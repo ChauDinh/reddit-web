@@ -115,7 +115,7 @@ export type LoginMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'email'>
+      & Pick<User, 'id' | 'username' | 'email'>
     )> }
   )> }
 );
@@ -136,7 +136,7 @@ export type RegisterMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'email'>
+      & Pick<User, 'id' | 'username' | 'email'>
     )> }
   ) }
 );
@@ -161,6 +161,7 @@ export const LoginDocument = gql`
       message
     }
     user {
+      id
       username
       email
     }
@@ -179,6 +180,7 @@ export const RegisterDocument = gql`
       message
     }
     user {
+      id
       username
       email
     }
