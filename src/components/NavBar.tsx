@@ -38,7 +38,7 @@ export const NavBar: React.FC<Props> = () => {
           variant="outline"
           display="flex"
           alignItems="center"
-          padding="0 10px"
+          padding="5px 16px"
         >
           {data.me.username}
         </Badge>

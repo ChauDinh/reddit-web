@@ -1,0 +1,5 @@
+fragment RegularUserResponse on User {
+  id
+  username
+  email
+}
