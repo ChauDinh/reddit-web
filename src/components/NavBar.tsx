@@ -3,13 +3,15 @@ import { Box, Text, Link, Flex, Badge, Button } from "@chakra-ui/core";
 import NextLink from "next/link";
 
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
+import { isServer } from "../utils/isServer";
 
 interface Props {}
 
 export const NavBar: React.FC<Props> = () => {
-  const [{ data, fetching }] = useMeQuery();
+  const [{ data, fetching }] = useMeQuery({ pause: isServer() }); // if the typeof window is server, we don't send the query
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   let renderUser = null; // the html rendered in user link component
+
   /**
    * There are 3 states:
    * data is loading
