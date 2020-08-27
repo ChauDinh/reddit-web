@@ -2,12 +2,13 @@ import React from "react";
 import { Box, Text, Link, Flex, Badge, Button } from "@chakra-ui/core";
 import NextLink from "next/link";
 
-import { useMeQuery } from "../generated/graphql";
+import { useMeQuery, useLogoutMutation } from "../generated/graphql";
 
 interface Props {}
 
 export const NavBar: React.FC<Props> = () => {
   const [{ data, fetching }] = useMeQuery();
+  const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   let renderUser = null; // the html rendered in user link component
   /**
    * There are 3 states:
@@ -42,7 +43,13 @@ export const NavBar: React.FC<Props> = () => {
         >
           {data.me.username}
         </Badge>
-        <Button variant="link">Logout</Button>
+        <Button
+          variant="link"
+          onClick={() => logout()}
+          isLoading={logoutFetching}
+        >
+          Logout
+        </Button>
       </Flex>
     );
   }

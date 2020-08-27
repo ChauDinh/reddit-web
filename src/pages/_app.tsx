@@ -8,6 +8,7 @@ import {
   MeQuery,
   MeDocument,
   RegisterMutation,
+  LogoutMutation,
 } from "../generated/graphql";
 
 function customUpdateQuery<Result, Query>(
@@ -62,6 +63,14 @@ const client = createClient({
                   };
                 }
               }
+            );
+          },
+          logout: (_result, args, cache, info) => {
+            customUpdateQuery<LogoutMutation, MeQuery>(
+              cache,
+              { query: MeDocument },
+              _result,
+              () => ({ me: null })
             );
           },
         },
