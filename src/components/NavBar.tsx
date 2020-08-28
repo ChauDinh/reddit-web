@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Link, Flex, Badge, Button } from "@chakra-ui/core";
+import { Box, Text, Link, Flex, Button } from "@chakra-ui/core";
 import NextLink from "next/link";
 
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
@@ -36,15 +36,7 @@ export const NavBar: React.FC<Props> = () => {
     // client is logged in
     renderUser = (
       <Flex>
-        <Badge
-          mr={4}
-          variant="outline"
-          display="flex"
-          alignItems="center"
-          padding="5px 16px"
-        >
-          {data.me.username}
-        </Badge>
+        <Text mr={4}>{data.me.username}</Text>
         <Button
           variant="link"
           onClick={() => logout()}
