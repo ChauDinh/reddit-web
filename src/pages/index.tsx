@@ -1,4 +1,4 @@
-import { Box, Text, Button, Link } from "@chakra-ui/core";
+import { Box, Text, Link } from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
 
@@ -7,7 +7,11 @@ import { usePostsQuery } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 
 const Index = () => {
-  const [{ data, fetching }] = usePostsQuery();
+  const [{ data, fetching }] = usePostsQuery({
+    variables: {
+      limit: 5,
+    },
+  });
   return (
     <Layout variant="regular">
       <NextLink href="/create-post">
