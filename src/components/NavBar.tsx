@@ -1,5 +1,19 @@
 import React from "react";
-import { Box, Text, Link, Flex, Button } from "@chakra-ui/core";
+import {
+  Box,
+  Text,
+  Link,
+  Flex,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Icon,
+  InputGroup,
+  InputLeftElement,
+  Input,
+} from "@chakra-ui/core";
 import NextLink from "next/link";
 
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
@@ -49,8 +63,53 @@ export const NavBar: React.FC<Props> = () => {
   }
 
   return (
-    <Flex style={styles.container} fontWeight={700}>
-      <Text>Reddit</Text>
+    <Flex
+      zIndex={2}
+      top={0}
+      position="sticky"
+      style={styles.container}
+      fontWeight={700}
+    >
+      <NextLink href="/">
+        <Link textDecoration="none">
+          <Text>Reddit</Text>
+        </Link>
+      </NextLink>
+      <Box style={styles.homeButton} mx={4}>
+        <Menu>
+          <MenuButton width="100%" justifyContent="space-between" as={Button}>
+            Home
+            <Icon name="chevron-down" />
+          </MenuButton>
+          <MenuList width="230px">
+            <MenuItem>Popular</MenuItem>
+            <MenuItem>All</MenuItem>
+            <MenuItem>Create post</MenuItem>
+            <MenuItem>User setting</MenuItem>
+            <MenuItem>Messages</MenuItem>
+            <MenuItem>Premium member</MenuItem>
+          </MenuList>
+        </Menu>
+      </Box>
+      <InputGroup style={styles.searchInputGroup} mr={4}>
+        <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+        <Input type="text" placeholder="Search" />
+      </InputGroup>
+      <Box mr={4} style={styles.navBarIconGroup}>
+        <Icon name="star" mx={2} />
+
+        <NextLink href="/create-post">
+          <Link style={styles.userLink}>
+            <Icon name="edit" mx={2} />
+          </Link>
+        </NextLink>
+
+        <Icon name="sun" mx={2} color="blue.500" />
+
+        <Icon name="moon" mx={2} />
+
+        <Icon name="settings" mx={2} />
+      </Box>
       <Box style={styles.userLink} fontWeight={500}>
         {renderUser}
       </Box>
@@ -68,5 +127,19 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
   },
-  userLink: {},
+  userLink: {
+    display: "flex",
+  },
+  homeButton: {
+    width: "230px",
+    justifyContent: "space-between",
+  },
+  searchInputGroup: {
+    flexGrow: 1,
+  },
+  navBarIconGroup: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 };

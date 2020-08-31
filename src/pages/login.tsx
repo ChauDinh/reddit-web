@@ -4,12 +4,12 @@ import { Box, Text, Button, Flex, Link } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
-import { Wrapper } from "../components/Wrapper";
 import { InputField } from "../components/InputField";
 import { useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../utils/createUrqlClient";
+import { Layout } from "../components/Layout";
 
 interface Props {}
 
@@ -17,7 +17,7 @@ const Login: React.FC<Props> = () => {
   const [, login] = useLoginMutation();
   const router = useRouter();
   return (
-    <Wrapper variants="small">
+    <Layout variant="small">
       <Formik
         initialValues={{ usernameOrEmail: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -26,13 +26,13 @@ const Login: React.FC<Props> = () => {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login?.user) {
             // navigate to login page
-            router.push("/");
+            router.push(`${router.query.next || "/"}`);
           }
         }}
       >
         {({ isSubmitting }) => (
           <Form style={styles.container}>
-            <Text fontSize="2xl" fontWeight={700}>
+            <Text fontSize="20px" fontWeight={700}>
               Sign In
             </Text>
             <Box mt={4}>
@@ -67,7 +67,7 @@ const Login: React.FC<Props> = () => {
           </Form>
         )}
       </Formik>
-    </Wrapper>
+    </Layout>
   );
 };
 
