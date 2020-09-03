@@ -13,6 +13,7 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Image,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 
@@ -72,7 +73,13 @@ export const NavBar: React.FC<Props> = () => {
     >
       <NextLink href="/">
         <Link textDecoration="none">
-          <Text>Reddit</Text>
+          <Image
+            alt="logo"
+            htmlHeight="50px"
+            htmlWidth="150px"
+            objectFit="contain"
+            src="https://res-console.cloudinary.com/dnlthcx1a/thumbnails/v1/image/upload/v1598938922/cmVkZGl0LWxvZ29fZWtoY3ln/preview"
+          />
         </Link>
       </NextLink>
       <Box style={styles.homeButton} mx={4}>
@@ -98,11 +105,7 @@ export const NavBar: React.FC<Props> = () => {
       <Box mr={4} style={styles.navBarIconGroup}>
         <Icon name="star" mx={2} />
 
-        <NextLink href="/create-post">
-          <Link style={styles.userLink}>
-            <Icon name="edit" mx={2} />
-          </Link>
-        </NextLink>
+        <Icon name="chat" mx={2} />
 
         <Icon name="sun" mx={2} color="blue.500" />
 
