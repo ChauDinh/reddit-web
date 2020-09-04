@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useState, HTMLAttributes } from "react";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
@@ -36,6 +36,9 @@ const Index = () => {
         <Stack spacing={5} mb={data?.posts.hasMore ? 0 : "50px"}>
           {data!.posts.posts.map((post) => (
             <Box key={post.id} p={5} shadow="md" borderWidth="1px">
+              <Text fontSize="11px">
+                Posted by <span>{post.creator.username}</span>
+              </Text>
               <Heading mb={2} fontSize="xl">
                 {post.title}
               </Heading>
