@@ -1,7 +1,16 @@
-import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  IconButton,
+} from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
-import { useState, HTMLAttributes } from "react";
+import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
@@ -35,15 +44,39 @@ const Index = () => {
       ) : (
         <Stack spacing={5} mb={data?.posts.hasMore ? 0 : "50px"}>
           {data!.posts.posts.map((post) => (
-            <Box key={post.id} p={5} shadow="md" borderWidth="1px">
-              <Text fontSize="11px">
-                Posted by <span>{post.creator.username}</span>
-              </Text>
-              <Heading mb={2} fontSize="xl">
-                {post.title}
-              </Heading>
-              <Text mt={4}>{post.textSnippet}</Text>
-            </Box>
+            <Flex
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              key={post.id}
+              p={5}
+              shadow="md"
+              borderWidth="1px"
+            >
+              <Flex alignItems="center" flexDirection="column" mr={4}>
+                <IconButton
+                  aria-label="upvote"
+                  icon="chevron-up"
+                  size="xs"
+                  onClick={() => console.log("up vote")}
+                ></IconButton>
+                <Text my={1}>{post.points}</Text>
+                <IconButton
+                  aria-label="down-vote"
+                  icon="chevron-down"
+                  size="xs"
+                  onClick={() => console.log("down vote")}
+                ></IconButton>
+              </Flex>
+              <Box>
+                <Text fontSize="11px">
+                  Posted by <span>{post.creator.username}</span>
+                </Text>
+                <Heading mb={2} fontSize="xl">
+                  {post.title}
+                </Heading>
+                <Text mt={4}>{post.textSnippet}</Text>
+              </Box>
+            </Flex>
           ))}
         </Stack>
       )}
