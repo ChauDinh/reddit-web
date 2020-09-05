@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
+import { UpdootSection } from "../components/UpdootSection";
 
 const Index = () => {
   const [variables, setVariables] = useState({
@@ -52,21 +53,7 @@ const Index = () => {
               shadow="md"
               borderWidth="1px"
             >
-              <Flex alignItems="center" flexDirection="column" mr={4}>
-                <IconButton
-                  aria-label="upvote"
-                  icon="chevron-up"
-                  size="xs"
-                  onClick={() => console.log("up vote")}
-                ></IconButton>
-                <Text my={1}>{post.points}</Text>
-                <IconButton
-                  aria-label="down-vote"
-                  icon="chevron-down"
-                  size="xs"
-                  onClick={() => console.log("down vote")}
-                ></IconButton>
-              </Flex>
+              <UpdootSection post={post} />
               <Box>
                 <Text fontSize="11px">
                   Posted by <span>{post.creator.username}</span>
