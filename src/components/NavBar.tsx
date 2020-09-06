@@ -103,15 +103,13 @@ export const NavBar: React.FC<Props> = () => {
         <Input type="text" placeholder="Search" />
       </InputGroup>
       <Box mr={4} style={styles.navBarIconGroup}>
-        <Icon name="star" mx={2} />
-
-        <Icon name="chat" mx={2} />
-
         <Icon name="sun" mx={2} color="blue.500" />
 
         <Icon name="moon" mx={2} />
 
         <Icon name="settings" mx={2} />
+
+        <Icon name="chat" mx={2} />
       </Box>
       <Box style={styles.userLink} fontWeight={500}>
         {renderUser}

@@ -13,6 +13,7 @@ import {
   MeQuery,
   RegisterMutation,
   VoteMutationVariables,
+  DeletePostMutationVariables,
 } from "../generated/graphql";
 import { customUpdateQuery } from "./customUpdateQuery";
 
@@ -69,7 +70,7 @@ export const cursorPagination = (): Resolver => {
 export const createUrqlClient = (ssrExchange: any, ctx: any) => {
   let cookie = "";
   if (isServer()) {
-    cookie = ctx.req.headers.cookie;
+    cookie = ctx?.req?.headers.cookie;
   }
 
   return {
@@ -95,7 +96,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         },
         updates: {
           Mutation: {
-            createPost: (_result, args, cache, info) => {
+            createPost: (_result, _, cache, __) => {
               const allFields = cache.inspectFields("Query");
               const fieldInfos = allFields.filter(
                 (info) => info.fieldName === "posts"
@@ -104,7 +105,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                 cache.invalidate("Query", "posts", fieldInfo.arguments || {});
               });
             },
-            login: (_result, args, cache, info) => {
+            login: (_result, _, cache, __) => {
               customUpdateQuery<LoginMutation, MeQuery>(
                 cache,
                 { query: MeDocument },
@@ -127,7 +128,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                 cache.invalidate("Query", "posts", fieldInfo.arguments || {});
               });
             },
-            register: (_result, args, cache, info) => {
+            register: (_result, _, cache, __) => {
               customUpdateQuery<RegisterMutation, MeQuery>(
                 cache,
                 { query: MeDocument },
@@ -143,7 +144,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                 }
               );
             },
-            logout: (_result, args, cache, info) => {
+            logout: (_result, _, cache, __) => {
               customUpdateQuery<LogoutMutation, MeQuery>(
                 cache,
                 { query: MeDocument },
@@ -151,7 +152,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                 () => ({ me: null })
               );
             },
-            vote: (_result, args, cache, info) => {
+            vote: (_result, args, cache, __) => {
               const { value, postId } = args as VoteMutationVariables;
               const data = cache.readFragment(
                 gql`
@@ -180,6 +181,10 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                   { id: postId, points: newPoints, voteStatus: value } as any
                 );
               }
+            },
+            deletePost: (_result, args, cache, __) => {
+              const { id } = args as DeletePostMutationVariables;
+              cache.invalidate({ __typename: "Post", id });
             },
           },
         },
