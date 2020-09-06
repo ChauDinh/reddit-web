@@ -12,7 +12,11 @@ import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
 import { useState } from "react";
 import { Layout } from "../components/Layout";
-import { usePostsQuery, useDeletePostMutation } from "../generated/graphql";
+import {
+  usePostsQuery,
+  useDeletePostMutation,
+  useMeQuery,
+} from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { UpdootSection } from "../components/UpdootSection";
 
@@ -25,6 +29,7 @@ const Index = () => {
     variables,
   });
   const [, deletePost] = useDeletePostMutation();
+  const [{ data: meData }] = useMeQuery();
 
   if (!fetching && !data) {
     return <div>You got query failed for some reason</div>; // render 404 page later
@@ -34,11 +39,11 @@ const Index = () => {
     <Layout variant="regular">
       <Flex style={styles.title}>
         <Heading size="lg">Latest posts</Heading>
-        <Button leftIcon="edit" variant="solid">
-          <NextLink href="/create-post">
-            <Link>Create post</Link>
-          </NextLink>
-        </Button>
+        <NextLink href="/create-post">
+          <Button alignItems="center" leftIcon="edit" as={Link}>
+            Create post
+          </Button>
+        </NextLink>
       </Flex>
       <br />
       {fetching && !data ? (
@@ -68,26 +73,35 @@ const Index = () => {
                     </Link>
                   </NextLink>
                   <Text mt={4}>{post.textSnippet}</Text>
-                  <IconButton
-                    icon="delete"
-                    aria-label="delete-post"
-                    float="right"
-                    size="xs"
-                    onClick={() => deletePost({ id: post.id })}
-                  />
-                  <IconButton
-                    icon="edit"
-                    aria-label="edit-post"
-                    float="right"
-                    size="xs"
-                    mr={2}
-                  />
+                  {post.creator.id === meData?.me?.id ? (
+                    <IconButton
+                      icon="delete"
+                      aria-label="delete-post"
+                      float="right"
+                      size="xs"
+                      onClick={() => deletePost({ id: post.id })}
+                      ml={2}
+                    />
+                  ) : null}
+                  {post.creator.id === meData?.me?.id ? (
+                    <NextLink
+                      href="/post/edit/[id]"
+                      as={`/post/edit/${post.id}`}
+                    >
+                      <IconButton
+                        icon="edit"
+                        aria-label="edit-post"
+                        float="right"
+                        size="xs"
+                        ml={2}
+                      />
+                    </NextLink>
+                  ) : null}
                   <Button
                     leftIcon="chat"
                     size="xs"
                     fontWeight={500}
                     float="right"
-                    mr={2}
                     px={3}
                   >
                     comments
