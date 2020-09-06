@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  IconButton,
-} from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
 import { useState } from "react";
@@ -58,9 +49,13 @@ const Index = () => {
                 <Text fontSize="11px">
                   Posted by <span>{post.creator.username}</span>
                 </Text>
-                <Heading mb={2} fontSize="xl">
-                  {post.title}
-                </Heading>
+                <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+                  <Link>
+                    <Heading mb={2} fontSize="xl">
+                      {post.title}
+                    </Heading>
+                  </Link>
+                </NextLink>
                 <Text mt={4}>{post.textSnippet}</Text>
               </Box>
             </Flex>
