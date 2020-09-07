@@ -10,7 +10,7 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
   const [{ data: meData }] = useMeQuery();
   const [, deletePost] = useDeletePostMutation();
   return post.creator.id === meData?.me?.id ? (
-    <Box>
+    <Box mt={2}>
       <IconButton
         icon="delete"
         aria-label="delete-post"

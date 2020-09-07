@@ -17,7 +17,7 @@ const Login: React.FC<Props> = () => {
   const [, login] = useLoginMutation();
   const router = useRouter();
   return (
-    <Layout variant="small">
+    <Layout variant="small" direction="column">
       <Formik
         initialValues={{ usernameOrEmail: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -52,7 +52,12 @@ const Login: React.FC<Props> = () => {
               />
             </Box>
 
-            <Flex mt={4} alignItems="center" justifyContent="space-between">
+            <Flex
+              flex={1}
+              mt={4}
+              alignItems="center"
+              justifyContent="space-between"
+            >
               <Button
                 variantColor="blue"
                 isLoading={isSubmitting}
@@ -77,6 +82,8 @@ const styles = {
     padding: "16px 16px",
     border: "1px solid rgba(0, 0, 0, 0.1)",
     boxShadow: "0px 3px 6px rgba(212, 212, 212, 0.2)",
+    width: "100%",
+    background: "#fff",
   },
 };
 

@@ -26,14 +26,14 @@ const EditPost: React.FC<Props> = () => {
   const [, updatePost] = useUpdatePostMutation();
   if (fetching) {
     return (
-      <Layout>
+      <Layout direction="column">
         <Text>Loading...</Text>
       </Layout>
     );
   }
 
   return (
-    <Layout variant="small">
+    <Layout direction="column" variant="regular">
       <Formik
         initialValues={{ title: data?.post?.title, text: data?.post?.text }}
         onSubmit={async (values) => {
@@ -42,7 +42,7 @@ const EditPost: React.FC<Props> = () => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
+          <Form style={{ width: "100%" }}>
             <Box mt={4}>
               {" "}
               <InputField name="title" placeholder="Title" label="Title" />
@@ -53,6 +53,7 @@ const EditPost: React.FC<Props> = () => {
                 name="text"
                 placeholder="Text..."
                 label="Body"
+                height="300px"
               />
             </Box>
 

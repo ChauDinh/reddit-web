@@ -17,7 +17,7 @@ const CreatePost: React.FC<Props> = () => {
   const [, createPost] = useCreatePostMutation();
 
   return (
-    <Layout variant="small">
+    <Layout variant="regular" direction="column">
       <Formik
         initialValues={{ title: "", text: "" }}
         onSubmit={async (values) => {
@@ -30,7 +30,7 @@ const CreatePost: React.FC<Props> = () => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
+          <Form style={{ width: "100%" }}>
             <Box mt={4}>
               {" "}
               <InputField name="title" placeholder="Title" label="Title" />
@@ -41,6 +41,7 @@ const CreatePost: React.FC<Props> = () => {
                 name="text"
                 placeholder="Text..."
                 label="Body"
+                height="300px"
               />
             </Box>
 

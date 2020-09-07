@@ -75,8 +75,8 @@ export const NavBar: React.FC<Props> = () => {
         <Link textDecoration="none">
           <Image
             alt="logo"
-            htmlHeight="50px"
-            htmlWidth="150px"
+            htmlHeight="40px"
+            htmlWidth="126px"
             objectFit="contain"
             src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1598938922/reddit-logo_ekhcyg.png"
           />
