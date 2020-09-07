@@ -1,24 +1,12 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  IconButton,
-} from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
 import { useState } from "react";
 import { Layout } from "../components/Layout";
-import {
-  usePostsQuery,
-  useDeletePostMutation,
-  useMeQuery,
-} from "../generated/graphql";
+import { usePostsQuery, Post } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { UpdootSection } from "../components/UpdootSection";
+import EditAndDeleteButton from "../components/EditAndDeleteButton";
 
 const Index = () => {
   const [variables, setVariables] = useState({
@@ -28,8 +16,6 @@ const Index = () => {
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
-  const [, deletePost] = useDeletePostMutation();
-  const [{ data: meData }] = useMeQuery();
 
   if (!fetching && !data) {
     return <div>You got query failed for some reason</div>; // render 404 page later
@@ -73,30 +59,7 @@ const Index = () => {
                     </Link>
                   </NextLink>
                   <Text mt={4}>{post.textSnippet}</Text>
-                  {post.creator.id === meData?.me?.id ? (
-                    <IconButton
-                      icon="delete"
-                      aria-label="delete-post"
-                      float="right"
-                      size="xs"
-                      onClick={() => deletePost({ id: post.id })}
-                      ml={2}
-                    />
-                  ) : null}
-                  {post.creator.id === meData?.me?.id ? (
-                    <NextLink
-                      href="/post/edit/[id]"
-                      as={`/post/edit/${post.id}`}
-                    >
-                      <IconButton
-                        icon="edit"
-                        aria-label="edit-post"
-                        float="right"
-                        size="xs"
-                        ml={2}
-                      />
-                    </NextLink>
-                  ) : null}
+                  <EditAndDeleteButton post={post as Post} />
                   <Button
                     leftIcon="chat"
                     size="xs"
