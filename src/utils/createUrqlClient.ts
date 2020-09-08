@@ -1,7 +1,7 @@
 import { isServer } from "./isServer";
 import gql from "graphql-tag";
 import { dedupExchange, fetchExchange, stringifyVariables } from "@urql/core";
-import { cacheExchange, Resolver } from "@urql/exchange-graphcache";
+import { cacheExchange, Resolver, Cache } from "@urql/exchange-graphcache";
 import { pipe, tap } from "wonka";
 import { Exchange } from "urql";
 import Router from "next/router";
@@ -67,6 +67,14 @@ export const cursorPagination = (): Resolver => {
   };
 };
 
+function invalidateAllPosts(cache: Cache) {
+  const allFields = cache.inspectFields("Query");
+  const fieldInfos = allFields.filter((info) => info.fieldName === "posts");
+  fieldInfos.forEach((fieldInfo) => {
+    cache.invalidate("Query", "posts", fieldInfo.arguments || {});
+  });
+}
+
 export const createUrqlClient = (ssrExchange: any, ctx: any) => {
   let cookie = "";
   if (isServer()) {
@@ -97,13 +105,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         updates: {
           Mutation: {
             createPost: (_result, _, cache, __) => {
-              const allFields = cache.inspectFields("Query");
-              const fieldInfos = allFields.filter(
-                (info) => info.fieldName === "posts"
-              );
-              fieldInfos.forEach((fieldInfo) => {
-                cache.invalidate("Query", "posts", fieldInfo.arguments || {});
-              });
+              invalidateAllPosts(cache);
             },
             login: (_result, _, cache, __) => {
               customUpdateQuery<LoginMutation, MeQuery>(
@@ -120,13 +122,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                   }
                 }
               );
-              const allFields = cache.inspectFields("Query");
-              const fieldInfos = allFields.filter(
-                (info) => info.fieldName === "posts"
-              );
-              fieldInfos.forEach((fieldInfo) => {
-                cache.invalidate("Query", "posts", fieldInfo.arguments || {});
-              });
+              invalidateAllPosts(cache);
             },
             register: (_result, _, cache, __) => {
               customUpdateQuery<RegisterMutation, MeQuery>(

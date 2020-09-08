@@ -16,6 +16,7 @@ import {
   Image,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
@@ -26,6 +27,7 @@ export const NavBar: React.FC<Props> = () => {
   const [{ data, fetching }] = useMeQuery({ pause: isServer() }); // if the typeof window is server, we don't send the query
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   let renderUser = null; // the html rendered in user link component
+  const router = useRouter();
 
   /**
    * There are 3 states:
@@ -54,7 +56,10 @@ export const NavBar: React.FC<Props> = () => {
         <Text mr={4}>{data.me.username}</Text>
         <Button
           variant="link"
-          onClick={() => logout()}
+          onClick={async () => {
+            await logout();
+            router.reload();
+          }}
           isLoading={logoutFetching}
         >
           Logout
