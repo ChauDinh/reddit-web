@@ -84,11 +84,16 @@ export const NavBar: React.FC<Props> = () => {
       </NextLink>
       <Box style={styles.homeButton} mx={4}>
         <Menu>
-          <MenuButton width="100%" justifyContent="space-between" as={Button}>
+          <MenuButton
+            fontSize="sm"
+            width="100%"
+            justifyContent="space-between"
+            as={Button}
+          >
             Home
             <Icon name="chevron-down" />
           </MenuButton>
-          <MenuList width="230px">
+          <MenuList fontSize="sm" width="230px">
             <MenuItem>Popular</MenuItem>
             <MenuItem>All</MenuItem>
             <MenuItem>Create post</MenuItem>
@@ -100,7 +105,7 @@ export const NavBar: React.FC<Props> = () => {
       </Box>
       <InputGroup style={styles.searchInputGroup} mr={4}>
         <InputLeftElement children={<Icon name="search" color="gray.300" />} />
-        <Input type="text" placeholder="Search" />
+        <Input fontSize="sm" type="text" placeholder="Search" />
       </InputGroup>
       <Box mr={4} style={styles.navBarIconGroup}>
         <Icon name="sun" mx={2} color="blue.500" />
