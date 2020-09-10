@@ -6,7 +6,7 @@ import { Flex } from "@chakra-ui/core";
 
 interface Props {
   variant?: WrapperVariants;
-  direction: "column" | "row";
+  direction?: "column" | "row";
 }
 
 export const Layout: React.FC<Props> = ({ variant, children, direction }) => {
