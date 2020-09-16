@@ -1,4 +1,5 @@
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import theme from "../theme";
 import "./index.css";

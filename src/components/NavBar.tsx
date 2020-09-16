@@ -42,10 +42,14 @@ export const NavBar: React.FC<Props> = () => {
     renderUser = (
       <>
         <NextLink href="/register">
-          <Link mr={4}>Sign Up</Link>
+          <Button variantColor="blue" fontSize="sm" mr={4} as={Link}>
+            Sign Up
+          </Button>
         </NextLink>
         <NextLink href="/login">
-          <Link>Log In</Link>
+          <Button variantColor="orange" fontSize="sm" as={Link}>
+            Login
+          </Button>
         </NextLink>
       </>
     );
@@ -110,7 +114,10 @@ export const NavBar: React.FC<Props> = () => {
       </Box>
       <InputGroup style={styles.searchInputGroup} mr={4}>
         <InputLeftElement children={<Icon name="search" color="gray.300" />} />
-        <Input fontSize="sm" type="text" placeholder="Search" />
+        <Input fontSize="sm" type="text" placeholder="Search" mr={2} />
+        <Button fontSize="sm" px={8}>
+          Search
+        </Button>
       </InputGroup>
       <Box mr={4} style={styles.navBarIconGroup}>
         <Icon name="sun" mx={2} color="blue.500" />
@@ -119,7 +126,7 @@ export const NavBar: React.FC<Props> = () => {
 
         <Icon name="settings" mx={2} />
 
-        <Icon name="chat" mx={2} />
+        <Icon name="email" mx={2} />
       </Box>
       <Box style={styles.userLink} fontWeight={500}>
         {renderUser}

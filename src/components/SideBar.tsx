@@ -6,10 +6,10 @@ interface Props {}
 const SideBar: React.FC<Props> = () => {
   return (
     <Flex flexDirection="column" ml={8} maxW="230px" w="100%">
+      <Heading fontSize="12" mb={3}>
+        Today's Top Growing
+      </Heading>
       <Box background="#fff" p={2} borderRadius="3px">
-        <Heading fontSize="12" mb={6}>
-          Today's Top Growing Posts
-        </Heading>
         <List fontSize="sm" as="ol" styleType="decimal">
           <ListItem mt={2} pb={2} borderBottom="1px solid rgba(0, 0, 0, 0.08)">
             Lorem ipsum dolor sit amet
@@ -34,10 +34,10 @@ const SideBar: React.FC<Props> = () => {
           View all
         </Button>
       </Box>
-      <Box background="#fff" p={2} mt="20px" borderRadius="3px">
-        <Heading fontSize="12" mb={6}>
-          Trending Posts
-        </Heading>
+      <Heading fontSize="12" mt="30px" mb={3}>
+        Trending Today
+      </Heading>
+      <Box background="#fff" p={2} borderRadius="3px">
         <List fontSize="sm" as="ol" styleType="decimal">
           <ListItem mt={2} pb={2} borderBottom="1px solid rgba(0, 0, 0, 0.08)">
             Lorem ipsum dolor sit amet

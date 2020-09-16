@@ -9,6 +9,18 @@ const theme = {
   colors: {
     ...chakraTheme.colors,
     black: "#16161D",
+    orange: {
+      50: "#ffe9dd",
+      100: "#ffc5af",
+      200: "#ffa17e",
+      300: "#ff7c4c",
+      400: "#ff581a",
+      500: "#ff4500",
+      600: "#b42f00",
+      700: "#812100",
+      800: "#4f1200",
+      900: "#210300",
+    },
   },
   fonts,
   breakpoints,

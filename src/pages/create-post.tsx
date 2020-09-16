@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
+import { MyEditor } from "../components/MyEditor";
 import { useCreatePostMutation } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useIsAuth } from "../utils/useIsAuth";
@@ -18,7 +19,7 @@ const CreatePost: React.FC<Props> = () => {
 
   return (
     <Layout variant="regular" direction="column">
-      <Formik
+      {/* <Formik
         initialValues={{ title: "", text: "" }}
         onSubmit={async (values) => {
           const { error } = await createPost({ input: values });
@@ -56,7 +57,8 @@ const CreatePost: React.FC<Props> = () => {
             </Flex>
           </Form>
         )}
-      </Formik>
+      </Formik> */}
+      <MyEditor />
     </Layout>
   );
 };

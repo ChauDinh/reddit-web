@@ -13,6 +13,7 @@
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "@urql/exchange-graphcache": "^3.0.2",
+    "draft-js": "^0.11.7",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.5",
     "graphql": "^15.3.0",
@@ -21,7 +22,10 @@
     "next-urql": "^1.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-draft-wysiwyg": "^1.14.5",
     "react-is": "^16.13.1",
+    "slate": "^0.58.4",
+    "slate-react": "^0.58.4",
     "urql": "^1.10.0"
   },
   "devDependencies": {
@@ -29,6 +33,10 @@
     "@graphql-codegen/typescript": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.8",
     "@graphql-codegen/typescript-urql": "^2.0.1",
+    "@types/draft-js": "^0.10.44",
+    "@types/react-draft-wysiwyg": "^1.13.0",
+    "@types/slate": "^0.47.7",
+    "@types/slate-react": "^0.22.9",
     "typescript": "^4.0.2"
   }
 }
