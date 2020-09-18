@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { Text, Editor, Node, createEditor, Transforms } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { Button } from "@chakra-ui/core";
+import { FaBold, FaCode, FaItalic, FaUnderline } from "react-icons/fa";
+import { Button, Flex } from "@chakra-ui/core";
 
 import { initialValue } from "../utils/slateInitialValue";
 import { CustomSlateEditor } from "../utils/customSlateEditor";
@@ -9,7 +10,14 @@ import { CustomSlateEditor } from "../utils/customSlateEditor";
 const CodeElement = props => {
 	return (
 		<pre>
-			<code>{props.children}</code>
+			<code
+				style={{
+					fontSize: "14px",
+					backgroundColor: "#d9d9d9"
+				}}
+			>
+				{props.children}
+			</code>
 		</pre>
 	);
 };
@@ -27,6 +35,26 @@ const BoldLeaf = props => {
 	);
 };
 
+const ItalicLeaf = props => {
+	return <em {...props.attributes}>{props.children}</em>;
+};
+
+const Leaf = ({ attributes, children, leaf }) => {
+	if (leaf.bold) {
+		children = <strong>{children}</strong>;
+	}
+	if (leaf.code) {
+		children = <code>{children}</code>;
+	}
+	if (leaf.italic) {
+		children = <em>{children}</em>;
+	}
+	if (leaf.underline) {
+		children = <u>{children}</u>;
+	}
+	return <span {...attributes}>{children}</span>;
+};
+
 const DefaultElement = props => {
 	return <p {...props.attributes}>{props.children}</p>;
 };
@@ -36,7 +64,7 @@ export const MyEditor = () => {
 	const editor = useMemo(() => withReact(createEditor()), []);
 
 	const renderLeaf = useCallback(props => {
-		return <BoldLeaf {...props} />;
+		return <Leaf {...props} />;
 	}, []);
 
 	const renderElement = useCallback(props => {
@@ -53,63 +81,117 @@ export const MyEditor = () => {
 			value={value}
 			onChange={value => setValue(value)}
 		>
-			<div>
-				<Button
-					onMouseDown={event => {
-						event.preventDefault();
-						CustomSlateEditor.toggleBoldMark(
-							editor
-						);
-					}}
-				>
-					Bold
-				</Button>
-
-				<Button
-					onMouseDown={event => {
-						event.preventDefault();
-						CustomSlateEditor.toggleCodeBlock(
-							editor
-						);
-					}}
-				>
-					Code Block
-				</Button>
-			</div>
-			<Editable
-				renderLeaf={renderLeaf}
-				placeholder="Enter some plain text..."
-				renderElement={renderElement}
+			<Flex
+				flexDirection="column"
 				style={{
-					backgroundColor: "#EDF2F7",
 					width: "100%",
-					minHeight: "200px",
-					padding: "15px",
-					borderRadius: "3px"
+					minHeight: "350px"
 				}}
-				onKeyDown={event => {
-					if (!event.ctrlKey) {
-						return;
-					}
-					switch (event.key) {
-						case "`": {
-							event.preventDefault();
-							CustomSlateEditor.toggleCodeBlock(
-								editor
-							);
-							break;
-						}
-
-						case "b": {
+			>
+				<Flex
+					style={{
+						backgroundColor: "#fff",
+						padding: "15px",
+						borderBottom:
+							"1px solid rgba(0, 0, 0, 0.1)",
+						borderRadius: "3px 3px 0 0"
+					}}
+				>
+					<Button
+						variant="solid"
+						variantColor="blue"
+						size="xs"
+						onMouseDown={event => {
 							event.preventDefault();
 							CustomSlateEditor.toggleBoldMark(
 								editor
 							);
-							break;
+						}}
+						mr={2}
+					>
+						<FaBold />
+					</Button>
+
+					<Button
+						variant="solid"
+						variantColor="teal"
+						size="xs"
+						onMouseDown={event => {
+							event.preventDefault();
+							CustomSlateEditor.toggleCodeBlock(
+								editor
+							);
+						}}
+						mr={2}
+					>
+						<FaCode />
+					</Button>
+
+					<Button
+						variant="solid"
+						variantColor="teal"
+						size="xs"
+						onMouseDown={event => {
+							event.preventDefault();
+							CustomSlateEditor.toggleItalicMark(
+								editor
+							);
+						}}
+						mr={2}
+					>
+						<FaItalic />
+					</Button>
+
+					<Button
+						variant="solid"
+						variantColor="teal"
+						size="xs"
+						onMouseDown={event => {
+							event.preventDefault();
+							CustomSlateEditor.toggleUnderlineMark(
+								editor
+							);
+						}}
+						mr={2}
+					>
+						<FaUnderline />
+					</Button>
+				</Flex>
+				<Editable
+					renderLeaf={renderLeaf}
+					placeholder="Enter some plain text..."
+					renderElement={renderElement}
+					style={{
+						backgroundColor: "#fff",
+						width: "100%",
+						height: "100%",
+						padding: "15px",
+						borderRadius: "0px 0px 3px 3px"
+					}}
+					onKeyDown={event => {
+						if (!event.ctrlKey) {
+							return;
 						}
-					}
-				}}
-			/>
+						switch (event.key) {
+							case "`": {
+								event.preventDefault();
+								CustomSlateEditor.toggleCodeBlock(
+									editor
+								);
+								break;
+							}
+
+							case "b": {
+								event.preventDefault();
+								CustomSlateEditor.toggleBoldMark(
+									editor
+								);
+								break;
+							}
+						}
+					}}
+				/>
+			</Flex>
 		</Slate>
 	);
 };

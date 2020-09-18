@@ -16,6 +16,22 @@ export const CustomSlateEditor = {
 		return !!match;
 	},
 
+	isItalicMarkActive(editor) {
+		const [match] = Editor.nodes(editor, {
+			match: n => n.italic === true,
+			universal: true
+		});
+		return !!match;
+	},
+
+	isUnderlineActive(editor) {
+		const [match] = Editor.nodes(editor, {
+			match: n => n.underline === true,
+			universal: true
+		});
+		return !!match;
+	},
+
 	toggleBoldMark(editor) {
 		const isActive = CustomSlateEditor.isBoldMarkActive(editor);
 		Transforms.setNodes(
@@ -31,6 +47,24 @@ export const CustomSlateEditor = {
 			editor,
 			{ type: isActive ? null : "code" },
 			{ match: n => Editor.isBlock(editor, n) }
+		);
+	},
+
+	toggleItalicMark(editor) {
+		const isActive = CustomSlateEditor.isItalicMarkActive(editor);
+		Transforms.setNodes(
+			editor,
+			{ italic: isActive ? null : true },
+			{ match: n => Text.isText(n), split: true }
+		);
+	},
+
+	toggleUnderlineMark(editor) {
+		const isActive = CustomSlateEditor.isUnderlineActive(editor);
+		Transforms.setNodes(
+			editor,
+			{ underline: isActive ? null : true },
+			{ match: n => Text.isText(n), split: true }
 		);
 	}
 };
