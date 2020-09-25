@@ -9,7 +9,7 @@ import {
 import { useField } from "formik";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
+  label?: string;
   name: string;
   textarea?: boolean;
 };

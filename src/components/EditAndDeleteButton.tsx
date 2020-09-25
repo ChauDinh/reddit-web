@@ -1,16 +1,21 @@
 import React from "react";
 import { Box, IconButton } from "@chakra-ui/core";
-import { useMeQuery, useDeletePostMutation, Post } from "../generated/graphql";
+import {
+  useMeQuery,
+  useDeletePostMutation,
+  PostSnippetFragment,
+  SinglePostSnippetFragment,
+} from "../generated/graphql";
 import NextLink from "next/link";
 
 interface Props {
-  post: Post;
+  post: PostSnippetFragment | SinglePostSnippetFragment;
 }
 const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
   const [{ data: meData }] = useMeQuery();
   const [, deletePost] = useDeletePostMutation();
   return post.creator.id === meData?.me?.id ? (
-    <Box mt={2}>
+    <Box>
       <IconButton
         icon="delete"
         aria-label="delete-post"

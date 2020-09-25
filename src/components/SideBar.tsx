@@ -69,8 +69,9 @@ const SideBar: React.FC<Props> = () => {
         mt="20px"
         background="#fff"
         p={2}
+        fontSize="xs"
       >
-        Advertisement
+        Reddit Redesign Inc ⓒ 2020. All rights reserved
       </Box>
     </Flex>
   );
