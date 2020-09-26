@@ -92,7 +92,7 @@ const Leaf = ({ attributes, children, leaf }: any) => {
 		children = <u>{children}</u>;
 	}
 
-	return <span {...attributes}>{children}</span>;
+	return <p {...attributes}>{children}</p>;
 };
 
 const isBlockActive = (editor: any, format: any) => {

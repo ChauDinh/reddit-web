@@ -93,6 +93,7 @@ export const NavBar: React.FC<Props> = () => {
       <NextLink href="/">
         <Link textDecoration="none">
           <Image
+            maxWidth="126px"
             alt="logo"
             htmlHeight="40px"
             htmlWidth="126px"
