@@ -9,6 +9,7 @@ import { UpdootSection } from "../components/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import SideBar from "../components/SideBar";
 import ErrorPage from "./404";
+import { serializedSnippet } from "../utils/serializedAndDeserialized";
 
 const Index = () => {
   const [variables, setVariables] = useState({
@@ -20,6 +21,7 @@ const Index = () => {
   });
 
   if (!fetching && !data) {
+    console.error("Error: ", error?.message);
     return (
       // <Layout variant="regular" direction="column">
       //   <div>You got query failed for some reason</div>
@@ -33,7 +35,7 @@ const Index = () => {
     <Layout variant="regular" direction="column">
       <Box style={{ flexGrow: 1 }}>
         <Flex style={styles.title}>
-          <Heading size="lg">All posts</Heading>
+          <Heading size="sm">All posts</Heading>
           <NextLink href="/create-post">
             <Button
               alignItems="center"
@@ -41,13 +43,12 @@ const Index = () => {
               as={Link}
               variant="solid"
               variantColor="orange"
-              size="sm"
+              size="xs"
             >
               Create post
             </Button>
           </NextLink>
         </Flex>
-        <br />
         {fetching && !data ? (
           <Text>Loading...</Text>
         ) : (
@@ -69,13 +70,13 @@ const Index = () => {
                     </Text>
                     <NextLink href="/post/[id]" as={`/post/${post.id}`}>
                       <Link>
-                        <Heading mb={2} fontSize="md">
+                        <Heading mb={1} fontSize="lg">
                           {post.title}
                         </Heading>
                       </Link>
                     </NextLink>
-                    <Text mt={4} mb={2}>
-                      {post.textSnippet}
+                    <Text mt={2} mb={2}>
+                      {serializedSnippet(JSON.parse(post.text))}
                     </Text>
                     <EditAndDeleteButton post={post as Post} />
                     <Button
@@ -119,6 +120,7 @@ const styles = {
   title: {
     alignItems: "center",
     justifyContent: "space-between",
+    marginBottom: "10px",
   },
 };
 

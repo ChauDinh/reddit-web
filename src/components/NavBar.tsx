@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Avatar,
   Box,
   Text,
   Link,
@@ -20,6 +21,7 @@ import { useRouter } from "next/router";
 
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
+import { avatarUrlGenerator } from "../utils/createAvatar";
 
 interface Props {}
 
@@ -56,8 +58,16 @@ export const NavBar: React.FC<Props> = () => {
   } else {
     // client is logged in
     renderUser = (
-      <Flex>
-        <Text mr={4}>{data.me.username}</Text>
+      <Flex background="#EDF2F7" p="5px 10px" borderRadius="3px">
+        <Flex alignItems="center">
+          <Avatar
+            size="sm"
+            name={data.me.username}
+            src={avatarUrlGenerator(data.me.id)}
+            mr={1}
+          />
+          <Text mr={4}>{data.me.username}</Text>
+        </Flex>
         <Button
           variant="link"
           onClick={async () => {
