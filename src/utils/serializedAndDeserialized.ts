@@ -4,6 +4,27 @@ import escapeHTML from "escape-html";
 // serialized function will takes a value and returns a string
 export const serialized = (node: Node) => {
   if (Text.isText(node)) {
+    if (node.bold === true && node.italic === true && node.underline === true) {
+      return `<strong><em style="text-decoration:underline">${node.text}</em></strong>`;
+    }
+    if (node.bold === true && node.italic === true) {
+      return `<strong><em>${node.text}</em></strong>`;
+    }
+    if (node.bold === true && node.underline === true) {
+      return `<strong><p style="text-decoration:underline">${node.text}</p></strong>`;
+    }
+    if (node.underline === true && node.italic === true) {
+      return `<em><p style="text-decoration:underline">${node.text}</p></em>`;
+    }
+    if (node.bold === true) {
+      return `<strong>${node.text}</strong>`;
+    }
+    if (node.italic === true) {
+      return `<em>${node.text}</em>`;
+    }
+    if (node.underline === true) {
+      return `<p style="text-decoration:underline">${node.text}</p>`;
+    }
     return escapeHTML(node.text);
   }
 

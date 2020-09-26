@@ -142,6 +142,7 @@ const BlockButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiHeading size="18px" />
         </Button>
@@ -156,6 +157,7 @@ const BlockButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiListOl size="18px" />
         </Button>
@@ -170,6 +172,7 @@ const BlockButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiListUl size="18px" />
         </Button>
@@ -192,6 +195,7 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiBold size="18px" />
         </Button>
@@ -206,6 +210,7 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiItalic size="18px" />
         </Button>
@@ -220,6 +225,7 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiUnderline size="18px" />
         </Button>
@@ -234,6 +240,7 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           mr={2}
+          p={0}
         >
           <BiCodeBlock size="18px" />
         </Button>

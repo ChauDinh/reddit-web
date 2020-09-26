@@ -8,6 +8,7 @@ import { createUrqlClient } from "../utils/createUrqlClient";
 import { UpdootSection } from "../components/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import SideBar from "../components/SideBar";
+import ErrorPage from "./404";
 
 const Index = () => {
   const [variables, setVariables] = useState({
@@ -20,10 +21,11 @@ const Index = () => {
 
   if (!fetching && !data) {
     return (
-      <Layout variant="regular" direction="column">
-        <div>You got query failed for some reason</div>
-        <div>{error}</div>
-      </Layout>
+      // <Layout variant="regular" direction="column">
+      //   <div>You got query failed for some reason</div>
+      //   <div>{error}</div>
+      // </Layout>
+      <ErrorPage />
     ); // render 404 page later
   }
 
@@ -38,7 +40,7 @@ const Index = () => {
               leftIcon="edit"
               as={Link}
               variant="solid"
-              variantColor="blue"
+              variantColor="orange"
               size="sm"
             >
               Create post
