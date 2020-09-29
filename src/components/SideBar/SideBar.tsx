@@ -1,15 +1,34 @@
 import React from "react";
 import { Flex, Box, Heading, List, ListItem, Button } from "@chakra-ui/core";
 
+import sidebarStyles from "./SideBar.module.css";
+
 interface Props {}
 
 const SideBar: React.FC<Props> = () => {
   return (
-    <Flex flexDirection="column" ml={8} maxW="230px" w="100%">
-      <Heading fontSize="12" mb={3}>
+    <Flex
+      flexDirection="column"
+      ml={8}
+      maxW="230px"
+      w="100%"
+      className={sidebarStyles.sidebar__container}
+    >
+      <Heading
+        size="xs"
+        p={2}
+        background="#3182ce"
+        color="white"
+        borderRadius="3px 3px 0 0"
+      >
         Today's Top Growing
       </Heading>
-      <Box background="#fff" p={2} borderRadius="3px">
+      <Box
+        background="#fff"
+        p={2}
+        borderRadius="0 0 3px 3px"
+        boxShadow="1px 1px 6px rgba(200, 200, 200, 0.1)"
+      >
         <List fontSize="sm" as="ol" styleType="decimal">
           <ListItem mt={2} pb={2} borderBottom="1px solid rgba(0, 0, 0, 0.08)">
             Lorem ipsum dolor sit amet
@@ -34,10 +53,22 @@ const SideBar: React.FC<Props> = () => {
           View all
         </Button>
       </Box>
-      <Heading fontSize="12" mt="30px" mb={3}>
+      <Heading
+        size="xs"
+        mt="30px"
+        p={2}
+        background="#3182ce"
+        color="white"
+        borderRadius="3px 3px 0 0"
+      >
         Trending Today
       </Heading>
-      <Box background="#fff" p={2} borderRadius="3px">
+      <Box
+        background="#fff"
+        p={2}
+        borderRadius="0 0 3px 3px"
+        boxShadow="1px 1px 6px rgba(200, 200, 200, 0.1)"
+      >
         <List fontSize="sm" as="ol" styleType="decimal">
           <ListItem mt={2} pb={2} borderBottom="1px solid rgba(0, 0, 0, 0.08)">
             Lorem ipsum dolor sit amet
@@ -70,6 +101,7 @@ const SideBar: React.FC<Props> = () => {
         background="#fff"
         p={2}
         fontSize="xs"
+        boxShadow="1px 1px 6px rgba(200, 200, 200, 0.1)"
       >
         Reddit Redesign Inc ⓒ 2020. All rights reserved
       </Box>

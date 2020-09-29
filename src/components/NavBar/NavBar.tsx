@@ -19,9 +19,10 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-import { useMeQuery, useLogoutMutation } from "../generated/graphql";
-import { isServer } from "../utils/isServer";
-import { avatarUrlGenerator } from "../utils/createAvatar";
+import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
+import { isServer } from "../../utils/isServer";
+import { avatarUrlGenerator } from "../../utils/createAvatar";
+import navBarStyles from "./NavBar.module.css";
 
 interface Props {}
 
@@ -58,17 +59,26 @@ export const NavBar: React.FC<Props> = () => {
   } else {
     // client is logged in
     renderUser = (
-      <Flex background="#EDF2F7" p="5px 10px" borderRadius="3px">
-        <Flex alignItems="center">
+      <Flex className={navBarStyles.navbar__userGroup}>
+        <Flex justifyContent="space-between" alignItems="center">
           <Avatar
             size="sm"
             name={data.me.username}
             src={avatarUrlGenerator(data.me.id)}
             mr={1}
           />
-          <Text mr={4}>{data.me.username}</Text>
+          <Box className={navBarStyles.navbar__userNameAvatar}>
+            {data.me.username.length > 6 ? (
+              <Text className={navBarStyles.navbar__username} mr={4}>
+                {data.me.username}
+              </Text>
+            ) : (
+              <Text mr={4}>{data.me.username}</Text>
+            )}
+          </Box>
         </Flex>
         <Button
+          className={navBarStyles.navbar__logoutBtn}
           variant="link"
           onClick={async () => {
             await logout();
@@ -87,88 +97,61 @@ export const NavBar: React.FC<Props> = () => {
       zIndex={2}
       top={0}
       position="sticky"
-      style={styles.container}
       fontWeight={700}
+      className={navBarStyles.navbar__container}
     >
       <NextLink href="/">
         <Link textDecoration="none">
           <Image
-            maxWidth="126px"
+            className={navBarStyles.navbar__logo}
             alt="logo"
-            htmlHeight="40px"
-            htmlWidth="126px"
-            objectFit="contain"
             src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1598938922/reddit-logo_ekhcyg.png"
           />
         </Link>
       </NextLink>
-      <Box style={styles.homeButton} mx={4}>
+      <Box className={navBarStyles.navbar__homeBtn} mx={4}>
         <Menu>
-          <MenuButton
-            fontSize="sm"
-            width="100%"
-            justifyContent="space-between"
-            as={Button}
-          >
+          <MenuButton className={navBarStyles.navbar__homeMenuBtn} as={Button}>
             Home
             <Icon name="chevron-down" />
           </MenuButton>
-          <MenuList fontSize="sm" width="230px">
-            <MenuItem>Popular</MenuItem>
-            <MenuItem>All</MenuItem>
-            <MenuItem>Create post</MenuItem>
-            <MenuItem>User setting</MenuItem>
-            <MenuItem>Messages</MenuItem>
-            <MenuItem>Premium member</MenuItem>
+          <MenuList className={navBarStyles.navbar__homeMenuList}>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              Popular
+            </MenuItem>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              All
+            </MenuItem>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              Create post
+            </MenuItem>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              User setting
+            </MenuItem>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              Messages
+            </MenuItem>
+            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
+              Premium member
+            </MenuItem>
           </MenuList>
         </Menu>
       </Box>
-      <InputGroup style={styles.searchInputGroup} mr={4}>
+      <InputGroup className={navBarStyles.navbar__searchInputGroup} mr={4}>
         <InputLeftElement children={<Icon name="search" color="gray.300" />} />
         <Input fontSize="sm" type="text" placeholder="Search" mr={2} />
-        <Button fontSize="sm" px={8}>
+        <Button className={navBarStyles.navbar__searchBtn} px={8}>
           Search
         </Button>
       </InputGroup>
-      <Box mr={4} style={styles.navBarIconGroup}>
-        <Icon name="sun" mx={2} color="blue.500" />
+      <Box mr={4} className={navBarStyles.navbar__iconGroup}>
+        <Icon name="sun" mx={2} />
 
         <Icon name="moon" mx={2} />
 
-        <Icon name="settings" mx={2} />
-
         <Icon name="email" mx={2} />
       </Box>
-      <Box style={styles.userLink} fontWeight={500}>
-        {renderUser}
-      </Box>
+      <Flex fontWeight={500}>{renderUser}</Flex>
     </Flex>
   );
-};
-
-const styles = {
-  container: {
-    backgroundColor: "#fff",
-    boxShadow: "0 1px 3px rgba(212, 212, 212, 0.5)",
-    color: "#000",
-    width: "100%",
-    padding: "16px 24px",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  userLink: {
-    display: "flex",
-  },
-  homeButton: {
-    width: "230px",
-    justifyContent: "space-between",
-  },
-  searchInputGroup: {
-    flexGrow: 1,
-  },
-  navBarIconGroup: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
 };

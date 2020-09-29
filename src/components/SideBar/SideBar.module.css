@@ -1,0 +1,6 @@
+/* Mobile screen */
+@media only screen and (max-width: 767px) {
+  .sidebar__container {
+    display: none !important;
+  }
+}

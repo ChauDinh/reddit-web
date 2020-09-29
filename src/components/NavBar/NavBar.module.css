@@ -1,0 +1,152 @@
+.navbar__container {
+  background-color: #FAFAFA;
+  box-shadow: 0 1px 3px rgba(212, 212, 212, 0.5);
+  color: #000;
+  width: 100%;
+  padding: 16px 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__logo {
+  max-width: 126px;
+  height: 40px;
+  object-fit: contain;
+  width: 126px;
+}
+
+.navbar__homeBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar__homeMenuBtn {
+  width: 136px;
+  font-size: small !important;
+  justify-content: space-between !important;
+}
+
+.navbar__homeMenuList {
+  width: 136px;
+  font-size: small !important;
+  min-width: 136px !important;
+}
+
+.navbar__homeMenuItem {
+  width: 100%;
+  padding: 5px 10px !important;
+}
+
+.navbar__searchInputGroup {
+  flex-grow: 1;
+}
+
+.navbar__searchBtn {
+  font-size: small !important;
+}
+
+.navbar__iconGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__userGroup {
+  background-color: #EDF2F7;
+  border-radius: 3px;
+  padding: 5px 10px;
+  justify-content: space-between;
+  width: 170px;
+}
+
+.navbar__userNameAvatar {
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 2;
+  display: inline-block;
+  width: 50px;
+}
+
+.navbar__username {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar__username:hover {
+  animation: floatText 3s infinite alternate ease-in-out;
+}
+
+@keyframes floatText {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* For mobile */
+@media only screen and (max-width: 767px) {
+  .navbar__container {
+    padding: 12.69px;
+  }
+
+  .navbar__logo {
+    display: none;
+  }
+
+  .navbar__searchInputGroup {
+    margin-right: 0 !important;
+  }
+
+  .navbar__searchBtn {
+    display: none !important;
+  }
+
+  .navbar__iconGroup {
+    display: none;
+  }
+
+  .navbar__homeBtn {
+    display: none;
+  }
+
+  .navbar__userGroup {
+    width: initial;
+    font-size: x-small !important;
+    background-color: #EDF2F7;
+    justify-content: flex-end;
+    padding: 3px 3px;
+  }
+
+  .navbar__userGroup p {
+    margin-right: 0;
+  }
+
+  .navbar__logoutBtn {
+    display: none !important;
+  }
+}
+
+/* For tablet */
+@media only screen and (min-width: 768px) {
+  .navbar__iconGroup {
+    display: none;
+  }
+
+  .navbar__homeBtn {
+    display: none;
+  }
+}
+
+/* For web */
+@media only screen and (min-width: 1000px) {
+  .navbar__homeBtn {
+    display: flex;
+  }
+
+  .navbar__iconGroup {
+    display: flex;
+  }
+}

@@ -1,0 +1,17 @@
+.wrapper__container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper__container {
+    padding-top: 5px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0
+  }
+}

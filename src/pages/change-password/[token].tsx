@@ -6,7 +6,7 @@ import { Formik, Form } from "formik";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
 
-import { Wrapper } from "../../components/Wrapper";
+import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../../components/InputField";
 import { useChangePasswordMutation } from "../../generated/graphql";

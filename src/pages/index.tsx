@@ -7,7 +7,7 @@ import { usePostsQuery, Post } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { UpdootSection } from "../components/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/SideBar/SideBar";
 import ErrorPage from "./404";
 import { serializedSnippet } from "../utils/serializedAndDeserialized";
 
@@ -43,7 +43,7 @@ const Index = () => {
               as={Link}
               variant="solid"
               variantColor="orange"
-              size="xs"
+              size="sm"
             >
               Create post
             </Button>
@@ -59,9 +59,10 @@ const Index = () => {
                   alignItems="flex-start"
                   justifyContent="flex-start"
                   key={post.id}
-                  p={5}
+                  p="12.69px"
                   backgroundColor="#fff"
                   borderRadius="3px"
+                  boxShadow="1px 1px 6px rgba(200, 200, 200, 0.1)"
                 >
                   <UpdootSection post={post} />
                   <Box width="100%">
@@ -120,7 +121,10 @@ const styles = {
   title: {
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: "10px",
+    backgroundColor: "#FFF",
+    padding: "12.69px",
+    marginBottom: "1.25rem",
+    boxShadow: "1px 1px 6px rgba(200, 200, 200, 0.1)",
   },
 };
 
