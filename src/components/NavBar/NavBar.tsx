@@ -15,6 +15,14 @@ import {
   InputLeftElement,
   Input,
   Image,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -31,6 +39,10 @@ export const NavBar: React.FC<Props> = () => {
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   let renderUser = null; // the html rendered in user link component
   const router = useRouter();
+
+  // Drawer
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
 
   /**
    * There are 3 states:
@@ -60,23 +72,52 @@ export const NavBar: React.FC<Props> = () => {
     // client is logged in
     renderUser = (
       <Flex className={navBarStyles.navbar__userGroup}>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Avatar
-            size="sm"
-            name={data.me.username}
-            src={avatarUrlGenerator(data.me.id)}
-            mr={1}
-          />
-          <Box className={navBarStyles.navbar__userNameAvatar}>
-            {data.me.username.length > 6 ? (
-              <Text className={navBarStyles.navbar__username} mr={4}>
-                {data.me.username}
-              </Text>
-            ) : (
-              <Text mr={4}>{data.me.username}</Text>
-            )}
-          </Box>
-        </Flex>
+        <Button
+          onClick={onOpen}
+          ref={btnRef}
+          className={navBarStyles.navbar__userBtn}
+        >
+          <Flex justifyContent="space-between" alignItems="center">
+            <Avatar
+              size="sm"
+              name={data.me.username}
+              src={avatarUrlGenerator(data.me.id)}
+              mr={1}
+            />
+            <Box className={navBarStyles.navbar__userNameAvatar}>
+              {data.me.username.length > 6 ? (
+                <Text className={navBarStyles.navbar__username} mr={4}>
+                  {data.me.username}
+                </Text>
+              ) : (
+                <Text mr={4}>{data.me.username}</Text>
+              )}
+            </Box>
+          </Flex>
+        </Button>
+        <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <Box>
+              <DrawerHeader>My Stuff</DrawerHeader>
+              <DrawerBody>
+                <Text>Something...</Text>
+              </DrawerBody>
+            </Box>
+            <Box>
+              <DrawerHeader>View option</DrawerHeader>
+              <DrawerBody>
+                <Text>Something...</Text>
+              </DrawerBody>
+            </Box>
+            <DrawerHeader>More Stuff</DrawerHeader>
+            <DrawerBody>
+              <Text>Something...</Text>
+            </DrawerBody>
+            <DrawerHeader>Logout</DrawerHeader>
+          </DrawerContent>
+        </Drawer>
         <Button
           className={navBarStyles.navbar__logoutBtn}
           variant="link"

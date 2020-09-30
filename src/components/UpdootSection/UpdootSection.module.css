@@ -1,0 +1,11 @@
+.updootSectionContainer {
+  align-items: center;
+}
+
+/* Mobile screen */
+@media only screen and (max-width: 767px) {
+  .updootSectionContainer {
+    background-color: #fff;
+    padding-top: 1rem;
+  }
+}

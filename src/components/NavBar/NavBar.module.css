@@ -54,7 +54,8 @@
 .navbar__userGroup {
   background-color: #EDF2F7;
   border-radius: 3px;
-  padding: 5px 10px;
+  padding: 0 10px;
+  padding-left: 0;
   justify-content: space-between;
   width: 170px;
 }
@@ -75,6 +76,8 @@
 .navbar__username:hover {
   animation: floatText 3s infinite alternate ease-in-out;
 }
+
+
 
 @keyframes floatText {
   from {
@@ -126,6 +129,10 @@
 
   .navbar__logoutBtn {
     display: none !important;
+  }
+
+  .navbar__userBtn {
+    height: initial !important;
   }
 }
 

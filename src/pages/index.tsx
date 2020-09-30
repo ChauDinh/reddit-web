@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { usePostsQuery, Post } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
-import { UpdootSection } from "../components/UpdootSection";
+import { UpdootSection } from "../components/UpdootSection/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import SideBar from "../components/SideBar/SideBar";
 import ErrorPage from "./404";

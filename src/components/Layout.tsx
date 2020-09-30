@@ -11,7 +11,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ variant, children, direction }) => {
   return (
-    <Flex background="#FAFAFA" flexDirection={direction}>
+    <Flex flexDirection={direction}>
       <NavBar />
       <Wrapper variants={variant}>{children}</Wrapper>
     </Flex>

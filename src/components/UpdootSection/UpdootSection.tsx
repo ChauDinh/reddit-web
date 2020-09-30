@@ -4,7 +4,9 @@ import {
   PostSnippetFragment,
   SinglePostSnippetFragment,
   useVoteMutation,
-} from "../generated/graphql";
+} from "../../generated/graphql";
+
+import updootSectionStyles from "./UpdootSection.module.css";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
@@ -16,7 +18,11 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
   >("not-loading");
   const [, vote] = useVoteMutation();
   return (
-    <Flex alignItems="center" flexDirection="column" mr={4}>
+    <Flex
+      className={updootSectionStyles.updootSectionContainer}
+      flexDirection="column"
+      pr={4}
+    >
       <IconButton
         aria-label="upvote"
         icon="chevron-up"
