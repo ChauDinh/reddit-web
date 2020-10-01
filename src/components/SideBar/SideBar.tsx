@@ -9,7 +9,7 @@ const SideBar: React.FC<Props> = () => {
   return (
     <Flex
       flexDirection="column"
-      ml={8}
+      ml={4}
       maxW="230px"
       w="100%"
       className={sidebarStyles.sidebar__container}

@@ -17,15 +17,28 @@ import {
   Image,
   Drawer,
   DrawerBody,
-  DrawerFooter,
+  Divider,
   DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  List,
+  ListItem,
+  ListIcon,
+  DrawerOverlay,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { BiLogOut, BiChevronDown } from "react-icons/bi";
+import {
+  RiSettings5Fill,
+  RiUser3Fill,
+  RiMoonClearFill,
+  RiCopperCoinFill,
+  RiVipCrown2Fill,
+  RiCustomerServiceFill,
+  RiFileCodeFill,
+} from "react-icons/ri";
 
 import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
@@ -76,6 +89,7 @@ export const NavBar: React.FC<Props> = () => {
           onClick={onOpen}
           ref={btnRef}
           className={navBarStyles.navbar__userBtn}
+          rightIcon={BiChevronDown}
         >
           <Flex justifyContent="space-between" alignItems="center">
             <Avatar
@@ -97,25 +111,77 @@ export const NavBar: React.FC<Props> = () => {
         </Button>
         <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
           <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <Box>
-              <DrawerHeader>My Stuff</DrawerHeader>
-              <DrawerBody>
-                <Text>Something...</Text>
+          <DrawerContent className={navBarStyles.navbar__drawerContainer}>
+            <DrawerCloseButton backgroundColor="red" />
+            <Image
+              width="100px"
+              mt="10px"
+              ml="24px"
+              alt="logo"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1598938922/reddit-logo_ekhcyg.png"
+            />
+            <Box className={navBarStyles.navbar__drawerSection}>
+              <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
+                My Stuff
+              </DrawerHeader>
+              <DrawerBody className={navBarStyles.navbar__drawerBody}>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon icon={RiUser3Fill} />
+                    My profile
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon icon={RiSettings5Fill} />
+                    User settings
+                  </ListItem>
+                </List>
               </DrawerBody>
             </Box>
-            <Box>
-              <DrawerHeader>View option</DrawerHeader>
-              <DrawerBody>
-                <Text>Something...</Text>
+            <Box className={navBarStyles.navbar__drawerSection}>
+              <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
+                View option
+              </DrawerHeader>
+              <DrawerBody className={navBarStyles.navbar__drawerBody}>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon icon={RiMoonClearFill} />
+                    Night mode
+                  </ListItem>
+                </List>
               </DrawerBody>
             </Box>
-            <DrawerHeader>More Stuff</DrawerHeader>
-            <DrawerBody>
-              <Text>Something...</Text>
-            </DrawerBody>
-            <DrawerHeader>Logout</DrawerHeader>
+            <Box className={navBarStyles.navbar__drawerSection}>
+              <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
+                More Stuff
+              </DrawerHeader>
+              <DrawerBody className={navBarStyles.navbar__drawerBody}>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon icon={RiCopperCoinFill} />
+                    Reddit coins
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon icon={RiVipCrown2Fill} />
+                    Reddit premiums
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon icon={RiCustomerServiceFill} />
+                    Help center
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon icon={RiFileCodeFill} />
+                    Source code
+                  </ListItem>
+                </List>
+              </DrawerBody>
+            </Box>
+            <Divider mb={0} />
+            <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
+              <BiLogOut color="#333" />{" "}
+              <Text ml={1} color="#333" fontWeight="medium">
+                Logout
+              </Text>
+            </DrawerHeader>
           </DrawerContent>
         </Drawer>
         <Button

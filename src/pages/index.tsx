@@ -71,7 +71,7 @@ const Index = () => {
                     </Text>
                     <NextLink href="/post/[id]" as={`/post/${post.id}`}>
                       <Link>
-                        <Heading mb={1} fontSize="lg">
+                        <Heading mb={1} fontSize="lg" display="inline-block">
                           {post.title}
                         </Heading>
                       </Link>

@@ -57,7 +57,7 @@
   padding: 0 10px;
   padding-left: 0;
   justify-content: space-between;
-  width: 170px;
+  /* width: 170px; */
 }
 
 .navbar__userNameAvatar {
@@ -77,8 +77,6 @@
   animation: floatText 3s infinite alternate ease-in-out;
 }
 
-
-
 @keyframes floatText {
   from {
     transform: translateX(0%);
@@ -87,6 +85,32 @@
   to {
     transform: translateX(-100%);
   }
+}
+
+.navbar__logoutBtn {
+  margin-left: 5px;
+}
+
+.navbar__drawerContainer {
+  width: 213px !important;
+}
+
+.navbar__drawerHeader {
+  display: flex;
+  align-items: center;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #bdbdbd;
+  padding-top: 10px !important;
+  padding-bottom: 5px !important;
+  text-transform: uppercase;
+}
+
+.navbar__drawerBody {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 /* For mobile */

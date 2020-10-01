@@ -18,6 +18,7 @@ import { UpdootSection } from "../../components/UpdootSection/UpdootSection";
 import EditAndDeleteButton from "../../components/EditAndDeleteButton";
 import { serialized } from "../../utils/serializedAndDeserialized";
 import { RenderText } from "../../components/RenderText";
+import SideBar from "../../components/SideBar/SideBar";
 
 interface Props {}
 
@@ -54,7 +55,7 @@ const Post: React.FC<Props> = () => {
           </Text>
           <EditAndDeleteButton post={data.post} />
         </Flex>
-        <Heading size="md" mb={2}>
+        <Heading fontSize="42px" mb={2}>
           {data.post.title}
         </Heading>
         <Box mb={3}>
@@ -85,6 +86,7 @@ const Post: React.FC<Props> = () => {
           <Text mt={10}>The post has no comment</Text>
         </Flex>
       </Flex>
+      <SideBar />
     </Layout>
   );
 };

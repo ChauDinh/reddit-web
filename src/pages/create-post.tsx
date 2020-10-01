@@ -11,6 +11,7 @@ import { createUrqlClient } from "../utils/createUrqlClient";
 import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor";
 import { serialized } from "../utils/serializedAndDeserialized";
+import SideBar from "../components/SideBar/SideBar";
 
 interface Props {}
 
@@ -71,6 +72,7 @@ const CreatePost: React.FC<Props> = () => {
           );
         }}
       </Formik>
+      <SideBar />
     </Layout>
   );
 };
