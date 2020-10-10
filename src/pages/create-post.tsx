@@ -1,13 +1,11 @@
 import { Box, Button, Flex, FormControl, FormLabel } from "@chakra-ui/core";
 import { Node } from "slate";
 import { Form, Formik, Field } from "formik";
-import { withUrqlClient } from "next-urql";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
 import { useCreatePostMutation } from "../generated/graphql";
-import { createUrqlClient } from "../utils/createUrqlClient";
 import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor";
 import { serialized } from "../utils/serializedAndDeserialized";
@@ -18,14 +16,14 @@ interface Props {}
 const CreatePost: React.FC<Props> = () => {
   const router = useRouter();
   useIsAuth();
-  const [, createPost] = useCreatePostMutation();
+  const [createPost] = useCreatePostMutation();
 
   return (
     <Layout variant="regular" direction="column">
       <Formik
         initialValues={{ title: "", text: "" }}
         onSubmit={async (values) => {
-          const { error } = await createPost({ input: values });
+          const { errors } = await createPost({ variables: { input: values}});
           // Our errorExchange function handles the error globally. Check the
           // createUrqlClient file
           // console.log(JSON.parse(values.text)[0]);
@@ -35,7 +33,7 @@ const CreatePost: React.FC<Props> = () => {
               .map((n: Node) => serialized(n))
               .join("\n")
           );
-          if (!error) {
+          if (!errors) {
             router.push("/");
           }
         }}
@@ -77,4 +75,4 @@ const CreatePost: React.FC<Props> = () => {
   );
 };
 
-export default withUrqlClient(createUrqlClient)(CreatePost);
+export default CreatePost;

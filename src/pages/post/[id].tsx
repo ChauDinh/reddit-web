@@ -8,11 +8,9 @@ import {
   InputGroup,
   Button,
 } from "@chakra-ui/core";
-import { withUrqlClient } from "next-urql";
 import React from "react";
 import { Node } from "slate";
 import { Layout } from "../../components/Layout";
-import { createUrqlClient } from "../../utils/createUrqlClient";
 import { useGetPostFromUrl } from "../../utils/useGetPostFromUrl";
 import { UpdootSection } from "../../components/UpdootSection/UpdootSection";
 import EditAndDeleteButton from "../../components/EditAndDeleteButton";
@@ -23,8 +21,8 @@ import SideBar from "../../components/SideBar/SideBar";
 interface Props {}
 
 const Post: React.FC<Props> = () => {
-  const [{ data, fetching }] = useGetPostFromUrl();
-  if (fetching) {
+  const { data, loading } = useGetPostFromUrl();
+  if (loading) {
     return (
       <Layout direction="column" variant="regular">
         ...loading
@@ -91,4 +89,4 @@ const Post: React.FC<Props> = () => {
   );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Post);
+export default Post;

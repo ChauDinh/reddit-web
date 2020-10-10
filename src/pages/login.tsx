@@ -7,21 +7,19 @@ import NextLink from "next/link";
 import { InputField } from "../components/InputField";
 import { useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
-import { withUrqlClient } from "next-urql";
-import { createUrqlClient } from "../utils/createUrqlClient";
 import { Layout } from "../components/Layout";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
-  const [, login] = useLoginMutation();
+  const [login] = useLoginMutation();
   const router = useRouter();
   return (
     <Layout variant="small" direction="column">
       <Formik
         initialValues={{ usernameOrEmail: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
-          const response = await login(values);
+          const response = await login({variables: values});
           if (response.data?.login?.errors) {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login?.user) {
@@ -87,4 +85,4 @@ const styles = {
   },
 };
 
-export default withUrqlClient(createUrqlClient)(Login);
+export default Login;

@@ -12,8 +12,8 @@ interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
 }
 const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
-  const [{ data: meData }] = useMeQuery();
-  const [, deletePost] = useDeletePostMutation();
+  const { data: meData } = useMeQuery();
+  const [deletePost] = useDeletePostMutation();
   return post.creator.id === meData?.me?.id ? (
     <Box>
       <IconButton
@@ -21,7 +21,7 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
         aria-label="delete-post"
         float="right"
         size="xs"
-        onClick={() => deletePost({ id: post.id })}
+        onClick={() => deletePost({ variables: { id: post.id }})}
         ml={2}
       />
       <NextLink href="/post/edit/[id]" as={`/post/edit/${post.id}`}>

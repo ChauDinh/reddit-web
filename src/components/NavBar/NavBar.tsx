@@ -39,17 +39,20 @@ import {
   RiCustomerServiceFill,
   RiFileCodeFill,
 } from "react-icons/ri";
+import { useApolloClient } from "@apollo/client";
 
 import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import navBarStyles from "./NavBar.module.css";
+import { DarkModeSwitch } from "../DarkMode/DarkModeSwitch";
 
 interface Props {}
 
 export const NavBar: React.FC<Props> = () => {
-  const [{ data, fetching }] = useMeQuery({ pause: isServer() }); // if the typeof window is server, we don't send the query
-  const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
+  const { data, loading } = useMeQuery({ skip: isServer() }); // if the typeof window is server, we don't send the query
+  const [logout, { loading: logoutFetching }] = useLogoutMutation();
+  const apolloClient = useApolloClient();
   let renderUser = null; // the html rendered in user link component
   const router = useRouter();
 
@@ -63,7 +66,7 @@ export const NavBar: React.FC<Props> = () => {
    * client does not log in
    * client is logged in
    */
-  if (fetching) {
+  if (loading) {
     // data is loading
   } else if (!data?.me) {
     // client does not log in
@@ -189,7 +192,7 @@ export const NavBar: React.FC<Props> = () => {
           variant="link"
           onClick={async () => {
             await logout();
-            router.reload();
+            await apolloClient.resetStore();
           }}
           isLoading={logoutFetching}
         >
@@ -252,10 +255,7 @@ export const NavBar: React.FC<Props> = () => {
         </Button>
       </InputGroup>
       <Box mr={4} className={navBarStyles.navbar__iconGroup}>
-        <Icon name="sun" mx={2} />
-
-        <Icon name="moon" mx={2} />
-
+        <DarkModeSwitch />
         <Icon name="email" mx={2} />
       </Box>
       <Flex fontWeight={500}>{renderUser}</Flex>

@@ -1,10 +1,7 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
-import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
-import { useState } from "react";
 import { Layout } from "../components/Layout";
-import { usePostsQuery, Post } from "../generated/graphql";
-import { createUrqlClient } from "../utils/createUrqlClient";
+import { usePostsQuery, Post, PostsQuery } from "../generated/graphql";
 import { UpdootSection } from "../components/UpdootSection/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import SideBar from "../components/SideBar/SideBar";
@@ -12,15 +9,14 @@ import ErrorPage from "./404";
 import { serializedSnippet } from "../utils/serializedAndDeserialized";
 
 const Index = () => {
-  const [variables, setVariables] = useState({
-    limit: 10,
-    cursor: null as null | string,
-  });
-  const [{ data, error, fetching }] = usePostsQuery({
-    variables,
+  const { data, error, loading, fetchMore, variables } = usePostsQuery({
+    variables: {
+      limit: 10,
+      cursor: null as null | string,
+    },
   });
 
-  if (!fetching && !data) {
+  if (!loading && !data) {
     console.error("Error: ", error?.message);
     return (
       // <Layout variant="regular" direction="column">
@@ -49,7 +45,7 @@ const Index = () => {
             </Button>
           </NextLink>
         </Flex>
-        {fetching && !data ? (
+        {loading && !data ? (
           <Text>Loading...</Text>
         ) : (
           <Stack spacing={5} mb={data?.posts.hasMore ? 0 : "50px"}>
@@ -98,14 +94,32 @@ const Index = () => {
         {data && data.posts.hasMore ? (
           <Flex alignItems="center" justifyContent="center" mt={8} pb={8}>
             <Button
-              onClick={() =>
-                setVariables({
-                  limit: variables.limit,
-                  cursor:
-                    data.posts.posts[data.posts.posts.length - 1].createdAt,
+              onClick={() => {
+                fetchMore({
+                  variables: {
+                    limit: variables?.limit,
+                    cursor:
+                      data.posts.posts[data.posts.posts.length - 1].createdAt,
+                  },
+                  updateQuery: (previousValue, {fetchMoreResult}): PostsQuery => {
+                    if (!fetchMoreResult) {
+                      return previousValue as PostsQuery;
+                    }
+                    return {
+                      __typename: "Query",
+                      posts: {
+                        __typename: "PaginatedPosts",
+                        hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
+                        posts: [
+                          ...(previousValue as PostsQuery).posts.posts,
+                          ...(fetchMoreResult as PostsQuery).posts.posts
+                        ]
+                      }
+                    }
+                  }
                 })
-              }
-              isLoading={fetching}
+              }}
+              isLoading={loading}
             >
               load more
             </Button>
@@ -128,4 +142,4 @@ const styles = {
   },
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Index);
+export default Index;
