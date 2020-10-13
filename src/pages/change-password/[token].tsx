@@ -8,7 +8,7 @@ import NextLink from "next/link";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../../components/InputField";
-import { useChangePasswordMutation } from "../../generated/graphql";
+import { MeDocument, MeQuery, useChangePasswordMutation } from "../../generated/graphql";
 import { createWithApollo } from "../../utils/withApollo";
 
 const ChangePassword: NextPage = () => {
@@ -25,7 +25,17 @@ const ChangePassword: NextPage = () => {
               newPassword: values.newPassword,
               token:
                 typeof router.query.token === "string" ? router.query.token : "",
-            }  
+                
+            },
+            update: (cache, {data}) => {
+              cache.writeQuery<MeQuery>({
+                query: MeDocument,
+                data: {
+                  __typename: "Query",
+                  me: data?.changePassword.user
+                }
+              });
+            }
           });
           if (response.data?.changePassword?.errors) {
             const errorMap = toErrorMap(response.data.changePassword.errors);
