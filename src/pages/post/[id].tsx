@@ -17,6 +17,7 @@ import EditAndDeleteButton from "../../components/EditAndDeleteButton";
 import { serialized } from "../../utils/serializedAndDeserialized";
 import { RenderText } from "../../components/RenderText";
 import SideBar from "../../components/SideBar/SideBar";
+import { createWithApollo } from "../../utils/withApollo";
 
 interface Props {}
 
@@ -89,4 +90,4 @@ const Post: React.FC<Props> = () => {
   );
 };
 
-export default Post;
+export default createWithApollo({ssr: true})(Post);

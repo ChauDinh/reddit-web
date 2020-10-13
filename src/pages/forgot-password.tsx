@@ -5,6 +5,7 @@ import { Box, Flex, Button, Text } from "@chakra-ui/core";
 import { InputField } from "../components/InputField";
 import { useForgotPasswordMutation } from "../generated/graphql";
 import { Layout } from "../components/Layout";
+import { createWithApollo } from "../utils/withApollo";
 
 interface Props {}
 
@@ -58,4 +59,4 @@ const ForgotPassword: React.FC<Props> = () => {
   );
 };
 
-export default ForgotPassword;
+export default createWithApollo({ssr: false})(ForgotPassword);

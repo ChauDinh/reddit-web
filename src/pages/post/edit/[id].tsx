@@ -9,6 +9,7 @@ import {
   useUpdatePostMutation,
 } from "../../../generated/graphql";
 import { useGetIntegerId } from "../../../utils/useGetIntegerId";
+import { createWithApollo } from "../../../utils/withApollo";
 
 interface Props {}
 
@@ -71,4 +72,4 @@ const EditPost: React.FC<Props> = () => {
   );
 };
 
-export default EditPost;
+export default createWithApollo({ssr: false})(EditPost);

@@ -1,12 +1,13 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
-import { usePostsQuery, Post, PostsQuery } from "../generated/graphql";
+import { usePostsQuery, Post } from "../generated/graphql";
 import { UpdootSection } from "../components/UpdootSection/UpdootSection";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import SideBar from "../components/SideBar/SideBar";
 import ErrorPage from "./404";
 import { serializedSnippet } from "../utils/serializedAndDeserialized";
+import { createWithApollo } from "../utils/withApollo";
 
 const Index = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -14,6 +15,7 @@ const Index = () => {
       limit: 10,
       cursor: null as null | string,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
   if (!loading && !data) {
@@ -101,22 +103,23 @@ const Index = () => {
                     cursor:
                       data.posts.posts[data.posts.posts.length - 1].createdAt,
                   },
-                  updateQuery: (previousValue, {fetchMoreResult}): PostsQuery => {
-                    if (!fetchMoreResult) {
-                      return previousValue as PostsQuery;
-                    }
-                    return {
-                      __typename: "Query",
-                      posts: {
-                        __typename: "PaginatedPosts",
-                        hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
-                        posts: [
-                          ...(previousValue as PostsQuery).posts.posts,
-                          ...(fetchMoreResult as PostsQuery).posts.posts
-                        ]
-                      }
-                    }
-                  }
+                  // updateQuery: (previousValue, {fetchMoreResult}): PostsQuery => {
+                  //   if (!fetchMoreResult) {
+                  //     return previousValue as PostsQuery;
+                  //   }
+                  //   return {
+                  //     __typename: "Query",
+                  //     posts: {
+                  //       __typename: "PaginatedPosts",
+                  //       hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
+                  //       posts: [
+                  //         ...(previousValue as PostsQuery).posts.posts,
+                  //         ...(fetchMoreResult as PostsQuery).posts.posts
+                  //       ]
+                  //     }
+                  //   }
+                  // }
+                  
                 })
               }}
               isLoading={loading}
@@ -142,4 +145,4 @@ const styles = {
   },
 };
 
-export default Index;
+export default createWithApollo({ssr: true})(Index);

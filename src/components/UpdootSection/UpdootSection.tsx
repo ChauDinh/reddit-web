@@ -1,15 +1,52 @@
 import React, { useState } from "react";
 import { Flex, IconButton, Text } from "@chakra-ui/core";
+import gql from "graphql-tag";
 import {
   PostSnippetFragment,
   SinglePostSnippetFragment,
   useVoteMutation,
+  VoteMutation,
 } from "../../generated/graphql";
 
 import updootSectionStyles from "./UpdootSection.module.css";
+import { ApolloCache } from "@apollo/client";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
+}
+
+const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
+  const data = cache.readFragment<PostSnippetFragment>(
+    {
+      id: "Post:" + postId,
+      fragment: gql`
+      fragment _ on Post {
+        id
+        points
+        voteStatus
+      }
+    `,
+    }
+  );
+  if (data) {
+    if (data.voteStatus === value) {
+      return;
+    }
+    const newPoints =
+      (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
+    cache.writeFragment(
+      {
+        id: "Post:" + postId,
+        fragment: gql`
+          fragment __ on Post {
+            points
+            voteStatus
+          }
+        `,
+        data: { points: newPoints, voteStatus: value }
+      }
+    );
+  }
 }
 
 export const UpdootSection: React.FC<Props> = ({ post }) => {
@@ -33,7 +70,7 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
             return;
           }
           setLoadingState("updoot-loading");
-          await vote({variables: { postId: post.id, value: 1 }});
+          await vote({variables: { postId: post.id, value: 1 }, update: (cache) => updateAfterVote(1, post.id, cache)});
           setLoadingState("not-loading");
         }}
         isLoading={loadingState === "updoot-loading"}
@@ -53,7 +90,7 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
             variables: {
             postId: post.id,
             value: -1,
-          }});
+          }, update: (cache) => updateAfterVote(-1, post.id, cache)});
           setLoadingState("not-loading");
         }}
         isLoading={loadingState === "downdoot-loading"}

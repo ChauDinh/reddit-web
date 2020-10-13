@@ -9,6 +9,7 @@ import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../../components/InputField";
 import { useChangePasswordMutation } from "../../generated/graphql";
+import { createWithApollo } from "../../utils/withApollo";
 
 const ChangePassword: NextPage = () => {
   const [changePassword] = useChangePasswordMutation();
@@ -75,4 +76,4 @@ const ChangePassword: NextPage = () => {
   );
 };
 
-export default ChangePassword;
+export default createWithApollo({ssr: false})(ChangePassword);

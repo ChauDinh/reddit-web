@@ -28,7 +28,6 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import { BiLogOut, BiChevronDown } from "react-icons/bi";
 import {
   RiSettings5Fill,
@@ -54,7 +53,6 @@ export const NavBar: React.FC<Props> = () => {
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
   const apolloClient = useApolloClient();
   let renderUser = null; // the html rendered in user link component
-  const router = useRouter();
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
