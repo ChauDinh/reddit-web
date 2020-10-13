@@ -178,10 +178,15 @@ export const NavBar: React.FC<Props> = () => {
             </Box>
             <Divider mb={0} />
             <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
-              <BiLogOut color="#333" />{" "}
-              <Text ml={1} color="#333" fontWeight="medium">
-                Logout
-              </Text>
+              <Button variant="link" onClick={async () => {
+                await logout();
+                await apolloClient.resetStore();
+              }} isLoading={logoutFetching}>
+                <BiLogOut color="#333" />{" "}
+                <Text ml={1} color="#333" fontWeight="medium">
+                  Logout
+                </Text>
+              </Button>
             </DrawerHeader>
           </DrawerContent>
         </Drawer>
