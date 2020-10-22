@@ -9,7 +9,6 @@ import { useCreatePostMutation } from "../generated/graphql";
 import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor";
 import { serialized } from "../utils/serializedAndDeserialized";
-import SideBar from "../components/SideBar/SideBar";
 import { createWithApollo } from "../utils/withApollo";
 
 interface Props {}
@@ -62,7 +61,7 @@ const CreatePost: React.FC<Props> = () => {
 
               <Flex mt={4} alignItems="center" justifyContent="space-between">
                 <Button
-                  variantColor="blue"
+                  variantColor="purple"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -73,7 +72,6 @@ const CreatePost: React.FC<Props> = () => {
           );
         }}
       </Formik>
-      <SideBar />
     </Layout>
   );
 };

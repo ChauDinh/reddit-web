@@ -1,0 +1,54 @@
+.footer__container {
+  background-color: #7704CB;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.social__icons {
+  display: flex;
+  margin-top: 20px;
+}
+
+.social__icon {
+  margin-right: 16px;
+  font-size: 20px;
+}
+
+.menu {
+  flex-grow: 1;
+  margin-left: 30px;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.menu__heading {
+  font-weight: 700;
+}
+
+.menu__subscribeInput {
+  color: #000;
+}
+
+@media only screen and (max-width: 767px) {
+  .footer__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .menu {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .subscribe {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}

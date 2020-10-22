@@ -1,0 +1,44 @@
+.post__container {
+  background: #fff;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.post__img {
+  border-radius: 3px 3px 0 0;
+}
+
+.post__tech {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #fff;
+  background-color: #000;
+  padding: 3px 8px;
+  padding-right: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.post__title {
+  margin: 5px 20px;
+  font-size: 20px !important;
+}
+
+.post__text {
+  margin: 5px 20px;
+  flex-grow: 1;
+}
+
+.post__author {
+  margin: 15px 20px;
+  margin-bottom: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: #707070;
+  flex-shrink: 1;
+}

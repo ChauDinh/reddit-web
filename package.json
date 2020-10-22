@@ -28,9 +28,11 @@
     "react-dom": "^16.12.0",
     "react-icons": "^3.11.0",
     "react-is": "^16.13.1",
+    "react-slick": "^0.27.12",
     "slate": "^0.58.4",
     "slate-history": "^0.58.4",
     "slate-react": "^0.58.4",
+    "slick-carousel": "^1.8.1",
     "urql": "^1.10.0"
   },
   "devDependencies": {
@@ -42,8 +44,10 @@
     "@types/escape-html": "^1.0.0",
     "@types/is-hotkey": "^0.1.2",
     "@types/react-icons": "^3.0.0",
+    "@types/react-slick": "^0.23.4",
     "@types/slate": "^0.47.7",
     "@types/slate-react": "^0.22.9",
+    "@types/slick-carousel": "^1.6.34",
     "typescript": "^4.0.2"
   }
 }

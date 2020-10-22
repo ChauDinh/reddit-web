@@ -6,13 +6,7 @@ import {
   Link,
   Flex,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Icon,
   InputGroup,
-  InputLeftElement,
   Input,
   Image,
   Drawer,
@@ -28,7 +22,7 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
-import { BiLogOut, BiChevronDown } from "react-icons/bi";
+import { BiChevronDown } from "react-icons/bi";
 import {
   RiSettings5Fill,
   RiUser3Fill,
@@ -44,7 +38,6 @@ import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import navBarStyles from "./NavBar.module.css";
-import { DarkModeSwitch } from "../DarkMode/DarkModeSwitch";
 
 interface Props {}
 
@@ -70,14 +63,14 @@ export const NavBar: React.FC<Props> = () => {
     // client does not log in
     renderUser = (
       <>
-        <NextLink href="/register">
-          <Button variantColor="blue" fontSize="sm" mr={4} as={Link}>
-            Sign Up
-          </Button>
-        </NextLink>
         <NextLink href="/login">
-          <Button variantColor="orange" fontSize="sm" as={Link}>
-            Login
+            <Flex align={"center"} as={Link} mr={4}>
+              Login
+            </Flex>
+        </NextLink>
+        <NextLink href="/register">
+          <Button variantColor="purple" color="#fff" fontSize="sm" as={Link}>
+            Sign Up
           </Button>
         </NextLink>
       </>
@@ -119,7 +112,7 @@ export const NavBar: React.FC<Props> = () => {
               mt="10px"
               ml="24px"
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1598938922/reddit-logo_ekhcyg.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603289131/Group_6_2x_itzd8f.png"
             />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -182,7 +175,6 @@ export const NavBar: React.FC<Props> = () => {
                 await logout();
                 await apolloClient.resetStore();
               }} isLoading={logoutFetching}>
-                <BiLogOut color="#333" />{" "}
                 <Text ml={1} color="#333" fontWeight="medium">
                   Logout
                 </Text>
@@ -218,49 +210,26 @@ export const NavBar: React.FC<Props> = () => {
           <Image
             className={navBarStyles.navbar__logo}
             alt="logo"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1598938922/reddit-logo_ekhcyg.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288837/Group_3_2x_nww9m5.png"
           />
         </Link>
       </NextLink>
-      <Box className={navBarStyles.navbar__homeBtn} mx={4}>
-        <Menu>
-          <MenuButton className={navBarStyles.navbar__homeMenuBtn} as={Button}>
-            Home
-            <Icon name="chevron-down" />
-          </MenuButton>
-          <MenuList className={navBarStyles.navbar__homeMenuList}>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              Popular
-            </MenuItem>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              All
-            </MenuItem>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              Create post
-            </MenuItem>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              User setting
-            </MenuItem>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              Messages
-            </MenuItem>
-            <MenuItem className={navBarStyles.navbar__homeMenuItem}>
-              Premium member
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Box>
-      <InputGroup className={navBarStyles.navbar__searchInputGroup} mr={4}>
-        <InputLeftElement children={<Icon name="search" color="gray.300" />} />
-        <Input fontSize="sm" type="text" placeholder="Search" mr={2} />
+      <InputGroup className={navBarStyles.navbar__searchInputGroup}>
+        <Input maxW="500px" fontSize="sm" type="text" placeholder="Search for titles, authors, topics..." mr={2}/>
         <Button className={navBarStyles.navbar__searchBtn} px={8}>
           Search
         </Button>
       </InputGroup>
-      <Box mr={4} className={navBarStyles.navbar__iconGroup}>
-        <DarkModeSwitch />
-        <Icon name="email" mx={2} />
-      </Box>
+      <NextLink href="/">
+        <Flex className={navBarStyles.navbar__homeRoute} align={"center"} as={Link} mr={4}>
+          Home
+        </Flex>
+      </NextLink>
+      <NextLink href="/articles">
+        <Flex className={navBarStyles.navbar__articlesRoute} align={"center"} as={Link} mr={4}>
+          Articles
+        </Flex>
+      </NextLink>
       <Flex fontWeight={500}>{renderUser}</Flex>
     </Flex>
   );

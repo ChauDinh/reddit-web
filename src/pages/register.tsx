@@ -1,13 +1,15 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button } from "@chakra-ui/core";
+import { Box, Text, Button, Image, Link, Flex } from "@chakra-ui/core";
 import { useRouter } from "next/router";
+import NextLink from "next/link";
 
 import { InputField } from "../components/InputField";
 import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { Layout } from "../components/Layout";
 import { createWithApollo } from "../utils/withApollo";
+import { Wrapper } from "../components/Wrapper/Wrapper";
 
 interface Props {}
 
@@ -15,69 +17,75 @@ const Register: React.FC<Props> = () => {
   const [register] = useRegisterMutation();
   const router = useRouter();
   return (
-    <Layout variant="small" direction="column">
-      <Formik
-        initialValues={{ username: "", email: "", password: "" }}
-        onSubmit={async (values, { setErrors }) => {
-          const response = await register({variables: values, update: (cache, {data}) => {
-            cache.writeQuery<MeQuery>({
-              query: MeDocument,
-              data: {
-                __typename: "Query",
-                me: data?.register.user
-              }
-            })
-          }});
-          if (response.data?.register?.errors) {
-            setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register?.user) {
-            // navigate to login page
-            router.push("/login");
-          }
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form style={styles.container}>
-            <Text fontSize="20px" fontWeight={700}>
-              Sign Up
-            </Text>
-            <Box mt={4}>
-              {" "}
-              <InputField
-                name="username"
-                placeholder="Username"
-                label="Username"
-              />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                name="email"
-                type="email"
-                placeholder="Email"
-                label="Email"
-              />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                name="password"
-                placeholder="Password"
-                label="Password"
-                type="password"
-              />
-            </Box>
+    <Layout variant="regular" direction="column">
+      <Wrapper variants="regular">
+        <Formik
+          initialValues={{ username: "", email: "", password: "" }}
+          onSubmit={async (values, { setErrors }) => {
+            const response = await register({variables: values, update: (cache, {data}) => {
+              cache.writeQuery<MeQuery>({
+                query: MeDocument,
+                data: {
+                  __typename: "Query",
+                  me: data?.register.user
+                }
+              })
+            }});
+            if (response.data?.register?.errors) {
+              setErrors(toErrorMap(response.data.register.errors));
+            } else if (response.data?.register?.user) {
+              // navigate to login page
+              router.push("/login");
+            }
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form style={styles.container}>
+              <Text fontSize="20px" fontWeight={700}>
+                Sign Up
+              </Text>
+              <Box mt={4}>
+                {" "}
+                <InputField
+                  name="username"
+                  placeholder="Username"
+                  label="Username"
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  label="Email"
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField
+                  name="password"
+                  placeholder="Password"
+                  label="Password"
+                  type="password"
+                />
+              </Box>
 
-            <Box mt={4}>
-              <Button
-                variantColor="blue"
-                isLoading={isSubmitting}
-                type="submit"
-              >
-                Register
-              </Button>
-            </Box>
-          </Form>
-        )}
-      </Formik>
+              <Flex mt={4} justifyContent="space-between" alignItems="center">
+                <Button
+                  variantColor="purple"
+                  isLoading={isSubmitting}
+                  type="submit"
+                >
+                  Register
+                </Button>
+                <NextLink href="/login">
+                  <Text as={Link}>Already have an account?</Text>
+                </NextLink>
+              </Flex>
+            </Form>
+          )}
+        </Formik>
+        <Image height="250px" src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_welcome_cats_thqn_evelon.png"/>
+      </Wrapper>
     </Layout>
   );
 };
@@ -86,8 +94,6 @@ const styles = {
   container: {
     borderRadius: "3px",
     padding: "16px 16px",
-    border: "1px solid rgba(0, 0, 0, 0.1)",
-    boxShadow: "0px 3px 6px rgba(212, 212, 212, 0.2)",
     width: "100%",
     backgroundColor: "#fff",
   },

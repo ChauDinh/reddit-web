@@ -1,6 +1,16 @@
 import { theme as chakraTheme } from "@chakra-ui/core";
 
-const fonts = { ...chakraTheme.fonts, mono: `'Menlo', monospace` };
+const fonts = { 
+  heading: "Source Sans Pro, sans serif",
+  body: "Source Sans Pro, sans serif",
+  mono: "Source Sans Pro, sans serif" 
+};
+
+const fontWeight = {
+  normal: 400,
+  medium: 500,
+  bold: 700,
+}
 
 const breakpoints = ["40em", "52em", "64em"];
 
@@ -33,7 +43,20 @@ const theme = {
       800: "#595959",
       900: "#404040",
     },
+    purple: {
+      50: "#f8e4ff",
+      100: "#e0b3ff",
+      200: "#ca81ff",
+      300: "#b34ffd",
+      400: "#9d1efb",
+      500: "#8404e1",
+      600: "#6701b0",
+      700: "#49007f",
+      800: "#2d004e",
+      900: "#12001f",
+    }
   },
+  fontWeight,
   fonts,
   breakpoints,
   icons: {

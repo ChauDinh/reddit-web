@@ -1,19 +1,26 @@
 import React from "react";
 
-import { Wrapper, WrapperVariants } from "./Wrapper/Wrapper";
+import { WrapperVariants } from "./Wrapper/Wrapper";
 import { NavBar } from "./NavBar/NavBar";
-import { Flex } from "@chakra-ui/core";
+import { Box, Flex } from "@chakra-ui/core";
+import { Footer } from "./Footer/Footer";
 
 interface Props {
   variant?: WrapperVariants;
   direction?: "column" | "row";
 }
 
-export const Layout: React.FC<Props> = ({ variant, children, direction }) => {
+export const Layout: React.FC<Props> = ({ children, direction }) => {
   return (
     <Flex flexDirection={direction}>
       <NavBar />
-      <Wrapper variants={variant}>{children}</Wrapper>
+      <Box style={{
+        minHeight: "calc(100vh - 265px)"
+      }}>
+        {/* <Wrapper variants={variant}>{children}</Wrapper> */}
+        {children}
+      </Box>
+      <Footer />
     </Flex>
   );
 };

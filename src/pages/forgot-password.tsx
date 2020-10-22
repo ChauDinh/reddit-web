@@ -13,7 +13,7 @@ const ForgotPassword: React.FC<Props> = () => {
   const [forgotPassword] = useForgotPasswordMutation();
   const [isComplete, setIsComplete] = useState(false);
   return (
-    <Layout variant="small">
+    <Layout variant="regular" direction="column">
       <Formik
         initialValues={{ email: "" }}
         onSubmit={async (values) => {
@@ -28,7 +28,7 @@ const ForgotPassword: React.FC<Props> = () => {
               please go and check it.
             </Box>
           ) : (
-            <Form>
+            <Form style={styles.container}>
               <Text fontSize="2xl" fontWeight={700}>
                 Change password
               </Text>
@@ -44,7 +44,7 @@ const ForgotPassword: React.FC<Props> = () => {
 
               <Flex mt={4} alignItems="center" justifyContent="space-between">
                 <Button
-                  variantColor="blue"
+                  variantColor="purple"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -57,6 +57,15 @@ const ForgotPassword: React.FC<Props> = () => {
       </Formik>
     </Layout>
   );
+};
+
+const styles = {
+  container: {
+    borderRadius: "3px",
+    padding: "16px 16px",
+    width: "100%",
+    background: "#fff",
+  },
 };
 
 export default createWithApollo({ssr: false})(ForgotPassword);
