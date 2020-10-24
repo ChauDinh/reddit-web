@@ -76,7 +76,7 @@ const Leaf = ({ attributes, children, leaf }: any) => {
           whiteSpace: "pre-wrap",
         }}
       >
-        <code>{children}</code>
+        <code style={{fontFamily: "'Source Code Pro', monospace"}}>{children}</code>
       </pre>
     );
   }
@@ -304,7 +304,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             height: "360px",
             backgroundColor: "#fff",
             borderRadius: "0px 0px 3px 3px",
-            boxShadow: "0 3px 10px rgba(202, 202, 202, 0.1)",
+            boxShadow: "0 3px 6px rgba(200, 200, 200, 0.5)",
             padding: "15px 15px",
             scrollBehavior: "smooth",
             overflowY: "scroll",

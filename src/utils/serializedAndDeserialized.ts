@@ -7,7 +7,7 @@ export const serialized = (node: Node) => {
     if (node.code === true) {
       return `
 								<pre style="white-space:pre-line;">
-									<code>${node.text}</code>
+									<code style="font-family: 'Source Code Pro', monospace">${node.text}</code>
 								</pre>
 						`;
     }
