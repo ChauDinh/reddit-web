@@ -1,7 +1,7 @@
 import isHotkey from "is-hotkey";
 import React from "react";
 import { createEditor, Node, Editor, Transforms } from "slate";
-import { Slate, withReact, Editable, useSlate } from "slate-react";
+import { Slate, withReact, Editable, useSlate, useSelected, useFocused, useEditor } from "slate-react";
 import {
   BiBold,
   BiCodeBlock,
@@ -12,9 +12,12 @@ import {
   BiUnderline,
 } from "react-icons/bi";
 import { useField } from "formik";
+import imageExtensions from "image-extensions";
+import isUrl from "is-url";
 
 import { initialValue } from "../utils/slateInitialValue";
 import { Button, Flex } from "@chakra-ui/core";
+import { css } from "emotion";
 
 interface Props {}
 
@@ -26,8 +29,67 @@ const HOTKEYS: { [char: string]: string } = {
 };
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 
+const withImages = (editor: any) => {
+  const {insertData, isVoid} = editor;
+  editor.isVoid = (element: any) => {
+    return element.type === "image" ? true : isVoid(element);
+  }
+  editor.insertData = (data: any) => {
+    const text = data.getData("text/plain");
+    const {files} = data;
+    
+    if (files && files.length > 0) {
+      for (const file of files) {
+        const reader = new FileReader();
+        const [mime] = file.type.split("/");
+
+        if (mime === "image") {
+          reader.addEventListener("load", () => {
+            const url = reader.result;
+            insertImage(editor, url);
+          })
+
+          reader.readAsDataURL(file);
+        }
+      }
+    } else if (isImageUrl(text)) {
+      insertImage(editor, text);
+    } else {
+      insertData(data);
+    }
+  }
+
+  return editor;
+}
+
+const insertImage = (editor: any, url: any) => {
+  const text = {text: ""};
+  const image = {type: "image", url, children: [text]}
+  Transforms.insertNodes(editor, image);
+}
+
 const Element = ({ attributes, children, element }: any) => {
   switch (element.type) {
+    case "image": {
+      const selected = useSelected();
+      const focused = useFocused();
+      return (
+        <div {...attributes}>
+          <div contentEditable={false}>
+            <img 
+              src={element.url}
+              className={css`
+                display: block;
+                max-width: 100%;
+                max-height: 20em;
+                box-shadow: ${selected && focused ? '0 0 0 3px #B4D5FF' : 'none'}
+              `}
+            />
+          </div>
+          {children}
+        </div>
+      )
+    }
     case "bulleted-list":
       return (
         <ul
@@ -133,6 +195,27 @@ const toggleBlock = (editor: any, format: any) => {
     Transforms.wrapNodes(editor, block);
   }
 };
+
+const isImageUrl = (url: any) => {
+  if (!url) return false;
+  if (!isUrl(url)) return false;
+  const ext = new URL(url).pathname.split(".").pop();
+  return imageExtensions.includes(ext);
+}
+
+const InsertImageButton = () => {
+  const editor = useEditor();
+  return (
+    <Button onMouseDown={event => {
+      event.preventDefault();
+      const url = window.prompt("Enter the URL of the image");
+      if (!url) return
+      insertImage(editor, url);
+    }}>
+      image
+    </Button>
+  )
+}
 
 const BlockButton = ({ format }: any) => {
   const editor = useSlate();
@@ -256,19 +339,20 @@ const MarkButton = ({ format }: any) => {
 };
 
 export const MyRichTextEditor: React.FC<Props> = (props: any) => {
-  const [field, meta, helpers] = useField<{}>(props);
+  const [field,, helpers] = useField<{}>(props);
   const { setValue } = helpers;
 
   const [slateValue, setSlateValue] = React.useState<Node[]>(
     props.value ? props.value : initialValue
   );
-  const editor = React.useMemo(() => withReact(createEditor()), []);
+  const editor = React.useMemo(() => withImages(withReact(createEditor())), []);
   const renderElement = React.useCallback(
     (props) => <Element {...props} />,
     []
   );
   const renderLeaf = React.useCallback((props) => <Leaf {...props} />, []);
 
+  console.log("slate value: ", slateValue)
   return (
     <Slate
       editor={editor}
@@ -294,6 +378,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
           <BlockButton format="heading" />
           <BlockButton format="numbered-list" />
           <BlockButton format="bulleted-list" />
+          <InsertImageButton />
         </Flex>
         <hr />
         <Editable

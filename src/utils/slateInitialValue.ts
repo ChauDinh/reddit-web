@@ -6,5 +6,5 @@ export const initialValue = [
       },
     ],
     type: "paragraph",
-  },
+  }
 ];
