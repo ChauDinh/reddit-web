@@ -38,6 +38,10 @@ export const serialized = (node: Node) => {
   const children: any = node.children.map((n) => serialized(n)).join("");
 
   switch (node.type) {
+    case "image": {
+      console.log(node.url);
+      return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url}/>`
+    }
     case "paragraph":
       return `<p style="margin-top: 5px; margin-bottom: 5px">${children}</p>`;
     case "heading":

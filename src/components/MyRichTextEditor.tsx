@@ -10,6 +10,7 @@ import {
   BiListOl,
   BiListUl,
   BiUnderline,
+  BiImages
 } from "react-icons/bi";
 import { useField } from "formik";
 import imageExtensions from "image-extensions";
@@ -211,8 +212,12 @@ const InsertImageButton = () => {
       const url = window.prompt("Enter the URL of the image");
       if (!url) return
       insertImage(editor, url);
-    }}>
-      image
+    }}
+      size="sm"
+      mr={2}
+      p={0}
+    >
+      <BiImages />
     </Button>
   )
 }
