@@ -1,5 +1,5 @@
 .navbar__container {
-  background-color: #FFF;
+  background-color: #fff;
   box-shadow: 0 1px 3px rgba(212, 212, 212, 0.5);
   color: #000;
   width: 100%;
@@ -22,12 +22,12 @@
 }
 
 .navbar__searchInputGroup > input:focus {
-  border-color: #7704CB !important;
+  border-color: #7704cb !important;
 }
 
 .navbar__searchBtn {
   font-size: small !important;
-  background-color: #7704CB !important;
+  background-color: #7704cb !important;
   color: #fff;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .navbar__userGroup {
-  background-color: #EDF2F7;
+  background-color: #edf2f7;
   border-radius: 3px;
   padding: 0 10px;
   padding-left: 0;
@@ -110,6 +110,7 @@
 
   .navbar__searchInputGroup {
     margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   .navbar__searchBtn {
@@ -135,7 +136,7 @@
   .navbar__userGroup {
     width: initial;
     font-size: x-small !important;
-    background-color: #EDF2F7;
+    background-color: #edf2f7;
     justify-content: flex-end;
     padding: 3px 3px;
   }

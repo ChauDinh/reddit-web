@@ -1,8 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
 body {
-  background-color: #FFF;
+  background-color: #fff;
   font-family: "Source Sans Pro", sans-serif !important;
 }
 
+@media only screen and (max-width: 767px) {
+  .header__content {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+  .header__img {
+    display: none !important;
+  }
+  .grid-posts {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}

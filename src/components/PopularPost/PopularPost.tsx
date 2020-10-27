@@ -8,6 +8,7 @@ import {
 import PopularPostStyles from "./PopularPost.module.css";
 import { PostCard } from "../PostCard/PostCard";
 import { Box, Heading } from "@chakra-ui/core";
+import { useWindowDimensions } from "../../utils/useWindowDimensions";
 
 interface Props {
   popular: PostSnippetFragment[] | SinglePostSnippetFragment[];
@@ -30,6 +31,7 @@ const NextArrow = (props: any) => {
         zIndex: "1",
         boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         paddingTop: "2.69px",
+        right: "3px",
       }}
       onClick={onClick}
     />
@@ -53,6 +55,7 @@ const PrevArrow = (props: any) => {
         zIndex: "1",
         boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         paddingTop: "2.69px",
+        left: "3px",
       }}
       onClick={onClick}
     />
@@ -60,6 +63,9 @@ const PrevArrow = (props: any) => {
 };
 
 export const PopularPost: React.FC<Props> = ({ popular }) => {
+  const { width } = useWindowDimensions();
+  console.log(width);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -76,18 +82,28 @@ export const PopularPost: React.FC<Props> = ({ popular }) => {
       <Heading mb={2} color="#FFF" size="md">
         Popular articles
       </Heading>
-      <Slider {...settings}>
-        <Box className={PopularPostStyles.slick__item}>
-          {popular.slice(0, 3).map((post) => (
-            <PostCard post={post} />
+      {width > 767 ? (
+        <Slider {...settings}>
+          <Box className={PopularPostStyles.slick__item}>
+            {popular.slice(0, 3).map((post) => (
+              <PostCard post={post} />
+            ))}
+          </Box>
+          <Box className={PopularPostStyles.slick__item}>
+            {popular.slice(3, 6).map((post) => (
+              <PostCard post={post} />
+            ))}
+          </Box>{" "}
+        </Slider>
+      ) : (
+        <Slider {...settings}>
+          {popular.map((pop) => (
+            <Box>
+              <PostCard post={pop}></PostCard>
+            </Box>
           ))}
-        </Box>
-        <Box className={PopularPostStyles.slick__item}>
-          {popular.slice(3, 6).map((post) => (
-            <PostCard post={post} />
-          ))}
-        </Box>
-      </Slider>
+        </Slider>
+      )}
     </div>
   );
 };

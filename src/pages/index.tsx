@@ -29,7 +29,11 @@ const Index = () => {
     <Layout variant="regular" direction="column">
       <Box style={{ flexGrow: 1 }}>
         <Wrapper variants="regular">
-          <Flex justifyContent="space-between" w="100%">
+          <Flex
+            className="header__content"
+            justifyContent="space-between"
+            w="100%"
+          >
             <Flex flexDirection="column">
               <Heading mb={2} size="xl">
                 Blog
@@ -51,6 +55,7 @@ const Index = () => {
               </NextLink>
             </Flex>
             <Image
+              className="header__img"
               float="right"
               height="250px"
               src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_researching_22gp_r0go0r.png"
@@ -67,6 +72,7 @@ const Index = () => {
                 Recent articles
               </Heading>
               <Grid
+                className="grid-posts"
                 templateColumns="repeat(3, 1fr)"
                 gap={4}
                 mb={data?.posts.hasMore ? 0 : "50px"}
