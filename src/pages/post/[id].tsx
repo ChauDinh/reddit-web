@@ -31,7 +31,11 @@ const Post: React.FC<Props> = () => {
     );
   }
   if (!data?.post) {
-    return <Layout variant="regular" direction="column">Could not find post</Layout>; // 404 page
+    return (
+      <Layout variant="regular" direction="column">
+        Could not find post
+      </Layout>
+    ); // 404 page
   }
 
   const htmlString = JSON.parse(data.post.text)
@@ -91,4 +95,4 @@ const Post: React.FC<Props> = () => {
   );
 };
 
-export default createWithApollo({ssr: true})(Post);
+export default createWithApollo({ ssr: true })(Post);

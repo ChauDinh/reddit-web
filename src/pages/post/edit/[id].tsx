@@ -1,9 +1,11 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/core";
-import { Form, Formik } from "formik";
+import { Button, Flex, FormControl, Text } from "@chakra-ui/core";
+import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../../../components/InputField";
 import { Layout } from "../../../components/Layout";
+import { MyRichTextEditor } from "../../../components/MyRichTextEditor";
+import { Wrapper } from "../../../components/Wrapper/Wrapper";
 import {
   usePostQuery,
   useUpdatePostMutation,
@@ -31,45 +33,53 @@ const EditPost: React.FC<Props> = () => {
     );
   }
 
+  console.log(JSON.parse(data?.post?.text as string));
+
   return (
     <Layout direction="column" variant="regular">
-      <Formik
-        initialValues={{ title: data?.post?.title, text: data?.post?.text }}
-        onSubmit={async (values) => {
-          await updatePost({ variables: { id: integerId, ...values }});
-          router.back();
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form style={{ width: "100%" }}>
-            <Box mt={4}>
-              {" "}
-              <InputField name="title" placeholder="Title" label="Title" />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                textarea={true}
-                name="text"
-                placeholder="Text..."
-                label="Body"
-                height="300px"
-              />
-            </Box>
+      <Wrapper variants="regular">
+        <Formik
+          initialValues={{
+            title: data?.post?.title,
+            text: JSON.parse(data?.post?.text as string),
+          }}
+          onSubmit={async (values) => {
+            await updatePost({ variables: { id: integerId, ...values } });
+            router.back();
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form style={{ width: "100%" }}>
+              <FormControl mt={4}>
+                {" "}
+                <InputField name="title" placeholder="Title" label="Title" />
+              </FormControl>
+              <FormControl mt={4}>
+                {/* <InputField
+                  textarea={true}
+                  name="text"
+                  placeholder="Text..."
+                  label="Body"
+                  height="300px"
+                /> */}
+                <Field name="text" as={MyRichTextEditor} />
+              </FormControl>
 
-            <Flex mt={4} alignItems="center" justifyContent="space-between">
-              <Button
-                variantColor="purple"
-                isLoading={isSubmitting}
-                type="submit"
-              >
-                Update post
-              </Button>
-            </Flex>
-          </Form>
-        )}
-      </Formik>
+              <Flex mt={4} alignItems="center" justifyContent="space-between">
+                <Button
+                  variantColor="purple"
+                  isLoading={isSubmitting}
+                  type="submit"
+                >
+                  Update post
+                </Button>
+              </Flex>
+            </Form>
+          )}
+        </Formik>
+      </Wrapper>
     </Layout>
   );
 };
 
-export default createWithApollo({ssr: false})(EditPost);
+export default createWithApollo({ ssr: false })(EditPost);

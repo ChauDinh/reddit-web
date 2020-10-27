@@ -8,7 +8,11 @@ import NextLink from "next/link";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../../components/InputField";
-import { MeDocument, MeQuery, useChangePasswordMutation } from "../../generated/graphql";
+import {
+  MeDocument,
+  MeQuery,
+  useChangePasswordMutation,
+} from "../../generated/graphql";
 import { createWithApollo } from "../../utils/withApollo";
 
 const ChangePassword: NextPage = () => {
@@ -24,18 +28,19 @@ const ChangePassword: NextPage = () => {
             variables: {
               newPassword: values.newPassword,
               token:
-                typeof router.query.token === "string" ? router.query.token : "",
-                
+                typeof router.query.token === "string"
+                  ? router.query.token
+                  : "",
             },
-            update: (cache, {data}) => {
+            update: (cache, { data }) => {
               cache.writeQuery<MeQuery>({
                 query: MeDocument,
                 data: {
                   __typename: "Query",
-                  me: data?.changePassword.user
-                }
+                  me: data?.changePassword.user,
+                },
               });
-            }
+            },
           });
           if (response.data?.changePassword?.errors) {
             const errorMap = toErrorMap(response.data.changePassword.errors);
@@ -86,4 +91,4 @@ const ChangePassword: NextPage = () => {
   );
 };
 
-export default createWithApollo({ssr: false})(ChangePassword);
+export default createWithApollo({ ssr: false })(ChangePassword);

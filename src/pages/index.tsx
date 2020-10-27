@@ -6,7 +6,7 @@ import ErrorPage from "./404";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 import { PostCard } from "../components/PostCard/PostCard";
-import {PopularPost} from "../components/PopularPost/PopularPost";
+import { PopularPost } from "../components/PopularPost/PopularPost";
 
 const Index = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -19,9 +19,7 @@ const Index = () => {
 
   if (!loading && !data) {
     console.error("Error: ", error?.message);
-    return (
-      <ErrorPage />
-    ); 
+    return <ErrorPage />;
   }
 
   const popularPosts = data?.posts.posts.slice(0, variables?.limit);
@@ -29,13 +27,16 @@ const Index = () => {
 
   return (
     <Layout variant="regular" direction="column">
-      <Box style={{flexGrow: 1}}>
+      <Box style={{ flexGrow: 1 }}>
         <Wrapper variants="regular">
           <Flex justifyContent="space-between" w="100%">
             <Flex flexDirection="column">
-              <Heading mb={2} size="xl">Blog</Heading>
+              <Heading mb={2} size="xl">
+                Blog
+              </Heading>
               <Text mb={4} fontWeight="medium">
-                Our latest web design tips, insights and resources <br /> hot off the presses
+                Our latest web design tips, insights and resources <br /> hot
+                off the presses
               </Text>
               <NextLink href="/create-post">
                 <Button
@@ -49,7 +50,11 @@ const Index = () => {
                 </Button>
               </NextLink>
             </Flex>
-            <Image float="right" height="250px" src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_researching_22gp_r0go0r.png" />
+            <Image
+              float="right"
+              height="250px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_researching_22gp_r0go0r.png"
+            />
           </Flex>
         </Wrapper>
         <PopularPost popular={popularPosts ? popularPosts.slice(0, 6) : []} />
@@ -58,8 +63,14 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column">
-              <Heading size="md" mb={3}>Recent articles</Heading>
-              <Grid templateColumns="repeat(3, 1fr)" gap={4} mb={data?.posts.hasMore ? 0 : "50px"}>
+              <Heading size="md" mb={3}>
+                Recent articles
+              </Heading>
+              <Grid
+                templateColumns="repeat(3, 1fr)"
+                gap={4}
+                mb={data?.posts.hasMore ? 0 : "50px"}
+              >
                 {data!.posts.posts.map((post) =>
                   !post ? null : <PostCard post={post} />
                 )}
@@ -76,8 +87,8 @@ const Index = () => {
                     limit: variables?.limit,
                     cursor:
                       data.posts.posts[data.posts.posts.length - 1].createdAt,
-                  }, 
-                })
+                  },
+                });
               }}
               isLoading={loading}
             >
@@ -90,4 +101,4 @@ const Index = () => {
   );
 };
 
-export default createWithApollo({ssr: true})(Index);
+export default createWithApollo({ ssr: true })(Index);

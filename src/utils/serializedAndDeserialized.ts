@@ -4,12 +4,12 @@ import escapeHTML from "escape-html";
 // serialized function will takes a value and returns a string
 export const serialized = (node: Node) => {
   if (Text.isText(node)) {
-    if (node.code === true) {
+    if (node.code === true && node.text.length !== 0) {
       return `
-								<pre style="white-space:pre-line;">
-									<code style="font-family: 'Source Code Pro', monospace">${node.text}</code>
-								</pre>
-						`;
+        <pre style="white-space:pre-line; margin-top: 15px; margin-bottom: 15px;">
+          <code style="font-family: 'Source Code Pro', monospace">${node.text}</code>
+        </pre>
+      `;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
       return `<strong><em style="text-decoration:underline">${node.text}</em></strong>`;
@@ -40,7 +40,7 @@ export const serialized = (node: Node) => {
   switch (node.type) {
     case "image": {
       console.log(node.url);
-      return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url}/>`
+      return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url}/> <div style="clear: both"></div>`;
     }
     case "paragraph":
       return `<p style="margin-top: 5px; margin-bottom: 5px">${children}</p>`;
