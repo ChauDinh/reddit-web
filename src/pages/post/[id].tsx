@@ -87,19 +87,19 @@ const Post: React.FC<Props> = () => {
                   <Text className={SinglePostStyles.reaction__label}>Love</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  😄
+                  🐸
                   <Text className={SinglePostStyles.reaction__label}>Haha</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  😲
+                  🙊
                   <Text className={SinglePostStyles.reaction__label}>Wow</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  😞
+                  😿
                   <Text className={SinglePostStyles.reaction__label}>Sad</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  😡
+                  👿
                   <Text className={SinglePostStyles.reaction__label}>
                     Angry
                   </Text>
