@@ -1,0 +1,55 @@
+.award__btn {
+  cursor: pointer;
+  position: relative;
+}
+
+.reaction__box {
+  position: absolute;
+  width: 312px;
+  height: 55px;
+  background-color: #fafafa;
+  border-radius: 28px;
+  left: -25px;
+  bottom: 20px;
+  display: none;
+}
+
+.reaction__icon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  font-size: 28px;
+  background-color: transparent;
+  border-radius: 20px;
+  transition: all 0.3s ease-out;
+}
+
+.reaction__icon > .reaction__label {
+  padding: 3px 5px 3px 5px;
+  position: relative;
+  top: -69px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #333;
+  font-size: 12px !important;
+  text-align: center;
+  visibility: hidden;
+}
+
+.award__btn:hover > .reaction__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.award__btn:hover > .reaction__box > .reaction__icon:hover {
+  transform: scale(1.4);
+  transform-origin: bottom;
+}
+
+.award__btn:hover > .reaction__box > .reaction__icon:hover > .reaction__label {
+  visibility: visible;
+  font-size: 12px !important;
+}

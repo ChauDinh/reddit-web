@@ -18,6 +18,7 @@ import { serialized } from "../../utils/serializedAndDeserialized";
 import { RenderText } from "../../components/RenderText";
 import { createWithApollo } from "../../utils/withApollo";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
+import SinglePostStyles from "./SinglePost.module.css";
 
 interface Props {}
 
@@ -67,9 +68,43 @@ const Post: React.FC<Props> = () => {
           </Box>
           <hr />
           <Flex mt={2} alignItems="center" justifyContent="flex-start">
-            <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
+            <Box
+              className={SinglePostStyles.award__btn}
+              mr={4}
+              fontSize="sm"
+              color="#8e9296"
+              fontWeight={600}
+            >
               <Icon mb="2px" mr={1} name="star" />
               Award
+              <Box className={SinglePostStyles.reaction__box}>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  👍
+                  <Text className={SinglePostStyles.reaction__label}>Like</Text>
+                </Box>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  ❤️
+                  <Text className={SinglePostStyles.reaction__label}>Love</Text>
+                </Box>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  😄
+                  <Text className={SinglePostStyles.reaction__label}>Haha</Text>
+                </Box>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  😲
+                  <Text className={SinglePostStyles.reaction__label}>Wow</Text>
+                </Box>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  😞
+                  <Text className={SinglePostStyles.reaction__label}>Sad</Text>
+                </Box>
+                <Box className={SinglePostStyles.reaction__icon}>
+                  😡
+                  <Text className={SinglePostStyles.reaction__label}>
+                    Angry
+                  </Text>
+                </Box>
+              </Box>
             </Box>
             <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
               <Icon mr={1} name="chat" />
