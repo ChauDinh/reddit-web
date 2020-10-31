@@ -1,13 +1,4 @@
-import {
-  Heading,
-  Text,
-  Flex,
-  Box,
-  Icon,
-  Input,
-  InputGroup,
-  Button,
-} from "@chakra-ui/core";
+import { Heading, Text, Flex, Box, Icon, Button } from "@chakra-ui/core";
 import React from "react";
 import { Node } from "slate";
 import { Layout } from "../../components/Layout";
@@ -19,10 +10,15 @@ import { RenderText } from "../../components/RenderText";
 import { createWithApollo } from "../../utils/withApollo";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import SinglePostStyles from "./SinglePost.module.css";
+import { InputField } from "../../components/InputField";
+import { Form, Formik } from "formik";
+import { useCreateCommentMutation } from "../../generated/graphql";
 
 interface Props {}
 
 const Post: React.FC<Props> = () => {
+  const [createComment] = useCreateCommentMutation();
+
   const { data, loading } = useGetPostFromUrl();
   if (loading) {
     return (
@@ -115,13 +111,36 @@ const Post: React.FC<Props> = () => {
               Share
             </Box>
           </Flex>
-          <Flex mt={4} flexDirection="column">
-            <InputGroup>
-              <Input fontSize="sm" placeholder="Create comments" mr={2} />
-              <Button fontSize="sm" variantColor="purple">
-                Send
-              </Button>
-            </InputGroup>
+          <Flex mt={0} flexDirection="column">
+            <Formik
+              initialValues={{ comment: "" }}
+              onSubmit={async (values) => {
+                console.log(values);
+                await createComment({
+                  variables: {
+                    input: { text: values.comment, postId: data.post!.id },
+                  },
+                });
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Form>
+                  <Flex alignItems="flex-end" justifyContent="space-between">
+                    <Flex alignItems="center" h="100%" flexGrow={1}>
+                      <InputField name="comment" placeholder="Create comment" />
+                    </Flex>
+                    <Button
+                      variantColor="purple"
+                      type="submit"
+                      isLoading={isSubmitting}
+                      ml={4}
+                    >
+                      Send
+                    </Button>
+                  </Flex>
+                </Form>
+              )}
+            </Formik>
             <Text mt={10}>The post has no comment</Text>
           </Flex>
         </Flex>

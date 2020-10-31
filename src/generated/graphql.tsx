@@ -13,10 +13,16 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  comments?: Maybe<CommentResults>;
   hello: Scalars['String'];
   posts: PaginatedPosts;
   post?: Maybe<Post>;
   me?: Maybe<User>;
+};
+
+
+export type QueryCommentsArgs = {
+  postId: Scalars['Float'];
 };
 
 
@@ -28,6 +34,32 @@ export type QueryPostsArgs = {
 
 export type QueryPostArgs = {
   id: Scalars['Int'];
+};
+
+export type CommentResults = {
+  __typename?: 'CommentResults';
+  comments: Array<Comment>;
+};
+
+export type Comment = {
+  __typename?: 'Comment';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  text: Scalars['String'];
+  points: Scalars['Float'];
+  creatorId: Scalars['Float'];
+  postId: Scalars['Float'];
+  commentCreator: User;
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  username: Scalars['String'];
+  email: Scalars['String'];
 };
 
 export type PaginatedPosts = {
@@ -47,20 +79,13 @@ export type Post = {
   creatorId: Scalars['Float'];
   creator: User;
   voteStatus?: Maybe<Scalars['Int']>;
+  comments: Comment;
   textSnippet: Scalars['String'];
-};
-
-export type User = {
-  __typename?: 'User';
-  id: Scalars['Float'];
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
-  username: Scalars['String'];
-  email: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createComment: Comment;
   createPost: Post;
   updatePost?: Maybe<Post>;
   deletePost: Scalars['Boolean'];
@@ -70,6 +95,11 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   forgotPassword: Scalars['Boolean'];
   changePassword: UserResponse;
+};
+
+
+export type MutationCreateCommentArgs = {
+  input: CommentInput;
 };
 
 
@@ -114,6 +144,11 @@ export type MutationForgotPasswordArgs = {
 export type MutationChangePasswordArgs = {
   newPassword: Scalars['String'];
   token: Scalars['String'];
+};
+
+export type CommentInput = {
+  text: Scalars['String'];
+  postId: Scalars['Float'];
 };
 
 export type PostInput = {
@@ -194,6 +229,23 @@ export type ChangePasswordMutation = (
   & { changePassword: (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
+  ) }
+);
+
+export type CreateCommentMutationVariables = Exact<{
+  input: CommentInput;
+}>;
+
+
+export type CreateCommentMutation = (
+  { __typename?: 'Mutation' }
+  & { createComment: (
+    { __typename?: 'Comment' }
+    & Pick<Comment, 'id' | 'createdAt' | 'updatedAt' | 'text' | 'points' | 'creatorId'>
+    & { commentCreator: (
+      { __typename?: 'User' }
+      & Pick<User, 'username'>
+    ) }
   ) }
 );
 
@@ -426,6 +478,46 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const CreateCommentDocument = gql`
+    mutation CreateComment($input: CommentInput!) {
+  createComment(input: $input) {
+    id
+    createdAt
+    updatedAt
+    text
+    points
+    creatorId
+    commentCreator {
+      username
+    }
+  }
+}
+    `;
+export type CreateCommentMutationFn = Apollo.MutationFunction<CreateCommentMutation, CreateCommentMutationVariables>;
+
+/**
+ * __useCreateCommentMutation__
+ *
+ * To run a mutation, you first call `useCreateCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCommentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCommentMutation, { data, loading, error }] = useCreateCommentMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateCommentMutation(baseOptions?: Apollo.MutationHookOptions<CreateCommentMutation, CreateCommentMutationVariables>) {
+        return Apollo.useMutation<CreateCommentMutation, CreateCommentMutationVariables>(CreateCommentDocument, baseOptions);
+      }
+export type CreateCommentMutationHookResult = ReturnType<typeof useCreateCommentMutation>;
+export type CreateCommentMutationResult = Apollo.MutationResult<CreateCommentMutation>;
+export type CreateCommentMutationOptions = Apollo.BaseMutationOptions<CreateCommentMutation, CreateCommentMutationVariables>;
 export const CreatePostDocument = gql`
     mutation CreatePost($input: PostInput!) {
   createPost(input: $input) {

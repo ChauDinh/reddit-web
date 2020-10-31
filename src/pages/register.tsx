@@ -22,15 +22,18 @@ const Register: React.FC<Props> = () => {
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           onSubmit={async (values, { setErrors }) => {
-            const response = await register({variables: values, update: (cache, {data}) => {
-              cache.writeQuery<MeQuery>({
-                query: MeDocument,
-                data: {
-                  __typename: "Query",
-                  me: data?.register.user
-                }
-              })
-            }});
+            const response = await register({
+              variables: values,
+              update: (cache, { data }) => {
+                cache.writeQuery<MeQuery>({
+                  query: MeDocument,
+                  data: {
+                    __typename: "Query",
+                    me: data?.register.user,
+                  },
+                });
+              },
+            });
             if (response.data?.register?.errors) {
               setErrors(toErrorMap(response.data.register.errors));
             } else if (response.data?.register?.user) {
@@ -84,7 +87,10 @@ const Register: React.FC<Props> = () => {
             </Form>
           )}
         </Formik>
-        <Image height="250px" src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_welcome_cats_thqn_evelon.png"/>
+        <Image
+          height="250px"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_welcome_cats_thqn_evelon.png"
+        />
       </Wrapper>
     </Layout>
   );
@@ -99,4 +105,4 @@ const styles = {
   },
 };
 
-export default createWithApollo({ssr: false})(Register);
+export default createWithApollo({ ssr: false })(Register);

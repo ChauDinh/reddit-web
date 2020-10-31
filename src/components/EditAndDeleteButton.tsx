@@ -21,9 +21,14 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
         aria-label="delete-post"
         float="right"
         size="xs"
-        onClick={() => deletePost({ variables: { id: post.id }, update: (cache) => {
-          cache.evict({id: "Post:" + post.id}); // Post:78
-        }})}
+        onClick={() =>
+          deletePost({
+            variables: { id: post.id },
+            update: (cache) => {
+              cache.evict({ id: "Post:" + post.id }); // Post:78
+            },
+          })
+        }
         ml={2}
       />
       <NextLink href="/post/edit/[id]" as={`/post/edit/${post.id}`}>
