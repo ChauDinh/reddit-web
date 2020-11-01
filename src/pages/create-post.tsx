@@ -25,9 +25,12 @@ const CreatePost: React.FC<Props> = () => {
         <Formik
           initialValues={{ title: "", text: "" }}
           onSubmit={async (values) => {
-            const { errors } = await createPost({ variables: { input: values}, update: (cache) => {
-              cache.evict({fieldName: "posts:{}"})
-            }});
+            const { errors } = await createPost({
+              variables: { input: values },
+              update: (cache) => {
+                cache.evict({ fieldName: "posts:{}" });
+              },
+            });
             // Our errorExchange function handles the error globally. Check the
             // createUrqlClient file
             // console.log(JSON.parse(values.text)[0]);
@@ -79,4 +82,4 @@ const CreatePost: React.FC<Props> = () => {
   );
 };
 
-export default createWithApollo({ssr: false})(CreatePost);
+export default createWithApollo({ ssr: false })(CreatePost);

@@ -14,10 +14,12 @@ import { InputField } from "../../components/InputField";
 import { Form, Formik } from "formik";
 import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
+import { useRouter } from "next/router";
 
 interface Props {}
 
 const Post: React.FC<Props> = () => {
+  const router = useRouter();
   const [createComment] = useCreateCommentMutation();
 
   const { data, loading } = useGetPostFromUrl();
@@ -117,11 +119,15 @@ const Post: React.FC<Props> = () => {
               initialValues={{ comment: "" }}
               onSubmit={async (values) => {
                 console.log(values);
-                await createComment({
+                const { errors } = await createComment({
                   variables: {
                     input: { text: values.comment, postId: data.post!.id },
                   },
                 });
+                if (errors) {
+                  console.error(errors);
+                }
+                router.reload();
               }}
             >
               {({ isSubmitting }) => (
