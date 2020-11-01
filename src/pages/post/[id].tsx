@@ -13,6 +13,7 @@ import SinglePostStyles from "./SinglePost.module.css";
 import { InputField } from "../../components/InputField";
 import { Form, Formik } from "formik";
 import { useCreateCommentMutation } from "../../generated/graphql";
+import { BoxComment } from "../../components/BoxComment/BoxComment";
 
 interface Props {}
 
@@ -141,7 +142,7 @@ const Post: React.FC<Props> = () => {
                 </Form>
               )}
             </Formik>
-            <Text mt={10}>The post has no comment</Text>
+            <BoxComment postId={data.post.id} />
           </Flex>
         </Flex>
       </Wrapper>

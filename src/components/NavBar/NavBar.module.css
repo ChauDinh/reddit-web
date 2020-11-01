@@ -22,12 +22,12 @@
 }
 
 .navbar__searchInputGroup > input:focus {
-  border-color: #7704cb !important;
+  border-color: #5e73b0 !important;
 }
 
 .navbar__searchBtn {
   font-size: small !important;
-  background-color: #7704cb !important;
+  background-color: #5e73b0 !important;
   color: #fff;
 }
 

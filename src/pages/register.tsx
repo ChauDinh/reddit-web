@@ -89,7 +89,7 @@ const Register: React.FC<Props> = () => {
         </Formik>
         <Image
           height="250px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_welcome_cats_thqn_evelon.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_welcome_cats_thqn_w9shsx.png"
         />
       </Wrapper>
     </Layout>

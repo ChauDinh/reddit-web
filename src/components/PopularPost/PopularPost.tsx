@@ -9,6 +9,7 @@ import PopularPostStyles from "./PopularPost.module.css";
 import { PostCard } from "../PostCard/PostCard";
 import { Box, Heading } from "@chakra-ui/core";
 import { useWindowDimensions } from "../../utils/useWindowDimensions";
+import { Wrapper } from "../Wrapper/Wrapper";
 
 interface Props {
   popular: PostSnippetFragment[] | SinglePostSnippetFragment[];
@@ -25,7 +26,7 @@ const NextArrow = (props: any) => {
         width: "46px",
         display: "flex",
         alignItems: "center",
-        background: "#8404e1",
+        background: "#5E73B0",
         justifyContent: "center",
         borderRadius: "50%",
         zIndex: "1",
@@ -51,7 +52,7 @@ const PrevArrow = (props: any) => {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "50%",
-        background: "#8404e1",
+        background: "#5E73B0",
         zIndex: "1",
         boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         paddingTop: "2.69px",
@@ -64,7 +65,6 @@ const PrevArrow = (props: any) => {
 
 export const PopularPost: React.FC<Props> = ({ popular }) => {
   const { width } = useWindowDimensions();
-  console.log(width);
 
   const settings = {
     dots: false,
@@ -79,28 +79,36 @@ export const PopularPost: React.FC<Props> = ({ popular }) => {
 
   return (
     <div className={PopularPostStyles.slick__container}>
-      <Heading mb={2} color="#FFF" size="md">
-        Popular articles
-      </Heading>
+      <Wrapper variants="regular">
+        <Heading color="#FFF" size="md">
+          Popular articles
+        </Heading>
+      </Wrapper>
       {width > 767 ? (
         <Slider {...settings}>
-          <Box className={PopularPostStyles.slick__item}>
-            {popular.slice(0, 3).map((post) => (
-              <PostCard post={post} />
-            ))}
-          </Box>
-          <Box className={PopularPostStyles.slick__item}>
-            {popular.slice(3, 6).map((post) => (
-              <PostCard post={post} />
-            ))}
-          </Box>{" "}
+          <Wrapper variants="regular">
+            <Box className={PopularPostStyles.slick__item}>
+              {popular.slice(0, 3).map((post) => (
+                <PostCard post={post} />
+              ))}
+            </Box>
+          </Wrapper>
+          <Wrapper variants="regular">
+            <Box className={PopularPostStyles.slick__item}>
+              {popular.slice(3, 6).map((post) => (
+                <PostCard post={post} />
+              ))}
+            </Box>
+          </Wrapper>
         </Slider>
       ) : (
         <Slider {...settings}>
           {popular.map((pop) => (
-            <Box>
-              <PostCard post={pop}></PostCard>
-            </Box>
+            <Wrapper variants="regular">
+              <Box>
+                <PostCard post={pop}></PostCard>
+              </Box>
+            </Wrapper>
           ))}
         </Slider>
       )}

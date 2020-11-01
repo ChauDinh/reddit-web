@@ -58,7 +58,7 @@ const Index = () => {
               className="header__img"
               float="right"
               height="250px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603176949/undraw_researching_22gp_r0go0r.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_researching_22gp_1_klspqo.png"
             />
           </Flex>
         </Wrapper>

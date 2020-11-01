@@ -64,9 +64,9 @@ export const NavBar: React.FC<Props> = () => {
     renderUser = (
       <>
         <NextLink href="/login">
-            <Flex align={"center"} as={Link} mr={4}>
-              Login
-            </Flex>
+          <Flex align={"center"} as={Link} mr={4}>
+            Login
+          </Flex>
         </NextLink>
         <NextLink href="/register">
           <Button variantColor="purple" color="#fff" fontSize="sm" as={Link}>
@@ -171,10 +171,14 @@ export const NavBar: React.FC<Props> = () => {
             </Box>
             <Divider mb={0} />
             <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
-              <Button variant="link" onClick={async () => {
-                await logout();
-                await apolloClient.resetStore();
-              }} isLoading={logoutFetching}>
+              <Button
+                variant="link"
+                onClick={async () => {
+                  await logout();
+                  await apolloClient.resetStore();
+                }}
+                isLoading={logoutFetching}
+              >
                 <Text ml={1} color="#333" fontWeight="medium">
                   Logout
                 </Text>
@@ -210,23 +214,39 @@ export const NavBar: React.FC<Props> = () => {
           <Image
             className={navBarStyles.navbar__logo}
             alt="logo"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288837/Group_3_2x_nww9m5.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151246/Group_7_2x_rsvend.png"
           />
         </Link>
       </NextLink>
       <InputGroup className={navBarStyles.navbar__searchInputGroup}>
-        <Input maxW="500px" fontSize="sm" type="text" placeholder="Search for titles, authors, topics..." mr={2}/>
+        <Input
+          maxW="500px"
+          fontSize="sm"
+          type="text"
+          placeholder="Search for titles, authors, topics..."
+          mr={2}
+        />
         <Button className={navBarStyles.navbar__searchBtn} px={8}>
           Search
         </Button>
       </InputGroup>
       <NextLink href="/">
-        <Flex className={navBarStyles.navbar__homeRoute} align={"center"} as={Link} mr={4}>
+        <Flex
+          className={navBarStyles.navbar__homeRoute}
+          align={"center"}
+          as={Link}
+          mr={4}
+        >
           Home
         </Flex>
       </NextLink>
       <NextLink href="/articles">
-        <Flex className={navBarStyles.navbar__articlesRoute} align={"center"} as={Link} mr={4}>
+        <Flex
+          className={navBarStyles.navbar__articlesRoute}
+          align={"center"}
+          as={Link}
+          mr={4}
+        >
           Articles
         </Flex>
       </NextLink>

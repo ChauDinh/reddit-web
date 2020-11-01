@@ -7,13 +7,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 function MyApp({ Component, pageProps }: any) {
   return (
-      <ThemeProvider theme={theme}>
-        <ColorModeProvider>
-          <CSSReset />
-          <Component {...pageProps} />
-        </ColorModeProvider>
-      </ThemeProvider>
-
+    <ThemeProvider theme={theme}>
+      <CSSReset />
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
