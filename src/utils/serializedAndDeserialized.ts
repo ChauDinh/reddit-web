@@ -60,7 +60,7 @@ export const serialized = (node: Node) => {
 // serialized function return text snippet
 export const serializedSnippet = (nodes: Node[]) => {
   let result = nodes.map((node) => Node.string(node)).join("\n");
-  return result.length < 100 ? result : result.slice(0, 100) + "...";
+  return result.length < 60 ? result : result.slice(0, 60) + "...";
 };
 
 // deSerialized function will takes a string and returns a value

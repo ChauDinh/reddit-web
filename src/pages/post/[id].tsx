@@ -15,6 +15,7 @@ import { Form, Formik } from "formik";
 import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
 import { useRouter } from "next/router";
+import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 
 interface Props {}
 
@@ -57,7 +58,11 @@ const Post: React.FC<Props> = () => {
           flexDirection="column"
         >
           <Text mr={2} fontSize="xs">
-            Posted by {data.post.creator.username} 7 hours ago
+            Posted by{" "}
+            <span style={{ fontWeight: "bolder" }}>
+              {data.post.creator.username}
+            </span>{" "}
+            {handleDateFromCreatedAtAndUpdatedAt(parseInt(data.post.createdAt))}
           </Text>
           <Heading fontSize="36px" mb={2}>
             {data.post.title}

@@ -68,7 +68,7 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column">
-              <Heading size="md" mb={3}>
+              <Heading size="md" mb="40px">
                 Recent articles
               </Heading>
               <Grid
