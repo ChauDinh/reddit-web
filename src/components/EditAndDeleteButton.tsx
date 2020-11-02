@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton } from "@chakra-ui/core";
+import { Flex, IconButton } from "@chakra-ui/core";
 import {
   useMeQuery,
   useDeletePostMutation,
@@ -15,7 +15,7 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
   const { data: meData } = useMeQuery();
   const [deletePost] = useDeletePostMutation();
   return post.creator.id === meData?.me?.id ? (
-    <Box>
+    <Flex direction="column">
       <IconButton
         icon="delete"
         aria-label="delete-post"
@@ -29,7 +29,7 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
             },
           })
         }
-        ml={2}
+        mt={4}
       />
       <NextLink href="/post/edit/[id]" as={`/post/edit/${post.id}`}>
         <IconButton
@@ -37,10 +37,10 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
           aria-label="edit-post"
           float="right"
           size="xs"
-          ml={2}
+          mt={4}
         />
       </NextLink>
-    </Box>
+    </Flex>
   ) : null;
 };
 

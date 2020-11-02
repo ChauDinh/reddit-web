@@ -45,7 +45,10 @@ const Post: React.FC<Props> = () => {
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
-        <UpdootSection post={data?.post} />
+        <Flex direction="column" alignItems="flex-start">
+          <UpdootSection post={data?.post} />
+          <EditAndDeleteButton post={data.post} />
+        </Flex>
         <Flex
           width="100%"
           p={4}
@@ -53,12 +56,9 @@ const Post: React.FC<Props> = () => {
           background="#fff"
           flexDirection="column"
         >
-          <Flex mb={1} alignItems="center" justifyContent="space-between">
-            <Text mr={2} fontSize="xs">
-              Posted by {data.post.creator.username} 7 hours ago
-            </Text>
-            <EditAndDeleteButton post={data.post} />
-          </Flex>
+          <Text mr={2} fontSize="xs">
+            Posted by {data.post.creator.username} 7 hours ago
+          </Text>
           <Heading fontSize="36px" mb={2}>
             {data.post.title}
           </Heading>

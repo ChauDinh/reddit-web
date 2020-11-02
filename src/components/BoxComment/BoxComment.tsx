@@ -22,7 +22,7 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
         {data.comments?.comments.map((comment) => (
           <Flex
             key={comment.id}
-            alignItems="center"
+            alignItems="flex-start"
             justifyContent="flex-start"
             mb={4}
           >
