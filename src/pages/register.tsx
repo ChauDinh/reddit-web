@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Image, Link, Flex } from "@chakra-ui/core";
+import { Box, Text, Button, Image, Link, Flex, Heading } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -87,10 +87,19 @@ const Register: React.FC<Props> = () => {
             </Form>
           )}
         </Formik>
-        <Image
-          height="250px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_welcome_cats_thqn_w9shsx.png"
-        />
+        <Flex
+          w="100%"
+          direction="column"
+          alignItems="flex-end"
+          justifyContent="flex-end"
+        >
+          <Image
+            height="250px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_welcome_cats_thqn_w9shsx.png"
+          />
+          <Heading size="md">amanlearnscode</Heading>
+          <Text mb={3}>Collaboration platform for modern bloggers</Text>
+        </Flex>
       </Wrapper>
     </Layout>
   );

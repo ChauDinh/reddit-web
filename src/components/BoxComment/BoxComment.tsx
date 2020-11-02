@@ -34,7 +34,7 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
             />
             <Flex direction="column" w="100%">
               <Flex alignItems="center" justifyContent="space-between" w="100%">
-                <Text color="#4c609a" fontWeight={600} mr={2}>
+                <Text color="#000" fontWeight={600} mr={2}>
                   {comment.commentCreator.username}:
                 </Text>
                 <Text fontSize="12px" fontWeight={600}>

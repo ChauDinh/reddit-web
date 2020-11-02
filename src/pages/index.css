@@ -2,8 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
 body {
-  background-color: #fff;
+  background-color: #fafafa;
   font-family: "Source Sans Pro", sans-serif !important;
+}
+
+.header__content {
+  box-shadow: 1px 1px 6px rgba(200, 200, 200, 0.3);
+  padding: 30px 20px;
+  border-radius: 10px;
+  background-color: #fff;
 }
 
 @media only screen and (max-width: 767px) {
@@ -16,5 +23,8 @@ body {
   }
   .grid-posts {
     grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .create-post__btn {
+    width: 100%;
   }
 }

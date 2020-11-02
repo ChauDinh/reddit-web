@@ -20,7 +20,7 @@ export const PostCard: React.FC<Props> = ({ post }) => {
       <NextLink href="/post/[id]" as={`/post/${post.id}`}>
         <Image
           className={PostCardStyles.post__img}
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_react_y7wq_wkbjab.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_video_influencer_9oyy_kod7oy.png"
         />
       </NextLink>
       <NextLink href="/post/[id]" as={`/post/${post.id}`}>

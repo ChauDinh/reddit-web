@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Flex, Link, Image } from "@chakra-ui/core";
+import { Box, Text, Button, Flex, Link, Image, Heading } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -82,13 +82,28 @@ const Login: React.FC<Props> = () => {
                   <Link>Forgot password?</Link>
                 </NextLink>
               </Flex>
+              <hr style={{ margin: "20px 0" }} />
+              <Flex>
+                <NextLink href="/register">
+                  <Button flexGrow={1}>Create new account</Button>
+                </NextLink>
+              </Flex>
             </Form>
           )}
         </Formik>
-        <Image
-          height="280px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151136/undraw_Login_re_4vu2_fuyuao.png"
-        />
+        <Flex
+          w="100%"
+          direction="column"
+          alignItems="flex-end"
+          justifyContent="flex-end"
+        >
+          <Image
+            height="280px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151136/undraw_Login_re_4vu2_fuyuao.png"
+          />
+          <Heading size="md">amanlearnscode</Heading>
+          <Text mb={3}>Collaboration platform for modern bloggers</Text>
+        </Flex>
       </Wrapper>
     </Layout>
   );

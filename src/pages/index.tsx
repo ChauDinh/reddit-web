@@ -34,7 +34,7 @@ const Index = () => {
             justifyContent="space-between"
             w="100%"
           >
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" flexGrow={1}>
               <Heading mb={2} size="xl">
                 Blog
               </Heading>
@@ -49,6 +49,7 @@ const Index = () => {
                   variantColor="purple"
                   color="#fff"
                   size="md"
+                  className="create-post__btn"
                 >
                   Create post
                 </Button>
@@ -58,7 +59,7 @@ const Index = () => {
               className="header__img"
               float="right"
               height="250px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_researching_22gp_1_klspqo.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_body_text_l3ld_e4xrot.png"
             />
           </Flex>
         </Wrapper>
@@ -69,7 +70,7 @@ const Index = () => {
           <Wrapper variants="regular">
             <Flex direction="column">
               <Heading size="md" mb="40px">
-                Recent articles
+                #Recent articles
               </Heading>
               <Grid
                 className="grid-posts"

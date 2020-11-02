@@ -112,7 +112,7 @@ export const NavBar: React.FC<Props> = () => {
               mt="10px"
               ml="24px"
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603289131/Group_6_2x_itzd8f.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317326/Group_7_2x_v0bqkz.png"
             />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -214,7 +214,7 @@ export const NavBar: React.FC<Props> = () => {
           <Image
             className={navBarStyles.navbar__logo}
             alt="logo"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151246/Group_7_2x_rsvend.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317326/Group_7_2x_v0bqkz.png"
           />
         </Link>
       </NextLink>
