@@ -45,7 +45,7 @@ const Login: React.FC<Props> = () => {
         >
           {({ isSubmitting }) => (
             <Form style={styles.container}>
-              <Text fontSize="20px" fontWeight={700}>
+              <Text fontSize="23px" fontWeight={700}>
                 Sign In
               </Text>
               <Box mt={4}>
@@ -96,13 +96,18 @@ const Login: React.FC<Props> = () => {
           direction="column"
           alignItems="flex-end"
           justifyContent="flex-end"
+          background="#fff"
+          padding="0 16px"
+          className="login__image"
         >
           <Image
             height="280px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151136/undraw_Login_re_4vu2_fuyuao.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_Login_re_4vu2_p5gchx.png"
           />
           <Heading size="md">amanlearnscode</Heading>
-          <Text mb={3}>Collaboration platform for modern bloggers</Text>
+          <Text textAlign="right" fontSize="md" mb={3}>
+            Collaboration platform for modern bloggers
+          </Text>
         </Flex>
       </Wrapper>
     </Layout>

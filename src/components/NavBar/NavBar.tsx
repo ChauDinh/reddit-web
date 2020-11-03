@@ -31,6 +31,7 @@ import {
   RiVipCrown2Fill,
   RiCustomerServiceFill,
   RiFileCodeFill,
+  RiLogoutBoxFill,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -108,7 +109,7 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton backgroundColor="red" />
             <Image
-              width="100px"
+              width="200px"
               mt="10px"
               ml="24px"
               alt="logo"
@@ -179,7 +180,8 @@ export const NavBar: React.FC<Props> = () => {
                 }}
                 isLoading={logoutFetching}
               >
-                <Text ml={1} color="#333" fontWeight="medium">
+                <RiLogoutBoxFill fontSize="23px" color="#000" />
+                <Text ml={1} color="#000" fontWeight="bold">
                   Logout
                 </Text>
               </Button>
@@ -221,7 +223,7 @@ export const NavBar: React.FC<Props> = () => {
       <InputGroup className={navBarStyles.navbar__searchInputGroup}>
         <Input
           maxW="500px"
-          fontSize="sm"
+          fontSize="md"
           type="text"
           placeholder="Search for titles, authors, topics..."
           mr={2}

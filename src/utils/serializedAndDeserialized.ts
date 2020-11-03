@@ -43,15 +43,15 @@ export const serialized = (node: Node) => {
       return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url}/> <div style="clear: both"></div>`;
     }
     case "paragraph":
-      return `<p style="margin-top: 5px; margin-bottom: 5px">${children}</p>`;
+      return `<p style="margin-top: 20px; margin-bottom: 20px">${children}</p>`;
     case "heading":
-      return `<h1 style="font-size:20px; font-weight:700; margin-top:20px">${children}</h1>`;
+      return `<h1 style="font-size:28px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
-      return `<ol style="margin-left:2em; margin-bottom:5px">${children}</ol>`;
+      return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
     case "list-item":
-      return `<li style="margin-bottom:5px">${children}</li>`;
+      return `<li style="margin-bottom:20px">${children}</li>`;
     case "bulleted-list":
-      return `<ul style="margin-left:2em; margin-bottom:5px">${children}</ul>`;
+      return `<ul style="margin-left:2em; margin-bottom:20px">${children}</ul>`;
     default:
       return children;
   }
@@ -60,7 +60,7 @@ export const serialized = (node: Node) => {
 // serialized function return text snippet
 export const serializedSnippet = (nodes: Node[]) => {
   let result = nodes.map((node) => Node.string(node)).join("\n");
-  return result.length < 60 ? result : result.slice(0, 60) + "...";
+  return result.length < 46 ? result : result.slice(0, 46) + "...";
 };
 
 // deSerialized function will takes a string and returns a value

@@ -7,7 +7,7 @@
   position: absolute;
   width: 312px;
   height: 50px;
-  background-color: #6579b3;
+  background-color: #fafafa;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
   border-radius: 28px;
   left: -25px;
@@ -16,8 +16,8 @@
 }
 
 .reaction__icon {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: inline-block;
   text-align: center;
   font-size: 28px;
@@ -27,13 +27,12 @@
 }
 
 .reaction__icon > .reaction__label {
-  padding: 3px 5px 3px 5px;
   position: relative;
-  top: -60px;
-  border-radius: 10px;
+  padding: 2px;
+  top: -50px;
+  border-radius: 3px;
   color: #fff;
   background-color: #333;
-  font-size: 12px !important;
   text-align: center;
   visibility: hidden;
 }
@@ -52,4 +51,6 @@
 
 .award__btn:hover > .reaction__box > .reaction__icon:hover > .reaction__label {
   visibility: visible;
+  font-size: 8px;
+  text-align: center;
 }

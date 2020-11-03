@@ -3,7 +3,8 @@
 
 body {
   background-color: #fafafa;
-  font-family: "Source Sans Pro", sans-serif !important;
+  font-family: "-apple-system", sans-serif !important;
+  font-size: 1.27rem !important;
 }
 
 .header__content {
@@ -14,6 +15,9 @@ body {
 }
 
 @media only screen and (max-width: 767px) {
+  body {
+    background-color: #fff;
+  }
   .header__content {
     padding-top: 20px;
     padding-bottom: 40px;
@@ -26,5 +30,9 @@ body {
   }
   .create-post__btn {
     width: 100%;
+  }
+  .login__image,
+  .register__image {
+    display: none !important;
   }
 }

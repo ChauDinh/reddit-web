@@ -16,6 +16,14 @@ import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
 import { useRouter } from "next/router";
 import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
+import {
+  FaAngry,
+  FaGrinSquintTears,
+  FaGrinStars,
+  FaGrinWink,
+  FaSadTear,
+  FaSurprise,
+} from "react-icons/fa";
 
 interface Props {}
 
@@ -52,12 +60,12 @@ const Post: React.FC<Props> = () => {
         </Flex>
         <Flex
           width="100%"
-          p={4}
+          p="20px"
           borderRadius="3px"
           background="#fff"
           flexDirection="column"
         >
-          <Text mr={2} fontSize="xs">
+          <Text mr={2} mb={2} fontSize="xs">
             Posted by{" "}
             <span style={{ fontWeight: "bolder" }}>
               {data.post.creator.username}
@@ -83,27 +91,27 @@ const Post: React.FC<Props> = () => {
               Award
               <Box className={SinglePostStyles.reaction__box}>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  👍
+                  <FaGrinStars color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Like</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  ❤️
+                  <FaGrinWink color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Love</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  🐸
+                  <FaGrinSquintTears color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Haha</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  🙊
+                  <FaSurprise color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Wow</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  😿
+                  <FaSadTear color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Sad</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  👿
+                  <FaAngry color="#0933dd" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>
                     Angry
                   </Text>

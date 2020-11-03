@@ -24,7 +24,10 @@ export const PostCard: React.FC<Props> = ({ post }) => {
         />
       </NextLink>
       <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-        <Heading className={PostCardStyles.post__title}>{post.title}</Heading>
+        <Flex className={PostCardStyles.postTitle__container}>
+          <Heading className={PostCardStyles.post__title}>{post.title}</Heading>
+          <Box className={PostCardStyles.fullyPost__title}>{post.title}</Box>
+        </Flex>
       </NextLink>
       <NextLink href="/post/[id]" as={`/post/${post.id}`}>
         <Text className={PostCardStyles.post__text}>

@@ -69,7 +69,7 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column">
-              <Heading size="md" mb="40px">
+              <Heading size="md" mb="40px" color="#000">
                 #Recent articles
               </Heading>
               <Grid
@@ -88,6 +88,8 @@ const Index = () => {
         {data && data.posts.hasMore ? (
           <Flex alignItems="center" justifyContent="center" mt={8} pb={8}>
             <Button
+              variantColor="purple"
+              color="#fff"
               onClick={() => {
                 fetchMore({
                   variables: {

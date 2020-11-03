@@ -26,7 +26,6 @@
 }
 
 .navbar__searchBtn {
-  font-size: small !important;
   background-color: #0933dd !important;
   color: #fff;
 }
@@ -77,13 +76,13 @@
 }
 
 .navbar__drawerContainer {
-  width: 213px !important;
+  width: 500px !important;
 }
 
 .navbar__drawerHeader {
   display: flex;
   align-items: center;
-  font-size: 14px !important;
+  /* font-size: 14px !important; */
   font-weight: 700 !important;
   color: #bdbdbd;
   padding-top: 10px !important;
@@ -94,8 +93,8 @@
 .navbar__drawerBody {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  font-size: 14px;
-  font-weight: 600;
+  /* font-size: 14px; */
+  font-weight: 500;
 }
 
 /* For mobile */

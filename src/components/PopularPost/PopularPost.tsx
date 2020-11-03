@@ -26,13 +26,13 @@ const NextArrow = (props: any) => {
         width: "46px",
         display: "flex",
         alignItems: "center",
-        background: "#000",
+        background: "#0933dd",
         justifyContent: "center",
         borderRadius: "50%",
         zIndex: "1",
         boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         paddingTop: "2.69px",
-        right: "-7px",
+        right: "0px",
       }}
       onClick={onClick}
     />
@@ -52,11 +52,11 @@ const PrevArrow = (props: any) => {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "50%",
-        background: "#000",
+        background: "#0933dd",
         zIndex: "1",
         boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         paddingTop: "2.69px",
-        left: "-7px",
+        left: "0px",
       }}
       onClick={onClick}
     />
@@ -80,7 +80,7 @@ export const PopularPost: React.FC<Props> = ({ popular }) => {
   return (
     <div className={PopularPostStyles.slick__container}>
       <Wrapper variants="regular">
-        <Heading color="#333" size="md">
+        <Heading color="#000" size="md">
           #Popular articles
         </Heading>
       </Wrapper>

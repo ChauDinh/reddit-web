@@ -44,7 +44,7 @@ const Register: React.FC<Props> = () => {
         >
           {({ isSubmitting }) => (
             <Form style={styles.container}>
-              <Text fontSize="20px" fontWeight={700}>
+              <Text fontSize="23px" fontWeight={700}>
                 Sign Up
               </Text>
               <Box mt={4}>
@@ -81,7 +81,9 @@ const Register: React.FC<Props> = () => {
                   Register
                 </Button>
                 <NextLink href="/login">
-                  <Text as={Link}>Already have an account?</Text>
+                  <Text as={Link} textAlign="right">
+                    Already have an account?
+                  </Text>
                 </NextLink>
               </Flex>
             </Form>
@@ -92,13 +94,18 @@ const Register: React.FC<Props> = () => {
           direction="column"
           alignItems="flex-end"
           justifyContent="flex-end"
+          padding="0 16px"
+          background="#fff"
+          className="register__image"
         >
           <Image
             height="250px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151137/undraw_welcome_cats_thqn_w9shsx.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_welcome_cats_thqn_dcogsh.png"
           />
           <Heading size="md">amanlearnscode</Heading>
-          <Text mb={3}>Collaboration platform for modern bloggers</Text>
+          <Text mb={3} fontSize="md" textAlign="right">
+            Collaboration platform for modern bloggers
+          </Text>
         </Flex>
       </Wrapper>
     </Layout>

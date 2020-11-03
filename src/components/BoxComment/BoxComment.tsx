@@ -37,7 +37,11 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                 <Text color="#000" fontWeight={600} mr={2}>
                   {comment.commentCreator.username}:
                 </Text>
-                <Text fontSize="12px" fontWeight={600}>
+                <Text
+                  fontSize="13px"
+                  color="rgba(0, 0, 0, 0.5)"
+                  fontWeight={500}
+                >
                   {handleDateFromCreatedAtAndUpdatedAt(
                     parseInt(comment.createdAt, 10)
                   )}
