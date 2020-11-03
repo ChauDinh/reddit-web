@@ -24,6 +24,7 @@ import {
   FaSadTear,
   FaSurprise,
 } from "react-icons/fa";
+import { PostCreator } from "../../components/PostCreator/PostCreator";
 
 interface Props {}
 
@@ -83,7 +84,7 @@ const Post: React.FC<Props> = () => {
             <Box
               className={SinglePostStyles.award__btn}
               mr={4}
-              fontSize="sm"
+              fontSize="md"
               color="#8e9296"
               fontWeight={600}
             >
@@ -118,15 +119,19 @@ const Post: React.FC<Props> = () => {
                 </Box>
               </Box>
             </Box>
-            <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
+            <Box mr={4} fontSize="md" color="#8e9296" fontWeight={600}>
               <Icon mr={1} name="chat" />
               Comments
             </Box>
-            <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
+            <Box mr={4} fontSize="md" color="#8e9296" fontWeight={600}>
               <Icon mb="2px" mr={1} name="external-link" />
               Share
             </Box>
           </Flex>
+          <PostCreator
+            creator={data.post.creator}
+            createdAt={data.post.createdAt}
+          />
           <Flex mt={0} flexDirection="column">
             <Formik
               initialValues={{ comment: "" }}

@@ -1,0 +1,18 @@
+.postCreator__container {
+  margin-top: 20px;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #edf2f7;
+  padding: 20px;
+}
+
+.postCreator__name {
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 30px;
+}
+
+.postCreator__followBtn {
+  margin-left: 20px;
+}
