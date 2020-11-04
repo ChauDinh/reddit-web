@@ -1,7 +1,6 @@
 .footer__container {
   background-color: #fafafa;
   color: #000;
-  font-size: 14px;
   padding: 20px 0;
   box-shadow: 0 -1px 3px rgba(200, 200, 200, 0.2);
 }
@@ -20,11 +19,14 @@
   flex-grow: 1;
   margin-left: 30px;
   justify-content: space-between;
-  font-size: 14px;
 }
 
 .menu__heading {
   font-weight: 700;
+}
+
+.menu__item {
+  font-size: 16px;
 }
 
 .menu__subscribeInput {

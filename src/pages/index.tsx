@@ -39,8 +39,8 @@ const Index = () => {
                 Blog
               </Heading>
               <Text mb={4} fontWeight="medium">
-                Our latest web design tips, insights and resources <br /> hot
-                off the presses
+                Our latest web design tips, insights and resources hot off the
+                presses
               </Text>
               <NextLink href="/create-post">
                 <Button
