@@ -7,6 +7,7 @@ import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 import { PostCard } from "../components/PostCard/PostCard";
 import { PopularPost } from "../components/PopularPost/PopularPost";
+import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
 
 const Index = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -68,7 +69,7 @@ const Index = () => {
           <Text>Loading...</Text>
         ) : (
           <Wrapper variants="regular">
-            <Flex direction="column">
+            <Flex direction="column" w="100%">
               <Wrapper
                 variants="regular"
                 background="#fff"

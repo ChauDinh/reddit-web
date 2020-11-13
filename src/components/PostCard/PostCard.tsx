@@ -40,7 +40,6 @@ export const PostCard: React.FC<Props> = ({ post }) => {
           {post.creator.username}
         </Text>
         <Text ml={1}>
-          {" "}
           {new Date(parseInt(post.updatedAt)).toLocaleString().split(",")[0]}
         </Text>
       </Flex>

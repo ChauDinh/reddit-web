@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.postInfo {
+  flex-grow: 1;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.postTitle {
+  width: 100%;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical;
+}
