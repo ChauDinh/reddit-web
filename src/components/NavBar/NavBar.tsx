@@ -26,12 +26,10 @@ import { BiChevronDown } from "react-icons/bi";
 import {
   RiSettings5Fill,
   RiUser3Fill,
-  RiMoonClearFill,
   RiCopperCoinFill,
   RiVipCrown2Fill,
   RiCustomerServiceFill,
   RiFileCodeFill,
-  RiLogoutBoxFill,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -65,12 +63,12 @@ export const NavBar: React.FC<Props> = () => {
     renderUser = (
       <>
         <NextLink href="/login">
-          <Flex align={"center"} as={Link} mr={4}>
+          <Button alignItems={"center"} mr={4}>
             Login
-          </Flex>
+          </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button variantColor="purple" color="#fff" fontSize="sm" as={Link}>
+          <Button variantColor="purple" color="#fff" fontSize="sm">
             Sign Up
           </Button>
         </NextLink>
@@ -120,7 +118,7 @@ export const NavBar: React.FC<Props> = () => {
                 My Stuff
               </DrawerHeader>
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
-                <List spacing={3}>
+                <List spacing={5}>
                   <ListItem>
                     <ListIcon icon={RiUser3Fill} />
                     My profile
@@ -134,23 +132,10 @@ export const NavBar: React.FC<Props> = () => {
             </Box>
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
-                View option
-              </DrawerHeader>
-              <DrawerBody className={navBarStyles.navbar__drawerBody}>
-                <List spacing={3}>
-                  <ListItem>
-                    <ListIcon icon={RiMoonClearFill} />
-                    Night mode
-                  </ListItem>
-                </List>
-              </DrawerBody>
-            </Box>
-            <Box className={navBarStyles.navbar__drawerSection}>
-              <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
                 More Stuff
               </DrawerHeader>
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
-                <List spacing={3}>
+                <List spacing={5}>
                   <ListItem>
                     <ListIcon icon={RiCopperCoinFill} />
                     Reddit coins
@@ -180,8 +165,7 @@ export const NavBar: React.FC<Props> = () => {
                 }}
                 isLoading={logoutFetching}
               >
-                <RiLogoutBoxFill fontSize="23px" color="#000" />
-                <Text ml={1} color="#000" fontWeight="bold">
+                <Text ml={1} color="#000" fontWeight="bold" fontSize="20px">
                   Logout
                 </Text>
               </Button>
@@ -190,7 +174,7 @@ export const NavBar: React.FC<Props> = () => {
         </Drawer>
         <Button
           className={navBarStyles.navbar__logoutBtn}
-          variant="link"
+          // variant="link"
           onClick={async () => {
             await logout();
             await apolloClient.resetStore();

@@ -24,7 +24,8 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
             key={comment.id}
             alignItems="flex-start"
             justifyContent="flex-start"
-            mb={4}
+            mb="20px"
+            fontSize="18px"
           >
             <Avatar
               size="sm"

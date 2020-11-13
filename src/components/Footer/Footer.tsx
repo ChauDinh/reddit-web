@@ -2,7 +2,10 @@ import {
   Box,
   Flex,
   Heading,
+  Icon,
   Input,
+  InputGroup,
+  InputLeftElement,
   List,
   ListItem,
   Text,
@@ -31,7 +34,7 @@ export const Footer: React.FC<Props> = () => {
         >
           <Flex flexDirection="column">
             <Heading size="md">blog.amanlearnscode</Heading>
-            <Text color="rgba(0, 0, 0, 0.8)" mt={2}>
+            <Text color="rgba(0, 0, 0, 0.8)" mt={2} fontSize="16px">
               Collaboration platform for modern <br /> IT bloggers
             </Text>
             <Box className={footerStyles.social__icons}>
@@ -73,10 +76,15 @@ export const Footer: React.FC<Props> = () => {
                 Subscribe our newsletter
               </ListItem>
               <ListItem className={footerStyles.menu__item}>
-                <Input
-                  className={footerStyles.menu__subscribeInput}
-                  placeholder="email"
-                />
+                <InputGroup color="#333">
+                  <InputLeftElement
+                    children={<Icon name="email" color="gray.300" />}
+                  />
+                  <Input
+                    className={footerStyles.menu__subscribeInput}
+                    placeholder="email"
+                  />
+                </InputGroup>
               </ListItem>
             </List>
           </Flex>

@@ -69,19 +69,28 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column">
-              <Heading size="md" mb="40px" color="#000">
-                #Recent articles
-              </Heading>
-              <Grid
-                className="grid-posts"
-                templateColumns="repeat(3, 1fr)"
-                gap={4}
-                mb={data?.posts.hasMore ? 0 : "50px"}
+              <Wrapper
+                variants="regular"
+                background="#fff"
+                borderRadius="3px"
+                boxShadow="1px 1px 6px rgba(200, 200, 200, 0.2)"
               >
-                {data!.posts.posts.map((post) =>
-                  !post ? null : <PostCard post={post} />
-                )}
-              </Grid>
+                <Heading size="md" color="#000" mx="20px">
+                  #Recent articles
+                </Heading>
+              </Wrapper>
+              <Wrapper variants="regular">
+                <Grid
+                  className="grid-posts"
+                  templateColumns="repeat(3, 1fr)"
+                  gap={4}
+                  mb={data?.posts.hasMore ? 0 : "50px"}
+                >
+                  {data!.posts.posts.map((post) =>
+                    !post ? null : <PostCard post={post} />
+                  )}
+                </Grid>
+              </Wrapper>
             </Flex>
           </Wrapper>
         )}

@@ -37,11 +37,16 @@
 }
 
 .navbar__userGroup {
-  background-color: #edf2f7;
   border-radius: 3px;
   padding: 0 10px;
   padding-left: 0;
   justify-content: space-between;
+}
+
+.navbar__userBtn {
+  background-color: #fff !important;
+  box-shadow: 1px 1px 6px rgba(200, 200, 200, 0.2);
+  border: 1px solid #333;
 }
 
 .navbar__userNameAvatar {
@@ -73,6 +78,9 @@
 
 .navbar__logoutBtn {
   margin-left: 5px;
+  background-color: #fff !important;
+  box-shadow: 1px 1px 6px rgba(200, 200, 200, 0.2);
+  border: 1px solid #333;
 }
 
 .navbar__drawerContainer {
@@ -135,7 +143,6 @@
   .navbar__userGroup {
     width: initial;
     font-size: x-small !important;
-    background-color: #edf2f7;
     justify-content: flex-end;
     padding: 3px 3px;
   }

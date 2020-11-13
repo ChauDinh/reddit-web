@@ -1,8 +1,9 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Image, Link, Flex, Heading } from "@chakra-ui/core";
+import { Box, Text, Button, Image, Link, Flex, theme } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { AiOutlineFacebook, AiOutlineGoogle } from "react-icons/ai";
 
 import { InputField } from "../components/InputField";
 import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
@@ -72,7 +73,12 @@ const Register: React.FC<Props> = () => {
                 />
               </Box>
 
-              <Flex mt={4} justifyContent="space-between" alignItems="center">
+              <Flex
+                mt={4}
+                mb={4}
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Button
                   variantColor="purple"
                   isLoading={isSubmitting}
@@ -84,6 +90,28 @@ const Register: React.FC<Props> = () => {
                   <Text as={Link} textAlign="right">
                     Already have an account?
                   </Text>
+                </NextLink>
+              </Flex>
+              <hr />
+              <Flex mt={4} direction="column">
+                <NextLink href="/register">
+                  <Button
+                    leftIcon={AiOutlineGoogle}
+                    variant="outline"
+                    variantColor="white"
+                    mb={4}
+                  >
+                    Register with Google
+                  </Button>
+                </NextLink>
+                <NextLink href="/register">
+                  <Button
+                    leftIcon={AiOutlineFacebook}
+                    backgroundColor={theme.colors.blue[400]}
+                    color="#fff"
+                  >
+                    Register with Facebook
+                  </Button>
                 </NextLink>
               </Flex>
             </Form>
@@ -99,13 +127,10 @@ const Register: React.FC<Props> = () => {
           className="register__image"
         >
           <Image
+            width="inherit"
             height="250px"
             src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_welcome_cats_thqn_dcogsh.png"
           />
-          <Heading size="md">amanlearnscode</Heading>
-          <Text mb={3} fontSize="md" textAlign="right">
-            Collaboration platform for modern bloggers
-          </Text>
         </Flex>
       </Wrapper>
     </Layout>

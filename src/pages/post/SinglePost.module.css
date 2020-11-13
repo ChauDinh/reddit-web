@@ -28,13 +28,16 @@
 
 .reaction__icon > .reaction__label {
   position: relative;
-  padding: 2px;
-  top: -50px;
+  padding: 1px;
+  top: -60px;
   border-radius: 3px;
   color: #fff;
   background-color: #333;
   text-align: center;
+  font-size: 5px;
+  font-weight: 300;
   visibility: hidden;
+  width: 40px;
 }
 
 .award__btn:hover > .reaction__box {
@@ -45,12 +48,12 @@
 }
 
 .award__btn:hover > .reaction__box > .reaction__icon:hover {
-  transform: scale(1.4);
+  transform: scale(1.05);
   transform-origin: bottom;
 }
 
 .award__btn:hover > .reaction__box > .reaction__icon:hover > .reaction__label {
   visibility: visible;
-  font-size: 8px;
   text-align: center;
+  font-size: 8px !important;
 }

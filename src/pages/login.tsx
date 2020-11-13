@@ -1,8 +1,9 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Flex, Link, Image, Heading } from "@chakra-ui/core";
+import { Box, Text, Button, Flex, Link, Image, theme } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { AiOutlineFacebook, AiOutlineGoogle } from "react-icons/ai";
 
 import { InputField } from "../components/InputField";
 import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
@@ -83,9 +84,33 @@ const Login: React.FC<Props> = () => {
                 </NextLink>
               </Flex>
               <hr style={{ margin: "20px 0" }} />
-              <Flex>
+              <Flex direction="column">
                 <NextLink href="/register">
-                  <Button flexGrow={1}>Create new account</Button>
+                  <Button
+                    variant="outline"
+                    variantColor="black"
+                    leftIcon={AiOutlineGoogle}
+                    mb={4}
+                    flexGrow={1}
+                  >
+                    Login with Google
+                  </Button>
+                </NextLink>
+                <NextLink href="/register">
+                  <Button
+                    background={theme.colors.blue["400"]}
+                    color="#fff"
+                    leftIcon={AiOutlineFacebook}
+                    mb={4}
+                    flexGrow={1}
+                  >
+                    Login with Facebook
+                  </Button>
+                </NextLink>
+                <NextLink href="/register">
+                  <Button variantColor="green" flexGrow={1}>
+                    Create new account
+                  </Button>
                 </NextLink>
               </Flex>
             </Form>
@@ -104,10 +129,6 @@ const Login: React.FC<Props> = () => {
             height="280px"
             src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_Login_re_4vu2_p5gchx.png"
           />
-          <Heading size="md">amanlearnscode</Heading>
-          <Text textAlign="right" fontSize="md" mb={3}>
-            Collaboration platform for modern bloggers
-          </Text>
         </Flex>
       </Wrapper>
     </Layout>
