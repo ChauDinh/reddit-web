@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
 body {
-  background-color: #fafafa;
+  background-color: #fff;
   font-family: "-apple-system", sans-serif !important;
   font-size: 18px !important;
 }
@@ -14,7 +14,7 @@ body {
   background-color: #fff;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   body {
     background-color: #fff;
   }

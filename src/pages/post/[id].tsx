@@ -24,7 +24,7 @@ import {
   FaSadTear,
   FaSurprise,
 } from "react-icons/fa";
-import { PostCreator } from "../../components/PostCreator/PostCreator";
+// import { PostCreator } from "../../components/PostCreator/PostCreator";
 
 interface Props {}
 
@@ -128,10 +128,10 @@ const Post: React.FC<Props> = () => {
               Share
             </Box>
           </Flex>
-          <PostCreator
+          {/* <PostCreator
             creator={data.post.creator}
             createdAt={data.post.createdAt}
-          />
+          /> */}
           <Flex mt={0} flexDirection="column">
             <Formik
               initialValues={{ comment: "" }}

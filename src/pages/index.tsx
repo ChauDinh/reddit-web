@@ -80,18 +80,17 @@ const Index = () => {
                   #Recent articles
                 </Heading>
               </Wrapper>
-              <Wrapper variants="regular">
-                <Grid
-                  className="grid-posts"
-                  templateColumns="repeat(3, 1fr)"
-                  gap={4}
-                  mb={data?.posts.hasMore ? 0 : "50px"}
-                >
-                  {data!.posts.posts.map((post) =>
-                    !post ? null : <PostCard post={post} />
-                  )}
-                </Grid>
-              </Wrapper>
+              <Grid
+                className="grid-posts"
+                templateColumns="repeat(3, 1fr)"
+                gap={4}
+                mt="20px"
+                mb={data?.posts.hasMore ? 0 : "50px"}
+              >
+                {data!.posts.posts.map((post) =>
+                  !post ? null : <PostCard post={post} />
+                )}
+              </Grid>
             </Flex>
           </Wrapper>
         )}
@@ -116,6 +115,11 @@ const Index = () => {
           </Flex>
         ) : null}
       </Box>
+      {data?.posts.posts.map((post) => (
+        <Box w="340px">
+          <MiniPostCard post={post} />
+        </Box>
+      ))}
     </Layout>
   );
 };

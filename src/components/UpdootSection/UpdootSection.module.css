@@ -3,7 +3,7 @@
 }
 
 /* Mobile screen */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .updootSectionContainer {
     background-color: #fff;
     padding-top: 1rem;
