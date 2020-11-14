@@ -79,17 +79,11 @@ export const PopularPost: React.FC<Props> = ({ popular }) => {
 
   return (
     <div className={PopularPostStyles.slick__container}>
-      <Wrapper
-        variants="regular"
-        background="#fff"
-        borderRadius="3px"
-        boxShadow="1px 1px 6px rgba(200, 200, 200, 0.2)"
-      >
-        <Heading color="#000" size="md" height="100%" mx="20px">
-          #Popular articles
-        </Heading>
-      </Wrapper>
-      {width > 767 ? (
+      <Heading size="md" className={PopularPostStyles.title}>
+        POPULAR ARTICLES
+      </Heading>
+
+      {width > 600 ? (
         <Slider {...settings}>
           <Wrapper variants="regular">
             <Box className={PopularPostStyles.slick__item}>

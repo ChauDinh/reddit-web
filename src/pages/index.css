@@ -8,7 +8,6 @@ body {
 }
 
 .header__content {
-  box-shadow: 1px 1px 6px rgba(200, 200, 200, 0.3);
   padding: 30px 20px;
   border-radius: 3px;
   background-color: #fff;
@@ -34,5 +33,9 @@ body {
   .login__image,
   .register__image {
     display: none !important;
+  }
+  .recent-articles__title {
+    margin-left: 0 !important;
+    font-size: 16px !important;
   }
 }

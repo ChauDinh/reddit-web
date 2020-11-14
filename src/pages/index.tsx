@@ -1,12 +1,13 @@
-import { Box, Button, Flex, Heading, Text, Image, Grid } from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Text, Image } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
 import ErrorPage from "./404";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
-import { PostCard } from "../components/PostCard/PostCard";
 import { PopularPost } from "../components/PopularPost/PopularPost";
+import { Sidebar } from "../components/Sidebar/Sidebar";
+import { ReadingList } from "../components/ReadingList/ReadingList";
 import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
 
 const Index = () => {
@@ -32,36 +33,47 @@ const Index = () => {
         <Wrapper variants="regular">
           <Flex
             className="header__content"
+            alignItems="flex-start"
             justifyContent="space-between"
             w="100%"
           >
-            <Flex flexDirection="column" flexGrow={1}>
-              <Heading mb={2} size="xl">
-                Blog
-              </Heading>
-              <Text mb={4} fontWeight="medium">
-                Our latest web design tips, insights and resources hot off the
-                presses
-              </Text>
-              <NextLink href="/create-post">
-                <Button
-                  alignItems="center"
-                  leftIcon="edit"
-                  variantColor="purple"
-                  color="#fff"
-                  size="md"
-                  className="create-post__btn"
-                >
-                  Create post
-                </Button>
-              </NextLink>
+            <Flex
+              flexGrow={1}
+              w="100%"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Flex flexDirection="column" flexGrow={1} mr={6}>
+                <Heading mb={2} size="xl">
+                  Blog
+                </Heading>
+                <Text mb={4} fontWeight="medium" fontSize="16px">
+                  Our latest web design tips, insights and resources hot off the
+                  presses
+                </Text>
+                <NextLink href="/create-post">
+                  <Button
+                    alignItems="center"
+                    leftIcon="edit"
+                    variantColor="purple"
+                    color="#fff"
+                    size="md"
+                    className="create-post__btn"
+                  >
+                    Create post
+                  </Button>
+                </NextLink>
+              </Flex>
+              <Image
+                className="header__img"
+                float="right"
+                height="180px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_body_text_l3ld_e4xrot.png"
+              />
             </Flex>
-            <Image
-              className="header__img"
-              float="right"
-              height="250px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_body_text_l3ld_e4xrot.png"
-            />
+            <Sidebar isSticky={false}>
+              <Text fontSize="16px">This is a mock sidebar</Text>
+            </Sidebar>
           </Flex>
         </Wrapper>
         <PopularPost popular={popularPosts ? popularPosts.slice(0, 6) : []} />
@@ -70,17 +82,7 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column" w="100%">
-              <Wrapper
-                variants="regular"
-                background="#fff"
-                borderRadius="3px"
-                boxShadow="1px 1px 6px rgba(200, 200, 200, 0.2)"
-              >
-                <Heading size="md" color="#000" mx="20px">
-                  #Recent articles
-                </Heading>
-              </Wrapper>
-              <Grid
+              {/* <Grid
                 className="grid-posts"
                 templateColumns="repeat(3, 1fr)"
                 gap={4}
@@ -90,7 +92,25 @@ const Index = () => {
                 {data!.posts.posts.map((post) =>
                   !post ? null : <PostCard post={post} />
                 )}
-              </Grid>
+              </Grid> */}
+              <Flex>
+                <Flex direction="column">
+                  <Heading
+                    className="recent-articles__title"
+                    ml="10px"
+                    mb="10px"
+                    size="md"
+                  >
+                    RECENT ARTICLES
+                  </Heading>
+                  {data?.posts.posts.map((post) =>
+                    !post ? null : <MiniPostCard post={post} />
+                  )}
+                </Flex>
+                <Sidebar isSticky={false}>
+                  <ReadingList></ReadingList>
+                </Sidebar>
+              </Flex>
             </Flex>
           </Wrapper>
         )}
@@ -115,11 +135,6 @@ const Index = () => {
           </Flex>
         ) : null}
       </Box>
-      {data?.posts.posts.map((post) => (
-        <Box w="340px">
-          <MiniPostCard post={post} />
-        </Box>
-      ))}
     </Layout>
   );
 };

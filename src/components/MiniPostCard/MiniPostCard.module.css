@@ -31,12 +31,18 @@
   height: 130px;
 }
 
-@media only screen and (max-width: 767px) {
-  .imgPostSize {
-    width: 200px;
-    height: 100px;
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0;
   }
   .postTitle {
     font-size: 16px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .imgPostSize {
+    width: 200px;
+    height: 100px;
   }
 }

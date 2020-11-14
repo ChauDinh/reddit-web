@@ -1,0 +1,22 @@
+.container {
+  margin-bottom: 20px;
+}
+
+.author {
+  font-size: 14px;
+}
+
+.content {
+  font-size: 16px;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 14px;
+  color: #707070;
+}
