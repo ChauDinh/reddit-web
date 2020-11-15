@@ -92,27 +92,27 @@ const Post: React.FC<Props> = () => {
               Award
               <Box className={SinglePostStyles.reaction__box}>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinStars color="#0933dd" fontSize="30px" />
+                  <FaGrinStars color="#524fff" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Like</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinWink color="#0933dd" fontSize="30px" />
+                  <FaGrinWink color="#ff42ab" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Love</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinSquintTears color="#0933dd" fontSize="30px" />
+                  <FaGrinSquintTears color="#ffe14f" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Haha</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaSurprise color="#0933dd" fontSize="30px" />
+                  <FaSurprise color="#6aff4f" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Wow</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaSadTear color="#0933dd" fontSize="30px" />
+                  <FaSadTear color="#9c4c14" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>Sad</Text>
                 </Box>
                 <Box className={SinglePostStyles.reaction__icon}>
-                  <FaAngry color="#0933dd" fontSize="30px" />
+                  <FaAngry color="#3a7f7c" fontSize="30px" />
                   <Text className={SinglePostStyles.reaction__label}>
                     Angry
                   </Text>

@@ -40,7 +40,7 @@ export const serialized = (node: Node) => {
   switch (node.type) {
     case "image": {
       console.log(node.url);
-      return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url}/> <div style="clear: both"></div>`;
+      return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url} /> <div style="clear: both"></div>`;
     }
     case "paragraph":
       return `<p style="margin-top: 20px; margin-bottom: 20px">${children}</p>`;

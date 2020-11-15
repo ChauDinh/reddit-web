@@ -72,7 +72,9 @@ const Index = () => {
               />
             </Flex>
             <Sidebar isSticky={false}>
-              <Text fontSize="16px">This is a mock sidebar</Text>
+              <Heading size="sm" className="header__followings">
+                LATEST FROM FOLLOWING
+              </Heading>
             </Sidebar>
           </Flex>
         </Wrapper>

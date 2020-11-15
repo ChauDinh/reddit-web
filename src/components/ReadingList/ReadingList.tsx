@@ -1,4 +1,5 @@
 import { Avatar, Flex, Heading, Text } from "@chakra-ui/core";
+import NextLink from "next/link";
 import React from "react";
 import { usePostsQuery } from "../../generated/graphql";
 import ErrorPage from "../../pages/404";
@@ -10,6 +11,10 @@ interface Props {}
 
 export const ReadingList: React.FC<Props> = () => {
   const { data, error, loading } = usePostsQuery({
+    variables: {
+      limit: 9,
+      cursor: null as null | string,
+    },
     notifyOnNetworkStatusChange: true,
   });
   if (!loading && !data) {
@@ -37,9 +42,11 @@ export const ReadingList: React.FC<Props> = () => {
               {post.creator.username}
             </Text>
           </Flex>
-          <Heading className={ReadingListStyles.content} size="sm">
-            {post.title}
-          </Heading>
+          <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+            <Heading className={ReadingListStyles.content} size="sm">
+              {post.title}
+            </Heading>
+          </NextLink>
           <Text className={ReadingListStyles.date}>{post.createdAt}</Text>
         </Flex>
       ))}

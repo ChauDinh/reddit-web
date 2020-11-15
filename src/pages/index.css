@@ -8,7 +8,7 @@ body {
 }
 
 .header__content {
-  padding: 30px 20px;
+  padding: 30px 10px;
   border-radius: 3px;
   background-color: #fff;
 }
@@ -23,6 +23,9 @@ body {
   }
   .header__img {
     display: none !important;
+  }
+  .header__followings {
+    font-size: 16px !important;
   }
   .grid-posts {
     grid-template-columns: repeat(1, 1fr) !important;

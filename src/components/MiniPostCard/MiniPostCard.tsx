@@ -1,10 +1,12 @@
 import { Avatar, Box, Flex, Heading, Image, Text } from "@chakra-ui/core";
 import React from "react";
+import NextLink from "next/link";
 import {
   PostSnippetFragment,
   SinglePostSnippetFragment,
 } from "../../generated/graphql";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
+import { serializedSnippet } from "../../utils/serializedAndDeserialized";
 import MiniPostCardStyles from "./MiniPostCard.module.css";
 
 interface Props {
@@ -23,7 +25,16 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           <Avatar mr={2} size="xs" src={avatarUrlGenerator(post.creator.id)} />
           <Text fontSize="16px">{post.creator.username}</Text>
         </Flex>
-        <Heading className={MiniPostCardStyles.postTitle}>{post.title}</Heading>
+        <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+          <Heading className={MiniPostCardStyles.postTitle}>
+            {post.title}
+          </Heading>
+        </NextLink>
+        <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+          <Text cursor="pointer" mb={2}>
+            {serializedSnippet(JSON.parse(post.text))}
+          </Text>
+        </NextLink>
         <Text
           className={MiniPostCardStyles.postDate}
           fontSize="16px"
@@ -33,13 +44,16 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
         </Text>
       </Flex>
       <Box className={MiniPostCardStyles.imgPostSize}>
-        <Image
-          backgroundSize="cover"
-          className={MiniPostCardStyles.postImg}
-          height="100%"
-          width="100%"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_video_influencer_9oyy_kod7oy.png"
-        />
+        <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+          <Image
+            cursor="pointer"
+            backgroundSize="cover"
+            className={MiniPostCardStyles.postImg}
+            height="100%"
+            width="100%"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_video_influencer_9oyy_kod7oy.png"
+          />
+        </NextLink>
       </Box>
     </Flex>
   );
