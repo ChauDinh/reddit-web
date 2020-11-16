@@ -67,8 +67,8 @@ const Index = () => {
               <Image
                 className="header__img"
                 float="right"
-                height="180px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_body_text_l3ld_e4xrot.png"
+                height="260px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535360/07_uriswj.png"
               />
             </Flex>
             <Sidebar isSticky={false}>
@@ -84,19 +84,8 @@ const Index = () => {
         ) : (
           <Wrapper variants="regular">
             <Flex direction="column" w="100%">
-              {/* <Grid
-                className="grid-posts"
-                templateColumns="repeat(3, 1fr)"
-                gap={4}
-                mt="20px"
-                mb={data?.posts.hasMore ? 0 : "50px"}
-              >
-                {data!.posts.posts.map((post) =>
-                  !post ? null : <PostCard post={post} />
-                )}
-              </Grid> */}
-              <Flex>
-                <Flex direction="column">
+              <Flex w="100%">
+                <Flex flexGrow={1} direction="column" width="calc(100% - 69px)">
                   <Heading
                     className="recent-articles__title"
                     ml="10px"

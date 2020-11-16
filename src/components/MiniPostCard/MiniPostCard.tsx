@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Heading, Image, Link, Text } from "@chakra-ui/core";
+import { Avatar, Box, Flex, Heading, Image, Text } from "@chakra-ui/core";
 import React from "react";
 import NextLink from "next/link";
 import {
@@ -35,13 +35,8 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           </Heading>
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Text cursor="pointer" mb={2}>
+          <Text flexGrow={1} cursor="pointer" mb={2}>
             {serializedSnippet(JSON.parse(post.text))}
-            <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-              <Link ml={2} fontSize="14px" fontWeight={600}>
-                Read more
-              </Link>
-            </NextLink>
           </Text>
         </NextLink>
         <Text

@@ -3,6 +3,7 @@ import React from "react";
 import { useCommentQuery } from "../../generated/graphql";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
+import BoxCommentStyles from "./BoxComment.module.css";
 
 interface Props {
   postId: number;
@@ -18,14 +19,14 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
     loading ? (
       <Text>Loading comment...</Text>
     ) : (
-      <Flex direction="column" mt={6}>
+      <Flex className={BoxCommentStyles.container} direction="column" mt={6}>
         {data.comments?.comments.map((comment) => (
           <Flex
             key={comment.id}
             alignItems="flex-start"
             justifyContent="flex-start"
             mb="20px"
-            fontSize="18px"
+            fontSize="16px"
           >
             <Avatar
               size="sm"

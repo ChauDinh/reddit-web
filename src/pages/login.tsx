@@ -126,8 +126,8 @@ const Login: React.FC<Props> = () => {
           className="login__image"
         >
           <Image
-            height="280px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_Login_re_4vu2_p5gchx.png"
+            height="360px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535374/01_f8f9tm.png"
           />
         </Flex>
       </Wrapper>

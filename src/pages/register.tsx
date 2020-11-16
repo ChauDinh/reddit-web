@@ -128,8 +128,8 @@ const Register: React.FC<Props> = () => {
         >
           <Image
             width="inherit"
-            height="250px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_welcome_cats_thqn_dcogsh.png"
+            height="360px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535362/03_xq0eih.png"
           />
         </Flex>
       </Wrapper>

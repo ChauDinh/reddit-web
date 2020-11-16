@@ -121,11 +121,11 @@ export const NavBar: React.FC<Props> = () => {
                 <List spacing={5}>
                   <ListItem>
                     <ListIcon icon={RiUser3Fill} />
-                    My profile
+                    Dashboard
                   </ListItem>
                   <ListItem>
                     <ListIcon icon={RiSettings5Fill} />
-                    User settings
+                    Reading list
                   </ListItem>
                 </List>
               </DrawerBody>
@@ -138,11 +138,11 @@ export const NavBar: React.FC<Props> = () => {
                 <List spacing={5}>
                   <ListItem>
                     <ListIcon icon={RiCopperCoinFill} />
-                    Reddit coins
+                    Coins
                   </ListItem>
                   <ListItem>
                     <ListIcon icon={RiVipCrown2Fill} />
-                    Reddit premiums
+                    Upgrade premiums
                   </ListItem>
                   <ListItem>
                     <ListIcon icon={RiCustomerServiceFill} />
