@@ -24,7 +24,7 @@ import {
   FaSadTear,
   FaSurprise,
 } from "react-icons/fa";
-// import { PostCreator } from "../../components/PostCreator/PostCreator";
+import { PostCreator } from "../../components/PostCreator/PostCreator";
 
 interface Props {}
 
@@ -55,13 +55,19 @@ const Post: React.FC<Props> = () => {
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
-        <Flex direction="column" alignItems="flex-start">
-          <UpdootSection post={data?.post} />
-          <EditAndDeleteButton post={data.post} />
-        </Flex>
+        <div className={SinglePostStyles.leftSidebarButtons}>
+          <Flex
+            position="sticky"
+            top="90px"
+            direction="column"
+            alignItems="flex-start"
+          >
+            <UpdootSection post={data?.post} direction="column" />
+            <EditAndDeleteButton post={data.post} direction="column" top={4} />
+          </Flex>
+        </div>
         <Flex
           width="100%"
-          p="20px"
           borderRadius="3px"
           background="#fff"
           flexDirection="column"
@@ -73,66 +79,96 @@ const Post: React.FC<Props> = () => {
             </span>{" "}
             {handleDateFromCreatedAtAndUpdatedAt(parseInt(data.post.createdAt))}
           </Text>
-          <Heading fontSize="36px" mb={2}>
+          <Heading className={SinglePostStyles.post__title} mb={2}>
             {data.post.title}
           </Heading>
           <Box mb={3}>
             <RenderText str={htmlString} />
           </Box>
           <hr />
-          <Flex mt={2} alignItems="center" justifyContent="flex-start">
-            <Box
-              className={SinglePostStyles.award__btn}
-              mr={4}
-              fontSize="md"
-              color="#8e9296"
-              fontWeight={600}
-            >
-              <Icon mb="2px" mr={1} name="star" />
-              Award
-              <Box className={SinglePostStyles.reaction__box}>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinStars color="#524fff" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>Like</Text>
-                </Box>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinWink color="#ff42ab" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>Love</Text>
-                </Box>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaGrinSquintTears color="#ffe14f" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>Haha</Text>
-                </Box>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaSurprise color="#6aff4f" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>Wow</Text>
-                </Box>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaSadTear color="#9c4c14" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>Sad</Text>
-                </Box>
-                <Box className={SinglePostStyles.reaction__icon}>
-                  <FaAngry color="#3a7f7c" fontSize="30px" />
-                  <Text className={SinglePostStyles.reaction__label}>
-                    Angry
-                  </Text>
+          <Flex mt={2} alignItems="center" justifyContent="space-between">
+            <Flex alignItems="center">
+              <Box
+                className={SinglePostStyles.award__btn}
+                mr={4}
+                fontSize="sm"
+                color="#8e9296"
+                fontWeight={600}
+              >
+                <Icon mb="2px" mr={1} name="star" />
+                Award
+                <Box className={SinglePostStyles.reaction__box}>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaGrinStars color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Like
+                    </Text>
+                  </Box>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaGrinWink color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Love
+                    </Text>
+                  </Box>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaGrinSquintTears color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Haha
+                    </Text>
+                  </Box>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaSurprise color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Wow
+                    </Text>
+                  </Box>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaSadTear color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Sad
+                    </Text>
+                  </Box>
+                  <Box className={SinglePostStyles.reaction__icon}>
+                    <FaAngry color="#90a9d1" fontSize="30px" />
+                    <Text className={SinglePostStyles.reaction__label}>
+                      Angry
+                    </Text>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box mr={4} fontSize="md" color="#8e9296" fontWeight={600}>
-              <Icon mr={1} name="chat" />
-              Comments
-            </Box>
-            <Box mr={4} fontSize="md" color="#8e9296" fontWeight={600}>
-              <Icon mb="2px" mr={1} name="external-link" />
-              Share
-            </Box>
+              <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
+                <Icon mr={1} name="chat" />
+                Comments
+              </Box>
+              <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
+                <Icon mb="2px" mr={1} name="external-link" />
+                Share
+              </Box>
+            </Flex>
+            <div className={SinglePostStyles.editDeleteWrapper}>
+              <EditAndDeleteButton
+                direction="row"
+                post={data?.post}
+                right={3}
+              />
+            </div>
+            <div className={SinglePostStyles.updootWrapper}>
+              <UpdootSection direction="row" post={data?.post} />
+            </div>
           </Flex>
-          {/* <PostCreator
+          <PostCreator
             creator={data.post.creator}
             createdAt={data.post.createdAt}
-          /> */}
-          <Flex mt={0} flexDirection="column">
+          />
+        </Flex>
+        <div className={SinglePostStyles.commentWrapper}>
+          <Flex
+            className={SinglePostStyles.commentContainer}
+            ml={6}
+            flexDirection="column"
+            position="sticky"
+            top="60px"
+          >
             <Formik
               initialValues={{ comment: "" }}
               onSubmit={async (values) => {
@@ -155,10 +191,11 @@ const Post: React.FC<Props> = () => {
                       <InputField name="comment" placeholder="Create comment" />
                     </Flex>
                     <Button
-                      variantColor="purple"
+                      variantColor="blue"
                       type="submit"
                       isLoading={isSubmitting}
-                      ml={4}
+                      ml={2}
+                      fontSize="sm"
                     >
                       Send
                     </Button>
@@ -168,7 +205,7 @@ const Post: React.FC<Props> = () => {
             </Formik>
             <BoxComment postId={data.post.id} />
           </Flex>
-        </Flex>
+        </div>
       </Wrapper>
     </Layout>
   );

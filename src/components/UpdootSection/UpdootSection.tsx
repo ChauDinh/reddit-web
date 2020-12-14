@@ -4,15 +4,18 @@ import gql from "graphql-tag";
 import {
   PostSnippetFragment,
   SinglePostSnippetFragment,
+  useMeQuery,
   useVoteMutation,
   VoteMutation,
 } from "../../generated/graphql";
+import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
 
 import updootSectionStyles from "./UpdootSection.module.css";
 import { ApolloCache } from "@apollo/client";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
+  direction?: "column" | "row";
 }
 
 const updateAfterVote = (
@@ -49,20 +52,24 @@ const updateAfterVote = (
   }
 };
 
-export const UpdootSection: React.FC<Props> = ({ post }) => {
+export const UpdootSection: React.FC<Props> = ({ post, direction }) => {
   const [loadingState, setLoadingState] = useState<
     "updoot-loading" | "downdoot-loading" | "not-loading"
   >("not-loading");
+  const { data, loading } = useMeQuery();
   const [vote] = useVoteMutation();
   return (
     <Flex
       className={updootSectionStyles.updootSectionContainer}
-      flexDirection="column"
+      flexDirection={direction}
       pr={4}
     >
       <IconButton
+        isDisabled={!data?.me && !loading ? true : false}
         aria-label="upvote"
-        icon="chevron-up"
+        icon={FaLongArrowAltUp}
+        fontSize="16px"
+        color={post.voteStatus === 1 ? "#fff" : "#8e8e8e"}
         size="xs"
         variantColor={post.voteStatus === 1 ? "green" : undefined}
         onClick={async () => {
@@ -78,10 +85,15 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
         }}
         isLoading={loadingState === "updoot-loading"}
       ></IconButton>
-      <Text my={1}>{post.points}</Text>
+      <Text className={updootSectionStyles.point} my={1}>
+        {post.points}
+      </Text>
       <IconButton
+        isDisabled={!data?.me && !loading ? true : false}
         aria-label="down-vote"
-        icon="chevron-down"
+        icon={FaLongArrowAltDown}
+        fontSize="16px"
+        color={post.voteStatus === -1 ? "#fff" : "#8e8e8e"}
         size="xs"
         variantColor={post.voteStatus === -1 ? "red" : undefined}
         onClick={async () => {

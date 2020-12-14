@@ -1,9 +1,8 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Flex, Link, Image, theme } from "@chakra-ui/core";
+import { Box, Text, Button, Flex, Link } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import { AiOutlineFacebook, AiOutlineGoogle } from "react-icons/ai";
 
 import { InputField } from "../components/InputField";
 import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
@@ -18,8 +17,8 @@ const Login: React.FC<Props> = () => {
   const [login] = useLoginMutation();
   const router = useRouter();
   return (
-    <Layout variant="regular" direction="column">
-      <Wrapper variants="regular">
+    <Layout variant="small" direction="column">
+      <Wrapper variants="small">
         <Formik
           initialValues={{ usernameOrEmail: "", password: "" }}
           onSubmit={async (values, { setErrors }) => {
@@ -73,7 +72,7 @@ const Login: React.FC<Props> = () => {
                 justifyContent="space-between"
               >
                 <Button
-                  variantColor="purple"
+                  variantColor="blue"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -86,28 +85,6 @@ const Login: React.FC<Props> = () => {
               <hr style={{ margin: "20px 0" }} />
               <Flex direction="column">
                 <NextLink href="/register">
-                  <Button
-                    variant="outline"
-                    variantColor="black"
-                    leftIcon={AiOutlineGoogle}
-                    mb={4}
-                    flexGrow={1}
-                  >
-                    Login with Google
-                  </Button>
-                </NextLink>
-                <NextLink href="/register">
-                  <Button
-                    background={theme.colors.blue["400"]}
-                    color="#fff"
-                    leftIcon={AiOutlineFacebook}
-                    mb={4}
-                    flexGrow={1}
-                  >
-                    Login with Facebook
-                  </Button>
-                </NextLink>
-                <NextLink href="/register">
                   <Button variantColor="green" flexGrow={1}>
                     Create new account
                   </Button>
@@ -116,20 +93,6 @@ const Login: React.FC<Props> = () => {
             </Form>
           )}
         </Formik>
-        <Flex
-          w="100%"
-          direction="column"
-          alignItems="flex-end"
-          justifyContent="flex-end"
-          background="#fff"
-          padding="0 16px"
-          className="login__image"
-        >
-          <Image
-            height="360px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535374/01_f8f9tm.png"
-          />
-        </Flex>
       </Wrapper>
     </Layout>
   );

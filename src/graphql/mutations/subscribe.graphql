@@ -1,0 +1,3 @@
+mutation Subscribe($subscribedId: Int!) {
+  subscribe(subscribedId: $subscribedId)
+}

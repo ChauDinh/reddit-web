@@ -1,7 +1,15 @@
 import isHotkey from "is-hotkey";
 import React from "react";
 import { createEditor, Node, Editor, Transforms } from "slate";
-import { Slate, withReact, Editable, useSlate, useSelected, useFocused, useEditor } from "slate-react";
+import {
+  Slate,
+  withReact,
+  Editable,
+  useSlate,
+  useSelected,
+  useFocused,
+  useEditor,
+} from "slate-react";
 import {
   BiBold,
   BiCodeBlock,
@@ -10,7 +18,7 @@ import {
   BiListOl,
   BiListUl,
   BiUnderline,
-  BiImages
+  BiImages,
 } from "react-icons/bi";
 import { useField } from "formik";
 import imageExtensions from "image-extensions";
@@ -31,14 +39,14 @@ const HOTKEYS: { [char: string]: string } = {
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 
 const withImages = (editor: any) => {
-  const {insertData, isVoid} = editor;
+  const { insertData, isVoid } = editor;
   editor.isVoid = (element: any) => {
     return element.type === "image" ? true : isVoid(element);
-  }
+  };
   editor.insertData = (data: any) => {
     const text = data.getData("text/plain");
-    const {files} = data;
-    
+    const { files } = data;
+
     if (files && files.length > 0) {
       for (const file of files) {
         const reader = new FileReader();
@@ -48,7 +56,7 @@ const withImages = (editor: any) => {
           reader.addEventListener("load", () => {
             const url = reader.result;
             insertImage(editor, url);
-          })
+          });
 
           reader.readAsDataURL(file);
         }
@@ -58,16 +66,16 @@ const withImages = (editor: any) => {
     } else {
       insertData(data);
     }
-  }
+  };
 
   return editor;
-}
+};
 
 const insertImage = (editor: any, url: any) => {
-  const text = {text: ""};
-  const image = {type: "image", url, children: [text]}
+  const text = { text: "" };
+  const image = { type: "image", url, children: [text] };
   Transforms.insertNodes(editor, image);
-}
+};
 
 const Element = ({ attributes, children, element }: any) => {
   switch (element.type) {
@@ -77,19 +85,21 @@ const Element = ({ attributes, children, element }: any) => {
       return (
         <div {...attributes}>
           <div contentEditable={false}>
-            <img 
+            <img
               src={element.url}
               className={css`
                 display: block;
                 max-width: 100%;
                 max-height: 20em;
-                box-shadow: ${selected && focused ? '0 0 0 3px #B4D5FF' : 'none'}
+                box-shadow: ${selected && focused
+                  ? "0 0 0 3px #B4D5FF"
+                  : "none"};
               `}
             />
           </div>
           {children}
         </div>
-      )
+      );
     }
     case "bulleted-list":
       return (
@@ -139,7 +149,9 @@ const Leaf = ({ attributes, children, leaf }: any) => {
           whiteSpace: "pre-wrap",
         }}
       >
-        <code style={{fontFamily: "'Source Code Pro', monospace"}}>{children}</code>
+        <code style={{ fontFamily: "'Source Code Pro', monospace" }}>
+          {children}
+        </code>
       </pre>
     );
   }
@@ -202,25 +214,28 @@ const isImageUrl = (url: any) => {
   if (!isUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop();
   return imageExtensions.includes(ext);
-}
+};
 
 const InsertImageButton = () => {
   const editor = useEditor();
   return (
-    <Button onMouseDown={event => {
-      event.preventDefault();
-      const url = window.prompt("Enter the URL of the image");
-      if (!url) return
-      insertImage(editor, url);
-    }}
+    <Button
+      onMouseDown={(event) => {
+        event.preventDefault();
+        const url = window.prompt("Enter the URL of the image");
+        if (!url) return;
+        insertImage(editor, url);
+      }}
       size="sm"
+      variantColor="transparent"
+      color="#000"
       mr={2}
       p={0}
     >
       <BiImages />
     </Button>
-  )
-}
+  );
+};
 
 const BlockButton = ({ format }: any) => {
   const editor = useSlate();
@@ -234,6 +249,8 @@ const BlockButton = ({ format }: any) => {
             toggleBlock(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -249,6 +266,8 @@ const BlockButton = ({ format }: any) => {
             toggleBlock(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -264,6 +283,8 @@ const BlockButton = ({ format }: any) => {
             toggleBlock(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -287,6 +308,8 @@ const MarkButton = ({ format }: any) => {
             toggleMark(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -302,6 +325,8 @@ const MarkButton = ({ format }: any) => {
             toggleMark(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -317,6 +342,8 @@ const MarkButton = ({ format }: any) => {
             toggleMark(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -332,6 +359,8 @@ const MarkButton = ({ format }: any) => {
             toggleMark(editor, format);
           }}
           size="sm"
+          variantColor="transparent"
+          color="#000"
           mr={2}
           p={0}
         >
@@ -344,7 +373,7 @@ const MarkButton = ({ format }: any) => {
 };
 
 export const MyRichTextEditor: React.FC<Props> = (props: any) => {
-  const [field,, helpers] = useField<{}>(props);
+  const [field, , helpers] = useField<{}>(props);
   const { setValue } = helpers;
 
   const [slateValue, setSlateValue] = React.useState<Node[]>(
@@ -357,7 +386,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
   );
   const renderLeaf = React.useCallback((props) => <Leaf {...props} />, []);
 
-  console.log("slate value: ", slateValue)
+  console.log("slate value: ", slateValue);
   return (
     <Slate
       editor={editor}
@@ -371,7 +400,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
         <Flex
           style={{
             width: "100%",
-            backgroundColor: "#EDF2F7",
+            backgroundColor: "rgba(200, 200, 200, 0.5)",
             borderRadius: "3px 3px 0 0",
             padding: "10px 15px",
           }}
@@ -394,7 +423,8 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             height: "360px",
             backgroundColor: "#fff",
             borderRadius: "0px 0px 3px 3px",
-            boxShadow: "0 3px 6px rgba(200, 200, 200, 0.5)",
+            border: "1px solid rgba(200, 200, 200, 0.5)",
+            borderTop: "none",
             padding: "15px 15px",
             scrollBehavior: "smooth",
             overflowY: "scroll",

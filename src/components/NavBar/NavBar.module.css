@@ -5,7 +5,7 @@
   width: 100%;
   padding: 16px 24px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .navbar__logo {
@@ -25,11 +25,6 @@
   border-color: #5e73b0 !important;
 }
 
-.navbar__searchBtn {
-  background-color: #0933dd !important;
-  color: #fff;
-}
-
 .navbar__iconGroup {
   display: flex;
   justify-content: space-between;
@@ -45,8 +40,6 @@
 
 .navbar__userBtn {
   background-color: #fff !important;
-  box-shadow: 1px 1px 6px rgba(200, 200, 200, 0.2);
-  border: 1px solid #333;
 }
 
 .navbar__userNameAvatar {
@@ -90,12 +83,13 @@
 .navbar__drawerHeader {
   display: flex;
   align-items: center;
-  /* font-size: 14px !important; */
-  font-weight: 700 !important;
-  color: #bdbdbd;
+  font-weight: 600 !important;
   padding-top: 10px !important;
   padding-bottom: 5px !important;
   text-transform: uppercase;
+  font-size: 16px !important;
+  color: #333;
+  margin: 16px 0;
 }
 
 .navbar__drawerBody {
@@ -103,16 +97,13 @@
   padding-bottom: 0 !important;
   /* font-size: 14px; */
   font-weight: 500;
+  font-size: 16px;
 }
 
 /* For mobile */
 @media only screen and (max-width: 768px) {
   .navbar__container {
     padding: 12.69px;
-  }
-
-  .navbar__logo {
-    display: none;
   }
 
   .navbar__searchInputGroup {
@@ -179,5 +170,11 @@
 
   .navbar__iconGroup {
     display: flex;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar__searchInputGroup {
+    display: none !important;
   }
 }

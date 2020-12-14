@@ -51,22 +51,22 @@ const CreatePost: React.FC<Props> = () => {
                 <Box>
                   <FormControl>
                     <InputField
-                      label="Post title"
+                      label="Title"
                       name="title"
                       placeholder="Enter the title for post..."
                     />
                   </FormControl>
                 </Box>
-                <Box mt="4px">
+                <Box mt={4}>
                   <FormControl>
-                    <FormLabel>Story</FormLabel>
+                    <FormLabel fontWeight={600}>Content</FormLabel>
                     <Field name="text" as={MyRichTextEditor} />
                   </FormControl>
                 </Box>
 
                 <Flex mt={4} alignItems="center" justifyContent="space-between">
                   <Button
-                    variantColor="purple"
+                    variantColor="blue"
                     isLoading={isSubmitting}
                     type="submit"
                   >

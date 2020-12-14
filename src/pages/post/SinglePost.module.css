@@ -1,3 +1,7 @@
+.post__title {
+  font-size: 24px !important;
+}
+
 .award__btn {
   cursor: pointer;
   position: relative;
@@ -56,4 +60,53 @@
   visibility: visible;
   text-align: center;
   font-size: 8px !important;
+}
+
+.commentWrapper {
+  width: 460px;
+}
+
+.commentContainer {
+  width: 100% !important;
+}
+
+.updootWrapper {
+  display: none;
+}
+
+.editDeleteWrapper {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .post__title {
+    font-size: 24px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .post__title {
+    font-size: 24px !important;
+  }
+
+  .commentWrapper {
+    width: 100%;
+  }
+
+  .commentContainer {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+
+  .leftSidebarButtons {
+    display: none;
+  }
+
+  .updootWrapper {
+    display: inline-block;
+  }
+
+  .editDeleteWrapper {
+    display: inline-block;
+  }
 }

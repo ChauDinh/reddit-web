@@ -22,7 +22,8 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiLogOut } from "react-icons/bi";
+import { BsHouseDoor, BsFileRichtext } from "react-icons/bs";
 import {
   RiSettings5Fill,
   RiUser3Fill,
@@ -63,12 +64,17 @@ export const NavBar: React.FC<Props> = () => {
     renderUser = (
       <>
         <NextLink href="/login">
-          <Button alignItems={"center"} mr={4}>
+          <Button
+            variantColor="blue"
+            alignItems={"center"}
+            mr={4}
+            fontSize="sm"
+          >
             Login
           </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button variantColor="purple" color="#fff" fontSize="sm">
+          <Button variantColor="green" fontSize="sm">
             Sign Up
           </Button>
         </NextLink>
@@ -82,24 +88,26 @@ export const NavBar: React.FC<Props> = () => {
           onClick={onOpen}
           ref={btnRef}
           className={navBarStyles.navbar__userBtn}
-          rightIcon={BiChevronDown}
+          leftIcon={BiChevronDown}
         >
           <Flex justifyContent="space-between" alignItems="center">
-            <Avatar
-              size="sm"
-              name={data.me.username}
-              src={avatarUrlGenerator(data.me.id)}
-              mr={1}
-            />
             <Box className={navBarStyles.navbar__userNameAvatar}>
               {data.me.username.length > 6 ? (
                 <Text className={navBarStyles.navbar__username} mr={4}>
                   {data.me.username}
                 </Text>
               ) : (
-                <Text mr={4}>{data.me.username}</Text>
+                <Text fontSize="sm" mr={2}>
+                  {data.me.username}
+                </Text>
               )}
             </Box>
+            <Avatar
+              size="sm"
+              name={data.me.username}
+              src={avatarUrlGenerator(data.me.id)}
+              mr={1}
+            />
           </Flex>
         </Button>
         <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -165,24 +173,14 @@ export const NavBar: React.FC<Props> = () => {
                 }}
                 isLoading={logoutFetching}
               >
-                <Text ml={1} color="#000" fontWeight="bold" fontSize="20px">
+                <BiLogOut style={{ marginRight: "5px" }} />
+                <Text ml={1} color="#000" fontWeight="bold" fontSize="16px">
                   Logout
                 </Text>
               </Button>
             </DrawerHeader>
           </DrawerContent>
         </Drawer>
-        <Button
-          className={navBarStyles.navbar__logoutBtn}
-          // variant="link"
-          onClick={async () => {
-            await logout();
-            await apolloClient.resetStore();
-          }}
-          isLoading={logoutFetching}
-        >
-          Logout
-        </Button>
       </Flex>
     );
   }
@@ -212,7 +210,13 @@ export const NavBar: React.FC<Props> = () => {
           placeholder="Search for titles, authors, topics..."
           mr={2}
         />
-        <Button className={navBarStyles.navbar__searchBtn} px={8}>
+        <Button
+          w="100px"
+          leftIcon="search"
+          variantColor="gray"
+          fontSize="sm"
+          px={8}
+        >
           Search
         </Button>
       </InputGroup>
@@ -222,8 +226,9 @@ export const NavBar: React.FC<Props> = () => {
           align={"center"}
           as={Link}
           mr={4}
+          fontSize="sm"
         >
-          Home
+          <BsHouseDoor style={{ marginRight: "5px" }} /> Home
         </Flex>
       </NextLink>
       <NextLink href="/articles">
@@ -232,8 +237,9 @@ export const NavBar: React.FC<Props> = () => {
           align={"center"}
           as={Link}
           mr={4}
+          fontSize="sm"
         >
-          Articles
+          <BsFileRichtext style={{ marginRight: "5px" }} /> Articles
         </Flex>
       </NextLink>
       <Flex fontWeight={500}>{renderUser}</Flex>

@@ -10,12 +10,20 @@ import NextLink from "next/link";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
+  direction?: "column" | "row";
+  top?: number;
+  right?: number;
 }
-const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
+const EditAndDeleteButton: React.FC<Props> = ({
+  post,
+  direction,
+  top,
+  right = 0,
+}) => {
   const { data: meData } = useMeQuery();
   const [deletePost] = useDeletePostMutation();
   return post.creator.id === meData?.me?.id ? (
-    <Flex direction="column">
+    <Flex direction={direction}>
       <IconButton
         icon="delete"
         aria-label="delete-post"
@@ -29,7 +37,8 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
             },
           })
         }
-        mt={4}
+        mt={top}
+        mr={right}
       />
       <NextLink href="/post/edit/[id]" as={`/post/edit/${post.id}`}>
         <IconButton
@@ -37,7 +46,8 @@ const EditAndDeleteButton: React.FC<Props> = ({ post }) => {
           aria-label="edit-post"
           float="right"
           size="xs"
-          mt={4}
+          mt={top}
+          mr={right}
         />
       </NextLink>
     </Flex>

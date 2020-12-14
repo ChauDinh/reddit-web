@@ -45,7 +45,7 @@ export const serialized = (node: Node) => {
     case "paragraph":
       return `<p style="margin-top: 20px; margin-bottom: 20px">${children}</p>`;
     case "heading":
-      return `<h1 style="font-size:28px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
+      return `<h1 style="font-size:22px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
       return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
     case "list-item":

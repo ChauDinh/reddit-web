@@ -1,9 +1,8 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Image, Link, Flex, theme } from "@chakra-ui/core";
+import { Box, Text, Button, Link, Flex } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import { AiOutlineFacebook, AiOutlineGoogle } from "react-icons/ai";
 
 import { InputField } from "../components/InputField";
 import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
@@ -18,8 +17,8 @@ const Register: React.FC<Props> = () => {
   const [register] = useRegisterMutation();
   const router = useRouter();
   return (
-    <Layout variant="regular" direction="column">
-      <Wrapper variants="regular">
+    <Layout variant="small" direction="column">
+      <Wrapper variants="small">
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           onSubmit={async (values, { setErrors }) => {
@@ -80,7 +79,7 @@ const Register: React.FC<Props> = () => {
                 alignItems="center"
               >
                 <Button
-                  variantColor="purple"
+                  variantColor="blue"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -92,46 +91,9 @@ const Register: React.FC<Props> = () => {
                   </Text>
                 </NextLink>
               </Flex>
-              <hr />
-              <Flex mt={4} direction="column">
-                <NextLink href="/register">
-                  <Button
-                    leftIcon={AiOutlineGoogle}
-                    variant="outline"
-                    variantColor="white"
-                    mb={4}
-                  >
-                    Register with Google
-                  </Button>
-                </NextLink>
-                <NextLink href="/register">
-                  <Button
-                    leftIcon={AiOutlineFacebook}
-                    backgroundColor={theme.colors.blue[400]}
-                    color="#fff"
-                  >
-                    Register with Facebook
-                  </Button>
-                </NextLink>
-              </Flex>
             </Form>
           )}
         </Formik>
-        <Flex
-          w="100%"
-          direction="column"
-          alignItems="flex-end"
-          justifyContent="flex-end"
-          padding="0 16px"
-          background="#fff"
-          className="register__image"
-        >
-          <Image
-            width="inherit"
-            height="360px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535362/03_xq0eih.png"
-          />
-        </Flex>
       </Wrapper>
     </Layout>
   );

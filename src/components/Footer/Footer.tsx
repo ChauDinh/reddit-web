@@ -67,6 +67,10 @@ export const Footer: React.FC<Props> = () => {
                 Contact Us
               </ListItem>
               <ListItem className={footerStyles.menu__item}>Product</ListItem>
+              <ListItem className={footerStyles.menu__item}>Product</ListItem>
+              <ListItem className={footerStyles.menu__item}>Product</ListItem>
+              <ListItem className={footerStyles.menu__item}>Product</ListItem>
+              <ListItem className={footerStyles.menu__item}>Product</ListItem>
             </List>
             <List className={footerStyles.subscribe} spacing={3}>
               <ListItem className={footerStyles.menu__heading}>

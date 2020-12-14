@@ -1,11 +1,10 @@
-import { Box, Button, Flex, Heading, Text, Image } from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
 import ErrorPage from "./404";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
-import { PopularPost } from "../components/PopularPost/PopularPost";
 import { Sidebar } from "../components/Sidebar/Sidebar";
 import { ReadingList } from "../components/ReadingList/ReadingList";
 import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
@@ -23,9 +22,6 @@ const Index = () => {
     console.error("Error: ", error?.message);
     return <ErrorPage />;
   }
-
-  const popularPosts = data?.posts.posts.slice(0, variables?.limit);
-  popularPosts?.sort((a, b) => b.points - a.points);
 
   return (
     <Layout variant="regular" direction="column">
@@ -47,7 +43,7 @@ const Index = () => {
                 <Heading mb={2} size="xl">
                   Blog
                 </Heading>
-                <Text mb={4} fontWeight="medium" fontSize="16px">
+                <Text mb={4} fontWeight="medium" fontSize="md">
                   Our latest web design tips, insights and resources hot off the
                   presses
                 </Text>
@@ -55,7 +51,7 @@ const Index = () => {
                   <Button
                     alignItems="center"
                     leftIcon="edit"
-                    variantColor="purple"
+                    variantColor="blue"
                     color="#fff"
                     size="md"
                     className="create-post__btn"
@@ -64,12 +60,6 @@ const Index = () => {
                   </Button>
                 </NextLink>
               </Flex>
-              <Image
-                className="header__img"
-                float="right"
-                height="260px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1605535360/07_uriswj.png"
-              />
             </Flex>
             <Sidebar isSticky={false}>
               <Heading size="sm" className="header__followings">
@@ -78,7 +68,6 @@ const Index = () => {
             </Sidebar>
           </Flex>
         </Wrapper>
-        <PopularPost popular={popularPosts ? popularPosts.slice(0, 6) : []} />
         {loading && !data ? (
           <Text>Loading...</Text>
         ) : (
@@ -90,12 +79,12 @@ const Index = () => {
                     className="recent-articles__title"
                     ml="10px"
                     mb="10px"
-                    size="md"
+                    size="sm"
                   >
                     RECENT ARTICLES
                   </Heading>
                   {data?.posts.posts.map((post) =>
-                    !post ? null : <MiniPostCard post={post} />
+                    !post ? null : <MiniPostCard key={post.id} post={post} />
                   )}
                 </Flex>
                 <Sidebar isSticky={false}>

@@ -1,18 +1,30 @@
 .postCreator__container {
-	margin-top: 20px;
-	width: 100%;
-	align-items: flex-start;
-	justify-content: space-between;
-	background-color: #edf2f7;
-	padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #edf2f7;
+  padding: 20px;
 }
 
 .postCreator__name {
-	flex-grow: 1;
-	margin-left: 20px;
-	font-size: 1.57rem;
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 18px;
 }
 
 .postCreator__followBtn {
-	margin-left: 20px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .postCreator__container {
+    justify-content: flex-start;
+    background-color: #fff;
+    align-items: center;
+    padding-left: 0;
+  }
+  .postCreator__name {
+    display: none !important;
+  }
 }
