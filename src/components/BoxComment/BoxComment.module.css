@@ -1,5 +1,7 @@
 .container {
   font-size: 14px !important;
+  overflow-y: scroll !important;
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {

@@ -164,10 +164,7 @@ const Post: React.FC<Props> = () => {
         <div className={SinglePostStyles.commentWrapper}>
           <Flex
             className={SinglePostStyles.commentContainer}
-            ml={6}
             flexDirection="column"
-            position="sticky"
-            top="60px"
           >
             <Formik
               initialValues={{ comment: "" }}

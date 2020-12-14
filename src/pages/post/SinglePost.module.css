@@ -63,11 +63,17 @@
 }
 
 .commentWrapper {
-  width: 460px;
+  width: 500px;
+  height: 1000px;
+  margin-left: 1.5rem;
+  position: sticky;
+  top: 60px;
 }
 
 .commentContainer {
   width: 100% !important;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .updootWrapper {
