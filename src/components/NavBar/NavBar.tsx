@@ -115,11 +115,12 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton backgroundColor="red" />
             <Image
-              width="200px"
+              maxW="88px"
               mt="10px"
               ml="24px"
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317326/Group_7_2x_v0bqkz.png"
+              height="40px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288659/Group_3_2x_qrqyod.png"
             />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -193,56 +194,62 @@ export const NavBar: React.FC<Props> = () => {
       fontWeight={700}
       className={navBarStyles.navbar__container}
     >
-      <NextLink href="/">
-        <Link textDecoration="none">
-          <Image
-            className={navBarStyles.navbar__logo}
-            alt="logo"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317326/Group_7_2x_v0bqkz.png"
+      <Flex
+        className={navBarStyles.navbar__wrapper}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <NextLink href="/">
+          <Link textDecoration="none">
+            <Image
+              className={navBarStyles.navbar__logo}
+              alt="logo"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288659/Group_3_2x_qrqyod.png"
+            />
+          </Link>
+        </NextLink>
+        <InputGroup className={navBarStyles.navbar__searchInputGroup}>
+          <Input
+            maxW="500px"
+            fontSize="md"
+            type="text"
+            placeholder="Search for titles, authors, topics..."
+            mr={2}
           />
-        </Link>
-      </NextLink>
-      <InputGroup className={navBarStyles.navbar__searchInputGroup}>
-        <Input
-          maxW="500px"
-          fontSize="md"
-          type="text"
-          placeholder="Search for titles, authors, topics..."
-          mr={2}
-        />
-        <Button
-          w="100px"
-          leftIcon="search"
-          variantColor="gray"
-          fontSize="sm"
-          px={8}
-        >
-          Search
-        </Button>
-      </InputGroup>
-      <NextLink href="/">
-        <Flex
-          className={navBarStyles.navbar__homeRoute}
-          align={"center"}
-          as={Link}
-          mr={4}
-          fontSize="sm"
-        >
-          <BsHouseDoor style={{ marginRight: "5px" }} /> Home
-        </Flex>
-      </NextLink>
-      <NextLink href="/articles">
-        <Flex
-          className={navBarStyles.navbar__articlesRoute}
-          align={"center"}
-          as={Link}
-          mr={4}
-          fontSize="sm"
-        >
-          <BsFileRichtext style={{ marginRight: "5px" }} /> Articles
-        </Flex>
-      </NextLink>
-      <Flex fontWeight={500}>{renderUser}</Flex>
+          <Button
+            w="100px"
+            leftIcon="search"
+            variantColor="gray"
+            fontSize="sm"
+            px={8}
+          >
+            Search
+          </Button>
+        </InputGroup>
+        <NextLink href="/">
+          <Flex
+            className={navBarStyles.navbar__homeRoute}
+            align={"center"}
+            as={Link}
+            mr={4}
+            fontSize="sm"
+          >
+            <BsHouseDoor style={{ marginRight: "5px" }} /> Home
+          </Flex>
+        </NextLink>
+        <NextLink href="/articles">
+          <Flex
+            className={navBarStyles.navbar__articlesRoute}
+            align={"center"}
+            as={Link}
+            mr={4}
+            fontSize="sm"
+          >
+            <BsFileRichtext style={{ marginRight: "5px" }} /> Articles
+          </Flex>
+        </NextLink>
+        <Flex fontWeight={500}>{renderUser}</Flex>
+      </Flex>
     </Flex>
   );
 };

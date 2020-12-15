@@ -5,6 +5,10 @@
   box-shadow: 0 -1px 3px rgba(200, 200, 200, 0.2);
 }
 
+.footer__body {
+  margin: 0 10px;
+}
+
 .social__icons {
   display: flex;
   margin-top: 20px;
@@ -37,6 +41,7 @@
   .footer__body {
     display: flex;
     flex-direction: column;
+    margin: 0;
   }
 
   .menu {
@@ -53,5 +58,8 @@
   .subscribe {
     grid-column-start: 1;
     grid-column-end: 3;
+  }
+  .footer__body {
+    margin: 0;
   }
 }

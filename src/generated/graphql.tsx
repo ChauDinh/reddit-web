@@ -18,6 +18,8 @@ export type Query = {
   posts: PaginatedPosts;
   post?: Maybe<Post>;
   me?: Maybe<User>;
+  subscribed?: Maybe<Array<Scalars['Float']>>;
+  subscriber?: Maybe<Array<Scalars['Float']>>;
 };
 
 
@@ -34,6 +36,16 @@ export type QueryPostsArgs = {
 
 export type QueryPostArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QuerySubscribedArgs = {
+  subscriberId: Scalars['Int'];
+};
+
+
+export type QuerySubscriberArgs = {
+  subscribedId: Scalars['Int'];
 };
 
 export type CommentResults = {
@@ -426,6 +438,26 @@ export type PostsQuery = (
       & PostSnippetFragment
     )> }
   ) }
+);
+
+export type SubscribedQueryVariables = Exact<{
+  subscriberId: Scalars['Int'];
+}>;
+
+
+export type SubscribedQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'subscribed'>
+);
+
+export type SubscriberQueryVariables = Exact<{
+  subscribedId: Scalars['Int'];
+}>;
+
+
+export type SubscriberQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'subscriber'>
 );
 
 export const PostSnippetFragmentDoc = gql`
@@ -1001,3 +1033,65 @@ export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Post
 export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
 export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
 export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export const SubscribedDocument = gql`
+    query Subscribed($subscriberId: Int!) {
+  subscribed(subscriberId: $subscriberId)
+}
+    `;
+
+/**
+ * __useSubscribedQuery__
+ *
+ * To run a query within a React component, call `useSubscribedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubscribedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubscribedQuery({
+ *   variables: {
+ *      subscriberId: // value for 'subscriberId'
+ *   },
+ * });
+ */
+export function useSubscribedQuery(baseOptions?: Apollo.QueryHookOptions<SubscribedQuery, SubscribedQueryVariables>) {
+        return Apollo.useQuery<SubscribedQuery, SubscribedQueryVariables>(SubscribedDocument, baseOptions);
+      }
+export function useSubscribedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubscribedQuery, SubscribedQueryVariables>) {
+          return Apollo.useLazyQuery<SubscribedQuery, SubscribedQueryVariables>(SubscribedDocument, baseOptions);
+        }
+export type SubscribedQueryHookResult = ReturnType<typeof useSubscribedQuery>;
+export type SubscribedLazyQueryHookResult = ReturnType<typeof useSubscribedLazyQuery>;
+export type SubscribedQueryResult = Apollo.QueryResult<SubscribedQuery, SubscribedQueryVariables>;
+export const SubscriberDocument = gql`
+    query Subscriber($subscribedId: Int!) {
+  subscriber(subscribedId: $subscribedId)
+}
+    `;
+
+/**
+ * __useSubscriberQuery__
+ *
+ * To run a query within a React component, call `useSubscriberQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubscriberQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubscriberQuery({
+ *   variables: {
+ *      subscribedId: // value for 'subscribedId'
+ *   },
+ * });
+ */
+export function useSubscriberQuery(baseOptions?: Apollo.QueryHookOptions<SubscriberQuery, SubscriberQueryVariables>) {
+        return Apollo.useQuery<SubscriberQuery, SubscriberQueryVariables>(SubscriberDocument, baseOptions);
+      }
+export function useSubscriberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubscriberQuery, SubscriberQueryVariables>) {
+          return Apollo.useLazyQuery<SubscriberQuery, SubscriberQueryVariables>(SubscriberDocument, baseOptions);
+        }
+export type SubscriberQueryHookResult = ReturnType<typeof useSubscriberQuery>;
+export type SubscriberLazyQueryHookResult = ReturnType<typeof useSubscriberLazyQuery>;
+export type SubscriberQueryResult = Apollo.QueryResult<SubscriberQuery, SubscriberQueryVariables>;

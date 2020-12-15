@@ -1,5 +1,10 @@
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/core";
 import React from "react";
+import {
+  useMeQuery,
+  useSubscribedQuery,
+  useSubscribeMutation,
+} from "../../generated/graphql";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import {
   handleMonthFromCreatedAt,
@@ -16,6 +21,19 @@ interface Props {
 }
 
 export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
+  const { data, loading } = useMeQuery();
+  const {
+    data: subscribedData,
+    // loading: subscribedLoading,
+  } = useSubscribedQuery({
+    variables: {
+      subscriberId: data?.me?.id || -1,
+    },
+  });
+  const [subscribe] = useSubscribeMutation();
+
+  console.log(subscribedData?.subscribed);
+
   return (
     <Flex className={PostCreatorStyles.postCreator__container}>
       <Box className={PostCreatorStyles.postCreator__avatar}>
@@ -33,12 +51,24 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
         <Text fontWeight={600}>{creator.username}</Text>
       </Flex>
       <Button
-        variantColor="gray"
-        variant="outline"
+        isLoading={loading}
+        isDisabled={data?.me?.username ? false : true}
+        variantColor={
+          subscribedData?.subscribed?.includes(creator.id) ? "green" : "gray"
+        }
         fontSize="65%"
         className={PostCreatorStyles.postCreator__followBtn}
+        onClick={async () =>
+          await subscribe({
+            variables: {
+              subscribedId: creator.id,
+            },
+          }).catch((err) => console.error(err))
+        }
       >
-        Follow
+        {subscribedData?.subscribed?.includes(creator.id)
+          ? "Following"
+          : "Follow"}
       </Button>
     </Flex>
   );

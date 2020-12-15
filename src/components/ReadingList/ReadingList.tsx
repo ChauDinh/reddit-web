@@ -23,7 +23,7 @@ export const ReadingList: React.FC<Props> = () => {
   }
   return (
     <Flex direction="column">
-      <Heading mb="10px" size="sm">
+      <Heading mb="20px" size="sm">
         📘 READING LIST
       </Heading>
       {data?.posts.posts.map((post) => (

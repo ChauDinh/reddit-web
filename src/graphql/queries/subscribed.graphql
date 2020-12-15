@@ -1,0 +1,3 @@
+query Subscribed($subscriberId: Int!) {
+  subscribed(subscriberId: $subscriberId)
+}

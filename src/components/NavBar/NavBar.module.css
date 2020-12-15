@@ -5,7 +5,12 @@
   width: 100%;
   padding: 16px 24px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.navbar__wrapper {
+  max-width: 1000px;
+  width: 1000px;
 }
 
 .navbar__logo {
@@ -40,6 +45,7 @@
 
 .navbar__userBtn {
   background-color: #fff !important;
+  padding-right: 0 !important;
 }
 
 .navbar__userNameAvatar {
@@ -176,5 +182,9 @@
 @media only screen and (max-width: 600px) {
   .navbar__searchInputGroup {
     display: none !important;
+  }
+  .navbar__wrapper {
+    max-width: 100%;
+    width: 100%;
   }
 }

@@ -40,7 +40,7 @@ const Index = () => {
               justifyContent="space-between"
             >
               <Flex flexDirection="column" flexGrow={1} mr={6}>
-                <Heading mb={2} size="xl">
+                <Heading mb={2} size="lg">
                   Blog
                 </Heading>
                 <Text mb={4} fontWeight="medium" fontSize="md">
@@ -52,7 +52,7 @@ const Index = () => {
                     alignItems="center"
                     leftIcon="edit"
                     variantColor="blue"
-                    size="sm"
+                    size="md"
                     className="create-post__btn"
                   >
                     Create post
@@ -77,7 +77,7 @@ const Index = () => {
                   <Heading
                     className="recent-articles__title"
                     ml="10px"
-                    mb="10px"
+                    mb="20px"
                     size="sm"
                   >
                     📚 RECENT ARTICLES
@@ -96,8 +96,8 @@ const Index = () => {
         {data && data.posts.hasMore ? (
           <Flex alignItems="center" justifyContent="center" mt={8} pb={8}>
             <Button
-              variantColor="purple"
-              color="#fff"
+              variantColor="blue"
+              size="sm"
               onClick={() => {
                 fetchMore({
                   variables: {

@@ -45,7 +45,7 @@ const Register: React.FC<Props> = () => {
           {({ isSubmitting }) => (
             <Form style={styles.container}>
               <Text fontSize="23px" fontWeight={700}>
-                Sign Up
+                Create an account
               </Text>
               <Box mt={4}>
                 {" "}
