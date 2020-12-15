@@ -59,8 +59,19 @@ export const serialized = (node: Node) => {
 
 // serialized function return text snippet
 export const serializedSnippet = (nodes: Node[]) => {
-  let result = nodes.map((node) => Node.string(node)).join("\n");
-  return result.length < 46 ? result : result.slice(0, 46) + "...";
+  let imgUrl: null | string = null;
+  let result = nodes
+    .map((node) => {
+      if (imgUrl === null && node.type === "image") {
+        imgUrl = node.url as string;
+      }
+      return Node.string(node);
+    })
+    .join("\n");
+  return {
+    text: result.length < 46 ? result : result.slice(0, 46) + "...",
+    imgUrl,
+  };
 };
 
 // deSerialized function will takes a string and returns a value

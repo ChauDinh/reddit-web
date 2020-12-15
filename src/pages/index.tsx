@@ -52,8 +52,7 @@ const Index = () => {
                     alignItems="center"
                     leftIcon="edit"
                     variantColor="blue"
-                    color="#fff"
-                    size="md"
+                    size="sm"
                     className="create-post__btn"
                   >
                     Create post
@@ -81,7 +80,7 @@ const Index = () => {
                     mb="10px"
                     size="sm"
                   >
-                    RECENT ARTICLES
+                    📚 RECENT ARTICLES
                   </Heading>
                   {data?.posts.posts.map((post) =>
                     !post ? null : <MiniPostCard key={post.id} post={post} />

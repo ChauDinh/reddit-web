@@ -33,7 +33,7 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
         <Text fontWeight={600}>{creator.username}</Text>
       </Flex>
       <Button
-        variantColor="blue"
+        variantColor="gray"
         variant="outline"
         fontSize="65%"
         className={PostCreatorStyles.postCreator__followBtn}

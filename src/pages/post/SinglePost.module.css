@@ -65,6 +65,8 @@
 .commentWrapper {
   max-width: 500px;
   width: 500px;
+  border-left: 1.5px solid rgba(200, 200, 200, 0.3);
+  padding-left: 15px;
   max-height: 1000px;
   margin-left: 1.5rem;
   position: sticky;
@@ -89,6 +91,11 @@
   .post__title {
     font-size: 24px !important;
   }
+
+  .commentWrapper {
+    border-left: none;
+    padding-left: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -101,6 +108,8 @@
     width: 100%;
     margin-left: 0;
     overflow-y: scroll;
+    border-left: none;
+    padding-left: 0;
   }
 
   .commentContainer {

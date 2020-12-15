@@ -71,6 +71,7 @@ const Post: React.FC<Props> = () => {
           borderRadius="3px"
           background="#fff"
           flexDirection="column"
+          // marginRight="30px"
         >
           <Text mr={2} mb={2} fontSize="xs">
             Posted by{" "}
@@ -188,7 +189,7 @@ const Post: React.FC<Props> = () => {
                       <InputField name="comment" placeholder="Create comment" />
                     </Flex>
                     <Button
-                      variantColor="blue"
+                      variantColor="gray"
                       type="submit"
                       isLoading={isSubmitting}
                       ml={2}

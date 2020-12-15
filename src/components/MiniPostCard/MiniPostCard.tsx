@@ -36,7 +36,7 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Text flexGrow={1} cursor="pointer" mb={2}>
-            {serializedSnippet(JSON.parse(post.text))}
+            {serializedSnippet(JSON.parse(post.text)).text}
           </Text>
         </NextLink>
         <Text
@@ -55,7 +55,7 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
             className={MiniPostCardStyles.postImg}
             height="100%"
             width="100%"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_video_influencer_9oyy_kod7oy.png"
+            src={serializedSnippet(JSON.parse(post.text)).imgUrl || ""}
           />
         </NextLink>
       </Box>

@@ -3,10 +3,11 @@
   background-color: #fff;
   border-radius: 3px;
   padding: 16px;
+  padding-left: 10px;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 20px;
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  margin-bottom: 10px;
+  /* border: 1px solid rgba(200, 200, 200, 0.5); */
 }
 
 .postInfo {

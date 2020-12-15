@@ -19,6 +19,7 @@ body {
 
 .create-post__btn {
   width: 150px;
+  font-weight: 600 !important;
 }
 
 @media only screen and (max-width: 768px) {
@@ -46,7 +47,7 @@ body {
     display: none !important;
   }
   .recent-articles__title {
-    margin-left: 0 !important;
+    margin-left: 10px !important;
     font-size: 16px !important;
   }
 }
