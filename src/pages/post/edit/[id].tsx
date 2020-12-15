@@ -67,7 +67,7 @@ const EditPost: React.FC<Props> = () => {
 
               <Flex mt={4} alignItems="center" justifyContent="space-between">
                 <Button
-                  variantColor="purple"
+                  variantColor="blue"
                   isLoading={isSubmitting}
                   type="submit"
                 >

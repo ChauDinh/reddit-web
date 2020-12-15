@@ -228,11 +228,10 @@ const InsertImageButton = () => {
       }}
       size="sm"
       variantColor="transparent"
-      color="#000"
       mr={2}
       p={0}
     >
-      <BiImages />
+      <BiImages color="gray" />
     </Button>
   );
 };
@@ -254,7 +253,10 @@ const BlockButton = ({ format }: any) => {
           mr={2}
           p={0}
         >
-          <BiHeading size="18px" />
+          <BiHeading
+            size="18px"
+            color={isBlockActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     case "numbered-list":
@@ -267,11 +269,13 @@ const BlockButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiListOl size="18px" />
+          <BiListOl
+            size="18px"
+            color={isBlockActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     case "bulleted-list":
@@ -284,11 +288,13 @@ const BlockButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiListUl size="18px" />
+          <BiListUl
+            size="18px"
+            color={isBlockActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     default:
@@ -309,11 +315,13 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiBold size="18px" />
+          <BiBold
+            size="18px"
+            color={isMarkActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     case "italic":
@@ -326,11 +334,13 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiItalic size="18px" />
+          <BiItalic
+            size="18px"
+            color={isMarkActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     case "underline":
@@ -343,11 +353,13 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiUnderline size="18px" />
+          <BiUnderline
+            size="18px"
+            color={isMarkActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     case "code":
@@ -360,11 +372,13 @@ const MarkButton = ({ format }: any) => {
           }}
           size="sm"
           variantColor="transparent"
-          color="#000"
           mr={2}
           p={0}
         >
-          <BiCodeBlock size="18px" />
+          <BiCodeBlock
+            size="18px"
+            color={isMarkActive(editor, format) ? "#000" : "gray"}
+          />
         </Button>
       );
     default:
