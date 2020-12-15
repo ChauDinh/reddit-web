@@ -13,6 +13,7 @@ body {
 
 .header__content {
   padding: 30px 10px;
+  padding-bottom: 10px;
   border-radius: 3px;
   background-color: #fff;
 }
