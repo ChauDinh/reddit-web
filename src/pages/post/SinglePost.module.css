@@ -63,8 +63,9 @@
 }
 
 .commentWrapper {
+  max-width: 500px;
   width: 500px;
-  height: 1000px;
+  max-height: 1000px;
   margin-left: 1.5rem;
   position: sticky;
   top: 60px;
@@ -96,7 +97,10 @@
   }
 
   .commentWrapper {
+    max-width: 100%;
     width: 100%;
+    margin-left: 0;
+    overflow-y: scroll;
   }
 
   .commentContainer {
