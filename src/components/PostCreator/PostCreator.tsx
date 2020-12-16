@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/core";
 import React from "react";
+import { useApolloClient } from "@apollo/client";
 import {
   useMeQuery,
   useSubscribedQuery,
@@ -22,6 +23,7 @@ interface Props {
 
 export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
   const { data, loading } = useMeQuery();
+  const apolloClient = useApolloClient();
   const {
     data: subscribedData,
     // loading: subscribedLoading,
@@ -58,13 +60,14 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
         }
         fontSize="65%"
         className={PostCreatorStyles.postCreator__followBtn}
-        onClick={async () =>
+        onClick={async () => {
           await subscribe({
             variables: {
               subscribedId: creator.id,
             },
-          }).catch((err) => console.error(err))
-        }
+          });
+          await apolloClient.resetStore();
+        }}
       >
         {subscribedData?.subscribed?.includes(creator.id)
           ? "Following"

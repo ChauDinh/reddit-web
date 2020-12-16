@@ -159,7 +159,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                     voteStatus
                   }
                 `,
-                { id: postId } as any
+                { id: postId } as { id: number; __typename: string }
               ); // Data or null
               console.log("data: ", data);
               if (data) {
@@ -175,7 +175,12 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                       voteStatus
                     }
                   `,
-                  { id: postId, points: newPoints, voteStatus: value } as any
+                  { id: postId, points: newPoints, voteStatus: value } as {
+                    id: number;
+                    points: number;
+                    voteStatus: number;
+                    __typename: string;
+                  }
                 );
               }
             },

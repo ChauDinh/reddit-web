@@ -1,6 +1,7 @@
 import { Heading, Text, Flex, Box, Icon, Button } from "@chakra-ui/core";
 import React from "react";
 import { Node } from "slate";
+import { useApolloClient } from "@apollo/client";
 import { Layout } from "../../components/Layout";
 import { useGetPostFromUrl } from "../../utils/useGetPostFromUrl";
 import { UpdootSection } from "../../components/UpdootSection/UpdootSection";
@@ -14,7 +15,6 @@ import { InputField } from "../../components/InputField";
 import { Form, Formik } from "formik";
 import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
-import { useRouter } from "next/router";
 import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import {
   FaAngry,
@@ -29,8 +29,8 @@ import { PostCreator } from "../../components/PostCreator/PostCreator";
 interface Props {}
 
 const Post: React.FC<Props> = () => {
-  const router = useRouter();
   const [createComment] = useCreateCommentMutation();
+  const apolloClient = useApolloClient();
 
   const { data, loading } = useGetPostFromUrl();
   if (loading) {
@@ -169,7 +169,7 @@ const Post: React.FC<Props> = () => {
           >
             <Formik
               initialValues={{ comment: "" }}
-              onSubmit={async (values) => {
+              onSubmit={async (values, { resetForm }) => {
                 console.log(values);
                 const { errors } = await createComment({
                   variables: {
@@ -179,14 +179,19 @@ const Post: React.FC<Props> = () => {
                 if (errors) {
                   console.error(errors);
                 }
-                router.reload();
+                resetForm({ values: { comment: "" } });
+                await apolloClient.resetStore();
               }}
             >
-              {({ isSubmitting }) => (
+              {({ isSubmitting, values }) => (
                 <Form>
                   <Flex alignItems="flex-end" justifyContent="space-between">
                     <Flex alignItems="center" h="100%" flexGrow={1}>
-                      <InputField name="comment" placeholder="Create comment" />
+                      <InputField
+                        value={values.comment}
+                        name="comment"
+                        placeholder="Create comment"
+                      />
                     </Flex>
                     <Button
                       variantColor="gray"
