@@ -1,5 +1,15 @@
 import React from "react";
-import { Flex, IconButton } from "@chakra-ui/core";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogHeader,
+  Flex,
+  IconButton,
+  AlertDialogBody,
+  AlertDialogFooter,
+  Button,
+} from "@chakra-ui/core";
 import {
   useMeQuery,
   useDeletePostMutation,
@@ -22,6 +32,10 @@ const EditAndDeleteButton: React.FC<Props> = ({
 }) => {
   const { data: meData } = useMeQuery();
   const [deletePost] = useDeletePostMutation();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef();
+
   return post.creator.id === meData?.me?.id ? (
     <Flex direction={direction}>
       <IconButton
@@ -29,14 +43,7 @@ const EditAndDeleteButton: React.FC<Props> = ({
         aria-label="delete-post"
         float="right"
         size="xs"
-        onClick={() =>
-          deletePost({
-            variables: { id: post.id },
-            update: (cache) => {
-              cache.evict({ id: "Post:" + post.id }); // Post:78
-            },
-          })
-        }
+        onClick={() => setIsOpen(true)}
         mt={top}
         mr={right}
       />
@@ -50,6 +57,41 @@ const EditAndDeleteButton: React.FC<Props> = ({
           mr={right}
         />
       </NextLink>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef as any}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="md" fontWeight="bold">
+              Delete article
+            </AlertDialogHeader>
+            <AlertDialogBody>
+              Are you sure? You can't do this action afterwards.
+            </AlertDialogBody>
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button
+                variantColor="red"
+                onClick={() =>
+                  deletePost({
+                    variables: { id: post.id },
+                    update: (cache) => {
+                      cache.evict({ id: "Post:" + post.id }); // Post:78
+                    },
+                  })
+                }
+                ml={3}
+              >
+                Delete permanently
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Flex>
   ) : null;
 };

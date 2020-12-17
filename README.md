@@ -41,13 +41,17 @@ Slate.js). To render these HTML objects, we pass them into the
 - Khung soạn thảo phải là một Rich Text Editor (WYSIWYG) - Sử dụng Slate.js (✅)
 - Khung soạn thảo phải cho phép người dùng upload hình ảnh (cả dạng url và
   .png/.jpg...) (✅✍️)
-- updating...
+- Reading list (✍️)
+- Trang dashboard quản lý bài viết, thông tin following/followers, số lượng
+  upvote/downvote, các bài viết lưu trong reading list, upgrade lên thành viên
+  premium... (✍️)
 
 #### 1.2 Yêu cầu không bắt buộc (Optional)
 
 - Một news feed nhỏ dạng slider như Instagram cho phép người dùng tạo image và
   một đoạn status ngắn. (✍️)
 - Chỉ hiển thị những news feed từ những người dùng bạn đang theo dõi (✍️)
--
+- Tạo một số biểu đồ thống kê thông tin bài viết, lượt up/down vote, chia sẻ,
+  trending... (✍️)
 
 #### Lưu trữ

@@ -23,7 +23,7 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           mb={2}
         >
           <Avatar mr={2} size="xs" src={avatarUrlGenerator(post.creator.id)} />
-          <Text fontWeight={600} color="#8a8a8a" fontSize="14px">
+          <Text fontWeight={600} color="#000" fontSize="15px">
             {post.creator.username}
           </Text>
         </Flex>
