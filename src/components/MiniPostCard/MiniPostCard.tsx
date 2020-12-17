@@ -23,7 +23,9 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           mb={2}
         >
           <Avatar mr={2} size="xs" src={avatarUrlGenerator(post.creator.id)} />
-          <Text fontSize="16px">{post.creator.username}</Text>
+          <Text fontWeight={600} color="#8a8a8a" fontSize="14px">
+            {post.creator.username}
+          </Text>
         </Flex>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Heading
@@ -35,14 +37,14 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           </Heading>
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Text flexGrow={1} cursor="pointer" mb={2}>
+          <Text flexGrow={1} cursor="pointer" mb={1} mr={1}>
             {serializedSnippet(JSON.parse(post.text)).text}
           </Text>
         </NextLink>
         <Text
           className={MiniPostCardStyles.postDate}
-          fontSize="16px"
-          color="#707070"
+          fontSize="14px"
+          color="#8a8a8a"
         >
           {new Date(parseInt(post.updatedAt)).toLocaleString().split(",")[0]}
         </Text>

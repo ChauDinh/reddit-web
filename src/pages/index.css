@@ -29,7 +29,7 @@ body {
   }
   .header__content {
     padding-top: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
   .header__img {
     display: none !important;
@@ -55,6 +55,10 @@ body {
 
 @media only screen and (max-width: 600px) {
   .create-post__btn {
-    width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .header__content {
+    padding-bottom: 10px;
   }
 }

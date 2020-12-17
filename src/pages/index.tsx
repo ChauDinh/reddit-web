@@ -39,7 +39,7 @@ const Index = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Flex flexDirection="column" flexGrow={1} mr={6}>
+              <Flex flexDirection="column" flexGrow={1}>
                 <Heading mb={2} size="lg">
                   Blog
                 </Heading>
@@ -51,7 +51,8 @@ const Index = () => {
                   <Button
                     alignItems="center"
                     leftIcon="edit"
-                    variantColor="blue"
+                    variantColor="gray"
+                    color="#3182ce"
                     size="md"
                     className="create-post__btn"
                   >

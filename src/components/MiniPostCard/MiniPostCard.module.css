@@ -25,6 +25,7 @@
   -webkit-line-clamp: 2 !important;
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
+  padding-right: 3px;
   cursor: pointer;
 }
 
@@ -50,8 +51,12 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column-reverse;
+  }
   .imgPostSize {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: initial;
+    margin-bottom: 10px;
   }
 }

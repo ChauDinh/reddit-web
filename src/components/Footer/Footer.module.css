@@ -1,6 +1,6 @@
 .footer__container {
   background-color: #fafafa;
-  color: #000;
+  color: rgb(34, 130, 219);
   padding: 20px 10px;
   box-shadow: 0 -1px 3px rgba(200, 200, 200, 0.2);
 }
@@ -27,14 +27,16 @@
 
 .menu__heading {
   font-weight: 700;
+  color: #333;
 }
 
 .menu__item {
   font-size: 16px;
+  font-weight: 500;
 }
 
 .menu__subscribeInput {
-  color: #000;
+  color: #333;
 }
 
 @media only screen and (max-width: 768px) {

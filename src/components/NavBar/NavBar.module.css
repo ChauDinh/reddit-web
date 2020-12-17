@@ -41,6 +41,7 @@
   padding: 0 10px;
   padding-left: 0;
   justify-content: space-between;
+  box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.2);
 }
 
 .navbar__userBtn {
@@ -83,7 +84,7 @@
 }
 
 .navbar__drawerContainer {
-  width: 500px !important;
+  width: 300px !important;
 }
 
 .navbar__drawerHeader {

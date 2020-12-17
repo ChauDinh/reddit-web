@@ -31,6 +31,7 @@ import {
   RiVipCrown2Fill,
   RiCustomerServiceFill,
   RiFileCodeFill,
+  RiChatFollowUpFill,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -115,12 +116,12 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton backgroundColor="red" />
             <Image
-              maxW="88px"
+              maxW="96px"
               mt="10px"
               ml="24px"
               alt="logo"
               height="40px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288659/Group_3_2x_qrqyod.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608180460/Group_6_2x_lcgpfe.png"
             />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -135,6 +136,10 @@ export const NavBar: React.FC<Props> = () => {
                   <ListItem>
                     <ListIcon icon={RiSettings5Fill} />
                     Reading list
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon icon={RiChatFollowUpFill} />
+                    Following
                   </ListItem>
                 </List>
               </DrawerBody>
@@ -204,7 +209,7 @@ export const NavBar: React.FC<Props> = () => {
             <Image
               className={navBarStyles.navbar__logo}
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1603288659/Group_3_2x_qrqyod.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608182774/Group_10_2x_sxg0nz.png"
             />
           </Link>
         </NextLink>

@@ -8,7 +8,6 @@ import {
   InputLeftElement,
   List,
   ListItem,
-  Text,
 } from "@chakra-ui/core";
 import React from "react";
 import { Wrapper } from "../Wrapper/Wrapper";
@@ -33,10 +32,9 @@ export const Footer: React.FC<Props> = () => {
           w="100%"
         >
           <Flex flexDirection="column">
-            <Heading size="md">blog.amanlearnscode</Heading>
-            <Text color="rgba(0, 0, 0, 0.8)" mt={2} fontSize="16px">
-              Collaboration platform for modern <br /> IT bloggers
-            </Text>
+            <Heading size="md" color="#000">
+              medium.redesign
+            </Heading>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
               <RiInstagramFill className={footerStyles.social__icon} />
@@ -49,28 +47,26 @@ export const Footer: React.FC<Props> = () => {
               <ListItem className={footerStyles.menu__heading}>
                 Features
               </ListItem>
+              <ListItem className={footerStyles.menu__item}>Help</ListItem>
               <ListItem className={footerStyles.menu__item}>
-                Feature #1
+                Premium Member
               </ListItem>
               <ListItem className={footerStyles.menu__item}>
-                Feature #2
+                Top Topics
               </ListItem>
-              <ListItem className={footerStyles.menu__item}>
-                Feature #3
-              </ListItem>
-              <ListItem className={footerStyles.menu__item}>
-                Feature #4
-              </ListItem>
+              <ListItem className={footerStyles.menu__item}>Advertise</ListItem>
             </List>
             <List spacing={3}>
               <ListItem className={footerStyles.menu__heading}>
-                Contact Us
+                About Us
               </ListItem>
-              <ListItem className={footerStyles.menu__item}>Product</ListItem>
-              <ListItem className={footerStyles.menu__item}>Product</ListItem>
-              <ListItem className={footerStyles.menu__item}>Product</ListItem>
-              <ListItem className={footerStyles.menu__item}>Product</ListItem>
-              <ListItem className={footerStyles.menu__item}>Product</ListItem>
+              <ListItem className={footerStyles.menu__item}>Our team</ListItem>
+              <ListItem className={footerStyles.menu__item}>Careers</ListItem>
+              <ListItem className={footerStyles.menu__item}>Press</ListItem>
+              <ListItem className={footerStyles.menu__item}>Terms</ListItem>
+              <ListItem className={footerStyles.menu__item}>
+                Privacy Policy
+              </ListItem>
             </List>
             <List className={footerStyles.subscribe} spacing={3}>
               <ListItem className={footerStyles.menu__heading}>

@@ -19,7 +19,7 @@ const ForgotPassword: React.FC<Props> = () => {
         <Formik
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
-            await forgotPassword({variables: values});
+            await forgotPassword({ variables: values });
             setIsComplete(true);
           }}
         >
@@ -46,7 +46,7 @@ const ForgotPassword: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="space-between">
                   <Button
-                    variantColor="purple"
+                    variantColor="blue"
                     isLoading={isSubmitting}
                     type="submit"
                   >
@@ -71,4 +71,4 @@ const styles = {
   },
 };
 
-export default createWithApollo({ssr: false})(ForgotPassword);
+export default createWithApollo({ ssr: false })(ForgotPassword);
