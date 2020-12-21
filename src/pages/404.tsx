@@ -23,7 +23,7 @@ const ErrorPage: React.FC<Props> = () => {
       >
         <Image
           size="100%"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_not_found_60pq_abocoa.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608352687/undraw_marilyn_v73y_ecoisd.png"
         />
         <Button
           leftIcon={BiArrowBack}

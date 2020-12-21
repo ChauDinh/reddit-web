@@ -77,7 +77,6 @@ const Index = () => {
                 <Flex flexGrow={1} direction="column" width="calc(100% - 69px)">
                   <Heading
                     className="recent-articles__title"
-                    ml="10px"
                     mb="20px"
                     size="sm"
                   >

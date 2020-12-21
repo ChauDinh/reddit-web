@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/core";
 import React from "react";
+import NextLink from "next/link";
 import { useApolloClient } from "@apollo/client";
 import {
   useMeQuery,
@@ -50,7 +51,11 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
           Posted on {handleMonthFromCreatedAt(parseInt(createdAt))},{" "}
           {handleYearFromCreatedAt(parseInt(createdAt))} by:
         </Text>
-        <Text fontWeight={600}>{creator.username}</Text>
+        <NextLink href="/user/[id]" as={`/user/${creator.id}`}>
+          <Text cursor="pointer" fontWeight={600}>
+            {creator.username}
+          </Text>
+        </NextLink>
       </Flex>
       <Button
         isLoading={loading}

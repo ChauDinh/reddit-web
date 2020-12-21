@@ -114,15 +114,16 @@ export const NavBar: React.FC<Props> = () => {
         <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
           <DrawerOverlay />
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
-            <DrawerCloseButton backgroundColor="red" />
+            <DrawerCloseButton />
             <Image
-              maxW="96px"
+              maxW="169px"
               mt="10px"
               ml="24px"
               alt="logo"
               height="40px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608180460/Group_6_2x_lcgpfe.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608528788/Group_12_2x_z2usi8.png"
             />
+            <Divider border="2px solid" />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
                 My Stuff
@@ -131,7 +132,9 @@ export const NavBar: React.FC<Props> = () => {
                 <List spacing={5}>
                   <ListItem>
                     <ListIcon icon={RiUser3Fill} />
-                    Dashboard
+                    <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
+                      Dashboard
+                    </NextLink>
                   </ListItem>
                   <ListItem>
                     <ListIcon icon={RiSettings5Fill} />
@@ -209,7 +212,7 @@ export const NavBar: React.FC<Props> = () => {
             <Image
               className={navBarStyles.navbar__logo}
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608182774/Group_10_2x_sxg0nz.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608528788/Group_12_2x_z2usi8.png"
             />
           </Link>
         </NextLink>

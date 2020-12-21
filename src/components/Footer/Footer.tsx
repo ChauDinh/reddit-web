@@ -33,7 +33,7 @@ export const Footer: React.FC<Props> = () => {
         >
           <Flex flexDirection="column">
             <Heading size="md" color="#000">
-              medium.redesign
+              medium.clone
             </Heading>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
