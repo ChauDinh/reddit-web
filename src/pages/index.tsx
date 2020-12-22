@@ -53,7 +53,7 @@ const Index = () => {
                     leftIcon="edit"
                     variantColor="blue"
                     // color="#3182ce"
-                    size="sm"
+                    size="md"
                     className="create-post__btn"
                   >
                     Create post

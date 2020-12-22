@@ -12,11 +12,6 @@ import {
   Divider,
   Icon,
   Box,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  Button,
-  AlertDescription,
 } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 
@@ -27,15 +22,17 @@ import { Layout } from "../../components/Layout";
 import { createWithApollo } from "../../utils/withApollo";
 import UserProfileStyles from "./UserProfile.module.css";
 import { UserProfile } from "../../components/UserProfile/UserProfile";
+import { Error } from "../../components/Error/Error";
 
 interface Props {}
 
 const User: React.FC<Props> = () => {
   const router = useRouter();
   const userId: number = parseInt(router.query.id as string);
+  const [userData, setUserData] = React.useState({} as any);
 
   if (!userId) {
-    return null;
+    return <Error />;
   }
 
   const { data, loading } = useGetUserByIdQuery({
@@ -44,9 +41,21 @@ const User: React.FC<Props> = () => {
     },
   });
 
+  React.useEffect(() => {
+    if (data?.getUserById?.username) {
+      setUserData(data);
+    } else if (!data?.getUserById?.username) {
+      setUserData(null);
+    }
+
+    return () => {
+      console.log("unmounted!");
+    };
+  }, [userData?.getUserById, userId]);
+
   return (
     <Layout direction="column" variant="regular">
-      {data?.getUserById ? (
+      {userData ? (
         <Wrapper variants="regular">
           {loading ? (
             <Text>Loading...</Text>
@@ -71,11 +80,11 @@ const User: React.FC<Props> = () => {
               </Box>
 
               <Text className={UserProfileStyles.username}>
-                {data.getUserById?.username}
+                {userData.getUserById?.username}
               </Text>
-              {data.getUserById?.email !== "" ? (
+              {userData.getUserById?.email !== "" ? (
                 <Text className={UserProfileStyles.email}>
-                  <Icon name="email" /> {data.getUserById?.email}
+                  <Icon name="email" /> {userData.getUserById?.email}
                 </Text>
               ) : null}
               <Divider w="100%" />
@@ -108,28 +117,7 @@ const User: React.FC<Props> = () => {
           )}
         </Wrapper>
       ) : (
-        <Wrapper variants="regular">
-          <Alert
-            w="100%"
-            status="error"
-            variant="subtle"
-            flexDirection="column"
-            justifyContent="center"
-            textAlign="center"
-          >
-            <AlertIcon size="40px" mr={0} />
-            <AlertTitle mt={4} mb={1} fontSize="lg">
-              Something went wrong!
-            </AlertTitle>
-            <AlertDescription>
-              There is something wrong, maybe the response returns unaccepted
-              values.
-            </AlertDescription>
-            <Button mt={3} onClick={() => window.history.back()}>
-              Go back
-            </Button>
-          </Alert>
-        </Wrapper>
+        <Error />
       )}
       {/* <br />
         <ul>
