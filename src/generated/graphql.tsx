@@ -417,7 +417,7 @@ export type GetUserByIdQuery = (
   { __typename?: 'Query' }
   & { getUserById?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email' | 'createdAt'>
+    & Pick<User, 'username' | 'email' | 'createdAt' | 'updatedAt'>
   )> }
 );
 
@@ -954,6 +954,7 @@ export const GetUserByIdDocument = gql`
     username
     email
     createdAt
+    updatedAt
   }
 }
     `;

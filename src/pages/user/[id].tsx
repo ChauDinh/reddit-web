@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  Text,
-  AvatarBadge,
   Avatar,
   Flex,
   Tabs,
@@ -9,9 +7,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Divider,
-  Icon,
-  Box,
+  Button,
 } from "@chakra-ui/core";
 
 import { Wrapper } from "../../components/Wrapper/Wrapper";
@@ -47,46 +43,43 @@ const User: React.FC<Props> = () => {
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
         <Flex
+          mt="40px"
           w="100%"
           direction="column"
           alignItems="center"
           justifyContent="center"
           className={UserProfileStyles.container}
         >
-          <Box className={UserProfileStyles.header}>
-            <Avatar
-              height="130px"
-              width="130px"
-              borderRadius="full"
-              src={userAvatarUrl}
-              className={UserProfileStyles.avatar}
-            >
-              <AvatarBadge size="1.25em" backgroundColor="#E2E8F0" />
-            </Avatar>
-          </Box>
-
-          <Text className={UserProfileStyles.username}>
-            {data?.getUserById?.username}
-          </Text>
-          {data?.getUserById?.email !== "" ? (
-            <Text className={UserProfileStyles.email}>
-              <Icon name="email" /> {data?.getUserById?.email}
-            </Text>
-          ) : null}
-          <Divider w="100%" />
-          <Tabs className={UserProfileStyles.tabs} isFitted variant="enclosed">
-            <TabList>
-              <Tab className={UserProfileStyles.tabBtn}>Profile</Tab>
-              <Tab className={UserProfileStyles.tabBtn}>Posts</Tab>
-              <Tab className={UserProfileStyles.tabBtn}>Reading</Tab>
-              <Tab className={UserProfileStyles.tabBtn}>Following</Tab>
+          <Tabs className={UserProfileStyles.tabs}>
+            <TabList className={UserProfileStyles.tabList}>
+              <Tab className={UserProfileStyles.tabBtn}>
+                <Avatar
+                  borderRadius="full"
+                  src={userAvatarUrl}
+                  className={UserProfileStyles.avatar}
+                ></Avatar>
+                <span>PROFILE</span>
+              </Tab>
+              <Tab className={UserProfileStyles.tabBtn}>POSTS</Tab>
+              <Tab className={UserProfileStyles.tabBtn}>READING</Tab>
+              <Tab className={UserProfileStyles.tabBtn}>FOLLOWING</Tab>
             </TabList>
-
+            <Button
+              variant="outline"
+              variantColor="green"
+              className={UserProfileStyles.followBtn}
+              onClick={() => window.alert("Hi")}
+            >
+              Follow
+            </Button>
             <TabPanels mt={6}>
               <TabPanel>
                 <UserProfile
                   username={data?.getUserById?.username}
                   email={data?.getUserById?.email}
+                  joinDate={data.getUserById.createdAt}
+                  updateDate={data.getUserById.updatedAt}
+                  avatar={userAvatarUrl}
                 />
               </TabPanel>
               <TabPanel>
@@ -99,7 +92,6 @@ const User: React.FC<Props> = () => {
             </TabPanels>
           </Tabs>
         </Flex>
-        )
       </Wrapper>
     </Layout>
   );

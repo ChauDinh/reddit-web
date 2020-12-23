@@ -1,15 +1,49 @@
 .container {
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
+.avatar {
+  display: none !important;
+}
+
 .title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 23px;
+  font-weight: 500;
   margin-bottom: 16px;
 }
 
 .listItems {
   margin-bottom: 16px;
   font-size: 15px;
+}
+
+.aboutMe {
+  flex-grow: 1;
+  margin: 0 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .aboutMe {
+    flex-grow: unset;
+    margin: 0;
+    width: 100%;
+  }
+  .overview {
+    width: 100%;
+  }
+  .member {
+    width: 100%;
+  }
+  .avatar {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 }
