@@ -49,10 +49,14 @@
   box-shadow: none !important;
 }
 
-.followBtn {
+.msgAndFollowBtn {
   position: absolute !important;
   right: 0;
   top: 0;
+}
+
+.followBtn {
+  margin-right: 20px !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -70,7 +74,7 @@
   .tabBtn > span {
     display: inline-block;
   }
-  .followBtn {
+  .msgAndFollowBtn {
     display: none !important;
   }
 }

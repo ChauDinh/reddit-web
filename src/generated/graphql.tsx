@@ -467,6 +467,24 @@ export type PostsQuery = (
   ) }
 );
 
+export type GetPostsByCreatorIdQueryVariables = Exact<{
+  creatorId: Scalars['Int'];
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetPostsByCreatorIdQuery = (
+  { __typename?: 'Query' }
+  & { postsByCreatorId?: Maybe<(
+    { __typename?: 'PaginatedPosts' }
+    & { posts: Array<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'title' | 'createdAt' | 'updatedAt'>
+    )> }
+  )> }
+);
+
 export type SubscribedQueryVariables = Exact<{
   subscriberId: Scalars['Int'];
 }>;
@@ -1096,6 +1114,46 @@ export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Post
 export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
 export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
 export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export const GetPostsByCreatorIdDocument = gql`
+    query GetPostsByCreatorId($creatorId: Int!, $limit: Int!, $cursor: String) {
+  postsByCreatorId(creatorId: $creatorId, limit: $limit, cursor: $cursor) {
+    posts {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetPostsByCreatorIdQuery__
+ *
+ * To run a query within a React component, call `useGetPostsByCreatorIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostsByCreatorIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPostsByCreatorIdQuery({
+ *   variables: {
+ *      creatorId: // value for 'creatorId'
+ *      limit: // value for 'limit'
+ *      cursor: // value for 'cursor'
+ *   },
+ * });
+ */
+export function useGetPostsByCreatorIdQuery(baseOptions?: Apollo.QueryHookOptions<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>) {
+        return Apollo.useQuery<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>(GetPostsByCreatorIdDocument, baseOptions);
+      }
+export function useGetPostsByCreatorIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>) {
+          return Apollo.useLazyQuery<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>(GetPostsByCreatorIdDocument, baseOptions);
+        }
+export type GetPostsByCreatorIdQueryHookResult = ReturnType<typeof useGetPostsByCreatorIdQuery>;
+export type GetPostsByCreatorIdLazyQueryHookResult = ReturnType<typeof useGetPostsByCreatorIdLazyQuery>;
+export type GetPostsByCreatorIdQueryResult = Apollo.QueryResult<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>;
 export const SubscribedDocument = gql`
     query Subscribed($subscriberId: Int!) {
   subscribed(subscriberId: $subscriberId)

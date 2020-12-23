@@ -81,7 +81,7 @@ export const UserProfile: React.FC<Props> = ({
         <Text className={UserProfileStyles.title}>About me</Text>
         <Textarea />
         <Button float="right" mt={3}>
-          Edit
+          Update
         </Button>
       </Box>
       <Box className={UserProfileStyles.member}>
@@ -97,7 +97,12 @@ export const UserProfile: React.FC<Props> = ({
             {handleDateFromCreatedAtAndUpdatedAt(parseFloat(updateDate))}
           </StatHelpText>
         </Stat>
-        <Button leftIcon={BsFillStarFill} mt={3} variantColor="green">
+        <Button
+          leftIcon={BsFillStarFill}
+          mt={3}
+          variantColor="green"
+          onClick={() => window.alert("Sorry! The feature will coming soon :(")}
+        >
           Upgrade account
         </Button>
       </Box>

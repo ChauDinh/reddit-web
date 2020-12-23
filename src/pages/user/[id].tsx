@@ -20,6 +20,7 @@ import {
   useGetUserAvatarFromUrl,
   useGetUserFromUrl,
 } from "../../utils/useGetUserFromUrl";
+import { UserPosts } from "../../components/UserPosts/UserPosts";
 
 interface Props {}
 
@@ -64,14 +65,26 @@ const User: React.FC<Props> = () => {
               <Tab className={UserProfileStyles.tabBtn}>READING</Tab>
               <Tab className={UserProfileStyles.tabBtn}>FOLLOWING</Tab>
             </TabList>
-            <Button
-              variant="outline"
-              variantColor="green"
-              className={UserProfileStyles.followBtn}
-              onClick={() => window.alert("Hi")}
-            >
-              Follow
-            </Button>
+            <Flex className={UserProfileStyles.msgAndFollowBtn}>
+              <Button
+                variant="outline"
+                variantColor="green"
+                onClick={() => window.alert("Hi")}
+                className={UserProfileStyles.followBtn}
+              >
+                Follow
+              </Button>
+              <Button
+                variant="outline"
+                variantColor="blue"
+                onClick={() =>
+                  window.alert("Sorry! This feature will coming soon :(")
+                }
+                className={UserProfileStyles.msgBtn}
+              >
+                Direct Message
+              </Button>
+            </Flex>
             <TabPanels mt={6}>
               <TabPanel>
                 <UserProfile
@@ -83,7 +96,7 @@ const User: React.FC<Props> = () => {
                 />
               </TabPanel>
               <TabPanel>
-                <p>two!</p>
+                <UserPosts />
               </TabPanel>
               <TabPanel>
                 <p>three!</p>

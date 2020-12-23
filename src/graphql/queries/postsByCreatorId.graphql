@@ -1,0 +1,10 @@
+query GetPostsByCreatorId($creatorId: Int!, $limit: Int!, $cursor: String) {
+  postsByCreatorId(creatorId: $creatorId, limit: $limit, cursor: $cursor) {
+    posts {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+}
