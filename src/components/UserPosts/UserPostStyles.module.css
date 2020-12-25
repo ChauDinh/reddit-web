@@ -27,6 +27,16 @@
   padding: 8px;
 }
 
+.itemId,
+.itemTitle {
+  cursor: pointer;
+}
+
+.itemId:hover,
+.itemTitle:hover {
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 500px) {
   .table {
     display: block;

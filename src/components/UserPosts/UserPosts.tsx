@@ -1,5 +1,6 @@
 import { Stack, Text } from "@chakra-ui/core";
 import React from "react";
+import NextLink from "next/link";
 import { useGetPostsByCreatorIdQuery } from "../../generated/graphql";
 import {
   handleDateFromCreatedAt,
@@ -46,8 +47,12 @@ export const UserPosts: React.FC<Props> = () => {
         </tr>
         {data.postsByCreatorId.posts.map((post) => (
           <tr key={post.id} className={UserPostStyles.tableItem}>
-            <td className={UserPostStyles.itemId}>{post.id}</td>
-            <td className={UserPostStyles.itemTitle}>{post.title}</td>
+            <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+              <td className={UserPostStyles.itemId}>{post.id}</td>
+            </NextLink>
+            <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+              <td className={UserPostStyles.itemTitle}>{post.title}</td>
+            </NextLink>
             <td className={UserPostStyles.itemCreatedAt}>
               {handleDateFromCreatedAt(parseFloat(post.createdAt))},{" "}
               {handleMonthFromCreatedAt(parseFloat(post.createdAt))},{" "}

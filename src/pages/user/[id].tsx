@@ -99,7 +99,7 @@ const User: React.FC<Props> = () => {
                 <UserPosts />
               </TabPanel>
               <TabPanel>
-                <p>three!</p>
+                <p>Sorry, these feature is not ready yet :( </p>
               </TabPanel>
               <TabPanel>four</TabPanel>
             </TabPanels>
