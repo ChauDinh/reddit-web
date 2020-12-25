@@ -18,6 +18,7 @@ import {
   RiLinkedinBoxFill,
   RiYoutubeFill,
 } from "react-icons/ri";
+import { GoMarkGithub } from "react-icons/go";
 
 import footerStyles from "./Footer.module.css";
 
@@ -89,6 +90,24 @@ export const Footer: React.FC<Props> = () => {
                     placeholder="email"
                   />
                 </InputGroup>
+              </ListItem>
+              <ListItem className={footerStyles.menu__item}>
+                <a
+                  href="https://github.com/ChauDinh/reddit-web"
+                  target="__blank"
+                >
+                  <Icon height="24px" width="24px" as={GoMarkGithub} />
+                  amanlearnscode on GitHub
+                </a>
+              </ListItem>
+              <ListItem className={footerStyles.menu__item}>
+                Site design © 2020 by{" "}
+                <a
+                  href="https://www.facebook.com/dinh.leslie.71/"
+                  target="__blank"
+                >
+                  Chau Dinh
+                </a>
               </ListItem>
             </List>
           </Flex>

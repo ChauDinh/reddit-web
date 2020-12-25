@@ -35,6 +35,10 @@
   font-weight: 500;
 }
 
+.menu__item > a:hover {
+  text-decoration: underline;
+}
+
 .menu__subscribeInput {
   color: #333;
 }
@@ -56,6 +60,10 @@
   .menu {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .menu__heading,
+  .menu__item {
+    text-align: center;
   }
   .subscribe {
     grid-column-start: 1;

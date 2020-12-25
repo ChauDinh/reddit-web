@@ -1,4 +1,4 @@
-# Reddit Web App 📘
+# M.amanlearnscode client📘
 
 The web app is built by React and Next.JS with Chakra-UI library.
 
@@ -27,6 +27,14 @@ content, we send a request (GET) to the server and receive the JSON string. We
 parse the string and serialize them into HTML object (check for docs on
 Slate.js). To render these HTML objects, we pass them into the
 `dangerouslySetInnerHTML` attribute, you can also do with `react-html-parser` library.
+
+## (Vietnamese)
+
+✅ hoàn thành
+
+✍️ chưa hoàn thành, đang hoàn thành
+
+💡 Ý tưởng
 
 ### Yêu cầu hệ thống
 

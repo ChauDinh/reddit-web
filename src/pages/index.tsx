@@ -41,7 +41,7 @@ const Index = () => {
               justifyContent="space-between"
             >
               <Flex flexDirection="column" flexGrow={1}>
-                <Heading mb={2} size="lg">
+                <Heading className="header__title" mb={2} size="lg">
                   Blog for
                   <TypeWriter
                     onInit={(typewriter) => {

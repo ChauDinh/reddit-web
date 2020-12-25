@@ -6,13 +6,12 @@
 }
 
 .tableHeadings {
-  background: #3182ce;
-  color: #fff;
+  background: #edf2f7;
+  color: #333;
 }
 
 .tableHeading {
   min-width: 100px;
-  border-bottom: 1px solid;
   padding: 8px 0;
 }
 

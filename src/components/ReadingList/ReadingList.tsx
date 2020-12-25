@@ -4,6 +4,10 @@ import React from "react";
 import { usePostsQuery } from "../../generated/graphql";
 import ErrorPage from "../../pages/404";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
+import {
+  handleMonthFromCreatedAt,
+  handleYearFromCreatedAt,
+} from "../../utils/handleCreatedAtAndUpdatedAtDate";
 
 import ReadingListStyles from "./ReadingList.module.css";
 
@@ -23,7 +27,7 @@ export const ReadingList: React.FC<Props> = () => {
   }
   return (
     <Flex direction="column">
-      <Heading mb="20px" size="sm">
+      <Heading className={ReadingListStyles.title} mb="20px" size="sm">
         📘 READING LIST
       </Heading>
       {data?.posts.posts.map((post) => (
@@ -47,7 +51,10 @@ export const ReadingList: React.FC<Props> = () => {
               {post.title}
             </Heading>
           </NextLink>
-          <Text className={ReadingListStyles.date}>{post.createdAt}</Text>
+          <Text className={ReadingListStyles.date}>
+            {handleMonthFromCreatedAt(parseFloat(post.createdAt))},{" "}
+            {handleYearFromCreatedAt(parseFloat(post.createdAt))}
+          </Text>
         </Flex>
       ))}
     </Flex>
