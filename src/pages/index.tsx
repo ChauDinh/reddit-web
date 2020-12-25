@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/core";
+import TypeWriter from "typewriter-effect";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
 import { usePostsQuery } from "../generated/graphql";
@@ -41,7 +42,17 @@ const Index = () => {
             >
               <Flex flexDirection="column" flexGrow={1}>
                 <Heading mb={2} size="lg">
-                  Blog
+                  Blog for
+                  <TypeWriter
+                    onInit={(typewriter) => {
+                      typewriter.pauseFor(1000).deleteAll().start();
+                    }}
+                    options={{
+                      strings: ["Developers", "Designers"],
+                      autoStart: true,
+                      loop: true,
+                    }}
+                  />
                 </Heading>
                 <Text mb={4} fontWeight="medium" fontSize="md">
                   Our latest web design tips, insights and resources hot off the

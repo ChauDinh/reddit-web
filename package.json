@@ -36,6 +36,7 @@
     "slate-history": "^0.58.4",
     "slate-react": "^0.58.4",
     "slick-carousel": "^1.8.1",
+    "typewriter-effect": "^2.17.0",
     "urql": "^1.10.0"
   },
   "devDependencies": {
