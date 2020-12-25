@@ -1,0 +1,36 @@
+.table {
+  max-width: 100%;
+  width: 100%;
+  border-collapse: separate;
+  font-size: 16px;
+}
+
+.tableHeadings {
+  background: #3182ce;
+  color: #fff;
+}
+
+.tableHeading {
+  min-width: 100px;
+  border-bottom: 1px solid;
+  padding: 8px 0;
+}
+
+.tableItem:nth-child(odd) {
+  background: #edf2f7;
+}
+
+.itemId,
+.itemTitle,
+.itemCreatedAt,
+.itemUpdatedAt {
+  padding: 8px;
+}
+
+@media only screen and (max-width: 500px) {
+  .table {
+    display: block;
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}

@@ -41,7 +41,7 @@
   padding: 0 10px;
   padding-left: 0;
   justify-content: space-between;
-  box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.2);
+  /* box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.2); */
 }
 
 .navbar__userBtn {
@@ -58,6 +58,7 @@
 }
 
 .navbar__username {
+  font-weight: 500;
   position: relative;
   display: inline-block;
 }
@@ -187,5 +188,16 @@
   .navbar__wrapper {
     max-width: 100%;
     width: 100%;
+  }
+  .navbar__userNameAvatar {
+    display: none;
+  }
+  .navbar__userAvatarImg {
+    display: none !important;
+  }
+  .navbar__loginBtn,
+  .navbar__registerBtn {
+    padding: 0 5px !important;
+    font-size: 10px !important;
   }
 }

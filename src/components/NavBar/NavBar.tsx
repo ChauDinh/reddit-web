@@ -63,23 +63,28 @@ export const NavBar: React.FC<Props> = () => {
   } else if (!data?.me) {
     // client does not log in
     renderUser = (
-      <>
+      <Flex className={navBarStyles.navbar__loginRegisterBtns}>
         <NextLink href="/login">
           <Button
             variantColor="blue"
             alignItems={"center"}
             mr={4}
             fontSize="sm"
+            className={navBarStyles.navbar__loginBtn}
           >
             Login
           </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button variantColor="green" fontSize="sm">
+          <Button
+            variantColor="green"
+            fontSize="sm"
+            className={navBarStyles.navbar__registerBtn}
+          >
             Sign Up
           </Button>
         </NextLink>
-      </>
+      </Flex>
     );
   } else {
     // client is logged in
@@ -104,6 +109,7 @@ export const NavBar: React.FC<Props> = () => {
               )}
             </Box>
             <Avatar
+              className={navBarStyles.navbar__userAvatarImg}
               size="sm"
               name={data.me.username}
               src={avatarUrlGenerator(data.me.id)}
@@ -121,7 +127,7 @@ export const NavBar: React.FC<Props> = () => {
               ml="24px"
               alt="logo"
               height="40px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608528788/Group_12_2x_z2usi8.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787243/Group_14_2x_ky51ky.png"
             />
             <Divider border="2px solid" />
             <Box className={navBarStyles.navbar__drawerSection}>
@@ -212,7 +218,7 @@ export const NavBar: React.FC<Props> = () => {
             <Image
               className={navBarStyles.navbar__logo}
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608528788/Group_12_2x_z2usi8.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787243/Group_14_2x_ky51ky.png"
             />
           </Link>
         </NextLink>

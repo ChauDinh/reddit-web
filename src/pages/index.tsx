@@ -51,7 +51,7 @@ const Index = () => {
                   <Button
                     alignItems="center"
                     leftIcon="edit"
-                    variantColor="blue"
+                    variantColor="gray"
                     // color="#3182ce"
                     size="md"
                     className="create-post__btn"

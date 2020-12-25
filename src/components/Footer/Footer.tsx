@@ -8,6 +8,7 @@ import {
   InputLeftElement,
   List,
   ListItem,
+  Image,
 } from "@chakra-ui/core";
 import React from "react";
 import { Wrapper } from "../Wrapper/Wrapper";
@@ -31,9 +32,12 @@ export const Footer: React.FC<Props> = () => {
           justifyContent="space-between"
           w="100%"
         >
-          <Flex flexDirection="column">
+          <Flex flexDirection="column" alignItems="center">
             <Heading size="md" color="#000">
-              medium.clone
+              <Image
+                height="69px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787638/Group_16_2x_a3coo3.png"
+              />
             </Heading>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />

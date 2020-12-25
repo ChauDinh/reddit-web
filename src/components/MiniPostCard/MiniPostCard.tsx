@@ -22,10 +22,24 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           alignItems="center"
           mb={2}
         >
-          <Avatar mr={2} size="xs" src={avatarUrlGenerator(post.creator.id)} />
-          <Text fontWeight={600} color="#000" fontSize="15px">
-            {post.creator.username}
-          </Text>
+          <NextLink href="/user/[id]" as={`/user/${post.creator.id}`}>
+            <Avatar
+              cursor="pointer"
+              mr={2}
+              size="xs"
+              src={avatarUrlGenerator(post.creator.id)}
+            />
+          </NextLink>
+          <NextLink href="/user/[id]" as={`/user/${post.creator.id}`}>
+            <Text
+              fontWeight={600}
+              color="#000"
+              fontSize="15px"
+              cursor="pointer"
+            >
+              {post.creator.username}
+            </Text>
+          </NextLink>
         </Flex>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Heading

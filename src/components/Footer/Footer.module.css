@@ -1,6 +1,6 @@
 .footer__container {
   background-color: #fafafa;
-  color: rgb(34, 130, 219);
+  /* color: rgb(34, 130, 219); */
   padding: 20px 0;
   box-shadow: 0 -1px 3px rgba(200, 200, 200, 0.2);
 }

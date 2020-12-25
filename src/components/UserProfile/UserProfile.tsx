@@ -14,11 +14,7 @@ import {
   Button,
   Avatar,
 } from "@chakra-ui/core";
-import {
-  BsPeopleCircle,
-  BsFillCursorFill,
-  BsFillStarFill,
-} from "react-icons/bs";
+import { BsPeopleCircle, BsFillCursorFill } from "react-icons/bs";
 
 import UserProfileStyles from "./UserProfileStyles.module.css";
 import {
@@ -48,6 +44,9 @@ export const UserProfile: React.FC<Props> = ({
         <Avatar width="100px" height="100px" src={avatar} />
         <Button width="100%" variant="outline" variantColor="green" mt={6}>
           Follow
+        </Button>
+        <Button width="100%" variant="outline" variantColor="blue" mt={2}>
+          Direct Message
         </Button>
       </Box>
       <Box className={UserProfileStyles.overview}>
@@ -98,9 +97,12 @@ export const UserProfile: React.FC<Props> = ({
           </StatHelpText>
         </Stat>
         <Button
-          leftIcon={BsFillStarFill}
+          // leftIcon={BsFillStarFill}
           mt={3}
-          variantColor="green"
+          variant="outline"
+          variantColor="gray"
+          color="#333"
+          fontWeight={600}
           onClick={() => window.alert("Sorry! The feature will coming soon :(")}
         >
           Upgrade account
