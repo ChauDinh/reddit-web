@@ -231,7 +231,7 @@ const InsertImageButton = () => {
       mr={2}
       p={0}
     >
-      <BiImages color="gray" />
+      <BiImages color="#f2f2f2" />
     </Button>
   );
 };
@@ -255,7 +255,7 @@ const BlockButton = ({ format }: any) => {
         >
           <BiHeading
             size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "gray"}
+            color={isBlockActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -274,7 +274,7 @@ const BlockButton = ({ format }: any) => {
         >
           <BiListOl
             size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "gray"}
+            color={isBlockActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -293,7 +293,7 @@ const BlockButton = ({ format }: any) => {
         >
           <BiListUl
             size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "gray"}
+            color={isBlockActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -320,7 +320,7 @@ const MarkButton = ({ format }: any) => {
         >
           <BiBold
             size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "gray"}
+            color={isMarkActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -339,7 +339,7 @@ const MarkButton = ({ format }: any) => {
         >
           <BiItalic
             size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "gray"}
+            color={isMarkActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -358,7 +358,7 @@ const MarkButton = ({ format }: any) => {
         >
           <BiUnderline
             size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "gray"}
+            color={isMarkActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -377,7 +377,7 @@ const MarkButton = ({ format }: any) => {
         >
           <BiCodeBlock
             size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "gray"}
+            color={isMarkActive(editor, format) ? "#fff" : "gray"}
           />
         </Button>
       );
@@ -414,7 +414,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
         <Flex
           style={{
             width: "100%",
-            backgroundColor: "rgba(200, 200, 200, 0.5)",
+            backgroundColor: "#333",
             borderRadius: "3px 3px 0 0",
             padding: "10px 15px",
           }}
@@ -434,7 +434,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
           style={{
             display: "block",
             width: "100%",
-            height: "360px",
+            height: "500px",
             backgroundColor: "#fff",
             borderRadius: "0px 0px 3px 3px",
             border: "1px solid rgba(200, 200, 200, 0.5)",

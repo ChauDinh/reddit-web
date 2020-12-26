@@ -20,9 +20,9 @@ import {
   FaAngry,
   FaGrinSquintTears,
   FaGrinStars,
-  FaGrinWink,
   FaSadTear,
   FaSurprise,
+  FaGrinHearts,
 } from "react-icons/fa";
 import { PostCreator } from "../../components/PostCreator/PostCreator";
 
@@ -100,37 +100,40 @@ const Post: React.FC<Props> = () => {
                 Award
                 <Box className={SinglePostStyles.reaction__box}>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaGrinStars color="#90a9d1" fontSize="30px" />
+                    <FaGrinStars color="rgb(87 147 243)" fontSize="28px" />
                     <Text className={SinglePostStyles.reaction__label}>
                       Like
                     </Text>
                   </Box>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaGrinWink color="#90a9d1" fontSize="30px" />
+                    <FaGrinHearts color="rgb(212 105 204)" fontSize="28px" />
                     <Text className={SinglePostStyles.reaction__label}>
                       Love
                     </Text>
                   </Box>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaGrinSquintTears color="#90a9d1" fontSize="30px" />
+                    <FaGrinSquintTears
+                      color="rgb(239 180 90)"
+                      fontSize="28px"
+                    />
                     <Text className={SinglePostStyles.reaction__label}>
                       Haha
                     </Text>
                   </Box>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaSurprise color="#90a9d1" fontSize="30px" />
+                    <FaSurprise color="rgb(75 181 177)" fontSize="28px" />
                     <Text className={SinglePostStyles.reaction__label}>
                       Wow
                     </Text>
                   </Box>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaSadTear color="#90a9d1" fontSize="30px" />
+                    <FaSadTear color="rgb(51 82 132)" fontSize="28px" />
                     <Text className={SinglePostStyles.reaction__label}>
                       Sad
                     </Text>
                   </Box>
                   <Box className={SinglePostStyles.reaction__icon}>
-                    <FaAngry color="#90a9d1" fontSize="30px" />
+                    <FaAngry color="rgb(210 71 27)" fontSize="28px" />
                     <Text className={SinglePostStyles.reaction__label}>
                       Angry
                     </Text>
@@ -138,23 +141,21 @@ const Post: React.FC<Props> = () => {
                 </Box>
               </Box>
               <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
-                <Icon mr={1} name="chat" />
-                Comments
-              </Box>
-              <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
                 <Icon mb="2px" mr={1} name="external-link" />
                 Share
               </Box>
             </Flex>
-            <div className={SinglePostStyles.editDeleteWrapper}>
-              <EditAndDeleteButton
-                direction="row"
-                post={data?.post}
-                right={3}
-              />
-            </div>
-            <div className={SinglePostStyles.updootWrapper}>
-              <UpdootSection direction="row" post={data?.post} />
+            <div>
+              <div className={SinglePostStyles.editDeleteWrapper}>
+                <EditAndDeleteButton
+                  direction="row"
+                  post={data?.post}
+                  right={3}
+                />
+              </div>
+              <div className={SinglePostStyles.updootWrapper}>
+                <UpdootSection direction="row" post={data?.post} />
+              </div>
             </div>
           </Flex>
           <PostCreator

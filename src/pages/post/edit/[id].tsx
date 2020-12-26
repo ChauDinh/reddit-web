@@ -2,6 +2,8 @@ import { Button, Flex, FormControl, Text } from "@chakra-ui/core";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
+import { VscSaveAs } from "react-icons/vsc";
+import { ImCancelCircle } from "react-icons/im";
 import { InputField } from "../../../components/InputField";
 import { Layout } from "../../../components/Layout";
 import { MyRichTextEditor } from "../../../components/MyRichTextEditor";
@@ -65,13 +67,24 @@ const EditPost: React.FC<Props> = () => {
                 <Field name="text" as={MyRichTextEditor} />
               </FormControl>
 
-              <Flex mt={4} alignItems="center" justifyContent="space-between">
+              <Flex mt={4} alignItems="center" justifyContent="flex-start">
                 <Button
-                  variantColor="blue"
+                  rightIcon={VscSaveAs}
+                  variantColor="#000"
+                  variant="outline"
                   isLoading={isSubmitting}
                   type="submit"
                 >
                   Update post
+                </Button>
+                <Button
+                  ml={5}
+                  rightIcon={ImCancelCircle}
+                  variant="outline"
+                  variantColor="#000"
+                  onClick={() => window.history.back()}
+                >
+                  Cancel
                 </Button>
               </Flex>
             </Form>

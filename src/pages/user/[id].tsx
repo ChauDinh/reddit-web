@@ -21,6 +21,7 @@ import {
   useGetUserFromUrl,
 } from "../../utils/useGetUserFromUrl";
 import { UserPosts } from "../../components/UserPosts/UserPosts";
+import { UserFollow } from "../../components/UserFollow/UserFollow";
 
 interface Props {}
 
@@ -101,7 +102,9 @@ const User: React.FC<Props> = () => {
               <TabPanel>
                 <p>Sorry, these feature is not ready yet :( </p>
               </TabPanel>
-              <TabPanel>four</TabPanel>
+              <TabPanel>
+                <UserFollow />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Flex>

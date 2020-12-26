@@ -3,6 +3,8 @@ import { Node } from "slate";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
+import { BiSend } from "react-icons/bi";
+import { RiDraftLine } from "react-icons/ri";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
 import { useCreatePostMutation } from "../generated/graphql";
@@ -64,13 +66,23 @@ const CreatePost: React.FC<Props> = () => {
                   </FormControl>
                 </Box>
 
-                <Flex mt={4} alignItems="center" justifyContent="space-between">
+                <Flex mt={4} alignItems="center" justifyContent="flex-start">
                   <Button
-                    variantColor="blue"
+                    variantColor="#000"
+                    variant="outline"
                     isLoading={isSubmitting}
                     type="submit"
+                    rightIcon={BiSend}
                   >
-                    Create post
+                    Create
+                  </Button>
+                  <Button
+                    rightIcon={RiDraftLine}
+                    variant="outline"
+                    variantColor="#000"
+                    ml={5}
+                  >
+                    Save Draft
                   </Button>
                 </Flex>
               </Form>

@@ -20,6 +20,10 @@ body {
   background-color: #fff;
 }
 
+.header__title > div {
+  color: #2e5bff;
+}
+
 .create-post__btn {
   width: 150px;
   font-weight: 800 !important;
@@ -66,9 +70,11 @@ body {
     width: 100% !important;
   }
   .header__content {
-    padding-bottom: 10px;
+    padding-top: 0;
+    padding-bottom: 0px;
   }
   .header__title {
     text-align: right;
+    margin-bottom: 16px !important;
   }
 }

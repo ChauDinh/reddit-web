@@ -9,8 +9,8 @@
 
 .reaction__box {
   position: absolute;
-  width: 312px;
-  height: 50px;
+  width: 250px;
+  height: 44px;
   background-color: #fafafa;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
   border-radius: 28px;
@@ -20,8 +20,8 @@
 }
 
 .reaction__icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   display: inline-block;
   text-align: center;
   font-size: 28px;
@@ -34,11 +34,12 @@
   position: relative;
   padding: 1px;
   top: -60px;
+  left: -5px;
   border-radius: 3px;
   color: #fff;
   background-color: #333;
   text-align: center;
-  font-size: 5px;
+  font-size: 5px !important;
   font-weight: 300;
   visibility: hidden;
   width: 40px;
@@ -52,7 +53,7 @@
 }
 
 .award__btn:hover > .reaction__box > .reaction__icon:hover {
-  transform: scale(1.05);
+  transform: scale(1.3);
   transform-origin: bottom;
 }
 
