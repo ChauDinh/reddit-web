@@ -417,7 +417,7 @@ export type GetUserByIdQuery = (
   { __typename?: 'Query' }
   & { getUserById?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email' | 'createdAt' | 'updatedAt'>
+    & Pick<User, 'id' | 'username' | 'email' | 'createdAt' | 'updatedAt'>
   )> }
 );
 
@@ -969,6 +969,7 @@ export type CommentQueryResult = Apollo.QueryResult<CommentQuery, CommentQueryVa
 export const GetUserByIdDocument = gql`
     query GetUserById($id: Int!) {
   getUserById(id: $id) {
+    id
     username
     email
     createdAt

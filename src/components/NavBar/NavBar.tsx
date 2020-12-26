@@ -259,7 +259,7 @@ export const NavBar: React.FC<Props> = () => {
             mr={4}
             fontSize="sm"
           >
-            <BsFileRichtext style={{ marginRight: "5px" }} /> Articles
+            <BsFileRichtext style={{ marginRight: "5px" }} /> 404 Page
           </Flex>
         </NextLink>
         <Flex fontWeight={500}>{renderUser}</Flex>

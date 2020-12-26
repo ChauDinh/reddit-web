@@ -72,7 +72,8 @@ const Login: React.FC<Props> = () => {
                 justifyContent="space-between"
               >
                 <Button
-                  variantColor="blue"
+                  variantColor="#333"
+                  variant="outline"
                   isLoading={isSubmitting}
                   type="submit"
                 >

@@ -46,7 +46,8 @@ const ForgotPassword: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="space-between">
                   <Button
-                    variantColor="blue"
+                    variantColor="#333"
+                    variant="outline"
                     isLoading={isSubmitting}
                     type="submit"
                   >

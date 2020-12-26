@@ -29,6 +29,8 @@ export const Error: React.FC<Props> = () => {
           leftIcon={BiArrowBack}
           onClick={() => window.history.back()}
           fontSize="sm"
+          variant="outline"
+          variantColor="#333"
         >
           Go back
         </Button>

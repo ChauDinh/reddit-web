@@ -79,7 +79,8 @@ const Register: React.FC<Props> = () => {
                 alignItems="center"
               >
                 <Button
-                  variantColor="blue"
+                  variantColor="#333"
+                  variant="outline"
                   isLoading={isSubmitting}
                   type="submit"
                 >

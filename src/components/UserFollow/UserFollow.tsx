@@ -1,8 +1,17 @@
-import { Box } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/core";
 import React from "react";
+import { FollowerUsers } from "../FollowerUsers/FollowerUsers";
+import { FollowingUsers } from "../FollowingUsers/FollowingUsers";
 
-interface Props {}
+interface Props {
+  id: number;
+}
 
-export const UserFollow: React.FC<Props> = () => {
-  return <Box>Welcome following/followed section</Box>;
+export const UserFollow: React.FC<Props> = ({ id }) => {
+  return (
+    <Flex direction="column">
+      <FollowerUsers id={id} />
+      <FollowingUsers id={id} />
+    </Flex>
+  );
 };

@@ -103,7 +103,7 @@ const User: React.FC<Props> = () => {
                 <p>Sorry, these feature is not ready yet :( </p>
               </TabPanel>
               <TabPanel>
-                <UserFollow />
+                <UserFollow id={data.getUserById.id} />
               </TabPanel>
             </TabPanels>
           </Tabs>
