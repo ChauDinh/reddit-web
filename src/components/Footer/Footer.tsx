@@ -33,7 +33,10 @@ export const Footer: React.FC<Props> = () => {
           justifyContent="space-between"
           w="100%"
         >
-          <Flex flexDirection="column" alignItems="center">
+          <Flex
+            className={footerStyles.footerLogoContainer}
+            flexDirection="column"
+          >
             <Heading size="md" color="#000">
               <Image
                 height="69px"
@@ -46,6 +49,26 @@ export const Footer: React.FC<Props> = () => {
               <RiLinkedinBoxFill className={footerStyles.social__icon} />
               <RiYoutubeFill className={footerStyles.social__icon} />
             </Box>
+            <List spacing={3}>
+              <ListItem className={footerStyles.menu__item}>
+                <a
+                  href="https://github.com/ChauDinh/reddit-web"
+                  target="__blank"
+                >
+                  <Icon height="24px" width="24px" as={GoMarkGithub} />
+                  amanlearnscode on GitHub
+                </a>
+              </ListItem>
+              <ListItem className={footerStyles.menu__item}>
+                Site design © 2020 by{" "}
+                <a
+                  href="https://www.facebook.com/dinh.leslie.71/"
+                  target="__blank"
+                >
+                  Chau Dinh
+                </a>
+              </ListItem>
+            </List>
           </Flex>
           <Flex className={footerStyles.menu}>
             <List spacing={3}>
@@ -90,24 +113,6 @@ export const Footer: React.FC<Props> = () => {
                     placeholder="email"
                   />
                 </InputGroup>
-              </ListItem>
-              <ListItem className={footerStyles.menu__item}>
-                <a
-                  href="https://github.com/ChauDinh/reddit-web"
-                  target="__blank"
-                >
-                  <Icon height="24px" width="24px" as={GoMarkGithub} />
-                  amanlearnscode on GitHub
-                </a>
-              </ListItem>
-              <ListItem className={footerStyles.menu__item}>
-                Site design © 2020 by{" "}
-                <a
-                  href="https://www.facebook.com/dinh.leslie.71/"
-                  target="__blank"
-                >
-                  Chau Dinh
-                </a>
               </ListItem>
             </List>
           </Flex>

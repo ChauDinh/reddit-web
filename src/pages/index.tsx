@@ -42,13 +42,18 @@ const Index = () => {
             >
               <Flex flexDirection="column" flexGrow={1}>
                 <Heading className="header__title" mb={2} size="lg">
-                  Blog for
+                  What's new technologies for
                   <TypeWriter
                     onInit={(typewriter) => {
                       typewriter.pauseFor(1000).deleteAll().start();
                     }}
                     options={{
-                      strings: ["Developers", "Designers"],
+                      strings: [
+                        "Developers",
+                        "DevOps",
+                        "Designers",
+                        "and YOU!",
+                      ],
                       autoStart: true,
                       loop: true,
                     }}
@@ -62,8 +67,8 @@ const Index = () => {
                   <Button
                     alignItems="center"
                     leftIcon="edit"
-                    variantColor="gray"
-                    // color="#3182ce"
+                    variantColor="blue"
+                    variant="solid"
                     size="md"
                     className="create-post__btn"
                   >
@@ -96,6 +101,32 @@ const Index = () => {
                   {data?.posts.posts.map((post) =>
                     !post ? null : <MiniPostCard key={post.id} post={post} />
                   )}
+                  {data && data.posts.hasMore ? (
+                    <Flex
+                      alignItems="center"
+                      justifyContent="center"
+                      mt={8}
+                      pb={8}
+                    >
+                      <Button
+                        variantColor="blue"
+                        size="sm"
+                        onClick={() => {
+                          fetchMore({
+                            variables: {
+                              limit: variables?.limit,
+                              cursor:
+                                data.posts.posts[data.posts.posts.length - 1]
+                                  .createdAt,
+                            },
+                          });
+                        }}
+                        isLoading={loading}
+                      >
+                        load more
+                      </Button>
+                    </Flex>
+                  ) : null}
                 </Flex>
                 <Sidebar isSticky={false}>
                   <ReadingList></ReadingList>
@@ -104,26 +135,6 @@ const Index = () => {
             </Flex>
           </Wrapper>
         )}
-        {data && data.posts.hasMore ? (
-          <Flex alignItems="center" justifyContent="center" mt={8} pb={8}>
-            <Button
-              variantColor="blue"
-              size="sm"
-              onClick={() => {
-                fetchMore({
-                  variables: {
-                    limit: variables?.limit,
-                    cursor:
-                      data.posts.posts[data.posts.posts.length - 1].createdAt,
-                  },
-                });
-              }}
-              isLoading={loading}
-            >
-              load more
-            </Button>
-          </Flex>
-        ) : null}
       </Box>
     </Layout>
   );

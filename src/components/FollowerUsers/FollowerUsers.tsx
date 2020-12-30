@@ -21,8 +21,8 @@ export const FollowerUsers: React.FC<Props> = ({ id }) => {
   return (
     <Stack spacing={3}>
       <Heading size="md">Follower</Heading>
-      {data.subscriber.map((id) => (
-        <FollowingUser id={id} />
+      {data.subscriber.map((sub) => (
+        <FollowingUser id={sub} />
       ))}
     </Stack>
   );

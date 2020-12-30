@@ -233,7 +233,7 @@ export const NavBar: React.FC<Props> = () => {
           <Button
             w="100px"
             leftIcon="search"
-            variantColor="gray"
+            variantColor="blue"
             fontSize="sm"
             px={8}
           >

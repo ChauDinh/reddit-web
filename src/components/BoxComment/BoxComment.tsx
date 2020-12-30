@@ -1,8 +1,7 @@
-import { Avatar, Flex, Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/core";
 import React from "react";
 import NextLink from "next/link";
 import { useCommentQuery } from "../../generated/graphql";
-import { avatarUrlGenerator } from "../../utils/createAvatar";
 import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import BoxCommentStyles from "./BoxComment.module.css";
 
@@ -29,15 +28,6 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
             mb="20px"
             fontSize="16px"
           >
-            <NextLink href="/user/[id]" as={`/user/${comment.creatorId}`}>
-              <Avatar
-                cursor="pointer"
-                size="sm"
-                name={comment.commentCreator.username}
-                src={avatarUrlGenerator(comment.creatorId)}
-                mr={2}
-              />
-            </NextLink>
             <Flex direction="column" w="100%">
               <Flex alignItems="center" justifyContent="space-between" w="100%">
                 <NextLink href="/user/[id]" as={`/user/${comment.creatorId}`}>

@@ -9,9 +9,14 @@
   margin: 0 0;
 }
 
+.footerLogoContainer {
+  align-items: flex-start;
+}
+
 .social__icons {
   display: flex;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .social__icon {
@@ -53,6 +58,10 @@
   .menu {
     margin-left: 0;
     margin-top: 20px;
+  }
+
+  .footerLogoContainer {
+    align-items: center;
   }
 }
 

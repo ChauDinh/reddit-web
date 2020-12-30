@@ -1,6 +1,7 @@
 .container {
   justify-content: space-between;
   align-items: flex-start;
+  /* flex-direction: column; */
 }
 
 .avatar {
@@ -27,13 +28,24 @@
   margin: 0 40px;
 }
 
+.profileAvatar {
+  margin: 20px auto;
+  margin-top: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .container {
     flex-direction: column;
   }
+  .title {
+    background-color: #333;
+    color: #fff;
+    padding: 0 5px;
+  }
   .aboutMe {
     flex-grow: unset;
     margin: 0;
+    margin-top: 16px;
     width: 100%;
   }
   .overview {
@@ -42,6 +54,7 @@
   }
   .member {
     width: 100%;
+    margin-top: 16px;
   }
   .avatar {
     display: flex !important;
@@ -50,5 +63,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+  }
+  .profileAvatar {
+    display: none !important;
   }
 }
