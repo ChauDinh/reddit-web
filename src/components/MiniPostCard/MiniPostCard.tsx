@@ -10,13 +10,21 @@ import { serializedSnippet } from "../../utils/serializedAndDeserialized";
 import MiniPostCardStyles from "./MiniPostCard.module.css";
 
 interface Props {
+  isColumn?: boolean;
   post: PostSnippetFragment | SinglePostSnippetFragment;
 }
 
-export const MiniPostCard: React.FC<Props> = ({ post }) => {
+export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
   return (
-    <Flex className={MiniPostCardStyles.container}>
-      <Flex direction="column" className={MiniPostCardStyles.postInfo}>
+    <Flex
+      direction={isColumn ? "column-reverse" : "row"}
+      className={MiniPostCardStyles.container}
+    >
+      <Flex
+        direction="column"
+        mt={isColumn ? "10px" : "0"}
+        className={MiniPostCardStyles.postInfo}
+      >
         <Flex
           className={MiniPostCardStyles.postCreator}
           alignItems="center"
@@ -63,7 +71,10 @@ export const MiniPostCard: React.FC<Props> = ({ post }) => {
           {new Date(parseInt(post.updatedAt)).toLocaleString().split(",")[0]}
         </Text>
       </Flex>
-      <Box className={MiniPostCardStyles.imgPostSize}>
+      <Box
+        height={isColumn ? "150px" : ""}
+        className={MiniPostCardStyles.imgPostSize}
+      >
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Image
             cursor="pointer"

@@ -1,0 +1,85 @@
+.header {
+  width: 100%;
+  padding: 36px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.5rem;
+}
+
+.avatar {
+  height: 100px !important;
+  width: 100px !important;
+  margin: 0 auto;
+}
+
+.userInfo {
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.username {
+  font-size: 36px;
+  margin-right: 20px;
+}
+
+.postsData,
+.followersData,
+.followingData {
+  margin-right: 36px;
+}
+
+.postsData > span,
+.followersData > span,
+.followingData > span {
+  font-weight: 800;
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .userInfo {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+  .userData {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .postsData,
+  .followersData,
+  .followingData {
+    margin-right: 0;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .userInfo {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    align-items: center;
+  }
+  .userNameAndBtn {
+    justify-content: flex-start !important;
+    width: 100%;
+  }
+  .userData {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .postsData,
+  .followersData,
+  .followingData {
+    margin-right: 0;
+    font-size: 20px;
+  }
+}

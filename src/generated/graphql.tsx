@@ -480,7 +480,7 @@ export type GetPostsByCreatorIdQuery = (
     { __typename?: 'PaginatedPosts' }
     & { posts: Array<(
       { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'title' | 'createdAt' | 'updatedAt'>
+      & PostSnippetFragment
     )> }
   )> }
 );
@@ -1119,14 +1119,11 @@ export const GetPostsByCreatorIdDocument = gql`
     query GetPostsByCreatorId($creatorId: Int!, $limit: Int!, $cursor: String) {
   postsByCreatorId(creatorId: $creatorId, limit: $limit, cursor: $cursor) {
     posts {
-      id
-      title
-      createdAt
-      updatedAt
+      ...PostSnippet
     }
   }
 }
-    `;
+    ${PostSnippetFragmentDoc}`;
 
 /**
  * __useGetPostsByCreatorIdQuery__

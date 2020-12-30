@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Text, Flex, Button } from "@chakra-ui/core";
+import { Avatar, Text, Flex, Button, Box } from "@chakra-ui/core";
 import { createWithApollo } from "../../utils/withApollo";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { Layout } from "../../components/Layout";
@@ -10,6 +10,9 @@ import {
 import { Error } from "../../components/Error/Error";
 import userProfileStyles from "./UserProfile.module.css";
 import { useGetPostsFromUrl } from "../../utils/useGetPostsFromUrl";
+import { useGetFollowingFromUrl } from "../../utils/useGetFollowingFromUrl";
+import { useGetFollowerFromUrl } from "../../utils/useGetFollowerFromUrl";
+import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
 
 interface Props {}
 
@@ -17,6 +20,14 @@ const User: React.FC<Props> = () => {
   const { data, loading } = useGetUserFromUrl();
   const userAvatarUrl = useGetUserAvatarFromUrl();
   const { data: postsData, loading: postsLoading } = useGetPostsFromUrl();
+  const {
+    data: followingData,
+    loading: followingLoading,
+  } = useGetFollowingFromUrl();
+  const {
+    data: followerData,
+    loading: followerLoading,
+  } = useGetFollowerFromUrl();
 
   if (loading) {
     return (
@@ -28,11 +39,19 @@ const User: React.FC<Props> = () => {
 
   if (postsLoading) return null;
 
+  if (followingLoading) return null;
+
+  if (followerLoading) return null;
+
   if (!data?.getUserById) {
     return <Error />;
   }
 
   if (!postsData?.postsByCreatorId) return null;
+
+  if (!followingData?.subscribed) return null;
+
+  if (!followerData?.subscriber) return null;
 
   if (data.getUserById === undefined) {
     return null;
@@ -41,23 +60,48 @@ const User: React.FC<Props> = () => {
   return (
     <Layout variant="regular" direction="column">
       <Wrapper variants="regular">
-        <Flex>
+        <Box className={userProfileStyles.header}>
           <Avatar
             className={userProfileStyles.avatar}
             src={`${userAvatarUrl}`}
           />
           <Flex className={userProfileStyles.userInfo}>
-            <Flex>
+            <Flex
+              className={userProfileStyles.userNameAndBtn}
+              alignItems="center"
+            >
               <Text className={userProfileStyles.username}>
                 {data.getUserById.username}
               </Text>
-              <Button size="xs">Following</Button>
+              <Button variantColor="blue" mr={4} size="sm">
+                Direct message
+              </Button>
+              <Button variantColor="green" size="sm">
+                Following
+              </Button>
             </Flex>
-            <Flex>
-              <Text>{postsData?.postsByCreatorId?.posts.length}</Text>
+            <Flex className={userProfileStyles.userData}>
+              <Text className={userProfileStyles.postsData}>
+                <span> {postsData.postsByCreatorId.posts.length}</span>
+                {postsData.postsByCreatorId.posts.length > 1
+                  ? " posts"
+                  : " post"}
+              </Text>
+              <Text className={userProfileStyles.followersData}>
+                <span> {followerData.subscriber.length}</span>
+                {followerData.subscriber.length > 1
+                  ? " followers"
+                  : " follower"}
+              </Text>
+              <Text className={userProfileStyles.followingData}>
+                <span> {followingData.subscribed.length}</span> following
+              </Text>
             </Flex>
           </Flex>
-        </Flex>
+          {postsData.postsByCreatorId.posts.map((post) => (
+            <MiniPostCard key={post.id} post={post} isColumn={true} />
+          ))}
+        </Box>
       </Wrapper>
     </Layout>
   );

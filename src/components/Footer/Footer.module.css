@@ -72,7 +72,7 @@
   }
   .menu__heading,
   .menu__item {
-    text-align: center;
+    text-align: left;
   }
   .subscribe {
     grid-column-start: 1;
@@ -80,5 +80,8 @@
   }
   .footer__body {
     margin: 0;
+  }
+  .footerLogoContainer {
+    align-items: flex-start;
   }
 }

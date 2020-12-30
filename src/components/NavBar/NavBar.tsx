@@ -23,15 +23,14 @@ import {
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { BiChevronDown, BiLogOut } from "react-icons/bi";
-import { BsHouseDoor, BsFileRichtext } from "react-icons/bs";
 import {
-  RiSettings5Fill,
   RiUser3Fill,
   RiCopperCoinFill,
   RiVipCrown2Fill,
   RiCustomerServiceFill,
   RiFileCodeFill,
-  RiChatFollowUpFill,
+  RiHome2Fill,
+  RiPagesFill,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -137,18 +136,16 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
-                    <ListIcon icon={RiUser3Fill} />
-                    <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
-                      Dashboard
+                    <ListIcon icon={RiHome2Fill} />
+                    <NextLink href="/" as={`/`}>
+                      Home
                     </NextLink>
                   </ListItem>
                   <ListItem>
-                    <ListIcon icon={RiSettings5Fill} />
-                    Reading list
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon icon={RiChatFollowUpFill} />
-                    Following
+                    <ListIcon icon={RiUser3Fill} />
+                    <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
+                      Profile
+                    </NextLink>
                   </ListItem>
                 </List>
               </DrawerBody>
@@ -248,7 +245,7 @@ export const NavBar: React.FC<Props> = () => {
             mr={4}
             fontSize="sm"
           >
-            <BsHouseDoor style={{ marginRight: "5px" }} /> Home
+            <RiHome2Fill style={{ marginRight: "5px" }} /> Home
           </Flex>
         </NextLink>
         <NextLink href="/articles">
@@ -259,7 +256,7 @@ export const NavBar: React.FC<Props> = () => {
             mr={4}
             fontSize="sm"
           >
-            <BsFileRichtext style={{ marginRight: "5px" }} /> 404 Page
+            <RiPagesFill style={{ marginRight: "5px" }} /> 404 Page
           </Flex>
         </NextLink>
         <Flex fontWeight={500}>{renderUser}</Flex>
