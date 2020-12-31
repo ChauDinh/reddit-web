@@ -52,8 +52,8 @@ Slate.js). To render these HTML objects, we pass them into the
 - Reading list (✍️)
 - Trang dashboard quản lý bài viết, thông tin following/followers, số lượng
   upvote/downvote, các bài viết lưu trong reading list, upgrade lên thành viên
-  premium... (✍️)
-- Tính năng tìm kiếm bài viết theo tiêu đề, chủ đề, tìm kiếm tác giả theo username (✍️)
+  premium... (✅✍️)
+- Tính năng tìm kiếm bài viết theo tiêu đề, chủ đề, tìm kiếm tác giả theo username (💡✍️)
 - Thêm trường chủ đề (categories) cho bài viết (post) (✍️)
 
 #### 1.2 Yêu cầu không bắt buộc (Optional)
