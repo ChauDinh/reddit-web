@@ -4,7 +4,25 @@ mutation CreatePost($input: PostInput!) {
     createdAt
     updatedAt
     title
-    text
+    text {
+      children {
+        text
+        type
+        bold
+        italic
+        underline
+        code
+        children {
+          text
+          italic
+          bold
+          code
+          underline
+        }
+      }
+      type
+      url
+    }
     creatorId
     points
   }

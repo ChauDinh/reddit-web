@@ -4,6 +4,7 @@
   border-radius: 3px;
   padding: 16px;
   padding-left: 0;
+  padding-right: 0;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -24,8 +25,10 @@
   -webkit-line-clamp: 2 !important;
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
+  margin-right: 10px;
   padding-right: 3px;
   cursor: pointer;
+  font-size: 24px !important;
 }
 
 .imgPostSize {
@@ -45,9 +48,6 @@
     padding: 10px;
     padding-left: 0;
     padding-right: 0;
-  }
-  .postTitle {
-    font-size: 16px !important;
   }
 }
 

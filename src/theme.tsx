@@ -1,9 +1,9 @@
 import { theme as chakraTheme } from "@chakra-ui/core";
 
 const fonts = {
-  heading: "Roboto, SF Pro Display, -apple-system, sans-serif",
-  body: "Roboto, -apple-system, sans-serif",
-  mono: "Roboto, -apple-system, sans-serif",
+  heading: "Lato, SF Pro Display, -apple-system, sans-serif",
+  body: "Lato, -apple-system, sans-serif",
+  mono: "Lato, -apple-system, sans-serif",
 };
 
 const fontWeight = {

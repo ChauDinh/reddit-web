@@ -13,7 +13,6 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  comments?: Maybe<CommentResults>;
   hello: Scalars['String'];
   posts: PaginatedPosts;
   post?: Maybe<Post>;
@@ -22,11 +21,8 @@ export type Query = {
   getUserById?: Maybe<User>;
   subscribed?: Maybe<Array<Scalars['Float']>>;
   subscriber?: Maybe<Array<Scalars['Float']>>;
-};
-
-
-export type QueryCommentsArgs = {
-  postId: Scalars['Float'];
+  comments?: Maybe<CommentResults>;
+  categories?: Maybe<Array<Category>>;
 };
 
 
@@ -62,9 +58,73 @@ export type QuerySubscriberArgs = {
   subscribedId: Scalars['Int'];
 };
 
-export type CommentResults = {
-  __typename?: 'CommentResults';
-  comments: Array<Comment>;
+
+export type QueryCommentsArgs = {
+  postId: Scalars['Float'];
+};
+
+export type PaginatedPosts = {
+  __typename?: 'PaginatedPosts';
+  posts: Array<Post>;
+  hasMore: Scalars['Boolean'];
+};
+
+export type Post = {
+  __typename?: 'Post';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  title: Scalars['String'];
+  text: Array<TextType>;
+  points: Scalars['Float'];
+  creatorId: Scalars['Float'];
+  creator: User;
+  voteStatus?: Maybe<Scalars['Int']>;
+  comments: Comment;
+  isPublic: Scalars['Boolean'];
+  viewed: Scalars['Float'];
+  min: Scalars['Float'];
+};
+
+export type TextType = {
+  __typename?: 'TextType';
+  children: Array<Node>;
+  type: Scalars['String'];
+  url: Scalars['String'];
+};
+
+export type Node = {
+  __typename?: 'Node';
+  text: Scalars['String'];
+  bold: Scalars['Boolean'];
+  italic: Scalars['Boolean'];
+  underline: Scalars['Boolean'];
+  children: Array<SubNode>;
+  type: Scalars['String'];
+  code: Scalars['Boolean'];
+};
+
+export type SubNode = {
+  __typename?: 'SubNode';
+  text: Scalars['String'];
+  italic: Scalars['Boolean'];
+  underline: Scalars['Boolean'];
+  bold: Scalars['Boolean'];
+  code: Scalars['Boolean'];
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  username: Scalars['String'];
+  email: Scalars['String'];
+  status: Scalars['String'];
+  isPremium: Scalars['Boolean'];
+  viewed: Scalars['Float'];
+  nation: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type Comment = {
@@ -80,39 +140,25 @@ export type Comment = {
   commentPost: Post;
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['Float'];
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
-  username: Scalars['String'];
-  email: Scalars['String'];
+export type CommentResults = {
+  __typename?: 'CommentResults';
+  comments: Array<Comment>;
 };
 
-export type Post = {
-  __typename?: 'Post';
+export type Category = {
+  __typename?: 'Category';
   id: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   title: Scalars['String'];
-  text: Scalars['String'];
-  points: Scalars['Float'];
   creatorId: Scalars['Float'];
+  point: Scalars['Float'];
+  viewed: Scalars['Float'];
   creator: User;
-  voteStatus?: Maybe<Scalars['Int']>;
-  comments: Comment;
-  textSnippet: Scalars['String'];
-};
-
-export type PaginatedPosts = {
-  __typename?: 'PaginatedPosts';
-  posts: Array<Post>;
-  hasMore: Scalars['Boolean'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createComment: Comment;
   createPost: Post;
   updatePost?: Maybe<Post>;
   deletePost: Scalars['Boolean'];
@@ -123,11 +169,12 @@ export type Mutation = {
   forgotPassword: Scalars['Boolean'];
   changePassword: UserResponse;
   subscribe: Scalars['Boolean'];
-};
-
-
-export type MutationCreateCommentArgs = {
-  input: CommentInput;
+  createComment: Comment;
+  deleteComment: Scalars['Boolean'];
+  createCategory: Category;
+  deleteCategory: Scalars['Boolean'];
+  createMessage: DirectMessage;
+  deleteMessage: Scalars['Boolean'];
 };
 
 
@@ -137,7 +184,7 @@ export type MutationCreatePostArgs = {
 
 
 export type MutationUpdatePostArgs = {
-  text?: Maybe<Scalars['String']>;
+  text: TypeTextInput;
   title?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
 };
@@ -179,14 +226,68 @@ export type MutationSubscribeArgs = {
   subscribedId: Scalars['Int'];
 };
 
-export type CommentInput = {
+
+export type MutationCreateCommentArgs = {
+  input: CommentInput;
+};
+
+
+export type MutationDeleteCommentArgs = {
+  commentId: Scalars['Float'];
+};
+
+
+export type MutationCreateCategoryArgs = {
+  title: Scalars['String'];
+};
+
+
+export type MutationDeleteCategoryArgs = {
+  categoryId: Scalars['Float'];
+};
+
+
+export type MutationCreateMessageArgs = {
   text: Scalars['String'];
-  postId: Scalars['Float'];
+  receiverId: Scalars['Float'];
+};
+
+
+export type MutationDeleteMessageArgs = {
+  messageId: Scalars['Float'];
 };
 
 export type PostInput = {
   title: Scalars['String'];
+  text: Array<TypeText>;
+};
+
+export type TypeText = {
+  children: Array<Child>;
+  type: Scalars['String'];
+  url: Scalars['String'];
+};
+
+export type Child = {
   text: Scalars['String'];
+  bold: Scalars['Boolean'];
+  italic: Scalars['Boolean'];
+  underline: Scalars['Boolean'];
+  children: Array<Child2>;
+  type: Scalars['String'];
+  code: Scalars['Boolean'];
+};
+
+export type Child2 = {
+  text: Scalars['String'];
+  italic: Scalars['Boolean'];
+  underline: Scalars['Boolean'];
+  bold: Scalars['Boolean'];
+  code: Scalars['Boolean'];
+};
+
+export type TypeTextInput = {
+  text: Array<TypeText>;
 };
 
 export type UserResponse = {
@@ -212,10 +313,39 @@ export type LoginInput = {
   password: Scalars['String'];
 };
 
+export type CommentInput = {
+  text: Scalars['String'];
+  postId: Scalars['Float'];
+};
+
+export type DirectMessage = {
+  __typename?: 'DirectMessage';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  text: Scalars['String'];
+  senderId: Scalars['Float'];
+  receiverId: Scalars['Float'];
+  viewed: Scalars['Float'];
+  sender: User;
+  receiver: User;
+};
+
 export type PostSnippetFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'text' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
-  & { creator: (
+  & Pick<Post, 'id' | 'title' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
+  & { text: Array<(
+    { __typename?: 'TextType' }
+    & Pick<TextType, 'type' | 'url'>
+    & { children: Array<(
+      { __typename?: 'Node' }
+      & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
+      & { children: Array<(
+        { __typename?: 'SubNode' }
+        & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
+      )> }
+    )> }
+  )>, creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
   ) }
@@ -244,8 +374,19 @@ export type RegularUserResponseFragment = (
 
 export type SinglePostSnippetFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'text' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
-  & { creator: (
+  & Pick<Post, 'id' | 'title' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
+  & { text: Array<(
+    { __typename?: 'TextType' }
+    & Pick<TextType, 'type' | 'url'>
+    & { children: Array<(
+      { __typename?: 'Node' }
+      & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
+      & { children: Array<(
+        { __typename?: 'SubNode' }
+        & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
+      )> }
+    )> }
+  )>, creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
   ) }
@@ -291,7 +432,19 @@ export type CreatePostMutation = (
   { __typename?: 'Mutation' }
   & { createPost: (
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'creatorId' | 'points'>
+    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'creatorId' | 'points'>
+    & { text: Array<(
+      { __typename?: 'TextType' }
+      & Pick<TextType, 'type' | 'url'>
+      & { children: Array<(
+        { __typename?: 'Node' }
+        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
+        & { children: Array<(
+          { __typename?: 'SubNode' }
+          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
+        )> }
+      )> }
+    )> }
   ) }
 );
 
@@ -365,7 +518,7 @@ export type SubscribeMutation = (
 export type UpdatePostMutationVariables = Exact<{
   id: Scalars['Int'];
   title?: Maybe<Scalars['String']>;
-  text?: Maybe<Scalars['String']>;
+  text: TypeTextInput;
 }>;
 
 
@@ -373,7 +526,19 @@ export type UpdatePostMutation = (
   { __typename?: 'Mutation' }
   & { updatePost?: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'updatedAt' | 'title' | 'text' | 'textSnippet'>
+    & Pick<Post, 'id' | 'updatedAt' | 'title'>
+    & { text: Array<(
+      { __typename?: 'TextType' }
+      & Pick<TextType, 'type' | 'url'>
+      & { children: Array<(
+        { __typename?: 'Node' }
+        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
+        & { children: Array<(
+          { __typename?: 'SubNode' }
+          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
+        )> }
+      )> }
+    )> }
   )> }
 );
 
@@ -441,8 +606,19 @@ export type PostQuery = (
   { __typename?: 'Query' }
   & { post?: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'text' | 'title' | 'points' | 'voteStatus'>
-    & { creator: (
+    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'voteStatus'>
+    & { text: Array<(
+      { __typename?: 'TextType' }
+      & Pick<TextType, 'type' | 'url'>
+      & { children: Array<(
+        { __typename?: 'Node' }
+        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
+        & { children: Array<(
+          { __typename?: 'SubNode' }
+          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
+        )> }
+      )> }
+    )>, creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
     ) }
@@ -509,7 +685,25 @@ export const PostSnippetFragmentDoc = gql`
     fragment PostSnippet on Post {
   id
   title
-  text
+  text {
+    children {
+      text
+      type
+      bold
+      italic
+      underline
+      code
+      children {
+        text
+        italic
+        bold
+        code
+        underline
+      }
+    }
+    type
+    url
+  }
   points
   voteStatus
   createdAt
@@ -548,7 +742,25 @@ export const SinglePostSnippetFragmentDoc = gql`
     fragment SinglePostSnippet on Post {
   id
   title
-  text
+  text {
+    children {
+      text
+      type
+      bold
+      italic
+      underline
+      code
+      children {
+        text
+        italic
+        bold
+        code
+        underline
+      }
+    }
+    type
+    url
+  }
   points
   voteStatus
   createdAt
@@ -639,7 +851,25 @@ export const CreatePostDocument = gql`
     createdAt
     updatedAt
     title
-    text
+    text {
+      children {
+        text
+        type
+        bold
+        italic
+        underline
+        code
+        children {
+          text
+          italic
+          bold
+          code
+          underline
+        }
+      }
+      type
+      url
+    }
     creatorId
     points
   }
@@ -857,13 +1087,30 @@ export type SubscribeMutationHookResult = ReturnType<typeof useSubscribeMutation
 export type SubscribeMutationResult = Apollo.MutationResult<SubscribeMutation>;
 export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutation, SubscribeMutationVariables>;
 export const UpdatePostDocument = gql`
-    mutation UpdatePost($id: Int!, $title: String, $text: String) {
+    mutation UpdatePost($id: Int!, $title: String, $text: TypeTextInput!) {
   updatePost(id: $id, title: $title, text: $text) {
     id
     updatedAt
     title
-    text
-    textSnippet
+    text {
+      children {
+        text
+        type
+        bold
+        italic
+        underline
+        code
+        children {
+          text
+          italic
+          bold
+          code
+          underline
+        }
+      }
+      type
+      url
+    }
   }
 }
     `;
@@ -1041,7 +1288,25 @@ export const PostDocument = gql`
     id
     createdAt
     updatedAt
-    text
+    text {
+      children {
+        text
+        type
+        bold
+        italic
+        underline
+        code
+        children {
+          text
+          italic
+          bold
+          code
+          underline
+        }
+      }
+      type
+      url
+    }
     title
     creator {
       id

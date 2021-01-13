@@ -72,8 +72,7 @@ const Login: React.FC<Props> = () => {
                 justifyContent="space-between"
               >
                 <Button
-                  variantColor="#333"
-                  variant="outline"
+                  variantColor="blue"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -86,7 +85,7 @@ const Login: React.FC<Props> = () => {
               <hr style={{ margin: "20px 0" }} />
               <Flex direction="column">
                 <NextLink href="/register">
-                  <Button variantColor="gray" flexGrow={1}>
+                  <Button variantColor="blue" flexGrow={1}>
                     Create new account
                   </Button>
                 </NextLink>

@@ -1,13 +1,31 @@
 fragment PostSnippet on Post {
-	id
-	title
-	text
-	points
-	voteStatus
-	createdAt
-	updatedAt
-	creator {
-		id
-		username
-	}
+  id
+  title
+  text {
+    children {
+      text
+      type
+      bold
+      italic
+      underline
+      code
+      children {
+        text
+        italic
+        bold
+        code
+        underline
+      }
+    }
+    type
+    url
+  }
+  points
+  voteStatus
+  createdAt
+  updatedAt
+  creator {
+    id
+    username
+  }
 }

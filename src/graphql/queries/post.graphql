@@ -3,7 +3,25 @@ query Post($id: Int!) {
     id
     createdAt
     updatedAt
-    text
+    text {
+      children {
+        text
+        type
+        bold
+        italic
+        underline
+        code
+        children {
+          text
+          italic
+          bold
+          code
+          underline
+        }
+      }
+      type
+      url
+    }
     title
     creator {
       id
