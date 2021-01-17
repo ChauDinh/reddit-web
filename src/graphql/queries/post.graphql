@@ -1,33 +1,5 @@
 query Post($id: Int!) {
   post(id: $id) {
-    id
-    createdAt
-    updatedAt
-    text {
-      children {
-        text
-        type
-        bold
-        italic
-        underline
-        code
-        children {
-          text
-          italic
-          bold
-          code
-          underline
-        }
-      }
-      type
-      url
-    }
-    title
-    creator {
-      id
-      username
-    }
-    points
-    voteStatus
+    ...SinglePostSnippet
   }
 }

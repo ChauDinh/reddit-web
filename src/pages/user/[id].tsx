@@ -73,10 +73,10 @@ const User: React.FC<Props> = () => {
               <Text className={userProfileStyles.username}>
                 {data.getUserById.username}
               </Text>
-              <Button variantColor="blue" mr={4} size="sm">
+              <Button variantColor="gray" mr={4} size="sm">
                 Direct message
               </Button>
-              <Button variantColor="green" size="sm">
+              <Button variantColor="gray" size="sm">
                 Following
               </Button>
             </Flex>

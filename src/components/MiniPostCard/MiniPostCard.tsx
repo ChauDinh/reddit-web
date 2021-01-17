@@ -82,7 +82,10 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
             className={MiniPostCardStyles.postImg}
             height="100%"
             width="100%"
-            src={serializedSnippet(JSON.parse(post.text)).imgUrl || ""}
+            src={
+              serializedSnippet(JSON.parse(post.text)).imgUrl ||
+              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151138/undraw_static_assets_rpm6_vjnmqf.png"
+            }
           />
         </NextLink>
       </Box>

@@ -75,7 +75,7 @@ export type Post = {
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   title: Scalars['String'];
-  text: Array<TextType>;
+  text: Scalars['String'];
   points: Scalars['Float'];
   creatorId: Scalars['Float'];
   creator: User;
@@ -84,33 +84,6 @@ export type Post = {
   isPublic: Scalars['Boolean'];
   viewed: Scalars['Float'];
   min: Scalars['Float'];
-};
-
-export type TextType = {
-  __typename?: 'TextType';
-  children: Array<Node>;
-  type: Scalars['String'];
-  url: Scalars['String'];
-};
-
-export type Node = {
-  __typename?: 'Node';
-  text: Scalars['String'];
-  bold: Scalars['Boolean'];
-  italic: Scalars['Boolean'];
-  underline: Scalars['Boolean'];
-  children: Array<SubNode>;
-  type: Scalars['String'];
-  code: Scalars['Boolean'];
-};
-
-export type SubNode = {
-  __typename?: 'SubNode';
-  text: Scalars['String'];
-  italic: Scalars['Boolean'];
-  underline: Scalars['Boolean'];
-  bold: Scalars['Boolean'];
-  code: Scalars['Boolean'];
 };
 
 export type User = {
@@ -184,7 +157,7 @@ export type MutationCreatePostArgs = {
 
 
 export type MutationUpdatePostArgs = {
-  text: TypeTextInput;
+  text: Scalars['String'];
   title?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
 };
@@ -259,35 +232,7 @@ export type MutationDeleteMessageArgs = {
 
 export type PostInput = {
   title: Scalars['String'];
-  text: Array<TypeText>;
-};
-
-export type TypeText = {
-  children: Array<Child>;
-  type: Scalars['String'];
-  url: Scalars['String'];
-};
-
-export type Child = {
   text: Scalars['String'];
-  bold: Scalars['Boolean'];
-  italic: Scalars['Boolean'];
-  underline: Scalars['Boolean'];
-  children: Array<Child2>;
-  type: Scalars['String'];
-  code: Scalars['Boolean'];
-};
-
-export type Child2 = {
-  text: Scalars['String'];
-  italic: Scalars['Boolean'];
-  underline: Scalars['Boolean'];
-  bold: Scalars['Boolean'];
-  code: Scalars['Boolean'];
-};
-
-export type TypeTextInput = {
-  text: Array<TypeText>;
 };
 
 export type UserResponse = {
@@ -333,19 +278,8 @@ export type DirectMessage = {
 
 export type PostSnippetFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
-  & { text: Array<(
-    { __typename?: 'TextType' }
-    & Pick<TextType, 'type' | 'url'>
-    & { children: Array<(
-      { __typename?: 'Node' }
-      & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
-      & { children: Array<(
-        { __typename?: 'SubNode' }
-        & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
-      )> }
-    )> }
-  )>, creator: (
+  & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'points' | 'creatorId' | 'voteStatus' | 'isPublic' | 'viewed'>
+  & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
   ) }
@@ -374,19 +308,8 @@ export type RegularUserResponseFragment = (
 
 export type SinglePostSnippetFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'points' | 'voteStatus' | 'createdAt' | 'updatedAt'>
-  & { text: Array<(
-    { __typename?: 'TextType' }
-    & Pick<TextType, 'type' | 'url'>
-    & { children: Array<(
-      { __typename?: 'Node' }
-      & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
-      & { children: Array<(
-        { __typename?: 'SubNode' }
-        & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
-      )> }
-    )> }
-  )>, creator: (
+  & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'points' | 'creatorId' | 'voteStatus' | 'isPublic' | 'viewed'>
+  & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
   ) }
@@ -432,19 +355,7 @@ export type CreatePostMutation = (
   { __typename?: 'Mutation' }
   & { createPost: (
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'creatorId' | 'points'>
-    & { text: Array<(
-      { __typename?: 'TextType' }
-      & Pick<TextType, 'type' | 'url'>
-      & { children: Array<(
-        { __typename?: 'Node' }
-        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
-        & { children: Array<(
-          { __typename?: 'SubNode' }
-          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
-        )> }
-      )> }
-    )> }
+    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'creatorId' | 'points'>
   ) }
 );
 
@@ -518,7 +429,7 @@ export type SubscribeMutation = (
 export type UpdatePostMutationVariables = Exact<{
   id: Scalars['Int'];
   title?: Maybe<Scalars['String']>;
-  text: TypeTextInput;
+  text: Scalars['String'];
 }>;
 
 
@@ -526,19 +437,11 @@ export type UpdatePostMutation = (
   { __typename?: 'Mutation' }
   & { updatePost?: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'updatedAt' | 'title'>
-    & { text: Array<(
-      { __typename?: 'TextType' }
-      & Pick<TextType, 'type' | 'url'>
-      & { children: Array<(
-        { __typename?: 'Node' }
-        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
-        & { children: Array<(
-          { __typename?: 'SubNode' }
-          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
-        )> }
-      )> }
-    )> }
+    & Pick<Post, 'id' | 'points' | 'updatedAt' | 'createdAt' | 'voteStatus' | 'title' | 'text'>
+    & { creator: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username'>
+    ) }
   )> }
 );
 
@@ -606,22 +509,7 @@ export type PostQuery = (
   { __typename?: 'Query' }
   & { post?: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'voteStatus'>
-    & { text: Array<(
-      { __typename?: 'TextType' }
-      & Pick<TextType, 'type' | 'url'>
-      & { children: Array<(
-        { __typename?: 'Node' }
-        & Pick<Node, 'text' | 'type' | 'bold' | 'italic' | 'underline' | 'code'>
-        & { children: Array<(
-          { __typename?: 'SubNode' }
-          & Pick<SubNode, 'text' | 'italic' | 'bold' | 'code' | 'underline'>
-        )> }
-      )> }
-    )>, creator: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username'>
-    ) }
+    & SinglePostSnippetFragment
   )> }
 );
 
@@ -684,34 +572,19 @@ export type SubscriberQuery = (
 export const PostSnippetFragmentDoc = gql`
     fragment PostSnippet on Post {
   id
-  title
-  text {
-    children {
-      text
-      type
-      bold
-      italic
-      underline
-      code
-      children {
-        text
-        italic
-        bold
-        code
-        underline
-      }
-    }
-    type
-    url
-  }
-  points
-  voteStatus
   createdAt
   updatedAt
+  title
+  text
+  points
+  creatorId
   creator {
     id
     username
   }
+  voteStatus
+  isPublic
+  viewed
 }
     `;
 export const RegularErrorFragmentDoc = gql`
@@ -741,34 +614,19 @@ ${RegularUserFragmentDoc}`;
 export const SinglePostSnippetFragmentDoc = gql`
     fragment SinglePostSnippet on Post {
   id
-  title
-  text {
-    children {
-      text
-      type
-      bold
-      italic
-      underline
-      code
-      children {
-        text
-        italic
-        bold
-        code
-        underline
-      }
-    }
-    type
-    url
-  }
-  points
-  voteStatus
   createdAt
   updatedAt
+  title
+  text
+  points
+  creatorId
   creator {
     id
     username
   }
+  voteStatus
+  isPublic
+  viewed
 }
     `;
 export const ChangePasswordDocument = gql`
@@ -851,25 +709,7 @@ export const CreatePostDocument = gql`
     createdAt
     updatedAt
     title
-    text {
-      children {
-        text
-        type
-        bold
-        italic
-        underline
-        code
-        children {
-          text
-          italic
-          bold
-          code
-          underline
-        }
-      }
-      type
-      url
-    }
+    text
     creatorId
     points
   }
@@ -1087,30 +927,19 @@ export type SubscribeMutationHookResult = ReturnType<typeof useSubscribeMutation
 export type SubscribeMutationResult = Apollo.MutationResult<SubscribeMutation>;
 export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutation, SubscribeMutationVariables>;
 export const UpdatePostDocument = gql`
-    mutation UpdatePost($id: Int!, $title: String, $text: TypeTextInput!) {
+    mutation UpdatePost($id: Int!, $title: String, $text: String!) {
   updatePost(id: $id, title: $title, text: $text) {
     id
-    updatedAt
-    title
-    text {
-      children {
-        text
-        type
-        bold
-        italic
-        underline
-        code
-        children {
-          text
-          italic
-          bold
-          code
-          underline
-        }
-      }
-      type
-      url
+    points
+    creator {
+      id
+      username
     }
+    updatedAt
+    createdAt
+    voteStatus
+    title
+    text
   }
 }
     `;
@@ -1285,38 +1114,10 @@ export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const PostDocument = gql`
     query Post($id: Int!) {
   post(id: $id) {
-    id
-    createdAt
-    updatedAt
-    text {
-      children {
-        text
-        type
-        bold
-        italic
-        underline
-        code
-        children {
-          text
-          italic
-          bold
-          code
-          underline
-        }
-      }
-      type
-      url
-    }
-    title
-    creator {
-      id
-      username
-    }
-    points
-    voteStatus
+    ...SinglePostSnippet
   }
 }
-    `;
+    ${SinglePostSnippetFragmentDoc}`;
 
 /**
  * __usePostQuery__

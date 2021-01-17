@@ -48,8 +48,10 @@ export const serialized = (node: Node) => {
       return `<h1 style="font-size:22px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
       return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
-    case "list-item":
+    case "list-item": {
+      console.log("List Item", children);
       return `<li style="margin-bottom:20px">${children}</li>`;
+    }
     case "bulleted-list":
       return `<ul style="margin-left:2em; margin-bottom:20px">${children}</ul>`;
     default:

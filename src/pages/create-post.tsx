@@ -25,7 +25,10 @@ const CreatePost: React.FC<Props> = () => {
     <Layout variant="regular" direction="column">
       <Wrapper variants="regular">
         <Formik
-          initialValues={{ title: "", text: "" }}
+          initialValues={{
+            title: "",
+            text: "",
+          }}
           onSubmit={async (values) => {
             const { errors } = await createPost({
               variables: { input: values },
@@ -68,8 +71,7 @@ const CreatePost: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="flex-start">
                   <Button
-                    variantColor="#000"
-                    variant="outline"
+                    variantColor="blue"
                     isLoading={isSubmitting}
                     type="submit"
                     rightIcon={BiSend}
@@ -78,8 +80,8 @@ const CreatePost: React.FC<Props> = () => {
                   </Button>
                   <Button
                     rightIcon={RiDraftLine}
+                    variantColor="blue"
                     variant="outline"
-                    variantColor="#000"
                     ml={5}
                   >
                     Save Draft

@@ -31,7 +31,7 @@ export const PostCard: React.FC<Props> = ({ post }) => {
       </NextLink>
       <NextLink href="/post/[id]" as={`/post/${post.id}`}>
         <Text className={PostCardStyles.post__text}>
-          {serializedSnippet(JSON.parse(post.text))}
+          {serializedSnippet(post.text)}
         </Text>
       </NextLink>
       <Flex className={PostCardStyles.post__author}>

@@ -11,15 +11,15 @@ import {
   useEditor,
 } from "slate-react";
 import {
-  BiBold,
-  BiCodeBlock,
-  BiHeading,
-  BiItalic,
-  BiListOl,
-  BiListUl,
-  BiUnderline,
-  BiImages,
-} from "react-icons/bi";
+  AiOutlineLineHeight,
+  AiOutlineBold,
+  AiOutlineItalic,
+  AiOutlineUnderline,
+  AiOutlineCode,
+  AiOutlineUnorderedList,
+  AiOutlineOrderedList,
+  AiOutlineFileImage,
+} from "react-icons/ai";
 import { useField } from "formik";
 import imageExtensions from "image-extensions";
 import isUrl from "is-url";
@@ -226,12 +226,12 @@ const InsertImageButton = () => {
         if (!url) return;
         insertImage(editor, url);
       }}
+      variantColor="gray"
       size="sm"
-      variantColor="transparent"
       mr={2}
       p={0}
     >
-      <BiImages color="#f2f2f2" />
+      <AiOutlineFileImage color="#c2c9d1" />
     </Button>
   );
 };
@@ -247,15 +247,15 @@ const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           color="#000"
           mr={2}
           p={0}
         >
-          <BiHeading
+          <AiOutlineLineHeight
             size="18px"
-            color={isBlockActive(editor, format) ? "#fff" : "gray"}
+            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -267,14 +267,14 @@ const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiListOl
+          <AiOutlineOrderedList
             size="18px"
-            color={isBlockActive(editor, format) ? "#fff" : "gray"}
+            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -286,14 +286,14 @@ const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiListUl
+          <AiOutlineUnorderedList
             size="18px"
-            color={isBlockActive(editor, format) ? "#fff" : "gray"}
+            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -313,14 +313,14 @@ const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiBold
+          <AiOutlineBold
             size="18px"
-            color={isMarkActive(editor, format) ? "#fff" : "gray"}
+            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -332,14 +332,14 @@ const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiItalic
+          <AiOutlineItalic
             size="18px"
-            color={isMarkActive(editor, format) ? "#fff" : "gray"}
+            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -351,14 +351,14 @@ const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiUnderline
+          <AiOutlineUnderline
             size="18px"
-            color={isMarkActive(editor, format) ? "#fff" : "gray"}
+            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -370,14 +370,14 @@ const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
+          variantColor="gray"
           size="sm"
-          variantColor="transparent"
           mr={2}
           p={0}
         >
-          <BiCodeBlock
+          <AiOutlineCode
             size="18px"
-            color={isMarkActive(editor, format) ? "#fff" : "gray"}
+            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
           />
         </Button>
       );
@@ -414,7 +414,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
         <Flex
           style={{
             width: "100%",
-            backgroundColor: "#333",
+            backgroundColor: "#EDF2F7",
             borderRadius: "3px 3px 0 0",
             padding: "10px 15px",
           }}
@@ -437,7 +437,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             height: "500px",
             backgroundColor: "#fff",
             borderRadius: "0px 0px 3px 3px",
-            border: "1px solid rgba(200, 200, 200, 0.5)",
+            border: "1px solid #e2e8f0",
             borderTop: "none",
             padding: "15px 15px",
             scrollBehavior: "smooth",

@@ -30,7 +30,7 @@ export const Error: React.FC<Props> = () => {
           onClick={() => window.history.back()}
           fontSize="sm"
           variant="outline"
-          variantColor="#333"
+          variantColor="blue"
         >
           Go back
         </Button>

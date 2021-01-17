@@ -7,8 +7,8 @@
 }
 
 .avatar {
-  height: 100px !important;
-  width: 100px !important;
+  height: 69px !important;
+  width: 69px !important;
   margin: 0 auto;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .username {
-  font-size: 36px;
+  font-size: 28px;
   margin-right: 20px;
 }
 
@@ -29,12 +29,15 @@
 .followersData,
 .followingData {
   margin-right: 36px;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .postsData > span,
 .followersData > span,
 .followingData > span {
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 @media only screen and (max-width: 768px) {
@@ -54,7 +57,7 @@
   .followersData,
   .followingData {
     margin-right: 0;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
@@ -68,8 +71,12 @@
     align-items: center;
   }
   .userNameAndBtn {
-    justify-content: flex-start !important;
+    justify-content: center !important;
     width: 100%;
+  }
+  .username {
+    font-size: 16px;
+    font-weight: 800;
   }
   .userData {
     margin-top: 20px;
@@ -80,6 +87,6 @@
   .followersData,
   .followingData {
     margin-right: 0;
-    font-size: 20px;
+    font-size: 16px;
   }
 }

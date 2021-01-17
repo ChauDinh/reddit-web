@@ -35,7 +35,7 @@ const EditPost: React.FC<Props> = () => {
     );
   }
 
-  console.log(JSON.parse(data?.post?.text as string));
+  console.log(data?.post?.text);
 
   return (
     <Layout direction="column" variant="regular">

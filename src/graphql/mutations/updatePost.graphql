@@ -1,27 +1,15 @@
-mutation UpdatePost($id: Int!, $title: String, $text: TypeTextInput!) {
+mutation UpdatePost($id: Int!, $title: String, $text: String!) {
   updatePost(id: $id, title: $title, text: $text) {
     id
-    updatedAt
-    title
-    text {
-      children {
-        text
-        type
-        bold
-        italic
-        underline
-        code
-        children {
-          text
-          italic
-          bold
-          code
-          underline
-        }
-      }
-      type
-      url
+    points
+    creator {
+      id
+      username
     }
-    # textSnippet
+    updatedAt
+    createdAt
+    voteStatus
+    title
+    text
   }
 }

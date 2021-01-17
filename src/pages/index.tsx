@@ -24,6 +24,8 @@ const Index = () => {
     return <ErrorPage />;
   }
 
+  console.log("[POSTS]: ", data?.posts);
+
   return (
     <Layout variant="regular" direction="column">
       <Box style={{ flexGrow: 1 }}>
