@@ -42,6 +42,8 @@ export const serialized = (node: Node) => {
       console.log(node.url);
       return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url} /> <div style="clear: both"></div>`;
     }
+    case "link":
+      return `<a style="text-decoration:underline; color:blue" target="__blank" href=${node.url}>${children}</a>`;
     case "paragraph":
       return `<p style="margin-top: 20px; margin-bottom: 20px">${children}</p>`;
     case "heading":

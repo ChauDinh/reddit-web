@@ -1,6 +1,13 @@
 import isHotkey from "is-hotkey";
 import React from "react";
-import { createEditor, Node, Editor, Transforms } from "slate";
+import {
+  createEditor,
+  Node,
+  Editor,
+  Transforms,
+  Range,
+  Element as SlateElement,
+} from "slate";
 import {
   Slate,
   withReact,
@@ -19,6 +26,7 @@ import {
   AiOutlineUnorderedList,
   AiOutlineOrderedList,
   AiOutlineFileImage,
+  AiOutlineLink,
 } from "react-icons/ai";
 import { useField } from "formik";
 import imageExtensions from "image-extensions";
@@ -71,14 +79,92 @@ const withImages = (editor: any) => {
   return editor;
 };
 
-const insertImage = (editor: any, url: any) => {
+const withLinks = (editor: Editor) => {
+  const { insertData, insertText, isInline } = editor;
+
+  editor.isInline = (element) => {
+    return element.type === "link" ? true : isInline(element);
+  };
+
+  editor.insertText = (text) => {
+    if (text && isUrl(text)) {
+      wrapLink(editor, text);
+    } else {
+      insertText(text);
+    }
+  };
+
+  editor.insertData = (data: any) => {
+    const text = data.getData("text/plain");
+
+    if (text && isUrl(text)) {
+      wrapLink(editor, text);
+    } else {
+      // @ts-expect-error
+      insertData(data);
+    }
+  };
+
+  return editor;
+};
+
+const insertImage = (editor: Editor, url: any) => {
   const text = { text: "" };
   const image = { type: "image", url, children: [text] };
   Transforms.insertNodes(editor, image);
 };
 
+const insertLink = (editor: Editor, url: any) => {
+  if (editor.selection) {
+    wrapLink(editor, url);
+  }
+};
+
+const wrapLink = (editor: Editor, url: any) => {
+  if (isLinkActive(editor)) {
+    unwrapLink(editor);
+  }
+
+  const { selection } = editor;
+  const isCollapsed = selection && Range.isCollapsed(selection);
+  const link = {
+    type: "link",
+    url,
+    children: isCollapsed ? [{ text: url }] : [],
+  };
+
+  if (isCollapsed) {
+    Transforms.insertNodes(editor, link);
+  } else {
+    Transforms.wrapNodes(editor, link, { split: true });
+    Transforms.collapse(editor, { edge: "end" });
+  }
+};
+
+const unwrapLink = (editor: Editor) => {
+  Transforms.unwrapNodes(editor, {
+    match: (n) =>
+      !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
+  });
+};
+
+const isLinkActive = (editor: Editor) => {
+  const [link]: any = Editor.nodes(editor, {
+    match: (n) =>
+      !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
+  });
+
+  return !!link;
+};
+
 const Element = ({ attributes, children, element }: any) => {
   switch (element.type) {
+    case "link":
+      return (
+        <a {...attributes} href={element.url} style={{ color: "blue" }}>
+          {children}
+        </a>
+      );
     case "image": {
       const selected = useSelected();
       const focused = useFocused();
@@ -232,6 +318,26 @@ const InsertImageButton = () => {
       p={0}
     >
       <AiOutlineFileImage color="#c2c9d1" />
+    </Button>
+  );
+};
+
+const InsertLinkButton = () => {
+  const editor = useEditor();
+  return (
+    <Button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        const url = window.prompt("Enter the URL of the link:");
+        if (!url) return;
+        insertLink(editor, url);
+      }}
+      variantColor="gray"
+      size="sm"
+      mr={2}
+      p={0}
+    >
+      <AiOutlineLink color="#c2c9d1" />
     </Button>
   );
 };
@@ -393,7 +499,10 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
   const [slateValue, setSlateValue] = React.useState<Node[]>(
     props.value ? props.value : initialValue
   );
-  const editor = React.useMemo(() => withImages(withReact(createEditor())), []);
+  const editor = React.useMemo(
+    () => withImages(withLinks(withReact(createEditor()))),
+    []
+  );
   const renderElement = React.useCallback(
     (props) => <Element {...props} />,
     []
@@ -427,6 +536,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
           <BlockButton format="numbered-list" />
           <BlockButton format="bulleted-list" />
           <InsertImageButton />
+          <InsertLinkButton />
         </Flex>
         <hr />
         <Editable
