@@ -7,34 +7,27 @@ import {
   Transforms,
   Range,
   Element as SlateElement,
+  Text,
 } from "slate";
 import {
   Slate,
   withReact,
   Editable,
-  useSlate,
   useSelected,
   useFocused,
   useEditor,
 } from "slate-react";
-import {
-  AiOutlineLineHeight,
-  AiOutlineBold,
-  AiOutlineItalic,
-  AiOutlineUnderline,
-  AiOutlineCode,
-  AiOutlineUnorderedList,
-  AiOutlineOrderedList,
-  AiOutlineFileImage,
-  AiOutlineLink,
-} from "react-icons/ai";
+import { AiOutlineFileImage, AiOutlineLink } from "react-icons/ai";
 import { useField } from "formik";
 import imageExtensions from "image-extensions";
 import isUrl from "is-url";
 
-import { initialValue } from "../utils/slateInitialValue";
-import { Button, Flex } from "@chakra-ui/core";
+import { initialValue } from "../../utils/slateInitialValue";
+import { Button, Flex, Select } from "@chakra-ui/core";
 import { css } from "emotion";
+import { MarkButton } from "./MarkButton";
+import { BlockButton } from "./BlockButton";
+import Prism from "prismjs";
 
 interface Props {}
 
@@ -44,7 +37,16 @@ const HOTKEYS: { [char: string]: string } = {
   "mod+u": "underline",
   "mod+`": "code",
 };
-const LIST_TYPES = ["numbered-list", "bulleted-list"];
+
+const getLength = (token: string | any) => {
+  if (typeof token === "string") {
+    return token.length;
+  } else if (typeof token.content === "string") {
+    return token.content.length;
+  } else {
+    return token.content.reduce((l: any, t: any) => l + getLength(t), 0);
+  }
+};
 
 const withImages = (editor: any) => {
   const { insertData, isVoid } = editor;
@@ -157,6 +159,21 @@ const isLinkActive = (editor: Editor) => {
   return !!link;
 };
 
+const isMarkActive = (editor: any, format: any) => {
+  const marks = Editor.marks(editor);
+  return marks ? marks[format] === true : false;
+};
+
+const toggleMark = (editor: any, format: any) => {
+  const isActive = isMarkActive(editor, format);
+
+  if (isActive) {
+    Editor.removeMark(editor, format);
+  } else {
+    Editor.addMark(editor, format, true);
+  }
+};
+
 const Element = ({ attributes, children, element }: any) => {
   switch (element.type) {
     case "link":
@@ -230,15 +247,52 @@ const Leaf = ({ attributes, children, leaf }: any) => {
 
   if (leaf.code) {
     children = (
-      <pre
-        style={{
-          whiteSpace: "pre-wrap",
-        }}
+      <span
+        className={css`
+          font-family: monospace;
+          background: hsla(0, 0%, 100%, 0.5);
+          ${leaf.comment &&
+          css`
+            color: slategray;
+          `}
+          ${(leaf.operator || leaf.url) &&
+          css`
+            color: #9a6e3a;
+          `}
+        ${leaf.keyword &&
+          css`
+            color: #07a;
+          `}
+        ${(leaf.variable || leaf.regex) &&
+          css`
+            color: #e90;
+          `}
+        ${(leaf.number ||
+            leaf.boolean ||
+            leaf.tag ||
+            leaf.constant ||
+            leaf.symbol ||
+            leaf.attr ||
+            leaf.selector) &&
+          css`
+            color: #905;
+          `}
+        ${leaf.punctuation &&
+          css`
+            color: #999;
+          `}
+        ${(leaf.string || leaf.char) &&
+          css`
+            color: #690;
+          `}
+        ${(leaf.function || leaf.class) &&
+          css`
+            color: #dd4a68;
+          `}
+        `}
       >
-        <code style={{ fontFamily: "'Source Code Pro', monospace" }}>
-          {children}
-        </code>
-      </pre>
+        {children}
+      </span>
     );
   }
 
@@ -251,48 +305,6 @@ const Leaf = ({ attributes, children, leaf }: any) => {
   }
 
   return <span {...attributes}>{children}</span>;
-};
-
-const isBlockActive = (editor: any, format: any) => {
-  const [match]: any = Editor.nodes(editor, {
-    match: (n) => n.type === format,
-  });
-
-  return !!match;
-};
-
-const isMarkActive = (editor: any, format: any) => {
-  const marks = Editor.marks(editor);
-  return marks ? marks[format] === true : false;
-};
-
-const toggleMark = (editor: any, format: any) => {
-  const isActive = isMarkActive(editor, format);
-
-  if (isActive) {
-    Editor.removeMark(editor, format);
-  } else {
-    Editor.addMark(editor, format, true);
-  }
-};
-
-const toggleBlock = (editor: any, format: any) => {
-  const isActive = isBlockActive(editor, format);
-  const isList = LIST_TYPES.includes(format);
-
-  Transforms.unwrapNodes(editor, {
-    match: (n) => LIST_TYPES.includes(n.type as string),
-    split: true,
-  });
-
-  Transforms.setNodes(editor, {
-    type: isActive ? "paragraph" : isList ? "list-item" : format,
-  });
-
-  if (!isActive && isList) {
-    const block = { type: format, children: [] };
-    Transforms.wrapNodes(editor, block);
-  }
 };
 
 const isImageUrl = (url: any) => {
@@ -342,156 +354,6 @@ const InsertLinkButton = () => {
   );
 };
 
-const BlockButton = ({ format }: any) => {
-  const editor = useSlate();
-  switch (format) {
-    case "heading":
-      return (
-        <Button
-          isActive={isBlockActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleBlock(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          color="#000"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineLineHeight
-            size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    case "numbered-list":
-      return (
-        <Button
-          isActive={isBlockActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleBlock(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineOrderedList
-            size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    case "bulleted-list":
-      return (
-        <Button
-          isActive={isBlockActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleBlock(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineUnorderedList
-            size="18px"
-            color={isBlockActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    default:
-      return null;
-  }
-};
-
-const MarkButton = ({ format }: any) => {
-  const editor = useSlate();
-  switch (format) {
-    case "bold":
-      return (
-        <Button
-          isActive={isMarkActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleMark(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineBold
-            size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    case "italic":
-      return (
-        <Button
-          isActive={isMarkActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleMark(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineItalic
-            size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    case "underline":
-      return (
-        <Button
-          isActive={isMarkActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleMark(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineUnderline
-            size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    case "code":
-      return (
-        <Button
-          isActive={isMarkActive(editor, format)}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            toggleMark(editor, format);
-          }}
-          variantColor="gray"
-          size="sm"
-          mr={2}
-          p={0}
-        >
-          <AiOutlineCode
-            size="18px"
-            color={isMarkActive(editor, format) ? "#000" : "#c2c9d1"}
-          />
-        </Button>
-      );
-    default:
-      return null;
-  }
-};
-
 export const MyRichTextEditor: React.FC<Props> = (props: any) => {
   const [field, , helpers] = useField<{}>(props);
   const { setValue } = helpers;
@@ -499,6 +361,40 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
   const [slateValue, setSlateValue] = React.useState<Node[]>(
     props.value ? props.value : initialValue
   );
+
+  // slate editor state for code highlighting
+  const [language, setLanguage] = React.useState("html");
+
+  // decorate function depends on programming language selected
+  const decorate = React.useCallback(
+    ([node, path]) => {
+      const ranges: any = [];
+      if (!Text.isText(node)) {
+        return ranges;
+      }
+
+      const tokens = Prism.tokenize(node.text, Prism.languages[language]);
+      let start = 0;
+
+      for (const token of tokens) {
+        const length = getLength(token);
+        const end = start + length;
+
+        if (typeof token !== "string") {
+          ranges.push({
+            [token.type]: true,
+            anchor: { path, offset: start },
+            focus: { path, offset: end },
+          });
+        }
+
+        start = end;
+      }
+      return ranges;
+    },
+    [language]
+  );
+
   const editor = React.useMemo(
     () => withImages(withLinks(withReact(createEditor()))),
     []
@@ -526,17 +422,39 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             backgroundColor: "#EDF2F7",
             borderRadius: "3px 3px 0 0",
             padding: "10px 15px",
+            position: "relative",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <MarkButton format="bold" />
-          <MarkButton format="italic" />
-          <MarkButton format="underline" />
-          <MarkButton format="code" />
-          <BlockButton format="heading" />
-          <BlockButton format="numbered-list" />
-          <BlockButton format="bulleted-list" />
-          <InsertImageButton />
-          <InsertLinkButton />
+          <div>
+            <MarkButton format="bold" />
+            <MarkButton format="italic" />
+            <MarkButton format="underline" />
+            <MarkButton format="code" />
+            <BlockButton format="heading" />
+            <BlockButton format="numbered-list" />
+            <BlockButton format="bulleted-list" />
+            <InsertImageButton />
+            <InsertLinkButton />
+          </div>
+
+          <div>
+            <Select
+              value={language}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setLanguage(e.target.value);
+              }}
+              isDisabled={false}
+              contentEditable={false}
+              cursor="pointer"
+            >
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+            </Select>
+          </div>
         </Flex>
         <hr />
         <Editable
@@ -567,6 +485,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
               }
             }
           }}
+          decorate={decorate}
         />
       </Flex>
     </Slate>

@@ -1,15 +1,56 @@
 import { Node, Text } from "slate";
 import escapeHTML from "escape-html";
+import { css } from "emotion";
+
+const classNameCodeBlock = (leaf: any) => css`
+  font-family: monospace;
+  background: hsla(0, 0%, 100%, 0.5);
+  white-space: pre-wrap;
+  ${leaf.comment &&
+  css`
+    color: slategray;
+  `}
+  ${(leaf.operator || leaf.url) &&
+  css`
+    color: #9a6e3a;
+  `}
+  ${leaf.keyword &&
+  css`
+    color: #07a;
+  `}
+  ${(leaf.variable || leaf.regex) &&
+  css`
+    color: #e90;
+  `}
+  ${(leaf.number ||
+    leaf.boolean ||
+    leaf.tag ||
+    leaf.constant ||
+    leaf.symbol ||
+    leaf.attr ||
+    leaf.selector) &&
+  css`
+    color: #905;
+  `}
+  ${leaf.punctuation &&
+  css`
+    color: #999;
+  `}
+  ${(leaf.string || leaf.char) &&
+  css`
+    color: #690;
+  `}
+  ${(leaf.function || leaf.class) &&
+  css`
+    color: #dd4a68;
+  `}
+`;
 
 // serialized function will takes a value and returns a string
 export const serialized = (node: Node) => {
   if (Text.isText(node)) {
     if (node.code === true && node.text.length !== 0) {
-      return `
-        <pre style="white-space:pre-line; margin-top: 15px; margin-bottom: 15px;">
-          <code style="font-family: 'Source Code Pro', monospace">${node.text}</code>
-        </pre>
-      `;
+      return `<span class=${classNameCodeBlock(node)}>${node.text}</span>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
       return `<strong><em style="text-decoration:underline">${node.text}</em></strong>`;

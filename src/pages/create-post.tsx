@@ -9,7 +9,7 @@ import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
 import { useCreatePostMutation } from "../generated/graphql";
 import { useIsAuth } from "../utils/useIsAuth";
-import { MyRichTextEditor } from "../components/MyRichTextEditor";
+import { MyRichTextEditor } from "../components/MyRichTextEditor/MyRichTextEditor";
 import { serialized } from "../utils/serializedAndDeserialized";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";

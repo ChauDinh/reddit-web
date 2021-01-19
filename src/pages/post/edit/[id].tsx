@@ -6,7 +6,7 @@ import { VscSaveAs } from "react-icons/vsc";
 import { ImCancelCircle } from "react-icons/im";
 import { InputField } from "../../../components/InputField";
 import { Layout } from "../../../components/Layout";
-import { MyRichTextEditor } from "../../../components/MyRichTextEditor";
+import { MyRichTextEditor } from "../../../components/MyRichTextEditor/MyRichTextEditor";
 import { Wrapper } from "../../../components/Wrapper/Wrapper";
 import {
   usePostQuery,
@@ -70,8 +70,7 @@ const EditPost: React.FC<Props> = () => {
               <Flex mt={4} alignItems="center" justifyContent="flex-start">
                 <Button
                   rightIcon={VscSaveAs}
-                  variantColor="#000"
-                  variant="outline"
+                  variantColor="blue"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -81,7 +80,7 @@ const EditPost: React.FC<Props> = () => {
                   ml={5}
                   rightIcon={ImCancelCircle}
                   variant="outline"
-                  variantColor="#000"
+                  variantColor="blue"
                   onClick={() => window.history.back()}
                 >
                   Cancel

@@ -72,7 +72,7 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
         </Text>
       </Flex>
       <Box
-        height={isColumn ? "150px" : ""}
+        height={isColumn ? "180px" : ""}
         className={MiniPostCardStyles.imgPostSize}
       >
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
