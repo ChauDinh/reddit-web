@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 
 import { InputField } from "../components/InputField";
-import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
+import { useRegisterMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { Layout } from "../components/Layout";
 import { createWithApollo } from "../utils/withApollo";
@@ -24,15 +24,15 @@ const Register: React.FC<Props> = () => {
           onSubmit={async (values, { setErrors }) => {
             const response = await register({
               variables: values,
-              update: (cache, { data }) => {
-                cache.writeQuery<MeQuery>({
-                  query: MeDocument,
-                  data: {
-                    __typename: "Query",
-                    me: data?.register.user,
-                  },
-                });
-              },
+              // update: (cache, { data }) => {
+              //   cache.writeQuery<MeQuery>({
+              //     query: MeDocument,
+              //     data: {
+              //       __typename: "Query",
+              //       me: data?.register.user,
+              //     },
+              //   });
+              // },
             });
             if (response.data?.register?.errors) {
               setErrors(toErrorMap(response.data.register.errors));
