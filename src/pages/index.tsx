@@ -42,7 +42,7 @@ const Index = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Flex flexDirection="column" flexGrow={1}>
+              <Flex flexDirection="column">
                 <Heading className="header__title" mb={2} size="lg">
                   What's new technologies for
                   <TypeWriter
@@ -79,61 +79,50 @@ const Index = () => {
                 </NextLink>
               </Flex>
             </Flex>
-            <Sidebar isSticky={false}>
-              <Heading size="sm" className="header__followings">
-                LATEST FROM FOLLOWING
-              </Heading>
-            </Sidebar>
           </Flex>
         </Wrapper>
         {loading && !data ? (
           <Text>Loading...</Text>
         ) : (
           <Wrapper variants="regular">
-            <Flex direction="column" w="100%">
-              <Flex w="100%">
-                <Flex flexGrow={1} direction="column" width="calc(100% - 69px)">
-                  <Heading
-                    className="recent-articles__title"
-                    mb="20px"
-                    size="sm"
+            <Flex w="100%" justifyContent="space-between">
+              <Flex flexGrow={1} direction="column">
+                <Heading className="recent-articles__title" mb="20px" size="md">
+                  RECENT ARTICLES
+                </Heading>
+                {data?.posts.posts.map((post) =>
+                  !post ? null : <MiniPostCard key={post.id} post={post} />
+                )}
+                {data && data.posts.hasMore ? (
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    mt={8}
+                    pb={8}
                   >
-                    📚 RECENT ARTICLES
-                  </Heading>
-                  {data?.posts.posts.map((post) =>
-                    !post ? null : <MiniPostCard key={post.id} post={post} />
-                  )}
-                  {data && data.posts.hasMore ? (
-                    <Flex
-                      alignItems="center"
-                      justifyContent="center"
-                      mt={8}
-                      pb={8}
+                    <Button
+                      variantColor="blue"
+                      size="sm"
+                      onClick={() => {
+                        fetchMore({
+                          variables: {
+                            limit: variables?.limit,
+                            cursor:
+                              data.posts.posts[data.posts.posts.length - 1]
+                                .createdAt,
+                          },
+                        });
+                      }}
+                      isLoading={loading}
                     >
-                      <Button
-                        variantColor="blue"
-                        size="sm"
-                        onClick={() => {
-                          fetchMore({
-                            variables: {
-                              limit: variables?.limit,
-                              cursor:
-                                data.posts.posts[data.posts.posts.length - 1]
-                                  .createdAt,
-                            },
-                          });
-                        }}
-                        isLoading={loading}
-                      >
-                        load more
-                      </Button>
-                    </Flex>
-                  ) : null}
-                </Flex>
-                <Sidebar isSticky={false}>
-                  <ReadingList></ReadingList>
-                </Sidebar>
+                      load more
+                    </Button>
+                  </Flex>
+                ) : null}
               </Flex>
+              <Sidebar isSticky={false}>
+                <ReadingList></ReadingList>
+              </Sidebar>
             </Flex>
           </Wrapper>
         )}

@@ -27,8 +27,8 @@ export const ReadingList: React.FC<Props> = () => {
   }
   return (
     <Flex direction="column">
-      <Heading className={ReadingListStyles.title} mb="20px" size="sm">
-        📘 READING LIST
+      <Heading className={ReadingListStyles.title} mb="20px" size="md">
+        READING LIST
       </Heading>
       {data?.posts.posts.map((post) => (
         <Flex

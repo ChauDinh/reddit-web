@@ -1,7 +1,7 @@
 .container {
   background-color: #fff;
   width: 360px !important;
-  margin-left: 20px;
+  margin-left: 36px;
 }
 
 @media only screen and (max-width: 768px) {

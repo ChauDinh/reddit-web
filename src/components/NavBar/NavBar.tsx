@@ -69,6 +69,7 @@ export const NavBar: React.FC<Props> = () => {
             alignItems={"center"}
             mr={4}
             fontSize="sm"
+            fontWeight={800}
             className={navBarStyles.navbar__loginBtn}
           >
             Login
@@ -76,8 +77,10 @@ export const NavBar: React.FC<Props> = () => {
         </NextLink>
         <NextLink href="/register">
           <Button
-            variantColor="green"
+            variantColor="blue"
+            variant="outline"
             fontSize="sm"
+            fontWeight={800}
             className={navBarStyles.navbar__registerBtn}
           >
             Sign Up
@@ -121,12 +124,12 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton />
             <Image
-              maxW="169px"
+              maxW="111px"
               mt="10px"
               ml="24px"
               alt="logo"
               height="40px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787243/Group_14_2x_ky51ky.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612621994/latest-pro_2x_z0spzj.png"
             />
             <Divider border="2px solid" />
             <Box className={navBarStyles.navbar__drawerSection}>
@@ -215,7 +218,7 @@ export const NavBar: React.FC<Props> = () => {
             <Image
               className={navBarStyles.navbar__logo}
               alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787243/Group_14_2x_ky51ky.png"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612621994/latest-pro_2x_z0spzj.png"
             />
           </Link>
         </NextLink>

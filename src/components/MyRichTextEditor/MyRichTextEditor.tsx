@@ -390,6 +390,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
 
         start = end;
       }
+      console.log("[RANGES DECORATED]: ", ranges);
       return ranges;
     },
     [language]

@@ -61,18 +61,20 @@ const User: React.FC<Props> = () => {
     <Layout variant="regular" direction="column">
       <Wrapper variants="regular">
         <Box className={userProfileStyles.header}>
-          <Avatar
-            className={userProfileStyles.avatar}
-            src={`${userAvatarUrl}`}
-          />
+          <Flex className={userProfileStyles.usernameAndAvatar}>
+            <Avatar
+              className={userProfileStyles.avatar}
+              src={`${userAvatarUrl}`}
+            />
+            <Text className={userProfileStyles.username}>
+              {data.getUserById.username}
+            </Text>
+          </Flex>
           <Flex className={userProfileStyles.userInfo}>
             <Flex
               className={userProfileStyles.userNameAndBtn}
               alignItems="center"
             >
-              <Text className={userProfileStyles.username}>
-                {data.getUserById.username}
-              </Text>
               <Button variantColor="gray" mr={4} size="sm">
                 Direct message
               </Button>

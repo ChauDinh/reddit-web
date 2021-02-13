@@ -7,22 +7,24 @@
 }
 
 .avatar {
-  height: 120px !important;
-  width: 120px !important;
-  margin: 0 auto;
+  height: 80px !important;
+  width: 80px !important;
+  margin: 0;
+}
+
+.username {
+  font-size: 28px;
+  font-weight: 600;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .userInfo {
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
+  justify-content: flex-start;
   grid-column-start: 2;
   grid-column-end: 4;
-}
-
-.username {
-  font-size: 28px;
-  margin-right: 20px;
 }
 
 .postsData,
@@ -65,17 +67,20 @@
   .header {
     grid-template-columns: repeat(1, 1fr) !important;
   }
+  .usernameAndAvatar {
+    margin-bottom: 24px;
+  }
   .userInfo {
     grid-column-start: 1;
     grid-column-end: 2;
     align-items: center;
   }
   .userNameAndBtn {
-    justify-content: center !important;
+    justify-content: flex-start !important;
     width: 100%;
   }
   .username {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 800;
   }
   .userData {

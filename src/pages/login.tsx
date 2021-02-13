@@ -85,7 +85,7 @@ const Login: React.FC<Props> = () => {
               <hr style={{ margin: "20px 0" }} />
               <Flex direction="column">
                 <NextLink href="/register">
-                  <Button variantColor="blue" flexGrow={1}>
+                  <Button variantColor="blue" variant="outline" flexGrow={1}>
                     Create new account
                   </Button>
                 </NextLink>

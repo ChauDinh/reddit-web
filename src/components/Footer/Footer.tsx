@@ -39,8 +39,8 @@ export const Footer: React.FC<Props> = () => {
           >
             <Heading size="md" color="#000">
               <Image
-                height="69px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608787638/Group_16_2x_a3coo3.png"
+                height="38px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612622235/black-white_2x_gkchbf.png"
               />
             </Heading>
             <Box className={footerStyles.social__icons}>
@@ -56,11 +56,11 @@ export const Footer: React.FC<Props> = () => {
                   target="__blank"
                 >
                   <Icon height="24px" width="24px" as={GoMarkGithub} />
-                  amanlearnscode on GitHub
+                  Source Code
                 </a>
               </ListItem>
               <ListItem className={footerStyles.menu__item}>
-                Site design © 2020 by{" "}
+                Design © 2020 by{" "}
                 <a
                   href="https://www.facebook.com/dinh.leslie.71/"
                   target="__blank"
