@@ -2,7 +2,10 @@ import { Flex, Text } from "@chakra-ui/core";
 import React from "react";
 import NextLink from "next/link";
 import { useCommentQuery } from "../../generated/graphql";
-import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
+import {
+  handleDateFromCreatedAtAndUpdatedAt,
+  isToday,
+} from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import BoxCommentStyles from "./BoxComment.module.css";
 
 interface Props {
@@ -40,9 +43,11 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                   color="rgba(0, 0, 0, 0.5)"
                   fontWeight={500}
                 >
-                  {handleDateFromCreatedAtAndUpdatedAt(
-                    parseInt(comment.createdAt, 10)
-                  )}
+                  {isToday(parseInt(comment.createdAt, 10))
+                    ? isToday(parseInt(comment.createdAt, 10))
+                    : handleDateFromCreatedAtAndUpdatedAt(
+                        parseInt(comment.createdAt, 10)
+                      )}
                 </Text>
               </Flex>
               <Text color="#333" flexGrow={1}>
