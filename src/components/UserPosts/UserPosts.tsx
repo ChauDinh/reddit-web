@@ -1,4 +1,4 @@
-import { Stack, Text } from "@chakra-ui/core";
+import { Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useGetPostsByCreatorIdQuery } from "../../generated/graphql";

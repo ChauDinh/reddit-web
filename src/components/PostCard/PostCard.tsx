@@ -1,6 +1,14 @@
 import React from "react";
 import NextLink from "next/link";
-import { Avatar, Box, Flex, Heading, Text, Image, Link } from "@chakra-ui/core";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Image,
+  Link,
+} from "@chakra-ui/react";
 import {
   PostSnippetFragment,
   SinglePostSnippetFragment,

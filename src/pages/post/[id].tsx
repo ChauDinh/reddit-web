@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Box, Icon, Button } from "@chakra-ui/core";
+import { Heading, Text, Flex, Box, Icon, Button } from "@chakra-ui/react";
 import React from "react";
 import { Node } from "slate";
 import { useApolloClient } from "@apollo/client";
@@ -15,7 +15,10 @@ import { InputField } from "../../components/InputField";
 import { Form, Formik } from "formik";
 import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
-import { handleDateFromCreatedAtAndUpdatedAt } from "../../utils/handleCreatedAtAndUpdatedAtDate";
+import {
+  handleDateFromCreatedAtAndUpdatedAt,
+  isToday,
+} from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import {
   FaAngry,
   FaGrinSquintTears,
@@ -24,6 +27,8 @@ import {
   FaSurprise,
   FaGrinHearts,
 } from "react-icons/fa";
+import { RiFireFill, RiExternalLinkLine } from "react-icons/ri";
+
 import { PostCreator } from "../../components/PostCreator/PostCreator";
 
 interface Props {}
@@ -52,6 +57,7 @@ const Post: React.FC<Props> = () => {
     .map((n: Node) => serialized(n))
     .join("\n");
 
+  console.log("is today?: ", isToday(parseInt(data.post.createdAt)));
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
@@ -71,14 +77,15 @@ const Post: React.FC<Props> = () => {
           borderRadius="3px"
           background="#fff"
           flexDirection="column"
-          // marginRight="30px"
         >
           <Text mr={2} mb={2} fontSize="xs">
-            Posted by{" "}
-            <span style={{ fontWeight: "bolder" }}>
-              {data.post.creator.username}
-            </span>{" "}
-            {handleDateFromCreatedAtAndUpdatedAt(parseInt(data.post.createdAt))}
+            {isToday(parseInt(data.post.createdAt))
+              ? isToday(parseInt(data.post.createdAt)) +
+                "," +
+                handleDateFromCreatedAtAndUpdatedAt(
+                  parseInt(data.post.createdAt)
+                ).split(",")[1]
+              : "s"}
           </Text>
           <Heading className={SinglePostStyles.post__title} mb={2}>
             {data.post.title}
@@ -96,7 +103,7 @@ const Post: React.FC<Props> = () => {
                 color="#8e9296"
                 fontWeight={600}
               >
-                <Icon mb="2px" mr={1} name="star" />
+                <Icon mb="2px" mr={1} as={RiFireFill} />
                 Award
                 <Box className={SinglePostStyles.reaction__box}>
                   <Box className={SinglePostStyles.reaction__icon}>
@@ -141,7 +148,7 @@ const Post: React.FC<Props> = () => {
                 </Box>
               </Box>
               <Box mr={4} fontSize="sm" color="#8e9296" fontWeight={600}>
-                <Icon mb="2px" mr={1} name="external-link" />
+                <Icon mb="2px" mr={1} as={RiExternalLinkLine} />
                 Share
               </Box>
             </Flex>
@@ -195,7 +202,7 @@ const Post: React.FC<Props> = () => {
                       />
                     </Flex>
                     <Button
-                      variantColor="gray"
+                      colorScheme="gray"
                       type="submit"
                       isLoading={isSubmitting}
                       ml={2}

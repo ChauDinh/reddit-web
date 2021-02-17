@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import TypeWriter from "typewriter-effect";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
@@ -68,8 +68,7 @@ const Index = () => {
                 <NextLink href="/create-post">
                   <Button
                     alignItems="center"
-                    leftIcon="edit"
-                    variantColor="blue"
+                    colorScheme="telegram"
                     variant="solid"
                     size="md"
                     className="create-post__btn"
@@ -101,7 +100,7 @@ const Index = () => {
                     pb={8}
                   >
                     <Button
-                      variantColor="blue"
+                      colorScheme="telegram"
                       size="sm"
                       onClick={() => {
                         fetchMore({

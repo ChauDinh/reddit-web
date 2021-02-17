@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel } from "@chakra-ui/core";
+import { Box, Button, Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { Node } from "slate";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
@@ -62,6 +62,11 @@ const CreatePost: React.FC<Props> = () => {
                     />
                   </FormControl>
                 </Box>
+                <Box>
+                  <FormControl>
+                    <FormLabel fontWeight={600}>Category</FormLabel>
+                  </FormControl>
+                </Box>
                 <Box mt={4}>
                   <FormControl>
                     <FormLabel fontWeight={600}>Content</FormLabel>
@@ -71,16 +76,17 @@ const CreatePost: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="flex-start">
                   <Button
-                    variantColor="blue"
+                    colorScheme="telegram"
                     isLoading={isSubmitting}
                     type="submit"
-                    rightIcon={BiSend}
+                    rightIcon={<BiSend />}
+                    padding="0 20px"
                   >
                     Create
                   </Button>
                   <Button
-                    rightIcon={RiDraftLine}
-                    variantColor="blue"
+                    rightIcon={<RiDraftLine />}
+                    colorScheme="telegram"
                     variant="outline"
                     ml={5}
                   >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, IconButton, Text } from "@chakra-ui/core";
+import { Flex, IconButton, Text } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import {
   PostSnippetFragment,
@@ -66,12 +66,14 @@ export const UpdootSection: React.FC<Props> = ({ post, direction }) => {
     >
       <IconButton
         isDisabled={!data?.me && !loading ? true : false}
+        cursor="pointer"
         aria-label="upvote"
-        icon={FaLongArrowAltUp}
-        fontSize="16px"
+        as={FaLongArrowAltUp}
+        height="24px"
+        padding="3px 0"
         color={post.voteStatus === 1 ? "#fff" : "#8e8e8e"}
         size="xs"
-        variantColor={post.voteStatus === 1 ? "green" : undefined}
+        colorScheme={post.voteStatus === 1 ? "green" : undefined}
         onClick={async () => {
           if (post.voteStatus === 1) {
             return;
@@ -90,12 +92,14 @@ export const UpdootSection: React.FC<Props> = ({ post, direction }) => {
       </Text>
       <IconButton
         isDisabled={!data?.me && !loading ? true : false}
+        cursor="pointer"
         aria-label="down-vote"
-        icon={FaLongArrowAltDown}
-        fontSize="16px"
+        as={FaLongArrowAltDown}
+        height="24px"
+        padding="3px 0"
         color={post.voteStatus === -1 ? "#fff" : "#8e8e8e"}
         size="xs"
-        variantColor={post.voteStatus === -1 ? "red" : undefined}
+        colorScheme={post.voteStatus === -1 ? "red" : undefined}
         onClick={async () => {
           if (post.voteStatus === -1) {
             return;

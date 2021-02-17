@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import { useSlate } from "slate-react";
 import { Editor } from "slate";
 import {
@@ -35,7 +35,7 @@ export const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}
@@ -54,7 +54,7 @@ export const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}
@@ -73,7 +73,7 @@ export const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}
@@ -92,7 +92,7 @@ export const MarkButton = ({ format }: any) => {
             event.preventDefault();
             toggleMark(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}

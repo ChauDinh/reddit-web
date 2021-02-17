@@ -9,7 +9,7 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
   Button,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import {
   useMeQuery,
   useDeletePostMutation,
@@ -17,6 +17,7 @@ import {
   SinglePostSnippetFragment,
 } from "../generated/graphql";
 import NextLink from "next/link";
+import { RiEditBoxLine, RiDeleteBinLine } from "react-icons/ri";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
@@ -39,22 +40,30 @@ const EditAndDeleteButton: React.FC<Props> = ({
   return post.creator.id === meData?.me?.id ? (
     <Flex direction={direction}>
       <IconButton
-        icon="delete"
+        as={RiDeleteBinLine}
+        height="24px"
+        padding="3px 0"
         aria-label="delete-post"
+        color="#8e8e8e"
         float="right"
         size="xs"
         onClick={() => setIsOpen(true)}
         mt={top}
         mr={right}
+        cursor="pointer"
       />
       <NextLink href="/post/edit/[id]" as={`/post/edit/${post.id}`}>
         <IconButton
-          icon="edit"
+          as={RiEditBoxLine}
           aria-label="edit-post"
+          height="24px"
+          padding="3px 0"
+          color="#8e8e8e"
           float="right"
           size="xs"
           mt={top}
           mr={right}
+          cursor="pointer"
         />
       </NextLink>
       <AlertDialog
@@ -71,11 +80,9 @@ const EditAndDeleteButton: React.FC<Props> = ({
               Are you sure? You can't do this action afterwards.
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancel
-              </Button>
+              <Button onClick={onClose}>Cancel</Button>
               <Button
-                variantColor="red"
+                colorScheme="red"
                 onClick={() =>
                   deletePost({
                     variables: { id: post.id },

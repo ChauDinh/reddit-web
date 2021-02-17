@@ -5,7 +5,7 @@ import {
   Input,
   FormErrorMessage,
   Textarea,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useField } from "formik";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {

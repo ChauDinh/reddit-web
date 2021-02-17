@@ -2,14 +2,12 @@ import {
   Box,
   Flex,
   Heading,
-  Icon,
   Input,
   InputGroup,
   InputLeftElement,
   List,
   ListItem,
-  Image,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import React from "react";
 import { Wrapper } from "../Wrapper/Wrapper";
 import {
@@ -17,8 +15,8 @@ import {
   RiInstagramFill,
   RiLinkedinBoxFill,
   RiYoutubeFill,
+  RiMailFill,
 } from "react-icons/ri";
-import { GoMarkGithub } from "react-icons/go";
 
 import footerStyles from "./Footer.module.css";
 
@@ -37,11 +35,8 @@ export const Footer: React.FC<Props> = () => {
             className={footerStyles.footerLogoContainer}
             flexDirection="column"
           >
-            <Heading size="md" color="#000">
-              <Image
-                height="38px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612622235/black-white_2x_gkchbf.png"
-              />
+            <Heading size="xl" color="#000">
+              !MPLEMENT
             </Heading>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
@@ -50,15 +45,6 @@ export const Footer: React.FC<Props> = () => {
               <RiYoutubeFill className={footerStyles.social__icon} />
             </Box>
             <List spacing={3}>
-              <ListItem className={footerStyles.menu__item}>
-                <a
-                  href="https://github.com/ChauDinh/reddit-web"
-                  target="__blank"
-                >
-                  <Icon height="24px" width="24px" as={GoMarkGithub} />
-                  Source Code
-                </a>
-              </ListItem>
               <ListItem className={footerStyles.menu__item}>
                 Design © 2020 by{" "}
                 <a
@@ -104,10 +90,8 @@ export const Footer: React.FC<Props> = () => {
                 Subscribe our newsletter
               </ListItem>
               <ListItem className={footerStyles.menu__item}>
-                <InputGroup color="#333">
-                  <InputLeftElement
-                    children={<Icon name="email" color="gray.300" />}
-                  />
+                <InputGroup borderRadius="3px" color="#333" background="white">
+                  <InputLeftElement children={<RiMailFill />} />
                   <Input
                     className={footerStyles.menu__subscribeInput}
                     placeholder="email"

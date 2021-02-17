@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Text, Flex, Button, Box } from "@chakra-ui/core";
+import { Avatar, Text, Flex, Button, Box } from "@chakra-ui/react";
 import { createWithApollo } from "../../utils/withApollo";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { Layout } from "../../components/Layout";
@@ -75,10 +75,10 @@ const User: React.FC<Props> = () => {
               className={userProfileStyles.userNameAndBtn}
               alignItems="center"
             >
-              <Button variantColor="gray" mr={4} size="sm">
+              <Button colorScheme="gray" mr={4} size="sm">
                 Direct message
               </Button>
-              <Button variantColor="gray" size="sm">
+              <Button colorScheme="gray" size="sm">
                 Following
               </Button>
             </Flex>

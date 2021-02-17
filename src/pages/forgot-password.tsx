@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
-import { Box, Flex, Button, Text } from "@chakra-ui/core";
+import { Box, Flex, Button, Text } from "@chakra-ui/react";
 
 import { InputField } from "../components/InputField";
 import { useForgotPasswordMutation } from "../generated/graphql";
@@ -46,7 +46,7 @@ const ForgotPassword: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="space-between">
                   <Button
-                    variantColor="#333"
+                    colorScheme="#333"
                     variant="outline"
                     isLoading={isSubmitting}
                     type="submit"

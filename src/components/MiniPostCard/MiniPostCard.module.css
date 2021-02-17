@@ -35,7 +35,7 @@
   width: 300px;
   height: 136px;
   border-radius: 3px;
-  box-shadow: 0px 3px 6px rgba(200, 200, 200, 0.5);
+  margin-right: 10px;
 }
 
 .imgPostSize > img {
@@ -54,6 +54,8 @@
 @media only screen and (max-width: 600px) {
   .container {
     flex-direction: column-reverse !important;
+    box-shadow: 0 3px 6px rgba(200, 200, 200, 0.3);
+    padding: 10px;
   }
   .imgPostSize {
     position: relative;

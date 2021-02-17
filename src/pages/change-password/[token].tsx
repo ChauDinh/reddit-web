@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Box, Button, Text, Link } from "@chakra-ui/core";
+import { Box, Button, Text, Link } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import NextLink from "next/link";
 
@@ -77,7 +77,7 @@ const ChangePassword: NextPage = () => {
             ) : null}
             <Box mt={4}>
               <Button
-                variantColor="blue"
+                colorScheme="telegram"
                 isLoading={isSubmitting}
                 type="submit"
               >

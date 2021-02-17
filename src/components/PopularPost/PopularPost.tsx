@@ -7,7 +7,7 @@ import {
 
 import PopularPostStyles from "./PopularPost.module.css";
 import { PostCard } from "../PostCard/PostCard";
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading } from "@chakra-ui/react";
 import { useWindowDimensions } from "../../utils/useWindowDimensions";
 import { Wrapper } from "../Wrapper/Wrapper";
 

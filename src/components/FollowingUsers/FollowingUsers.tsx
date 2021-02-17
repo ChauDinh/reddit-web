@@ -1,4 +1,4 @@
-import { Heading, Stack, Text } from "@chakra-ui/core";
+import { Heading, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { useSubscribedQuery } from "../../generated/graphql";
 import { FollowingUser } from "./FollowingUser";

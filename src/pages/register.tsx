@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Link, Flex } from "@chakra-ui/core";
+import { Box, Text, Button, Link, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -79,7 +79,7 @@ const Register: React.FC<Props> = () => {
                 alignItems="center"
               >
                 <Button
-                  variantColor="blue"
+                  colorScheme="telegram"
                   isLoading={isSubmitting}
                   type="submit"
                 >

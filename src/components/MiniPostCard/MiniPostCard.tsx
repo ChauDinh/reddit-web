@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Heading, Image, Text } from "@chakra-ui/core";
+import { Avatar, Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import {
@@ -20,6 +20,24 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
       direction={isColumn ? "column-reverse" : "row"}
       className={MiniPostCardStyles.container}
     >
+      <Box
+        height={isColumn ? "180px" : ""}
+        className={MiniPostCardStyles.imgPostSize}
+      >
+        <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+          <Image
+            cursor="pointer"
+            backgroundSize="cover"
+            className={MiniPostCardStyles.postImg}
+            height="100%"
+            width="100%"
+            src={
+              serializedSnippet(JSON.parse(post.text)).imgUrl ||
+              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151138/undraw_static_assets_rpm6_vjnmqf.png"
+            }
+          />
+        </NextLink>
+      </Box>
       <Flex
         direction="column"
         mt={isColumn ? "10px" : "0"}
@@ -68,27 +86,9 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
           fontSize="14px"
           color="#8a8a8a"
         >
-          {new Date(parseInt(post.updatedAt)).toLocaleString().split(",")[0]}
+          {new Date(parseInt(post.createdAt)).toLocaleString().split(",")[0]}
         </Text>
       </Flex>
-      <Box
-        height={isColumn ? "180px" : ""}
-        className={MiniPostCardStyles.imgPostSize}
-      >
-        <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Image
-            cursor="pointer"
-            backgroundSize="cover"
-            className={MiniPostCardStyles.postImg}
-            height="100%"
-            width="100%"
-            src={
-              serializedSnippet(JSON.parse(post.text)).imgUrl ||
-              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151138/undraw_static_assets_rpm6_vjnmqf.png"
-            }
-          />
-        </NextLink>
-      </Box>
     </Flex>
   );
 };

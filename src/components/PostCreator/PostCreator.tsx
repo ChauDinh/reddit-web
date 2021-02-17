@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/core";
+import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useApolloClient } from "@apollo/client";
@@ -60,7 +60,7 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
       <Button
         isLoading={loading}
         isDisabled={data?.me?.username ? false : true}
-        variantColor={
+        colorScheme={
           subscribedData?.subscribed?.includes(creator.id) ? "green" : "gray"
         }
         fontSize="65%"

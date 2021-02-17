@@ -1,4 +1,4 @@
-import { Avatar, Flex, Heading, Text } from "@chakra-ui/core";
+import { Avatar, Flex, Heading, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 import { usePostsQuery } from "../../generated/graphql";

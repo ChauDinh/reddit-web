@@ -1,4 +1,4 @@
-import { theme as chakraTheme } from "@chakra-ui/core";
+import { theme as chakraTheme } from "@chakra-ui/react";
 
 const fonts = {
   heading: "Lato, SF Pro Display, -apple-system, sans-serif",
@@ -60,7 +60,7 @@ const theme = {
   fonts,
   breakpoints,
   icons: {
-    ...chakraTheme.icons,
+    // ...chakraTheme.icons,
     logo: {
       path: (
         <svg

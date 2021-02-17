@@ -23,7 +23,7 @@ import imageExtensions from "image-extensions";
 import isUrl from "is-url";
 
 import { initialValue } from "../../utils/slateInitialValue";
-import { Button, Flex, Select } from "@chakra-ui/core";
+import { Button, Flex, Select } from "@chakra-ui/react";
 import { css } from "emotion";
 import { MarkButton } from "./MarkButton";
 import { BlockButton } from "./BlockButton";
@@ -324,7 +324,7 @@ const InsertImageButton = () => {
         if (!url) return;
         insertImage(editor, url);
       }}
-      variantColor="gray"
+      colorScheme="gray"
       size="sm"
       mr={2}
       p={0}
@@ -344,7 +344,7 @@ const InsertLinkButton = () => {
         if (!url) return;
         insertLink(editor, url);
       }}
-      variantColor="gray"
+      colorScheme="gray"
       size="sm"
       mr={2}
       p={0}

@@ -8,7 +8,6 @@ import {
   Button,
   InputGroup,
   Input,
-  Image,
   Drawer,
   DrawerBody,
   Divider,
@@ -20,9 +19,9 @@ import {
   ListItem,
   ListIcon,
   DrawerOverlay,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import NextLink from "next/link";
-import { BiChevronDown, BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiSearch } from "react-icons/bi";
 import {
   RiUser3Fill,
   RiCopperCoinFill,
@@ -31,6 +30,7 @@ import {
   RiFileCodeFill,
   RiHome2Fill,
   RiPagesFill,
+  RiArrowDropDownLine,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -49,8 +49,6 @@ export const NavBar: React.FC<Props> = () => {
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
-
   /**
    * There are 3 states:
    * data is loading
@@ -65,7 +63,7 @@ export const NavBar: React.FC<Props> = () => {
       <Flex className={navBarStyles.navbar__loginRegisterBtns}>
         <NextLink href="/login">
           <Button
-            variantColor="blue"
+            colorScheme="telegram"
             alignItems={"center"}
             mr={4}
             fontSize="sm"
@@ -77,7 +75,7 @@ export const NavBar: React.FC<Props> = () => {
         </NextLink>
         <NextLink href="/register">
           <Button
-            variantColor="blue"
+            colorScheme="telegram"
             variant="outline"
             fontSize="sm"
             fontWeight={800}
@@ -94,9 +92,8 @@ export const NavBar: React.FC<Props> = () => {
       <Flex className={navBarStyles.navbar__userGroup}>
         <Button
           onClick={onOpen}
-          ref={btnRef}
           className={navBarStyles.navbar__userBtn}
-          leftIcon={BiChevronDown}
+          leftIcon={<RiArrowDropDownLine />}
         >
           <Flex justifyContent="space-between" alignItems="center">
             <Box className={navBarStyles.navbar__userNameAvatar}>
@@ -123,14 +120,9 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerOverlay />
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton />
-            <Image
-              maxW="111px"
-              mt="10px"
-              ml="24px"
-              alt="logo"
-              height="40px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612621994/latest-pro_2x_z0spzj.png"
-            />
+            <Box ml="24px" mt="10px" fontWeight="900" fontSize="x-large">
+              !MPLEMENT
+            </Box>
             <Divider border="2px solid" />
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -139,13 +131,13 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
-                    <ListIcon icon={RiHome2Fill} />
+                    <ListIcon as={RiHome2Fill} />
                     <NextLink href="/" as={`/`}>
                       Home
                     </NextLink>
                   </ListItem>
                   <ListItem>
-                    <ListIcon icon={RiUser3Fill} />
+                    <ListIcon as={RiUser3Fill} />
                     <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
                       Profile
                     </NextLink>
@@ -160,19 +152,19 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
-                    <ListIcon icon={RiCopperCoinFill} />
+                    <ListIcon as={RiCopperCoinFill} />
                     Coins
                   </ListItem>
                   <ListItem>
-                    <ListIcon icon={RiVipCrown2Fill} />
+                    <ListIcon as={RiVipCrown2Fill} />
                     Upgrade premiums
                   </ListItem>
                   <ListItem>
-                    <ListIcon icon={RiCustomerServiceFill} />
+                    <ListIcon as={RiCustomerServiceFill} />
                     Help center
                   </ListItem>
                   <ListItem>
-                    <ListIcon icon={RiFileCodeFill} />
+                    <ListIcon as={RiFileCodeFill} />
                     Source code
                   </ListItem>
                 </List>
@@ -214,13 +206,9 @@ export const NavBar: React.FC<Props> = () => {
         justifyContent="space-between"
       >
         <NextLink href="/">
-          <Link textDecoration="none">
-            <Image
-              className={navBarStyles.navbar__logo}
-              alt="logo"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1612621994/latest-pro_2x_z0spzj.png"
-            />
-          </Link>
+          <Box cursor="pointer" fontWeight="extrabold" fontSize="x-large">
+            !MPLEMENT
+          </Box>
         </NextLink>
         <InputGroup className={navBarStyles.navbar__searchInputGroup}>
           <Input
@@ -228,12 +216,13 @@ export const NavBar: React.FC<Props> = () => {
             fontSize="md"
             type="text"
             placeholder="Search for titles, authors, topics..."
+            background="white"
             mr={2}
           />
           <Button
             w="100px"
-            leftIcon="search"
-            variantColor="blue"
+            leftIcon={<BiSearch />}
+            colorScheme="telegram"
             fontSize="sm"
             px={8}
           >
@@ -259,7 +248,7 @@ export const NavBar: React.FC<Props> = () => {
             mr={4}
             fontSize="sm"
           >
-            <RiPagesFill style={{ marginRight: "5px" }} /> 404 Page
+            <RiPagesFill style={{ marginRight: "5px" }} /> Error
           </Flex>
         </NextLink>
         <Flex fontWeight={500}>{renderUser}</Flex>

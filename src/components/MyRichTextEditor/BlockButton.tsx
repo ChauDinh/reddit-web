@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import React from "react";
 import { Editor, Transforms } from "slate";
 import { useSlate } from "slate-react";
@@ -48,7 +48,7 @@ export const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           color="#000"
           mr={2}
@@ -68,7 +68,7 @@ export const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}
@@ -87,7 +87,7 @@ export const BlockButton = ({ format }: any) => {
             event.preventDefault();
             toggleBlock(editor, format);
           }}
-          variantColor="gray"
+          colorScheme="gray"
           size="sm"
           mr={2}
           p={0}

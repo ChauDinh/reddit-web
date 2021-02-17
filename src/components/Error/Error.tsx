@@ -1,4 +1,4 @@
-import { Flex, Button, Image } from "@chakra-ui/core";
+import { Flex, Button, Image } from "@chakra-ui/react";
 import React from "react";
 import { BiArrowBack } from "react-icons/bi";
 
@@ -26,11 +26,11 @@ export const Error: React.FC<Props> = () => {
           src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608352687/undraw_marilyn_v73y_ecoisd.png"
         />
         <Button
-          leftIcon={BiArrowBack}
+          leftIcon={<BiArrowBack />}
           onClick={() => window.history.back()}
           fontSize="sm"
           variant="outline"
-          variantColor="blue"
+          colorScheme="telegram"
         >
           Go back
         </Button>

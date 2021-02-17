@@ -1,8 +1,8 @@
 .footer__container {
-  background-color: #fafafa;
+  background-color: #fff;
   /* color: rgb(34, 130, 219); */
   padding: 20px 0;
-  box-shadow: 0 -1px 3px rgba(200, 200, 200, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.275);
 }
 
 .footer__body {
@@ -46,6 +46,7 @@
 
 .menu__subscribeInput {
   color: #333;
+  border-radius: 3px !important;
 }
 
 @media only screen and (max-width: 768px) {

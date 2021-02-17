@@ -1,4 +1,4 @@
-import { Button, Flex, FormControl, Text } from "@chakra-ui/core";
+import { Button, Flex, FormControl, Text } from "@chakra-ui/react";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -69,18 +69,18 @@ const EditPost: React.FC<Props> = () => {
 
               <Flex mt={4} alignItems="center" justifyContent="flex-start">
                 <Button
-                  rightIcon={VscSaveAs}
-                  variantColor="blue"
+                  rightIcon={<VscSaveAs />}
+                  colorScheme="telegram"
                   isLoading={isSubmitting}
                   type="submit"
                 >
-                  Update post
+                  Update
                 </Button>
                 <Button
                   ml={5}
-                  rightIcon={ImCancelCircle}
+                  rightIcon={<ImCancelCircle />}
                   variant="outline"
-                  variantColor="blue"
+                  colorScheme="telegram"
                   onClick={() => window.history.back()}
                 >
                   Cancel

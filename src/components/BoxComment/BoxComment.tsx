@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useCommentQuery } from "../../generated/graphql";
