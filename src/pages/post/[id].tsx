@@ -17,7 +17,7 @@ import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
 import {
   handleDateFromCreatedAtAndUpdatedAt,
-  isToday,
+  isNotToday,
 } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import {
   FaAngry,
@@ -57,7 +57,7 @@ const Post: React.FC<Props> = () => {
     .map((n: Node) => serialized(n))
     .join("\n");
 
-  console.log("is today?: ", isToday(parseInt(data.post.createdAt)));
+  console.log("is today?: ", isNotToday(parseInt(data.post.createdAt)));
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
@@ -79,13 +79,17 @@ const Post: React.FC<Props> = () => {
           flexDirection="column"
         >
           <Text mr={2} mb={2} fontSize="xs">
-            {isToday(parseInt(data.post.createdAt))
-              ? isToday(parseInt(data.post.createdAt)) +
+            {isNotToday(parseInt(data.post.createdAt))
+              ? isNotToday(parseInt(data.post.createdAt)) +
                 "," +
                 handleDateFromCreatedAtAndUpdatedAt(
                   parseInt(data.post.createdAt)
                 ).split(",")[1]
-              : "s"}
+              : "Today" +
+                "," +
+                handleDateFromCreatedAtAndUpdatedAt(
+                  parseInt(data.post.createdAt)
+                ).split(",")[1]}
           </Text>
           <Heading className={SinglePostStyles.post__title} mb={2}>
             {data.post.title}

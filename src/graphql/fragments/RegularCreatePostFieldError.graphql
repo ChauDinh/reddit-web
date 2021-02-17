@@ -1,0 +1,4 @@
+fragment RegularCreatePostFieldError on CreatePostFieldError {
+  field
+  message
+}

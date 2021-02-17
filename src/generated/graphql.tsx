@@ -9,6 +9,10 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+  DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type Query = {
@@ -17,12 +21,20 @@ export type Query = {
   posts: PaginatedPosts;
   post?: Maybe<Post>;
   postsByCreatorId?: Maybe<PaginatedPosts>;
+  postsInFollowingPublications?: Maybe<PaginatedPosts>;
+  postsByPublicationId?: Maybe<PaginatedPosts>;
   me?: Maybe<User>;
   getUserById?: Maybe<User>;
   subscribed?: Maybe<Array<Scalars['Float']>>;
   subscriber?: Maybe<Array<Scalars['Float']>>;
   comments?: Maybe<CommentResults>;
   categories?: Maybe<Array<Category>>;
+  categoriesByCreatorId?: Maybe<Array<Category>>;
+  sentMessages?: Maybe<Array<DirectMessage>>;
+  receivedMessages?: Maybe<Array<DirectMessage>>;
+  postCategoriesByPostId?: Maybe<Array<PostCategory>>;
+  meProfile?: Maybe<UserProfile>;
+  profileById?: Maybe<UserProfile>;
 };
 
 
@@ -41,6 +53,19 @@ export type QueryPostsByCreatorIdArgs = {
   cursor?: Maybe<Scalars['String']>;
   limit: Scalars['Int'];
   creatorId: Scalars['Int'];
+};
+
+
+export type QueryPostsInFollowingPublicationsArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+};
+
+
+export type QueryPostsByPublicationIdArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+  publicationId: Scalars['Int'];
 };
 
 
@@ -63,6 +88,21 @@ export type QueryCommentsArgs = {
   postId: Scalars['Float'];
 };
 
+
+export type QueryCategoriesByCreatorIdArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryPostCategoriesByPostIdArgs = {
+  postId: Scalars['Float'];
+};
+
+
+export type QueryProfileByIdArgs = {
+  userId: Scalars['Float'];
+};
+
 export type PaginatedPosts = {
   __typename?: 'PaginatedPosts';
   posts: Array<Post>;
@@ -78,12 +118,15 @@ export type Post = {
   text: Scalars['String'];
   points: Scalars['Float'];
   creatorId: Scalars['Float'];
+  publicationId?: Maybe<Scalars['String']>;
   creator: User;
   voteStatus?: Maybe<Scalars['Int']>;
+  postCategories?: Maybe<Array<PostCategory>>;
   comments: Comment;
   isPublic: Scalars['Boolean'];
   viewed: Scalars['Float'];
   min: Scalars['Float'];
+  publication: Publication;
 };
 
 export type User = {
@@ -93,11 +136,27 @@ export type User = {
   updatedAt: Scalars['String'];
   username: Scalars['String'];
   email: Scalars['String'];
-  status: Scalars['String'];
-  isPremium: Scalars['Boolean'];
-  viewed: Scalars['Float'];
-  nation: Scalars['String'];
+};
+
+export type PostCategory = {
+  __typename?: 'PostCategory';
+  categoryId: Scalars['Float'];
+  postId: Scalars['Float'];
+  category: Category;
+  post: Post;
+  categories: Array<Category>;
+};
+
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
   title: Scalars['String'];
+  creatorId: Scalars['Float'];
+  point: Scalars['Float'];
+  viewed: Scalars['Float'];
+  creator: User;
 };
 
 export type Comment = {
@@ -113,27 +172,57 @@ export type Comment = {
   commentPost: Post;
 };
 
-export type CommentResults = {
-  __typename?: 'CommentResults';
-  comments: Array<Comment>;
-};
-
-export type Category = {
-  __typename?: 'Category';
+export type Publication = {
+  __typename?: 'Publication';
   id: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   title: Scalars['String'];
   creatorId: Scalars['Float'];
-  point: Scalars['Float'];
-  viewed: Scalars['Float'];
   creator: User;
+  posts: Array<Post>;
 };
+
+export type CommentResults = {
+  __typename?: 'CommentResults';
+  comments: Array<Comment>;
+};
+
+export type DirectMessage = {
+  __typename?: 'DirectMessage';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  text: Scalars['String'];
+  senderId: Scalars['Float'];
+  receiverId: Scalars['Float'];
+  viewed: Scalars['Float'];
+  sender: User;
+  receiver: User;
+};
+
+export type UserProfile = {
+  __typename?: 'UserProfile';
+  id: Scalars['Float'];
+  userId: Scalars['Float'];
+  status?: Maybe<Scalars['String']>;
+  nation?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  company?: Maybe<Scalars['String']>;
+  age?: Maybe<Scalars['Float']>;
+  viewed?: Maybe<Scalars['Float']>;
+  isPremium: Scalars['Boolean'];
+  avatarUrl?: Maybe<Scalars['String']>;
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  user: User;
+};
+
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createPost: Post;
-  updatePost?: Maybe<Post>;
+  createPost: CreatePostResponse;
+  updatePost: CreatePostResponse;
   deletePost: Scalars['Boolean'];
   vote: Scalars['Boolean'];
   register: UserResponse;
@@ -148,6 +237,14 @@ export type Mutation = {
   deleteCategory: Scalars['Boolean'];
   createMessage: DirectMessage;
   deleteMessage: Scalars['Boolean'];
+  createPostCategory: PostCategory;
+  createStory: Story;
+  deleteStory: Scalars['Boolean'];
+  createPublication: Publication;
+  createMember: Scalars['Boolean'];
+  createUserCategory: Scalars['Boolean'];
+  updateProfile: Scalars['Boolean'];
+  uploadAvatar: Scalars['Boolean'];
 };
 
 
@@ -230,19 +327,74 @@ export type MutationDeleteMessageArgs = {
   messageId: Scalars['Float'];
 };
 
+
+export type MutationCreatePostCategoryArgs = {
+  categoryId: Scalars['Float'];
+  postId: Scalars['Float'];
+};
+
+
+export type MutationCreateStoryArgs = {
+  url?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationDeleteStoryArgs = {
+  storyId: Scalars['Float'];
+};
+
+
+export type MutationCreatePublicationArgs = {
+  title: Scalars['String'];
+};
+
+
+export type MutationCreateMemberArgs = {
+  publicationId: Scalars['Float'];
+};
+
+
+export type MutationCreateUserCategoryArgs = {
+  categoryId: Scalars['Float'];
+};
+
+
+export type MutationUpdateProfileArgs = {
+  options: UserProfileInput;
+};
+
+
+export type MutationUploadAvatarArgs = {
+  picture: Scalars['Upload'];
+};
+
+export type CreatePostResponse = {
+  __typename?: 'CreatePostResponse';
+  errors?: Maybe<Array<CreatePostFieldError>>;
+  post?: Maybe<Post>;
+};
+
+export type CreatePostFieldError = {
+  __typename?: 'CreatePostFieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
+};
+
 export type PostInput = {
   title: Scalars['String'];
   text: Scalars['String'];
+  publicationId?: Maybe<Scalars['Float']>;
 };
 
 export type UserResponse = {
   __typename?: 'UserResponse';
-  errors?: Maybe<Array<FieldError>>;
+  errors?: Maybe<Array<RegisterFieldError>>;
   user?: Maybe<User>;
 };
 
-export type FieldError = {
-  __typename?: 'FieldError';
+export type RegisterFieldError = {
+  __typename?: 'RegisterFieldError';
   field: Scalars['String'];
   message: Scalars['String'];
 };
@@ -263,18 +415,25 @@ export type CommentInput = {
   postId: Scalars['Float'];
 };
 
-export type DirectMessage = {
-  __typename?: 'DirectMessage';
+export type Story = {
+  __typename?: 'Story';
   id: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
-  text: Scalars['String'];
-  senderId: Scalars['Float'];
-  receiverId: Scalars['Float'];
-  viewed: Scalars['Float'];
-  sender: User;
-  receiver: User;
+  text?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  creatorId: Scalars['Float'];
+  creator: User;
 };
+
+export type UserProfileInput = {
+  status?: Maybe<Scalars['String']>;
+  nation?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  company?: Maybe<Scalars['String']>;
+  age?: Maybe<Scalars['Float']>;
+};
+
 
 export type PostSnippetFragment = (
   { __typename?: 'Post' }
@@ -285,9 +444,25 @@ export type PostSnippetFragment = (
   ) }
 );
 
-export type RegularErrorFragment = (
-  { __typename?: 'FieldError' }
-  & Pick<FieldError, 'field' | 'message'>
+export type RegularCreatePostFieldErrorFragment = (
+  { __typename?: 'CreatePostFieldError' }
+  & Pick<CreatePostFieldError, 'field' | 'message'>
+);
+
+export type RegularCreatePostResponseFragment = (
+  { __typename?: 'CreatePostResponse' }
+  & { errors?: Maybe<Array<(
+    { __typename?: 'CreatePostFieldError' }
+    & RegularCreatePostFieldErrorFragment
+  )>>, post?: Maybe<(
+    { __typename?: 'Post' }
+    & PostSnippetFragment
+  )> }
+);
+
+export type RegularRegisterFieldErrorFragment = (
+  { __typename?: 'RegisterFieldError' }
+  & Pick<RegisterFieldError, 'field' | 'message'>
 );
 
 export type RegularUserFragment = (
@@ -298,8 +473,8 @@ export type RegularUserFragment = (
 export type RegularUserResponseFragment = (
   { __typename?: 'UserResponse' }
   & { errors?: Maybe<Array<(
-    { __typename?: 'FieldError' }
-    & RegularErrorFragment
+    { __typename?: 'RegisterFieldError' }
+    & RegularRegisterFieldErrorFragment
   )>>, user?: Maybe<(
     { __typename?: 'User' }
     & RegularUserFragment
@@ -354,8 +529,8 @@ export type CreatePostMutationVariables = Exact<{
 export type CreatePostMutation = (
   { __typename?: 'Mutation' }
   & { createPost: (
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'creatorId' | 'points'>
+    { __typename?: 'CreatePostResponse' }
+    & RegularCreatePostResponseFragment
   ) }
 );
 
@@ -435,14 +610,10 @@ export type UpdatePostMutationVariables = Exact<{
 
 export type UpdatePostMutation = (
   { __typename?: 'Mutation' }
-  & { updatePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'points' | 'updatedAt' | 'createdAt' | 'voteStatus' | 'title' | 'text'>
-    & { creator: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username'>
-    ) }
-  )> }
+  & { updatePost: (
+    { __typename?: 'CreatePostResponse' }
+    & RegularCreatePostResponseFragment
+  ) }
 );
 
 export type VoteMutationVariables = Exact<{
@@ -569,6 +740,12 @@ export type SubscriberQuery = (
   & Pick<Query, 'subscriber'>
 );
 
+export const RegularCreatePostFieldErrorFragmentDoc = gql`
+    fragment RegularCreatePostFieldError on CreatePostFieldError {
+  field
+  message
+}
+    `;
 export const PostSnippetFragmentDoc = gql`
     fragment PostSnippet on Post {
   id
@@ -587,8 +764,19 @@ export const PostSnippetFragmentDoc = gql`
   viewed
 }
     `;
-export const RegularErrorFragmentDoc = gql`
-    fragment RegularError on FieldError {
+export const RegularCreatePostResponseFragmentDoc = gql`
+    fragment RegularCreatePostResponse on CreatePostResponse {
+  errors {
+    ...RegularCreatePostFieldError
+  }
+  post {
+    ...PostSnippet
+  }
+}
+    ${RegularCreatePostFieldErrorFragmentDoc}
+${PostSnippetFragmentDoc}`;
+export const RegularRegisterFieldErrorFragmentDoc = gql`
+    fragment RegularRegisterFieldError on RegisterFieldError {
   field
   message
 }
@@ -603,13 +791,13 @@ export const RegularUserFragmentDoc = gql`
 export const RegularUserResponseFragmentDoc = gql`
     fragment RegularUserResponse on UserResponse {
   errors {
-    ...RegularError
+    ...RegularRegisterFieldError
   }
   user {
     ...RegularUser
   }
 }
-    ${RegularErrorFragmentDoc}
+    ${RegularRegisterFieldErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
 export const SinglePostSnippetFragmentDoc = gql`
     fragment SinglePostSnippet on Post {
@@ -705,16 +893,10 @@ export type CreateCommentMutationOptions = Apollo.BaseMutationOptions<CreateComm
 export const CreatePostDocument = gql`
     mutation CreatePost($input: PostInput!) {
   createPost(input: $input) {
-    id
-    createdAt
-    updatedAt
-    title
-    text
-    creatorId
-    points
+    ...RegularCreatePostResponse
   }
 }
-    `;
+    ${RegularCreatePostResponseFragmentDoc}`;
 export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
 
 /**
@@ -929,20 +1111,10 @@ export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutat
 export const UpdatePostDocument = gql`
     mutation UpdatePost($id: Int!, $title: String, $text: String!) {
   updatePost(id: $id, title: $title, text: $text) {
-    id
-    points
-    creator {
-      id
-      username
-    }
-    updatedAt
-    createdAt
-    voteStatus
-    title
-    text
+    ...RegularCreatePostResponse
   }
 }
-    `;
+    ${RegularCreatePostResponseFragmentDoc}`;
 export type UpdatePostMutationFn = Apollo.MutationFunction<UpdatePostMutation, UpdatePostMutationVariables>;
 
 /**

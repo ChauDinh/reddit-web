@@ -30,7 +30,7 @@ export const handleDateFromCreatedAt = (str: number): number => {
   return new Date(str).getDate();
 };
 
-export const isToday = (str: number): string | boolean => {
+export const isNotToday = (str: number): string | boolean => {
   const currDate = new Date();
   const inputDate = new Date(str);
   if (currDate.getFullYear() !== inputDate.getFullYear()) {

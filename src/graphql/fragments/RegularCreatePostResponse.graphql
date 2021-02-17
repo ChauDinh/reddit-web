@@ -1,0 +1,8 @@
+fragment RegularCreatePostResponse on CreatePostResponse {
+  errors {
+    ...RegularCreatePostFieldError
+  }
+  post {
+    ...PostSnippet
+  }
+}

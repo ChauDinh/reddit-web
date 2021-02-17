@@ -1,0 +1,4 @@
+fragment RegularRegisterFieldError on RegisterFieldError {
+  field
+  message
+}
