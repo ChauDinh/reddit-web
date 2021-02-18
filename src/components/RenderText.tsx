@@ -6,5 +6,10 @@ interface Props {
 }
 
 export const RenderText: React.FC<Props> = (props) => {
-  return <Box dangerouslySetInnerHTML={{ __html: props.str }}></Box>;
+  return (
+    <Box
+      wordBreak="break-all"
+      dangerouslySetInnerHTML={{ __html: props.str }}
+    ></Box>
+  );
 };

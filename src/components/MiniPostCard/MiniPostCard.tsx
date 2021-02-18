@@ -78,7 +78,13 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
           </Heading>
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Text flexGrow={1} cursor="pointer" mb={1} mr={1}>
+          <Text
+            wordBreak="break-all"
+            flexGrow={1}
+            cursor="pointer"
+            mb={1}
+            mr={1}
+          >
             {serializedSnippet(JSON.parse(post.text)).text}
           </Text>
         </NextLink>

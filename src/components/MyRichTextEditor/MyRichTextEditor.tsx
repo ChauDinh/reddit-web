@@ -112,7 +112,10 @@ const withLinks = (editor: Editor) => {
 
 const insertImage = (editor: Editor, url: any) => {
   const text = { text: "" };
-  const image = { type: "image", url, children: [text] };
+  const image = [
+    { type: "image", url, children: [text] },
+    { type: "paragraph", children: [text] },
+  ];
   Transforms.insertNodes(editor, image);
 };
 
