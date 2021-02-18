@@ -46,7 +46,7 @@
 
 .menu__subscribeInput {
   color: #333;
-  border-radius: 3px !important;
+  border-radius: none !important;
 }
 
 @media only screen and (max-width: 768px) {

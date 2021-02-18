@@ -11,7 +11,7 @@ export const serialized = (node: Node) => {
         Prism.languages.javascript,
         "javascript"
       );
-      return `<span style="font-family: monospace">${highlightedCode}</span>`;
+      return `<pre style="font-family: monospace">${highlightedCode}</pre>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
       return `<strong><em style="text-decoration:underline">${node.text}</em></strong>`;
@@ -47,7 +47,7 @@ export const serialized = (node: Node) => {
     case "link":
       return `<a style="text-decoration:underline; color:blue" target="__blank" href=${node.url}>${children}</a>`;
     case "paragraph":
-      return `<p style="margin-top: 20px; margin-bottom: 20px">${children}</p>`;
+      return `<p style="margin-top: 10px; margin-bottom: 10px">${children}</p>`;
     case "heading":
       return `<h1 style="font-size:22px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":

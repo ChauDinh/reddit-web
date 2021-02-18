@@ -1,4 +1,5 @@
 import React from "react";
+import Prism from "prismjs";
 
 import { WrapperVariants } from "./Wrapper/Wrapper";
 import { NavBar } from "./NavBar/NavBar";
@@ -11,6 +12,9 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({ children, direction }) => {
+  React.useEffect(() => {
+    Prism.highlightAll();
+  }, []);
   return (
     <Flex flexDirection={direction}>
       <NavBar />

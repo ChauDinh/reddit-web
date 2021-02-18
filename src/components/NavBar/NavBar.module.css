@@ -36,7 +36,7 @@
 }
 
 .navbar__userGroup {
-  border-radius: 3px;
+  border-radius: none;
   padding: 0;
   padding-left: 0;
   justify-content: space-between;

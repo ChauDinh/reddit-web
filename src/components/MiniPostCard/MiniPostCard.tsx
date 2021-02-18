@@ -15,6 +15,7 @@ interface Props {
 }
 
 export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
+  console.log("[post.text]: ", post.text);
   return (
     <Flex
       direction={isColumn ? "column-reverse" : "row"}

@@ -1,7 +1,7 @@
 .container {
   height: 100%;
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: none;
   padding: 16px;
   padding-left: 0;
   padding-right: 0;
@@ -34,12 +34,12 @@
 .imgPostSize {
   width: 300px;
   height: 136px;
-  border-radius: 3px;
+  border-radius: none;
   margin-right: 10px;
 }
 
 .imgPostSize > img {
-  border-radius: 3px;
+  border-radius: none;
 }
 
 @media only screen and (max-width: 768px) {
