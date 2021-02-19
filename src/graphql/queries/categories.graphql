@@ -1,0 +1,13 @@
+query Categories {
+  categories {
+    id
+    title
+    createdAt
+    updatedAt
+    creator {
+      username
+    }
+    viewed
+    point
+  }
+}

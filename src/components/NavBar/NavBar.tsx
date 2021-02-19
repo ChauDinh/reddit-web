@@ -139,7 +139,7 @@ export const NavBar: React.FC<Props> = () => {
                   <ListItem>
                     <ListIcon as={RiUser3Fill} />
                     <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
-                      Profile
+                      My Account
                     </NextLink>
                   </ListItem>
                 </List>

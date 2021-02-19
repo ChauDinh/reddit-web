@@ -13,6 +13,7 @@ import { MyRichTextEditor } from "../components/MyRichTextEditor/MyRichTextEdito
 import { serialized } from "../utils/serializedAndDeserialized";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
+import { CategoryTags } from "../components/Category/CategoryTags";
 
 interface Props {}
 
@@ -62,14 +63,19 @@ const CreatePost: React.FC<Props> = () => {
                     />
                   </FormControl>
                 </Box>
-                <Box>
+                <Box mt={6}>
                   <FormControl>
-                    <FormLabel fontWeight={600}>Category</FormLabel>
+                    <FormLabel fontWeight={600} color="gray.600">
+                      Category
+                    </FormLabel>
+                    <CategoryTags />
                   </FormControl>
                 </Box>
-                <Box mt={4}>
+                <Box mt={6}>
                   <FormControl>
-                    <FormLabel fontWeight={600}>Content</FormLabel>
+                    <FormLabel fontWeight={600} color="gray.600">
+                      Content
+                    </FormLabel>
                     <Field name="text" as={MyRichTextEditor} />
                   </FormControl>
                 </Box>
