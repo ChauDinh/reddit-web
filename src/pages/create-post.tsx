@@ -6,7 +6,6 @@ import {
   FormLabel,
   Text,
 } from "@chakra-ui/react";
-import { Node } from "slate";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -16,11 +15,11 @@ import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
 import {
   useCategoriesQuery,
+  useCreatePostCategoryMutation,
   useCreatePostMutation,
 } from "../generated/graphql";
 import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor/MyRichTextEditor";
-import { serialized } from "../utils/serializedAndDeserialized";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
@@ -30,6 +29,7 @@ const CreatePost: React.FC<Props> = () => {
   const router = useRouter();
   useIsAuth();
   const [createPost] = useCreatePostMutation();
+  const [createPostCategory] = useCreatePostCategoryMutation();
   const { data, error, loading } = useCategoriesQuery();
 
   if (loading) return <Text>loading...</Text>;
@@ -42,25 +42,40 @@ const CreatePost: React.FC<Props> = () => {
           initialValues={{
             title: "",
             text: "",
-            category: "",
+            category: [] as string[],
           }}
           onSubmit={async (values) => {
             console.log("[Submitted values]: ", values);
-            const { errors } = await createPost({
-              variables: { input: values },
+
+            await createPost({
+              variables: { input: { text: values.text, title: values.title } },
               update: (cache) => {
                 cache.evict({ fieldName: "posts:{}" });
               },
-            });
-            console.log(
-              "this is content: ",
-              JSON.parse(values.text)
-                .map((n: Node) => serialized(n))
-                .join("\n")
-            );
-            if (!errors) {
-              router.push("/");
-            }
+            })
+              .then((response) => {
+                // create post-category
+                values.category.map((category) => {
+                  const selectedCategories = data?.categories?.filter(
+                    (c) => c.title === category
+                  );
+                  selectedCategories?.map(
+                    async (selectedCategory) =>
+                      await createPostCategory({
+                        variables: {
+                          postId: response.data!.createPost.post!.id,
+                          categoryId: selectedCategory.id,
+                        },
+                      })
+                  );
+                });
+                router.push("/");
+              })
+              .catch((err) => {
+                if (err) {
+                  router.push("/");
+                }
+              });
           }}
         >
           {({ isSubmitting }) => {
@@ -69,6 +84,7 @@ const CreatePost: React.FC<Props> = () => {
                 <Box>
                   <FormControl>
                     <InputField
+                      fontSize="20px"
                       label="Title"
                       name="title"
                       placeholder="Enter the title for post..."
@@ -77,7 +93,9 @@ const CreatePost: React.FC<Props> = () => {
                 </Box>
                 <Box mt={6}>
                   <FormControl as="fieldset">
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel color="gray.600" fontWeight={600}>
+                      Category
+                    </FormLabel>
                     {data?.categories?.map((category) => (
                       <label
                         key={category.id}

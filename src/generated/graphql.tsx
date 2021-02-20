@@ -547,6 +547,20 @@ export type CreatePostMutation = (
   ) }
 );
 
+export type CreatePostCategoryMutationVariables = Exact<{
+  postId: Scalars['Float'];
+  categoryId: Scalars['Float'];
+}>;
+
+
+export type CreatePostCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { createPostCategory: (
+    { __typename?: 'PostCategory' }
+    & Pick<PostCategory, 'postId' | 'categoryId'>
+  ) }
+);
+
 export type DeletePostMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -985,6 +999,40 @@ export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
 export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
+export const CreatePostCategoryDocument = gql`
+    mutation CreatePostCategory($postId: Float!, $categoryId: Float!) {
+  createPostCategory(postId: $postId, categoryId: $categoryId) {
+    postId
+    categoryId
+  }
+}
+    `;
+export type CreatePostCategoryMutationFn = Apollo.MutationFunction<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>;
+
+/**
+ * __useCreatePostCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreatePostCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePostCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPostCategoryMutation, { data, loading, error }] = useCreatePostCategoryMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *      categoryId: // value for 'categoryId'
+ *   },
+ * });
+ */
+export function useCreatePostCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>) {
+        return Apollo.useMutation<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>(CreatePostCategoryDocument, baseOptions);
+      }
+export type CreatePostCategoryMutationHookResult = ReturnType<typeof useCreatePostCategoryMutation>;
+export type CreatePostCategoryMutationResult = Apollo.MutationResult<CreatePostCategoryMutation>;
+export type CreatePostCategoryMutationOptions = Apollo.BaseMutationOptions<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>;
 export const DeletePostDocument = gql`
     mutation DeletePost($id: Int!) {
   deletePost(id: $id)

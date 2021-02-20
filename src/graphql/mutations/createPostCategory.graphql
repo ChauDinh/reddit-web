@@ -1,0 +1,6 @@
+mutation CreatePostCategory($postId: Float!, $categoryId: Float!) {
+  createPostCategory(postId: $postId, categoryId: $categoryId) {
+    postId
+    categoryId
+  }
+}

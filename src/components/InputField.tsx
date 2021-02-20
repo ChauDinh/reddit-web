@@ -11,6 +11,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   name: string;
   textarea?: boolean;
+  fontSize?: string;
 };
 
 export const InputField: React.FC<Props> = ({
