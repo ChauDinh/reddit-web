@@ -1,4 +1,11 @@
-import { Box, Button, Flex, FormControl, FormLabel } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Text,
+} from "@chakra-ui/react";
 import { Node } from "slate";
 import { Form, Formik, Field } from "formik";
 import { useRouter } from "next/router";
@@ -7,13 +14,15 @@ import { BiSend } from "react-icons/bi";
 import { RiDraftLine } from "react-icons/ri";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
-import { useCreatePostMutation } from "../generated/graphql";
+import {
+  useCategoriesQuery,
+  useCreatePostMutation,
+} from "../generated/graphql";
 import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor/MyRichTextEditor";
 import { serialized } from "../utils/serializedAndDeserialized";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
-import { CategoryTags } from "../components/Category/CategoryTags";
 
 interface Props {}
 
@@ -21,6 +30,10 @@ const CreatePost: React.FC<Props> = () => {
   const router = useRouter();
   useIsAuth();
   const [createPost] = useCreatePostMutation();
+  const { data, error, loading } = useCategoriesQuery();
+
+  if (loading) return <Text>loading...</Text>;
+  if (error) return null;
 
   return (
     <Layout variant="regular" direction="column">
@@ -29,17 +42,16 @@ const CreatePost: React.FC<Props> = () => {
           initialValues={{
             title: "",
             text: "",
+            category: "",
           }}
           onSubmit={async (values) => {
+            console.log("[Submitted values]: ", values);
             const { errors } = await createPost({
               variables: { input: values },
               update: (cache) => {
                 cache.evict({ fieldName: "posts:{}" });
               },
             });
-            // Our errorExchange function handles the error globally. Check the
-            // createUrqlClient file
-            // console.log(JSON.parse(values.text)[0]);
             console.log(
               "this is content: ",
               JSON.parse(values.text)
@@ -64,11 +76,28 @@ const CreatePost: React.FC<Props> = () => {
                   </FormControl>
                 </Box>
                 <Box mt={6}>
-                  <FormControl>
-                    <FormLabel fontWeight={600} color="gray.600">
-                      Category
-                    </FormLabel>
-                    <CategoryTags />
+                  <FormControl as="fieldset">
+                    <FormLabel>Category</FormLabel>
+                    {data?.categories?.map((category) => (
+                      <label
+                        key={category.id}
+                        style={{
+                          marginRight: "14px",
+                          cursor: "pointer",
+                          textTransform: "uppercase",
+                          fontSize: "15px",
+                          color: "#0088CC",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Field
+                          type="checkbox"
+                          name="category"
+                          value={category.title}
+                        />{" "}
+                        {category.title}
+                      </label>
+                    ))}
                   </FormControl>
                 </Box>
                 <Box mt={6}>
