@@ -15,7 +15,6 @@ interface Props {
 }
 
 export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
-  console.log("[post.text]: ", post.text);
   return (
     <Flex
       direction={isColumn ? "column-reverse" : "row"}
@@ -58,12 +57,7 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
             />
           </NextLink>
           <NextLink href="/user/[id]" as={`/user/${post.creator.id}`}>
-            <Text
-              fontWeight={600}
-              color="#000"
-              fontSize="15px"
-              cursor="pointer"
-            >
+            <Text fontWeight={600} fontSize="15px" cursor="pointer">
               {post.creator.username}
             </Text>
           </NextLink>

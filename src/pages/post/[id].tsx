@@ -91,12 +91,7 @@ const Post: React.FC<Props> = () => {
             <EditAndDeleteButton post={data.post} direction="column" top={4} />
           </Flex>
         </div>
-        <Flex
-          width="100%"
-          borderRadius="3px"
-          background="#fff"
-          flexDirection="column"
-        >
+        <Flex width="100%" borderRadius="3px" flexDirection="column">
           <Text mr={2} mb={2} fontSize="xs">
             {isNotToday(parseInt(data.post.createdAt))
               ? isNotToday(parseInt(data.post.createdAt)) +

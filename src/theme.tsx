@@ -1,4 +1,4 @@
-import { theme as chakraTheme } from "@chakra-ui/react";
+import { theme as chakraTheme, extendTheme } from "@chakra-ui/react";
 
 const fonts = {
   heading: "Lato, SF Pro Display, -apple-system, sans-serif",
@@ -12,10 +12,9 @@ const fontWeight = {
   bold: 700,
 };
 
-const breakpoints = ["40em", "52em", "64em"];
-
-const theme = {
-  ...chakraTheme,
+const configs = {
+  initialColorMode: "light",
+  useSystemColorMode: false,
   colors: {
     ...chakraTheme.colors,
     black: "#16161D",
@@ -58,7 +57,7 @@ const theme = {
   },
   fontWeight,
   fonts,
-  breakpoints,
+  // breakpoints: breakpoints,
   icons: {
     // ...chakraTheme.icons,
     logo: {
@@ -81,5 +80,10 @@ const theme = {
     },
   },
 };
+
+const theme = extendTheme({
+  ...chakraTheme,
+  configs,
+});
 
 export default theme;

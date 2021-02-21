@@ -34,15 +34,11 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
             <Flex direction="column" w="100%">
               <Flex alignItems="center" justifyContent="space-between" w="100%">
                 <NextLink href="/user/[id]" as={`/user/${comment.creatorId}`}>
-                  <Text color="#333" fontWeight={600} mr={2} cursor="pointer">
+                  <Text fontWeight={600} mr={2} cursor="pointer">
                     {comment.commentCreator.username}:
                   </Text>
                 </NextLink>
-                <Text
-                  fontSize="13px"
-                  color="rgba(0, 0, 0, 0.5)"
-                  fontWeight={500}
-                >
+                <Text fontSize="13px" fontWeight={500}>
                   {isNotToday(parseInt(comment.createdAt, 10))
                     ? isNotToday(parseInt(comment.createdAt, 10))
                     : handleDateFromCreatedAtAndUpdatedAt(
@@ -50,9 +46,7 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                       )}
                 </Text>
               </Flex>
-              <Text color="#333" flexGrow={1}>
-                {comment.text}
-              </Text>
+              <Text flexGrow={1}>{comment.text}</Text>
             </Flex>
           </Flex>
         ))}

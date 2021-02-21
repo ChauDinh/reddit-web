@@ -93,9 +93,7 @@ const CreatePost: React.FC<Props> = () => {
                 </Box>
                 <Box mt={6}>
                   <FormControl as="fieldset">
-                    <FormLabel color="gray.600" fontWeight={600}>
-                      Category
-                    </FormLabel>
+                    <FormLabel fontWeight={600}>Category</FormLabel>
                     {data?.categories?.map((category) => (
                       <label
                         key={category.id}
@@ -120,9 +118,7 @@ const CreatePost: React.FC<Props> = () => {
                 </Box>
                 <Box mt={6}>
                   <FormControl>
-                    <FormLabel fontWeight={600} color="gray.600">
-                      Content
-                    </FormLabel>
+                    <FormLabel fontWeight={600}>Content</FormLabel>
                     <Field name="text" as={MyRichTextEditor} />
                   </FormControl>
                 </Box>

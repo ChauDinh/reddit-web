@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
 import theme from "../theme";
 import "./index.css";
@@ -9,6 +9,7 @@ import "prismjs/themes/prism-tomorrow.css";
 function MyApp({ Component, pageProps }: any) {
   return (
     <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <Component {...pageProps} />
     </ChakraProvider>
   );

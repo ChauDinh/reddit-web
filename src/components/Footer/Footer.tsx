@@ -24,7 +24,11 @@ interface Props {}
 
 export const Footer: React.FC<Props> = () => {
   return (
-    <Box className={footerStyles.footer__container}>
+    <Box
+      className={footerStyles.footer__container}
+      backgroundColor="lightslategrey"
+      color="white"
+    >
       <Wrapper variants="regular">
         <Flex
           className={footerStyles.footer__body}

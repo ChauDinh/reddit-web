@@ -19,6 +19,8 @@ import {
   ListItem,
   ListIcon,
   DrawerOverlay,
+  useColorMode,
+  Switch,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { BiLogOut, BiSearch } from "react-icons/bi";
@@ -31,6 +33,8 @@ import {
   RiHome2Fill,
   RiPagesFill,
   RiArrowDropDownLine,
+  RiMoonClearFill,
+  RiSunLine,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -46,6 +50,9 @@ export const NavBar: React.FC<Props> = () => {
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
   const apolloClient = useApolloClient();
   let renderUser = null; // the html rendered in user link component
+
+  // color mode
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -65,7 +72,7 @@ export const NavBar: React.FC<Props> = () => {
           <Button
             colorScheme="telegram"
             alignItems={"center"}
-            mr={4}
+            mr={2}
             fontSize="sm"
             fontWeight={800}
             className={navBarStyles.navbar__loginBtn}
@@ -152,6 +159,20 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
+                    {colorMode === "light" ? (
+                      <ListIcon as={RiSunLine} />
+                    ) : (
+                      <ListIcon as={RiMoonClearFill} />
+                    )}
+                    {colorMode}
+                    <Switch
+                      onChange={toggleColorMode}
+                      colorScheme="teal"
+                      isChecked={colorMode === "dark"}
+                      ml={2}
+                    />
+                  </ListItem>
+                  <ListItem>
                     <ListIcon as={RiCopperCoinFill} />
                     Coins
                   </ListItem>
@@ -180,8 +201,8 @@ export const NavBar: React.FC<Props> = () => {
                 }}
                 isLoading={logoutFetching}
               >
-                <BiLogOut style={{ marginRight: "5px" }} />
-                <Text ml={1} color="#000" fontWeight="bold" fontSize="16px">
+                <BiLogOut style={{ marginRight: "5px", fontSize: "20px" }} />
+                <Text ml={1} fontWeight="bold" fontSize="20px">
                   Logout
                 </Text>
               </Button>
@@ -191,7 +212,7 @@ export const NavBar: React.FC<Props> = () => {
       </Flex>
     );
   }
-
+  console.log("color mode: ", colorMode);
   return (
     <Flex
       zIndex={2}
@@ -199,6 +220,8 @@ export const NavBar: React.FC<Props> = () => {
       position="sticky"
       fontWeight={700}
       className={navBarStyles.navbar__container}
+      backgroundColor="lightslategrey"
+      color="white"
     >
       <Flex
         className={navBarStyles.navbar__wrapper}
@@ -217,14 +240,16 @@ export const NavBar: React.FC<Props> = () => {
             type="text"
             placeholder="Search for titles, authors, topics..."
             background="white"
+            color="black"
             mr={2}
           />
           <Button
             w="100px"
             leftIcon={<BiSearch />}
-            colorScheme="telegram"
             fontSize="sm"
             px={8}
+            className={navBarStyles.navbar__searchBtn}
+            color="black"
           >
             Search
           </Button>

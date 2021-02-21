@@ -422,9 +422,8 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
         <Flex
           style={{
             width: "100%",
-            backgroundColor: "#EDF2F7",
             borderRadius: "3px 3px 0 0",
-            padding: "10px 15px",
+            padding: "10px 0",
             position: "relative",
             alignItems: "center",
             justifyContent: "space-between",
@@ -466,8 +465,8 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             display: "block",
             width: "100%",
             height: "500px",
-            backgroundColor: "#fff",
-            borderRadius: "0px 0px 3px 3px",
+            // backgroundColor: "#fff",
+            borderRadius: "3px",
             border: "1px solid #e2e8f0",
             borderTop: "none",
             padding: "15px 15px",

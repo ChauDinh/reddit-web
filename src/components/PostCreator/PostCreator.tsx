@@ -47,7 +47,7 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
         />
       </Box>
       <Flex direction="column" className={PostCreatorStyles.postCreator__name}>
-        <Text fontSize="14px" color="rgba(0, 0, 0, 0.8)">
+        <Text fontSize="14px">
           Posted on {handleMonthFromCreatedAt(parseInt(createdAt))},{" "}
           {handleYearFromCreatedAt(parseInt(createdAt))} by:
         </Text>
