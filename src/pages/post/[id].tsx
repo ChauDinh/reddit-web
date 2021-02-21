@@ -110,7 +110,7 @@ const Post: React.FC<Props> = () => {
                   parseInt(data.post.createdAt)
                 ).split(",")[1]}
           </Text>
-          <Heading className={SinglePostStyles.post__title} mb={2}>
+          <Heading className={SinglePostStyles.post__title} mb={4}>
             {data.post.title}
           </Heading>
           <Box mb={2}>
@@ -120,7 +120,8 @@ const Post: React.FC<Props> = () => {
                 size="lg"
                 fontWeight="bold"
                 colorScheme="telegram"
-                mr={2}
+                mr={1}
+                mb={1}
                 key={category.categories.id}
                 cursor="pointer"
               >

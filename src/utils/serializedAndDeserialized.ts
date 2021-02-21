@@ -14,19 +14,19 @@ export const serialized = (node: Node) => {
       return `<pre style="font-family: monospace">${highlightedCode}</pre>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
-      return `<strong><em style="text-decoration:underline">${node.text}</em></strong>`;
+      return `<strong style="font-weight: 800;"><em style="text-decoration:underline">${node.text}</em></strong>`;
     }
     if (node.bold === true && node.italic === true) {
-      return `<strong><em>${node.text}</em></strong>`;
+      return `<strong style="font-weight: 800;"><em>${node.text}</em></strong>`;
     }
     if (node.bold === true && node.underline === true) {
-      return `<strong style="text-decoration:underline">${node.text}</strong>`;
+      return `<strong style="text-decoration:underline; font-weight: 800">${node.text}</strong>`;
     }
     if (node.underline === true && node.italic === true) {
       return `<em style="text-decoration:underline">${node.text}</em>`;
     }
     if (node.bold === true) {
-      return `<strong>${node.text}</strong>`;
+      return `<strong style="font-weight: 800;">${node.text}</strong>`;
     }
     if (node.italic === true) {
       return `<em>${node.text}</em>`;
@@ -49,7 +49,7 @@ export const serialized = (node: Node) => {
     case "paragraph":
       return `<p style="margin-top: 10px; margin-bottom: 10px">${children}</p>`;
     case "heading":
-      return `<h1 style="font-size:22px; font-weight:700; margin-top:40px; margin-bottom:20px">${children}</h1>`;
+      return `<h1 style="font-size:22px; font-weight:800; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
       return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
     case "list-item": {
