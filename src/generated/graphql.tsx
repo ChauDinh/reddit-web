@@ -144,7 +144,7 @@ export type PostCategory = {
   postId: Scalars['Float'];
   category: Category;
   post: Post;
-  categories: Array<Category>;
+  categories: Category;
 };
 
 export type Category = {
@@ -724,6 +724,22 @@ export type PostQuery = (
     { __typename?: 'Post' }
     & SinglePostSnippetFragment
   )> }
+);
+
+export type PostCategoriesByPostIdQueryVariables = Exact<{
+  postId: Scalars['Float'];
+}>;
+
+
+export type PostCategoriesByPostIdQuery = (
+  { __typename?: 'Query' }
+  & { postCategoriesByPostId?: Maybe<Array<(
+    { __typename?: 'PostCategory' }
+    & { categories: (
+      { __typename?: 'Category' }
+      & Pick<Category, 'id' | 'title'>
+    ) }
+  )>> }
 );
 
 export type PostsQueryVariables = Exact<{
@@ -1467,6 +1483,42 @@ export function usePostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostQ
 export type PostQueryHookResult = ReturnType<typeof usePostQuery>;
 export type PostLazyQueryHookResult = ReturnType<typeof usePostLazyQuery>;
 export type PostQueryResult = Apollo.QueryResult<PostQuery, PostQueryVariables>;
+export const PostCategoriesByPostIdDocument = gql`
+    query PostCategoriesByPostId($postId: Float!) {
+  postCategoriesByPostId(postId: $postId) {
+    categories {
+      id
+      title
+    }
+  }
+}
+    `;
+
+/**
+ * __usePostCategoriesByPostIdQuery__
+ *
+ * To run a query within a React component, call `usePostCategoriesByPostIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostCategoriesByPostIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostCategoriesByPostIdQuery({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function usePostCategoriesByPostIdQuery(baseOptions?: Apollo.QueryHookOptions<PostCategoriesByPostIdQuery, PostCategoriesByPostIdQueryVariables>) {
+        return Apollo.useQuery<PostCategoriesByPostIdQuery, PostCategoriesByPostIdQueryVariables>(PostCategoriesByPostIdDocument, baseOptions);
+      }
+export function usePostCategoriesByPostIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostCategoriesByPostIdQuery, PostCategoriesByPostIdQueryVariables>) {
+          return Apollo.useLazyQuery<PostCategoriesByPostIdQuery, PostCategoriesByPostIdQueryVariables>(PostCategoriesByPostIdDocument, baseOptions);
+        }
+export type PostCategoriesByPostIdQueryHookResult = ReturnType<typeof usePostCategoriesByPostIdQuery>;
+export type PostCategoriesByPostIdLazyQueryHookResult = ReturnType<typeof usePostCategoriesByPostIdLazyQuery>;
+export type PostCategoriesByPostIdQueryResult = Apollo.QueryResult<PostCategoriesByPostIdQuery, PostCategoriesByPostIdQueryVariables>;
 export const PostsDocument = gql`
     query Posts($limit: Int!, $cursor: String) {
   posts(limit: $limit, cursor: $cursor) {

@@ -1,4 +1,13 @@
-import { Heading, Text, Flex, Box, Icon, Button } from "@chakra-ui/react";
+import {
+  Heading,
+  Text,
+  Flex,
+  Box,
+  Icon,
+  Button,
+  TagLabel,
+  Tag,
+} from "@chakra-ui/react";
 import React from "react";
 import { Node } from "slate";
 import { useApolloClient } from "@apollo/client";
@@ -30,6 +39,7 @@ import {
 import { RiFireFill, RiExternalLinkLine } from "react-icons/ri";
 
 import { PostCreator } from "../../components/PostCreator/PostCreator";
+import { useGetCategories } from "../../utils/useGetCategories";
 
 interface Props {}
 
@@ -38,6 +48,11 @@ const Post: React.FC<Props> = () => {
   const apolloClient = useApolloClient();
 
   const { data, loading } = useGetPostFromUrl();
+  const {
+    data: postCategoriesData,
+    loading: postCategoriesLoading,
+  } = useGetCategories(data?.post?.id as number);
+
   if (loading) {
     return (
       <Layout direction="column" variant="regular">
@@ -52,6 +67,10 @@ const Post: React.FC<Props> = () => {
       </Layout>
     ); // 404 page
   }
+
+  if (postCategoriesLoading) return null;
+
+  console.log("[categories]: ", postCategoriesData!.postCategoriesByPostId);
 
   const htmlString = JSON.parse(data.post.text)
     .map((n: Node) => serialized(n))
@@ -94,6 +113,21 @@ const Post: React.FC<Props> = () => {
           <Heading className={SinglePostStyles.post__title} mb={2}>
             {data.post.title}
           </Heading>
+          <Box mb={2}>
+            {postCategoriesData?.postCategoriesByPostId?.map((category) => (
+              <Tag
+                borderRadius="full"
+                size="lg"
+                fontWeight="bold"
+                colorScheme="telegram"
+                mr={2}
+                key={category.categories.id}
+                cursor="pointer"
+              >
+                <TagLabel># {category.categories.title}</TagLabel>
+              </Tag>
+            ))}
+          </Box>
           <Box mb={3}>
             <RenderText str={htmlString} />
           </Box>

@@ -1,0 +1,8 @@
+query PostCategoriesByPostId($postId: Float!) {
+  postCategoriesByPostId(postId: $postId) {
+    categories {
+      id
+      title
+    }
+  }
+}
