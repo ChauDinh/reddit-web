@@ -43,7 +43,7 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                     ? isToday(parseInt(comment.createdAt, 10))
                     : handleDateFromCreatedAtAndUpdatedAt(
                         parseInt(comment.createdAt, 10)
-                      )}
+                      ).split(",")[0]}
                 </Text>
               </Flex>
               <Text flexGrow={1}>{comment.text}</Text>

@@ -101,6 +101,8 @@ const Index = () => {
                   >
                     <Button
                       colorScheme="telegram"
+                      bg="telegram.500"
+                      color="white"
                       size="sm"
                       onClick={() => {
                         fetchMore({

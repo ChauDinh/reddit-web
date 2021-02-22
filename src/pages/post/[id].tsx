@@ -51,7 +51,7 @@ const Post: React.FC<Props> = () => {
   const {
     data: postCategoriesData,
     loading: postCategoriesLoading,
-  } = useGetCategories(data?.post?.id as number);
+  } = useGetCategories(data?.post ? data.post.id : -1);
 
   if (loading) {
     return (
@@ -68,7 +68,7 @@ const Post: React.FC<Props> = () => {
     ); // 404 page
   }
 
-  if (postCategoriesLoading) return null;
+  if (!postCategoriesData || postCategoriesLoading) return null;
 
   const htmlString = JSON.parse(data.post.text)
     .map((n: Node) => serialized(n))
