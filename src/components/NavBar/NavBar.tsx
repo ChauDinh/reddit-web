@@ -229,7 +229,12 @@ export const NavBar: React.FC<Props> = () => {
         justifyContent="space-between"
       >
         <NextLink href="/">
-          <Box cursor="pointer" fontWeight="extrabold" fontSize="x-large">
+          <Box
+            cursor="pointer"
+            fontWeight="extrabold"
+            fontSize="x-large"
+            color="black"
+          >
             !MPLEMENT
           </Box>
         </NextLink>

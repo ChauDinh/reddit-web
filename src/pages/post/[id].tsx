@@ -26,7 +26,7 @@ import { useCreateCommentMutation } from "../../generated/graphql";
 import { BoxComment } from "../../components/BoxComment/BoxComment";
 import {
   handleDateFromCreatedAtAndUpdatedAt,
-  isNotToday,
+  isToday,
 } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import {
   FaAngry,
@@ -70,13 +70,11 @@ const Post: React.FC<Props> = () => {
 
   if (postCategoriesLoading) return null;
 
-  console.log("[categories]: ", postCategoriesData!.postCategoriesByPostId);
-
   const htmlString = JSON.parse(data.post.text)
     .map((n: Node) => serialized(n))
     .join("\n");
 
-  console.log("is today?: ", isNotToday(parseInt(data.post.createdAt)));
+  console.log("is today?: ", isToday(parseInt(data.post.createdAt)));
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
@@ -93,17 +91,15 @@ const Post: React.FC<Props> = () => {
         </div>
         <Flex width="100%" borderRadius="3px" flexDirection="column">
           <Text mr={2} mb={2} fontSize="xs">
-            {isNotToday(parseInt(data.post.createdAt))
-              ? isNotToday(parseInt(data.post.createdAt)) +
+            {isToday(parseInt(data.post.createdAt, 10))
+              ? isToday(parseInt(data.post.createdAt, 10)) +
                 "," +
                 handleDateFromCreatedAtAndUpdatedAt(
-                  parseInt(data.post.createdAt)
+                  parseInt(data.post.createdAt, 10)
                 ).split(",")[1]
-              : "Today" +
-                "," +
-                handleDateFromCreatedAtAndUpdatedAt(
-                  parseInt(data.post.createdAt)
-                ).split(",")[1]}
+              : handleDateFromCreatedAtAndUpdatedAt(
+                  parseInt(data.post.createdAt, 10)
+                )}
           </Text>
           <Heading className={SinglePostStyles.post__title} mb={4}>
             {data.post.title}

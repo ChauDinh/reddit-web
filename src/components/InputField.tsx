@@ -28,7 +28,14 @@ export const InputField: React.FC<Props> = ({
       <FormLabel style={{ fontWeight: 600 }} htmlFor={field.name}>
         {label}
       </FormLabel>
-      <InputOrTextarea {...field} {...props} id={field.name} w="100%" />
+      <InputOrTextarea
+        {...field}
+        {...props}
+        id={field.name}
+        w="100%"
+        background="white"
+        color="black"
+      />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>
   );

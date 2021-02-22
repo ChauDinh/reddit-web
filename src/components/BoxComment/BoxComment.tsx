@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { useCommentQuery } from "../../generated/graphql";
 import {
   handleDateFromCreatedAtAndUpdatedAt,
-  isNotToday,
+  isToday,
 } from "../../utils/handleCreatedAtAndUpdatedAtDate";
 import BoxCommentStyles from "./BoxComment.module.css";
 
@@ -39,8 +39,8 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                   </Text>
                 </NextLink>
                 <Text fontSize="13px" fontWeight={500}>
-                  {isNotToday(parseInt(comment.createdAt, 10))
-                    ? isNotToday(parseInt(comment.createdAt, 10))
+                  {isToday(parseInt(comment.createdAt, 10))
+                    ? isToday(parseInt(comment.createdAt, 10))
                     : handleDateFromCreatedAtAndUpdatedAt(
                         parseInt(comment.createdAt, 10)
                       )}
