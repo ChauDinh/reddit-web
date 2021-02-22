@@ -67,6 +67,8 @@ const Index = () => {
                   <Button
                     alignItems="center"
                     colorScheme="telegram"
+                    bg="telegram.500"
+                    color="white"
                     variant="solid"
                     size="md"
                     className="create-post__btn"

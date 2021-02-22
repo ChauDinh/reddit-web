@@ -20,6 +20,7 @@ import {
   ListIcon,
   DrawerOverlay,
   useColorMode,
+  useColorModeValue,
   Switch,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
@@ -53,6 +54,8 @@ export const NavBar: React.FC<Props> = () => {
 
   // color mode
   const { colorMode, toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("gray.200", "gray.800");
+  const color = useColorModeValue("black", "white");
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -220,8 +223,8 @@ export const NavBar: React.FC<Props> = () => {
       position="sticky"
       fontWeight={700}
       className={navBarStyles.navbar__container}
-      backgroundColor="lightslategrey"
-      color="white"
+      bg={bg}
+      color={color}
     >
       <Flex
         className={navBarStyles.navbar__wrapper}
@@ -229,12 +232,7 @@ export const NavBar: React.FC<Props> = () => {
         justifyContent="space-between"
       >
         <NextLink href="/">
-          <Box
-            cursor="pointer"
-            fontWeight="extrabold"
-            fontSize="x-large"
-            color="black"
-          >
+          <Box cursor="pointer" fontWeight="extrabold" fontSize="x-large">
             !MPLEMENT
           </Box>
         </NextLink>
@@ -254,7 +252,9 @@ export const NavBar: React.FC<Props> = () => {
             fontSize="sm"
             px={8}
             className={navBarStyles.navbar__searchBtn}
-            color="black"
+            color="white"
+            colorScheme="telegram"
+            bg="telegram.500"
           >
             Search
           </Button>

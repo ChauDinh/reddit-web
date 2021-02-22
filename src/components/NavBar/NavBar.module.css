@@ -3,7 +3,7 @@
   padding: 16px 24px;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 6px 10px rgba(200, 200, 200, 0.2);
+  box-shadow: 0px 3px 10px rgba(200, 200, 200, 0.1);
 }
 
 .navbar__wrapper {
@@ -63,10 +63,6 @@
 
 .navbar__username:hover {
   animation: floatText 3s infinite alternate ease-in-out;
-}
-
-.navbar__registerBtn {
-  color: #007ab8 !important;
 }
 
 @keyframes floatText {

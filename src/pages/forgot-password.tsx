@@ -68,7 +68,6 @@ const styles = {
     borderRadius: "3px",
     padding: "16px 16px",
     width: "100%",
-    background: "#fff",
   },
 };
 
