@@ -7,6 +7,7 @@ import {
   InputLeftElement,
   List,
   ListItem,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { Wrapper } from "../Wrapper/Wrapper";
@@ -23,12 +24,10 @@ import footerStyles from "./Footer.module.css";
 interface Props {}
 
 export const Footer: React.FC<Props> = () => {
+  const bg = useColorModeValue("gray.200", "gray.800");
+  const color = useColorModeValue("black", "white");
   return (
-    <Box
-      className={footerStyles.footer__container}
-      backgroundColor="lightslategrey"
-      color="white"
-    >
+    <Box className={footerStyles.footer__container} color={color} bg={bg}>
       <Wrapper variants="regular">
         <Flex
           className={footerStyles.footer__body}
@@ -39,9 +38,7 @@ export const Footer: React.FC<Props> = () => {
             className={footerStyles.footerLogoContainer}
             flexDirection="column"
           >
-            <Heading size="xl" color="#000">
-              !MPLEMENT
-            </Heading>
+            <Heading size="xl">!MPLEMENT</Heading>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
               <RiInstagramFill className={footerStyles.social__icon} />

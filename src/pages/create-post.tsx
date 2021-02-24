@@ -98,19 +98,25 @@ const CreatePost: React.FC<Props> = () => {
                       <label
                         key={category.id}
                         style={{
-                          marginRight: "14px",
+                          marginRight: "20px",
                           cursor: "pointer",
-                          textTransform: "uppercase",
-                          fontSize: "15px",
-                          color: "#0088CC",
-                          fontWeight: "bold",
+                          fontSize: "16px",
+                          fontWeight: "normal",
+                          textTransform: "capitalize",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
                         <Field
                           type="checkbox"
                           name="category"
                           value={category.title}
-                        />{" "}
+                          style={{
+                            marginRight: "5px",
+                            marginTop: "2px",
+                          }}
+                        />
                         {category.title}
                       </label>
                     ))}

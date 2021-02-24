@@ -1,6 +1,6 @@
 .footer__container {
   padding: 20px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.275);
+  box-shadow: 0 -1px 10px rgba(153, 180, 206, 0.3);
 }
 
 .footer__body {

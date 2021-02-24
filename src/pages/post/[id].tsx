@@ -238,7 +238,7 @@ const Post: React.FC<Props> = () => {
                       ml={2}
                       fontSize="sm"
                     >
-                      Send
+                      Comment
                     </Button>
                   </Flex>
                 </Form>

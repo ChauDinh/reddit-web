@@ -19,21 +19,24 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
     <Flex
       direction={isColumn ? "column-reverse" : "row"}
       className={MiniPostCardStyles.container}
+      maxH={isColumn ? "none" : "160px"}
     >
       <Box
         height={isColumn ? "180px" : ""}
         className={MiniPostCardStyles.imgPostSize}
+        display={isColumn ? "flex" : "block"}
+        justifyContent={isColumn ? "center" : "normal"}
+        marginRight={isColumn ? "0px" : "10px"}
       >
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Image
-            cursor="pointer"
-            backgroundSize="cover"
-            className={MiniPostCardStyles.postImg}
             height="100%"
+            maxHeight={isColumn ? "none" : "150px"}
             width="100%"
+            cursor="pointer"
             src={
               serializedSnippet(JSON.parse(post.text)).imgUrl ||
-              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151138/undraw_static_assets_rpm6_vjnmqf.png"
+              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151136/undraw_code_review_l1q9_wr2xgh.png"
             }
           />
         </NextLink>
@@ -61,34 +64,31 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
               {post.creator.username}
             </Text>
           </NextLink>
+          {","}
+          <Text
+            className={MiniPostCardStyles.postDate}
+            fontSize="15px"
+            color="#8a8a8a"
+            ml={2}
+          >
+            {new Date(parseInt(post.createdAt)).toLocaleString().split(",")[0]}
+          </Text>
         </Flex>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
           <Heading
             size="md"
             cursor="pointer"
+            flexGrow={1}
             className={MiniPostCardStyles.postTitle}
           >
             {post.title}
           </Heading>
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Text
-            wordBreak="break-all"
-            flexGrow={1}
-            cursor="pointer"
-            mb={1}
-            mr={1}
-          >
+          <Text wordBreak="break-all" cursor="pointer" mb={1} mr={1}>
             {serializedSnippet(JSON.parse(post.text)).text}
           </Text>
         </NextLink>
-        <Text
-          className={MiniPostCardStyles.postDate}
-          fontSize="14px"
-          color="#8a8a8a"
-        >
-          {new Date(parseInt(post.createdAt)).toLocaleString().split(",")[0]}
-        </Text>
       </Flex>
     </Flex>
   );

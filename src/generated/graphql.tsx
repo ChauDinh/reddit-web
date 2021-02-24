@@ -33,6 +33,8 @@ export type Query = {
   sentMessages?: Maybe<Array<DirectMessage>>;
   receivedMessages?: Maybe<Array<DirectMessage>>;
   postCategoriesByPostId?: Maybe<Array<PostCategory>>;
+  publications: Array<Publication>;
+  members: Array<Member>;
   meProfile?: Maybe<UserProfile>;
   profileById?: Maybe<UserProfile>;
 };
@@ -96,6 +98,11 @@ export type QueryCategoriesByCreatorIdArgs = {
 
 export type QueryPostCategoriesByPostIdArgs = {
   postId: Scalars['Float'];
+};
+
+
+export type QueryMembersArgs = {
+  publicationId: Scalars['Float'];
 };
 
 
@@ -179,6 +186,7 @@ export type Publication = {
   updatedAt: Scalars['String'];
   title: Scalars['String'];
   creatorId: Scalars['Float'];
+  isPrivate?: Maybe<Scalars['Boolean']>;
   creator: User;
   posts: Array<Post>;
 };
@@ -201,6 +209,17 @@ export type DirectMessage = {
   receiver: User;
 };
 
+export type Member = {
+  __typename?: 'Member';
+  userId: Scalars['Float'];
+  publicationId: Scalars['Float'];
+  publication: Publication;
+  user: User;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+};
+
+
 export type UserProfile = {
   __typename?: 'UserProfile';
   id: Scalars['Float'];
@@ -217,7 +236,6 @@ export type UserProfile = {
   updated_at: Scalars['DateTime'];
   user: User;
 };
-
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -346,6 +364,7 @@ export type MutationDeleteStoryArgs = {
 
 
 export type MutationCreatePublicationArgs = {
+  isPrivate?: Maybe<Scalars['Boolean']>;
   title: Scalars['String'];
 };
 
@@ -558,6 +577,23 @@ export type CreatePostCategoryMutation = (
   & { createPostCategory: (
     { __typename?: 'PostCategory' }
     & Pick<PostCategory, 'postId' | 'categoryId'>
+  ) }
+);
+
+export type CreatePublicationMutationVariables = Exact<{
+  title: Scalars['String'];
+}>;
+
+
+export type CreatePublicationMutation = (
+  { __typename?: 'Mutation' }
+  & { createPublication: (
+    { __typename?: 'Publication' }
+    & Pick<Publication, 'id' | 'title' | 'createdAt'>
+    & { creator: (
+      { __typename?: 'User' }
+      & Pick<User, 'username'>
+    ) }
   ) }
 );
 
@@ -1049,6 +1085,43 @@ export function useCreatePostCategoryMutation(baseOptions?: Apollo.MutationHookO
 export type CreatePostCategoryMutationHookResult = ReturnType<typeof useCreatePostCategoryMutation>;
 export type CreatePostCategoryMutationResult = Apollo.MutationResult<CreatePostCategoryMutation>;
 export type CreatePostCategoryMutationOptions = Apollo.BaseMutationOptions<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>;
+export const CreatePublicationDocument = gql`
+    mutation CreatePublication($title: String!) {
+  createPublication(title: $title) {
+    id
+    title
+    creator {
+      username
+    }
+    createdAt
+  }
+}
+    `;
+export type CreatePublicationMutationFn = Apollo.MutationFunction<CreatePublicationMutation, CreatePublicationMutationVariables>;
+
+/**
+ * __useCreatePublicationMutation__
+ *
+ * To run a mutation, you first call `useCreatePublicationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePublicationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPublicationMutation, { data, loading, error }] = useCreatePublicationMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useCreatePublicationMutation(baseOptions?: Apollo.MutationHookOptions<CreatePublicationMutation, CreatePublicationMutationVariables>) {
+        return Apollo.useMutation<CreatePublicationMutation, CreatePublicationMutationVariables>(CreatePublicationDocument, baseOptions);
+      }
+export type CreatePublicationMutationHookResult = ReturnType<typeof useCreatePublicationMutation>;
+export type CreatePublicationMutationResult = Apollo.MutationResult<CreatePublicationMutation>;
+export type CreatePublicationMutationOptions = Apollo.BaseMutationOptions<CreatePublicationMutation, CreatePublicationMutationVariables>;
 export const DeletePostDocument = gql`
     mutation DeletePost($id: Int!) {
   deletePost(id: $id)

@@ -1,0 +1,10 @@
+mutation CreatePublication($title: String!) {
+  createPublication(title: $title) {
+    id
+    title
+    creator {
+      username
+    }
+    createdAt
+  }
+}
