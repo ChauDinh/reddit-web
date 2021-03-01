@@ -73,7 +73,7 @@ const Index = () => {
                     size="md"
                     className="create-post__btn"
                   >
-                    Create post
+                    Create Post
                   </Button>
                 </NextLink>
               </Flex>

@@ -258,7 +258,7 @@ export type Mutation = {
   createPostCategory: PostCategory;
   createStory: Story;
   deleteStory: Scalars['Boolean'];
-  createPublication: Publication;
+  createPublication: CreatePublicationResponse;
   createMember: Scalars['Boolean'];
   createUserCategory: Scalars['Boolean'];
   updateProfile: Scalars['Boolean'];
@@ -445,6 +445,18 @@ export type Story = {
   creator: User;
 };
 
+export type CreatePublicationResponse = {
+  __typename?: 'CreatePublicationResponse';
+  errors?: Maybe<Array<CreatePublicationFieldError>>;
+  publication?: Maybe<Publication>;
+};
+
+export type CreatePublicationFieldError = {
+  __typename?: 'CreatePublicationFieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
+};
+
 export type UserProfileInput = {
   status?: Maybe<Scalars['String']>;
   nation?: Maybe<Scalars['String']>;
@@ -553,6 +565,16 @@ export type CreateCommentMutation = (
   ) }
 );
 
+export type CreateMemberMutationVariables = Exact<{
+  publicationId: Scalars['Float'];
+}>;
+
+
+export type CreateMemberMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'createMember'>
+);
+
 export type CreatePostMutationVariables = Exact<{
   input: PostInput;
 }>;
@@ -582,18 +604,25 @@ export type CreatePostCategoryMutation = (
 
 export type CreatePublicationMutationVariables = Exact<{
   title: Scalars['String'];
+  isPrivate?: Maybe<Scalars['Boolean']>;
 }>;
 
 
 export type CreatePublicationMutation = (
   { __typename?: 'Mutation' }
   & { createPublication: (
-    { __typename?: 'Publication' }
-    & Pick<Publication, 'id' | 'title' | 'createdAt'>
-    & { creator: (
-      { __typename?: 'User' }
-      & Pick<User, 'username'>
-    ) }
+    { __typename?: 'CreatePublicationResponse' }
+    & { publication?: Maybe<(
+      { __typename?: 'Publication' }
+      & Pick<Publication, 'id' | 'title' | 'createdAt'>
+      & { creator: (
+        { __typename?: 'User' }
+        & Pick<User, 'username'>
+      ) }
+    )>, errors?: Maybe<Array<(
+      { __typename?: 'CreatePublicationFieldError' }
+      & Pick<CreatePublicationFieldError, 'field' | 'message'>
+    )>> }
   ) }
 );
 
@@ -814,6 +843,43 @@ export type GetPostsByCreatorIdQuery = (
   )> }
 );
 
+export type PostsByPublicationIdQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+  publicationId: Scalars['Int'];
+}>;
+
+
+export type PostsByPublicationIdQuery = (
+  { __typename?: 'Query' }
+  & { postsByPublicationId?: Maybe<(
+    { __typename?: 'PaginatedPosts' }
+    & { posts: Array<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'title' | 'createdAt' | 'updatedAt' | 'text'>
+      & { creator: (
+        { __typename?: 'User' }
+        & Pick<User, 'username'>
+      ) }
+    )> }
+  )> }
+);
+
+export type PublicationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PublicationsQuery = (
+  { __typename?: 'Query' }
+  & { publications: Array<(
+    { __typename?: 'Publication' }
+    & Pick<Publication, 'id' | 'title' | 'createdAt' | 'updatedAt' | 'isPrivate'>
+    & { creator: (
+      { __typename?: 'User' }
+      & Pick<User, 'username'>
+    ) }
+  )> }
+);
+
 export type SubscribedQueryVariables = Exact<{
   subscriberId: Scalars['Int'];
 }>;
@@ -1019,6 +1085,36 @@ export function useCreateCommentMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateCommentMutationHookResult = ReturnType<typeof useCreateCommentMutation>;
 export type CreateCommentMutationResult = Apollo.MutationResult<CreateCommentMutation>;
 export type CreateCommentMutationOptions = Apollo.BaseMutationOptions<CreateCommentMutation, CreateCommentMutationVariables>;
+export const CreateMemberDocument = gql`
+    mutation CreateMember($publicationId: Float!) {
+  createMember(publicationId: $publicationId)
+}
+    `;
+export type CreateMemberMutationFn = Apollo.MutationFunction<CreateMemberMutation, CreateMemberMutationVariables>;
+
+/**
+ * __useCreateMemberMutation__
+ *
+ * To run a mutation, you first call `useCreateMemberMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMemberMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMemberMutation, { data, loading, error }] = useCreateMemberMutation({
+ *   variables: {
+ *      publicationId: // value for 'publicationId'
+ *   },
+ * });
+ */
+export function useCreateMemberMutation(baseOptions?: Apollo.MutationHookOptions<CreateMemberMutation, CreateMemberMutationVariables>) {
+        return Apollo.useMutation<CreateMemberMutation, CreateMemberMutationVariables>(CreateMemberDocument, baseOptions);
+      }
+export type CreateMemberMutationHookResult = ReturnType<typeof useCreateMemberMutation>;
+export type CreateMemberMutationResult = Apollo.MutationResult<CreateMemberMutation>;
+export type CreateMemberMutationOptions = Apollo.BaseMutationOptions<CreateMemberMutation, CreateMemberMutationVariables>;
 export const CreatePostDocument = gql`
     mutation CreatePost($input: PostInput!) {
   createPost(input: $input) {
@@ -1086,14 +1182,20 @@ export type CreatePostCategoryMutationHookResult = ReturnType<typeof useCreatePo
 export type CreatePostCategoryMutationResult = Apollo.MutationResult<CreatePostCategoryMutation>;
 export type CreatePostCategoryMutationOptions = Apollo.BaseMutationOptions<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>;
 export const CreatePublicationDocument = gql`
-    mutation CreatePublication($title: String!) {
-  createPublication(title: $title) {
-    id
-    title
-    creator {
-      username
+    mutation CreatePublication($title: String!, $isPrivate: Boolean) {
+  createPublication(title: $title, isPrivate: $isPrivate) {
+    publication {
+      id
+      title
+      creator {
+        username
+      }
+      createdAt
     }
-    createdAt
+    errors {
+      field
+      message
+    }
   }
 }
     `;
@@ -1113,6 +1215,7 @@ export type CreatePublicationMutationFn = Apollo.MutationFunction<CreatePublicat
  * const [createPublicationMutation, { data, loading, error }] = useCreatePublicationMutation({
  *   variables: {
  *      title: // value for 'title'
+ *      isPrivate: // value for 'isPrivate'
  *   },
  * });
  */
@@ -1666,6 +1769,89 @@ export function useGetPostsByCreatorIdLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetPostsByCreatorIdQueryHookResult = ReturnType<typeof useGetPostsByCreatorIdQuery>;
 export type GetPostsByCreatorIdLazyQueryHookResult = ReturnType<typeof useGetPostsByCreatorIdLazyQuery>;
 export type GetPostsByCreatorIdQueryResult = Apollo.QueryResult<GetPostsByCreatorIdQuery, GetPostsByCreatorIdQueryVariables>;
+export const PostsByPublicationIdDocument = gql`
+    query PostsByPublicationId($limit: Int!, $cursor: String, $publicationId: Int!) {
+  postsByPublicationId(limit: $limit, cursor: $cursor, publicationId: $publicationId) {
+    posts {
+      id
+      title
+      creator {
+        username
+      }
+      createdAt
+      updatedAt
+      text
+    }
+  }
+}
+    `;
+
+/**
+ * __usePostsByPublicationIdQuery__
+ *
+ * To run a query within a React component, call `usePostsByPublicationIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsByPublicationIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsByPublicationIdQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      cursor: // value for 'cursor'
+ *      publicationId: // value for 'publicationId'
+ *   },
+ * });
+ */
+export function usePostsByPublicationIdQuery(baseOptions?: Apollo.QueryHookOptions<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>) {
+        return Apollo.useQuery<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>(PostsByPublicationIdDocument, baseOptions);
+      }
+export function usePostsByPublicationIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>) {
+          return Apollo.useLazyQuery<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>(PostsByPublicationIdDocument, baseOptions);
+        }
+export type PostsByPublicationIdQueryHookResult = ReturnType<typeof usePostsByPublicationIdQuery>;
+export type PostsByPublicationIdLazyQueryHookResult = ReturnType<typeof usePostsByPublicationIdLazyQuery>;
+export type PostsByPublicationIdQueryResult = Apollo.QueryResult<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>;
+export const PublicationsDocument = gql`
+    query Publications {
+  publications {
+    id
+    title
+    creator {
+      username
+    }
+    createdAt
+    updatedAt
+    isPrivate
+  }
+}
+    `;
+
+/**
+ * __usePublicationsQuery__
+ *
+ * To run a query within a React component, call `usePublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePublicationsQuery(baseOptions?: Apollo.QueryHookOptions<PublicationsQuery, PublicationsQueryVariables>) {
+        return Apollo.useQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, baseOptions);
+      }
+export function usePublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublicationsQuery, PublicationsQueryVariables>) {
+          return Apollo.useLazyQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, baseOptions);
+        }
+export type PublicationsQueryHookResult = ReturnType<typeof usePublicationsQuery>;
+export type PublicationsLazyQueryHookResult = ReturnType<typeof usePublicationsLazyQuery>;
+export type PublicationsQueryResult = Apollo.QueryResult<PublicationsQuery, PublicationsQueryVariables>;
 export const SubscribedDocument = gql`
     query Subscribed($subscriberId: Int!) {
   subscribed(subscriberId: $subscriberId)

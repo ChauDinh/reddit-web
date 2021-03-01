@@ -1,0 +1,22 @@
+query PostsByPublicationId(
+  $limit: Int!
+  $cursor: String
+  $publicationId: Int!
+) {
+  postsByPublicationId(
+    limit: $limit
+    cursor: $cursor
+    publicationId: $publicationId
+  ) {
+    posts {
+      id
+      title
+      creator {
+        username
+      }
+      createdAt
+      updatedAt
+      text
+    }
+  }
+}

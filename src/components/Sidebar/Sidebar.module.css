@@ -1,5 +1,6 @@
 .container {
   width: 360px !important;
+  min-width: 360px !important;
   margin-left: 36px;
 }
 

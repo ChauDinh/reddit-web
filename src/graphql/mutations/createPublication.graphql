@@ -1,10 +1,16 @@
-mutation CreatePublication($title: String!) {
-  createPublication(title: $title) {
-    id
-    title
-    creator {
-      username
+mutation CreatePublication($title: String!, $isPrivate: Boolean) {
+  createPublication(title: $title, isPrivate: $isPrivate) {
+    publication {
+      id
+      title
+      creator {
+        username
+      }
+      createdAt
     }
-    createdAt
+    errors {
+      field
+      message
+    }
   }
 }

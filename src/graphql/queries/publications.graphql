@@ -1,0 +1,12 @@
+query Publications {
+  publications {
+    id
+    title
+    creator {
+      username
+    }
+    createdAt
+    updatedAt
+    isPrivate
+  }
+}
