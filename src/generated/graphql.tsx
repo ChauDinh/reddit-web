@@ -778,6 +778,23 @@ export type MeQuery = (
   )> }
 );
 
+export type MembersQueryVariables = Exact<{
+  publicationId: Scalars['Float'];
+}>;
+
+
+export type MembersQuery = (
+  { __typename?: 'Query' }
+  & { members: Array<(
+    { __typename?: 'Member' }
+    & Pick<Member, 'userId' | 'createdAt' | 'updatedAt' | 'publicationId'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'username'>
+    ) }
+  )> }
+);
+
 export type PostQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -1626,6 +1643,45 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MembersDocument = gql`
+    query Members($publicationId: Float!) {
+  members(publicationId: $publicationId) {
+    user {
+      username
+    }
+    userId
+    createdAt
+    updatedAt
+    publicationId
+  }
+}
+    `;
+
+/**
+ * __useMembersQuery__
+ *
+ * To run a query within a React component, call `useMembersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMembersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMembersQuery({
+ *   variables: {
+ *      publicationId: // value for 'publicationId'
+ *   },
+ * });
+ */
+export function useMembersQuery(baseOptions?: Apollo.QueryHookOptions<MembersQuery, MembersQueryVariables>) {
+        return Apollo.useQuery<MembersQuery, MembersQueryVariables>(MembersDocument, baseOptions);
+      }
+export function useMembersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MembersQuery, MembersQueryVariables>) {
+          return Apollo.useLazyQuery<MembersQuery, MembersQueryVariables>(MembersDocument, baseOptions);
+        }
+export type MembersQueryHookResult = ReturnType<typeof useMembersQuery>;
+export type MembersLazyQueryHookResult = ReturnType<typeof useMembersLazyQuery>;
+export type MembersQueryResult = Apollo.QueryResult<MembersQuery, MembersQueryVariables>;
 export const PostDocument = gql`
     query Post($id: Int!) {
   post(id: $id) {

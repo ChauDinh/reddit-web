@@ -1,0 +1,11 @@
+query Members($publicationId: Float!) {
+  members(publicationId: $publicationId) {
+    user {
+      username
+    }
+    userId
+    createdAt
+    updatedAt
+    publicationId
+  }
+}

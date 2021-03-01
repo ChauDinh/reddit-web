@@ -74,7 +74,6 @@ const Post: React.FC<Props> = () => {
     .map((n: Node) => serialized(n))
     .join("\n");
 
-  console.log("is today?: ", isToday(parseInt(data.post.createdAt)));
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
