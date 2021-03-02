@@ -54,7 +54,7 @@ export const NavBar: React.FC<Props> = () => {
 
   // color mode
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("gray.200", "gray.800");
+  const bg = useColorModeValue("white", "gray.800");
   const color = useColorModeValue("black", "white");
 
   // Drawer
@@ -104,10 +104,14 @@ export const NavBar: React.FC<Props> = () => {
           onClick={onOpen}
           className={navBarStyles.navbar__userBtn}
           leftIcon={<RiArrowDropDownLine />}
+          colorScheme="telegram"
+          bg="telegram.500"
+          color="white"
+          fontWeight={600}
         >
           <Flex justifyContent="space-between" alignItems="center">
             <Box className={navBarStyles.navbar__userNameAvatar}>
-              {data.me.username.length > 6 ? (
+              {data.me.username.length > 12 ? (
                 <Text className={navBarStyles.navbar__username} mr={4}>
                   {data.me.username}
                 </Text>
@@ -281,7 +285,7 @@ export const NavBar: React.FC<Props> = () => {
             <RiPagesFill style={{ marginRight: "5px" }} /> Error
           </Flex>
         </NextLink>
-        <Flex fontWeight={500}>{renderUser}</Flex>
+        <Flex>{renderUser}</Flex>
       </Flex>
     </Flex>
   );

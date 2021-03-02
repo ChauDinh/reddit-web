@@ -43,8 +43,8 @@
 }
 
 .navbar__userBtn {
-  background-color: transparent !important;
-  padding-right: 0 !important;
+  padding-right: 5px !important;
+  padding-left: 5px !important;
 }
 
 .navbar__userNameAvatar {
@@ -52,11 +52,9 @@
   white-space: nowrap;
   z-index: 2;
   display: inline-block;
-  width: 50px;
 }
 
 .navbar__username {
-  font-weight: 500;
   position: relative;
   display: inline-block;
 }

@@ -37,6 +37,11 @@ body {
   padding-left: 0;
 }
 
+input[type="checkbox"] {
+  border-radius: 0 !important;
+  background-color: red;
+}
+
 @media only screen and (max-width: 768px) {
   .header__content {
     padding-top: 20px;

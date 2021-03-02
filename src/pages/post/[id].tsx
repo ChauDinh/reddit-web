@@ -80,7 +80,7 @@ const Post: React.FC<Props> = () => {
         <div className={SinglePostStyles.leftSidebarButtons}>
           <Flex
             position="sticky"
-            top="90px"
+            top="120px"
             direction="column"
             alignItems="flex-start"
           >
@@ -88,7 +88,7 @@ const Post: React.FC<Props> = () => {
             <EditAndDeleteButton post={data.post} direction="column" top={4} />
           </Flex>
         </div>
-        <Flex width="100%" borderRadius="3px" flexDirection="column">
+        <Flex mt="30px" width="100%" flexDirection="column">
           <Text mr={2} mb={2} fontSize="xs">
             {isToday(parseInt(data.post.createdAt, 10))
               ? isToday(parseInt(data.post.createdAt, 10)) +

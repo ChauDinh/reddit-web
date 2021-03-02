@@ -24,7 +24,7 @@ import footerStyles from "./Footer.module.css";
 interface Props {}
 
 export const Footer: React.FC<Props> = () => {
-  const bg = useColorModeValue("gray.200", "gray.800");
+  const bg = useColorModeValue("white", "gray.800");
   const color = useColorModeValue("black", "white");
   return (
     <Box className={footerStyles.footer__container} color={color} bg={bg}>

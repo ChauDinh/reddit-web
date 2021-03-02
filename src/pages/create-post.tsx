@@ -3,12 +3,14 @@ import {
   Button,
   Flex,
   FormControl,
+  FormHelperText,
   FormLabel,
   Text,
+  Checkbox,
 } from "@chakra-ui/react";
-import { Form, Formik, Field } from "formik";
+import { Form, Formik, Field, FieldProps } from "formik";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { FC } from "react";
 import { BiSend } from "react-icons/bi";
 import { RiDraftLine } from "react-icons/ri";
 import { InputField } from "../components/InputField";
@@ -24,6 +26,14 @@ import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
 interface Props {}
+
+const CustomCheckbox: FC<FieldProps> = ({ field, form, ...props }) => {
+  return (
+    <Checkbox mr="5px" mt="2px" {...field} {...props}>
+      {field?.value}
+    </Checkbox>
+  );
+};
 
 const CreatePost: React.FC<Props> = () => {
   const router = useRouter();
@@ -94,6 +104,10 @@ const CreatePost: React.FC<Props> = () => {
                 <Box mt={6}>
                   <FormControl as="fieldset">
                     <FormLabel fontWeight={600}>Category</FormLabel>
+                    <FormHelperText mb={4}>
+                      You can choose multiple categories. Attached categories to
+                      your post would help people discover it easier.
+                    </FormHelperText>
                     {data?.categories?.map((category) => (
                       <label
                         key={category.id}
@@ -109,13 +123,9 @@ const CreatePost: React.FC<Props> = () => {
                         }}
                       >
                         <Field
-                          type="checkbox"
+                          as={CustomCheckbox}
                           name="category"
                           value={category.title}
-                          style={{
-                            marginRight: "5px",
-                            marginTop: "2px",
-                          }}
                         />
                         {category.title}
                       </label>

@@ -34,6 +34,7 @@ export type Query = {
   receivedMessages?: Maybe<Array<DirectMessage>>;
   postCategoriesByPostId?: Maybe<Array<PostCategory>>;
   publications: Array<Publication>;
+  publicationById: CreatePublicationResponse;
   members: Array<Member>;
   meProfile?: Maybe<UserProfile>;
   profileById?: Maybe<UserProfile>;
@@ -98,6 +99,11 @@ export type QueryCategoriesByCreatorIdArgs = {
 
 export type QueryPostCategoriesByPostIdArgs = {
   postId: Scalars['Float'];
+};
+
+
+export type QueryPublicationByIdArgs = {
+  publicationId: Scalars['Float'];
 };
 
 
@@ -207,6 +213,18 @@ export type DirectMessage = {
   viewed: Scalars['Float'];
   sender: User;
   receiver: User;
+};
+
+export type CreatePublicationResponse = {
+  __typename?: 'CreatePublicationResponse';
+  errors?: Maybe<Array<CreatePublicationFieldError>>;
+  publication?: Maybe<Publication>;
+};
+
+export type CreatePublicationFieldError = {
+  __typename?: 'CreatePublicationFieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
 };
 
 export type Member = {
@@ -443,18 +461,6 @@ export type Story = {
   url?: Maybe<Scalars['String']>;
   creatorId: Scalars['Float'];
   creator: User;
-};
-
-export type CreatePublicationResponse = {
-  __typename?: 'CreatePublicationResponse';
-  errors?: Maybe<Array<CreatePublicationFieldError>>;
-  publication?: Maybe<Publication>;
-};
-
-export type CreatePublicationFieldError = {
-  __typename?: 'CreatePublicationFieldError';
-  field: Scalars['String'];
-  message: Scalars['String'];
 };
 
 export type UserProfileInput = {
@@ -880,6 +886,25 @@ export type PostsByPublicationIdQuery = (
       ) }
     )> }
   )> }
+);
+
+export type PublicationByIdQueryVariables = Exact<{
+  publicationId: Scalars['Float'];
+}>;
+
+
+export type PublicationByIdQuery = (
+  { __typename?: 'Query' }
+  & { publicationById: (
+    { __typename?: 'CreatePublicationResponse' }
+    & { publication?: Maybe<(
+      { __typename?: 'Publication' }
+      & Pick<Publication, 'title' | 'isPrivate'>
+    )>, errors?: Maybe<Array<(
+      { __typename?: 'CreatePublicationFieldError' }
+      & Pick<CreatePublicationFieldError, 'field' | 'message'>
+    )>> }
+  ) }
 );
 
 export type PublicationsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -1869,6 +1894,46 @@ export function usePostsByPublicationIdLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type PostsByPublicationIdQueryHookResult = ReturnType<typeof usePostsByPublicationIdQuery>;
 export type PostsByPublicationIdLazyQueryHookResult = ReturnType<typeof usePostsByPublicationIdLazyQuery>;
 export type PostsByPublicationIdQueryResult = Apollo.QueryResult<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>;
+export const PublicationByIdDocument = gql`
+    query PublicationById($publicationId: Float!) {
+  publicationById(publicationId: $publicationId) {
+    publication {
+      title
+      isPrivate
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+    `;
+
+/**
+ * __usePublicationByIdQuery__
+ *
+ * To run a query within a React component, call `usePublicationByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicationByIdQuery({
+ *   variables: {
+ *      publicationId: // value for 'publicationId'
+ *   },
+ * });
+ */
+export function usePublicationByIdQuery(baseOptions?: Apollo.QueryHookOptions<PublicationByIdQuery, PublicationByIdQueryVariables>) {
+        return Apollo.useQuery<PublicationByIdQuery, PublicationByIdQueryVariables>(PublicationByIdDocument, baseOptions);
+      }
+export function usePublicationByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublicationByIdQuery, PublicationByIdQueryVariables>) {
+          return Apollo.useLazyQuery<PublicationByIdQuery, PublicationByIdQueryVariables>(PublicationByIdDocument, baseOptions);
+        }
+export type PublicationByIdQueryHookResult = ReturnType<typeof usePublicationByIdQuery>;
+export type PublicationByIdLazyQueryHookResult = ReturnType<typeof usePublicationByIdLazyQuery>;
+export type PublicationByIdQueryResult = Apollo.QueryResult<PublicationByIdQuery, PublicationByIdQueryVariables>;
 export const PublicationsDocument = gql`
     query Publications {
   publications {

@@ -1,0 +1,12 @@
+query PublicationById($publicationId: Float!) {
+  publicationById(publicationId: $publicationId) {
+    publication {
+      title
+      isPrivate
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
