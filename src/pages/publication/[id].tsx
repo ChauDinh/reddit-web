@@ -3,6 +3,7 @@ import React from "react";
 import { Layout } from "../../components/Layout";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { useGetPostsFromPubUrl } from "../../utils/useGetPostsFromPubUrl";
+import NextLink from "next/link";
 
 import {
   useMembersQuery,
@@ -114,6 +115,9 @@ const Publication: React.FC<Props> = () => {
           {members.includes(meData!.me!.id) ? "Joined" : "Join"}
         </Button>
         <Box>This is publication page</Box>
+        <NextLink href={`/create-post?publicationId=${paramId}`}>
+          <Button>Create Post</Button>
+        </NextLink>
       </Wrapper>
     </Layout>
   );

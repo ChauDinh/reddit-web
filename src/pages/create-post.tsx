@@ -41,6 +41,7 @@ const CreatePost: React.FC<Props> = () => {
   const [createPost] = useCreatePostMutation();
   const [createPostCategory] = useCreatePostCategoryMutation();
   const { data, error, loading } = useCategoriesQuery();
+  const publicationId = router.query;
 
   if (loading) return <Text>loading...</Text>;
   if (error) return null;
@@ -58,7 +59,15 @@ const CreatePost: React.FC<Props> = () => {
             console.log("[Submitted values]: ", values);
 
             await createPost({
-              variables: { input: { text: values.text, title: values.title } },
+              variables: {
+                input: {
+                  text: values.text,
+                  title: values.title,
+                  publicationId: publicationId
+                    ? parseInt(publicationId.publicationId as string)
+                    : null,
+                },
+              },
               update: (cache) => {
                 cache.evict({ fieldName: "posts:{}" });
               },
