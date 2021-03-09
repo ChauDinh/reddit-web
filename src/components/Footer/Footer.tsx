@@ -1,7 +1,7 @@
 import {
   Box,
   Flex,
-  Heading,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -38,7 +38,13 @@ export const Footer: React.FC<Props> = () => {
             className={footerStyles.footerLogoContainer}
             flexDirection="column"
           >
-            <Heading size="xl">!MPLEMENT</Heading>
+            <Flex direction="column" alignItems="center" size="xl">
+              <Image
+                w="36px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+              />
+              BLOG.Inc
+            </Flex>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
               <RiInstagramFill className={footerStyles.social__icon} />
@@ -47,13 +53,13 @@ export const Footer: React.FC<Props> = () => {
             </Box>
             <List spacing={3}>
               <ListItem className={footerStyles.menu__item}>
-                Design © 2020 by{" "}
                 <a
                   href="https://www.facebook.com/dinh.leslie.71/"
                   target="__blank"
                 >
                   Chau Dinh
-                </a>
+                </a>{" "}
+                © 2020
               </ListItem>
             </List>
           </Flex>

@@ -11,19 +11,19 @@ export const serialized = (node: Node) => {
         Prism.languages.javascript,
         "javascript"
       );
-      return `<pre style="font-family: monospace">${highlightedCode}</pre>`;
+      return `<pre style="font-family: monospace; overflow-x: scroll; max-width: 600px; scrollbar-width: none;">${highlightedCode}</pre>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
-      return `<strong style="font-weight: 800;"><em style="text-decoration:underline">${node.text}</em></strong>`;
+      return `<strong style="font-weight: 800; display: inline-block;"><em style="text-decoration:underline">${node.text}</em></strong>`;
     }
     if (node.bold === true && node.italic === true) {
       return `<strong style="font-weight: 800;"><em>${node.text}</em></strong>`;
     }
     if (node.bold === true && node.underline === true) {
-      return `<strong style="text-decoration:underline; font-weight: 800">${node.text}</strong>`;
+      return `<strong style="text-decoration:underline; font-weight: 800; font-family: 'IBM Plex Serif'; display: inline-block;">${node.text}</strong>`;
     }
     if (node.underline === true && node.italic === true) {
-      return `<em style="text-decoration:underline">${node.text}</em>`;
+      return `<em style="text-decoration:underline; display: inline-block;">${node.text}</em>`;
     }
     if (node.bold === true) {
       return `<strong style="font-weight: 800;">${node.text}</strong>`;
@@ -45,9 +45,9 @@ export const serialized = (node: Node) => {
       return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url} /> <div style="clear: both"></div>`;
     }
     case "link":
-      return `<a style="text-decoration:underline; color:blue; word-break: break-all;" target="__blank" href=${node.url}>${children}</a>`;
+      return `<a style="text-decoration:underline; color:blue; word-break: break-word;" target="__blank" href=${node.url}>${children}</a>`;
     case "paragraph":
-      return `<p style="margin-top: 10px; margin-bottom: 10px">${children}</p>`;
+      return `<p style="margin-top: 10px; margin-bottom: 10px; text-align: justify; ">${children}</p>`;
     case "heading":
       return `<h1 style="font-size:22px; font-weight:800; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":

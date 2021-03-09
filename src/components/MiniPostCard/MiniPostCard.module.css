@@ -11,6 +11,7 @@
 
 .container:hover {
   box-shadow: 0 6px 10px rgba(153, 180, 206, 0.3);
+  border: none !important;
 }
 
 .postInfo {
@@ -59,6 +60,8 @@
   .container {
     flex-direction: column-reverse !important;
     padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
     border-radius: 3px;
     max-height: none !important;
   }

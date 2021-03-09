@@ -8,6 +8,8 @@ import {
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import { serializedSnippet } from "../../utils/serializedAndDeserialized";
 import MiniPostCardStyles from "./MiniPostCard.module.css";
+import { useGetCategories } from "../../utils/useGetCategories";
+import ErrorPage from "../../pages/404";
 
 interface Props {
   isColumn?: boolean;
@@ -15,13 +17,21 @@ interface Props {
 }
 
 export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
+  const { data, loading, error } = useGetCategories(post.id);
+
+  if (loading) return null;
+  if (error) return <ErrorPage />;
+  if (!data?.postCategoriesByPostId) return <ErrorPage />;
+
   return (
     <Flex
       direction={isColumn ? "column-reverse" : "row"}
       className={MiniPostCardStyles.container}
       maxH={isColumn ? "500px" : "160px"}
-      border="1px"
+      borderBottom={isColumn ? "none" : "1px"}
       borderColor="lightgray"
+      borderRadius="none"
+      position="relative"
     >
       <Box
         height={isColumn ? "180px" : ""}
@@ -38,7 +48,7 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
             cursor="pointer"
             src={
               serializedSnippet(JSON.parse(post.text)).imgUrl ||
-              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1604151136/undraw_code_review_l1q9_wr2xgh.png"
+              "https://res.cloudinary.com/dnlthcx1a/image/upload/v1615276978/undraw_Code_review_re_woeb_jfaoij.png"
             }
           />
         </NextLink>
@@ -87,11 +97,32 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
           </Heading>
         </NextLink>
         <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-          <Text wordBreak="break-all" cursor="pointer" mb={1} mr={1}>
+          <Text
+            wordBreak="break-all"
+            cursor="pointer"
+            mb={1}
+            mr={1}
+            colorScheme="gray"
+            color="gray.500"
+          >
             {serializedSnippet(JSON.parse(post.text)).text}
           </Text>
         </NextLink>
       </Flex>
+      <Box
+        position="absolute"
+        left="10px"
+        bottom="16px"
+        colorScheme="blackAlpha"
+        bg="blackAlpha.900"
+        color="white"
+        padding="0 10px"
+        borderRadius="3px"
+        fontSize="10px"
+        fontWeight="600"
+      >
+        {data!.postCategoriesByPostId[0]?.categories.title}
+      </Box>
     </Flex>
   );
 };

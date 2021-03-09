@@ -6,9 +6,13 @@ interface Props {
 }
 
 export const RenderText: React.FC<Props> = (props) => {
+  console.log(
+    "render-text: ",
+    props.str.split("\n").filter((el) => el.includes("<pre>"))
+  );
   return (
     <Box
-      wordBreak="break-all"
+      wordBreak="break-word"
       dangerouslySetInnerHTML={{ __html: props.str }}
     ></Box>
   );

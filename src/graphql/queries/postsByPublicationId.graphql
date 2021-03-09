@@ -9,14 +9,7 @@ query PostsByPublicationId(
     publicationId: $publicationId
   ) {
     posts {
-      id
-      title
-      creator {
-        username
-      }
-      createdAt
-      updatedAt
-      text
+      ...PostSnippet
     }
   }
 }

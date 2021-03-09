@@ -109,7 +109,9 @@ const Post: React.FC<Props> = () => {
                 borderRadius="full"
                 size="lg"
                 fontWeight="bold"
-                colorScheme="telegram"
+                colorScheme="blackAlpha"
+                color="white"
+                bg="blackAlpha.900"
                 mr={1}
                 mb={1}
                 key={category.categories.id}
@@ -231,13 +233,16 @@ const Post: React.FC<Props> = () => {
                       />
                     </Flex>
                     <Button
-                      colorScheme="gray"
+                      colorScheme="blackAlpha"
+                      variant="outline"
+                      color="blackAlpha.900"
+                      borderColor="blackAlpha.900"
                       type="submit"
                       isLoading={isSubmitting}
                       ml={2}
                       fontSize="sm"
                     >
-                      Comment
+                      Send
                     </Button>
                   </Flex>
                 </Form>

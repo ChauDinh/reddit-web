@@ -13,12 +13,14 @@
 
 .social__icons {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 .social__icon {
-  margin-right: 16px;
+  margin-right: 4px;
   font-size: 20px;
 }
 

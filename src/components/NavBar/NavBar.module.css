@@ -8,7 +8,7 @@
 
 .navbar__wrapper {
   max-width: 1000px;
-  width: 1000px;
+  width: 100%;
 }
 
 .navbar__logo {
@@ -17,15 +17,22 @@
 }
 
 .navbar__searchInputGroup {
-  flex-grow: 1;
   margin-left: 20px;
   margin-right: 20px;
   display: flex;
   justify-content: flex-end;
 }
 
+.navbar__searchInputGroup > input {
+  max-width: 300px;
+  width: 300px;
+}
 .navbar__searchInputGroup > input:focus {
   border-color: #5e73b0 !important;
+  max-width: 400px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0px 3px 10px rgba(200, 200, 200, 0.2);
 }
 
 .navbar__iconGroup {

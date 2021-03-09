@@ -61,7 +61,9 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
         isLoading={loading}
         isDisabled={data?.me?.username ? false : true}
         colorScheme={
-          subscribedData?.subscribed?.includes(creator.id) ? "green" : "gray"
+          subscribedData?.subscribed?.includes(creator.id)
+            ? "yellow"
+            : "blackAlpha"
         }
         fontSize="65%"
         className={PostCreatorStyles.postCreator__followBtn}

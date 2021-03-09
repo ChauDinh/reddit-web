@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import TypeWriter from "typewriter-effect";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
@@ -9,6 +9,7 @@ import { Wrapper } from "../components/Wrapper/Wrapper";
 import { Sidebar } from "../components/Sidebar/Sidebar";
 import { ReadingList } from "../components/ReadingList/ReadingList";
 import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
+import { BigPostCard } from "../components/BigPostCard/BigPostCard";
 
 const Index = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -40,8 +41,8 @@ const Index = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Flex flexDirection="column">
-                <Heading className="header__title" mb={2} size="lg">
+              <Flex flexDirection="column" w="100%" alignItems="center">
+                <Heading className="header__title" mb={6} size="xl">
                   What's new technologies for
                   <TypeWriter
                     onInit={(typewriter) => {
@@ -59,18 +60,30 @@ const Index = () => {
                     }}
                   />
                 </Heading>
-                <Text mb={4} fontWeight="medium" fontSize="md">
-                  Our latest web design tips, insights and resources hot off the
-                  presses
-                </Text>
+                <NextLink href="">
+                  <Button
+                    alignItems="center"
+                    colorScheme="blackAlpha"
+                    variant="outline"
+                    borderColor="blackAlpha.900"
+                    color="blackAlpha.900"
+                    w="100%"
+                    size="md"
+                    mb={2}
+                    className="create-post__btn"
+                  >
+                    Join Us
+                  </Button>
+                </NextLink>
                 <NextLink href="/create-post">
                   <Button
                     alignItems="center"
-                    colorScheme="telegram"
-                    bg="telegram.500"
-                    color="white"
+                    colorScheme="yellow"
+                    bg="yellow.400"
+                    color="black"
                     variant="solid"
                     size="md"
+                    w="100%"
                     className="create-post__btn"
                   >
                     Create Post
@@ -78,6 +91,11 @@ const Index = () => {
                 </NextLink>
               </Flex>
             </Flex>
+            <Image
+              className="header__img"
+              w="400px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615273378/taxi-social-distancing_oqjty9.png"
+            />
           </Flex>
         </Wrapper>
         {loading && !data ? (
@@ -87,8 +105,9 @@ const Index = () => {
             <Flex w="100%" justifyContent="space-between">
               <Flex flexGrow={1} direction="column">
                 <Heading className="recent-articles__title" mb="20px" size="md">
-                  RECENT ARTICLES
+                  MOST RECENT
                 </Heading>
+                <BigPostCard />
                 {data?.posts.posts.map((post) =>
                   !post ? null : <MiniPostCard key={post.id} post={post} />
                 )}
@@ -100,8 +119,8 @@ const Index = () => {
                     pb={8}
                   >
                     <Button
-                      colorScheme="telegram"
-                      bg="telegram.500"
+                      colorScheme="blackAlpha"
+                      bg="blackAlpha.900"
                       color="white"
                       size="sm"
                       onClick={() => {
@@ -116,7 +135,7 @@ const Index = () => {
                       }}
                       isLoading={loading}
                     >
-                      load more
+                      Load More
                     </Button>
                   </Flex>
                 ) : null}

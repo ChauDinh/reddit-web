@@ -77,7 +77,7 @@ const ChangePassword: NextPage = () => {
             ) : null}
             <Box mt={4}>
               <Button
-                colorScheme="telegram"
+                colorScheme="purple"
                 isLoading={isSubmitting}
                 type="submit"
               >

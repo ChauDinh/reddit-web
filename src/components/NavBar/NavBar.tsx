@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Text,
-  Link,
   Flex,
   Button,
   InputGroup,
@@ -22,20 +21,21 @@ import {
   useColorMode,
   useColorModeValue,
   Switch,
+  Image,
+  InputRightElement,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { BiLogOut, BiSearch } from "react-icons/bi";
 import {
-  RiUser3Fill,
-  RiCopperCoinFill,
-  RiVipCrown2Fill,
-  RiCustomerServiceFill,
-  RiFileCodeFill,
-  RiHome2Fill,
-  RiPagesFill,
-  RiArrowDropDownLine,
+  BiHome,
+  BiLogOut,
+  BiSearch,
+  BiUserCircle,
+  BiCodeBlock,
+} from "react-icons/bi";
+import {
   RiMoonClearFill,
   RiSunLine,
+  RiArrowDropDownLine,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
 
@@ -73,7 +73,8 @@ export const NavBar: React.FC<Props> = () => {
       <Flex className={navBarStyles.navbar__loginRegisterBtns}>
         <NextLink href="/login">
           <Button
-            colorScheme="telegram"
+            colorScheme="blackAlpha"
+            bg="blackAlpha.900"
             alignItems={"center"}
             mr={2}
             fontSize="sm"
@@ -85,7 +86,8 @@ export const NavBar: React.FC<Props> = () => {
         </NextLink>
         <NextLink href="/register">
           <Button
-            colorScheme="telegram"
+            colorScheme="blackAlpha"
+            borderColor="blackAlpha.900"
             variant="outline"
             fontSize="sm"
             fontWeight={800}
@@ -104,8 +106,8 @@ export const NavBar: React.FC<Props> = () => {
           onClick={onOpen}
           className={navBarStyles.navbar__userBtn}
           leftIcon={<RiArrowDropDownLine />}
-          colorScheme="telegram"
-          bg="telegram.500"
+          colorScheme="blackAlpha"
+          bg="blackAlpha.900"
           color="white"
           fontWeight={600}
         >
@@ -134,10 +136,21 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerOverlay />
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton />
-            <Box ml="24px" mt="10px" fontWeight="900" fontSize="x-large">
-              !MPLEMENT
-            </Box>
-            <Divider border="2px solid" />
+            <Flex
+              alignItems="center"
+              ml="24px"
+              mt="10px"
+              mb="10px"
+              fontWeight="800"
+              fontSize="medium"
+            >
+              <Image
+                w="30px"
+                mr={2}
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+              />
+              BLOG
+            </Flex>
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
                 My Stuff
@@ -145,15 +158,15 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
-                    <ListIcon as={RiHome2Fill} />
+                    <ListIcon as={BiHome} />
                     <NextLink href="/" as={`/`}>
-                      Home
+                      HOME
                     </NextLink>
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={RiUser3Fill} />
+                    <ListIcon as={BiUserCircle} />
                     <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
-                      My Account
+                      MY ACCOUNT
                     </NextLink>
                   </ListItem>
                 </List>
@@ -180,20 +193,8 @@ export const NavBar: React.FC<Props> = () => {
                     />
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={RiCopperCoinFill} />
-                    Coins
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={RiVipCrown2Fill} />
-                    Upgrade premiums
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={RiCustomerServiceFill} />
-                    Help center
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={RiFileCodeFill} />
-                    Source code
+                    <ListIcon as={BiCodeBlock} />
+                    SOURCE CODE
                   </ListItem>
                 </List>
               </DrawerBody>
@@ -219,7 +220,7 @@ export const NavBar: React.FC<Props> = () => {
       </Flex>
     );
   }
-  console.log("color mode: ", colorMode);
+
   return (
     <Flex
       zIndex={2}
@@ -235,56 +236,34 @@ export const NavBar: React.FC<Props> = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <NextLink href="/">
-          <Box cursor="pointer" fontWeight="extrabold" fontSize="x-large">
-            !MPLEMENT
-          </Box>
-        </NextLink>
+        <Box mr={2}>
+          <NextLink href="/">
+            <Flex cursor="pointer" fontSize="large" alignItems="center">
+              <Image
+                w="36px"
+                mr={2}
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+              />
+              <Text fontWeight="800">BLOG</Text>
+            </Flex>
+          </NextLink>
+        </Box>
         <InputGroup className={navBarStyles.navbar__searchInputGroup}>
           <Input
-            maxW="500px"
+            // maxW=""
+            flexGrow={1}
             fontSize="md"
             type="text"
             placeholder="Search for titles, authors, topics..."
             background="white"
+            borderColor="blackAlpha.900"
             color="black"
             mr={2}
           />
-          <Button
-            w="100px"
-            leftIcon={<BiSearch />}
-            fontSize="sm"
-            px={8}
-            className={navBarStyles.navbar__searchBtn}
-            color="white"
-            colorScheme="telegram"
-            bg="telegram.500"
-          >
-            Search
-          </Button>
+          <InputRightElement mr={2}>
+            <BiSearch color="blackAlpha" />
+          </InputRightElement>
         </InputGroup>
-        <NextLink href="/">
-          <Flex
-            className={navBarStyles.navbar__homeRoute}
-            align={"center"}
-            as={Link}
-            mr={4}
-            fontSize="sm"
-          >
-            <RiHome2Fill style={{ marginRight: "5px" }} /> Home
-          </Flex>
-        </NextLink>
-        <NextLink href="/articles">
-          <Flex
-            className={navBarStyles.navbar__articlesRoute}
-            align={"center"}
-            as={Link}
-            mr={4}
-            fontSize="sm"
-          >
-            <RiPagesFill style={{ marginRight: "5px" }} /> Error
-          </Flex>
-        </NextLink>
         <Flex>{renderUser}</Flex>
       </Flex>
     </Flex>

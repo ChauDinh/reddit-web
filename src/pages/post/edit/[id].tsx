@@ -70,7 +70,7 @@ const EditPost: React.FC<Props> = () => {
               <Flex mt={4} alignItems="center" justifyContent="flex-start">
                 <Button
                   rightIcon={<VscSaveAs />}
-                  colorScheme="telegram"
+                  colorScheme="purple"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -80,7 +80,7 @@ const EditPost: React.FC<Props> = () => {
                   ml={5}
                   rightIcon={<ImCancelCircle />}
                   variant="outline"
-                  colorScheme="telegram"
+                  colorScheme="purple"
                   onClick={() => window.history.back()}
                 >
                   Cancel

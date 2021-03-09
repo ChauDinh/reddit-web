@@ -16,6 +16,7 @@ import { useGetIntegerId } from "../../utils/useGetIntegerId";
 import { useApolloClient } from "@apollo/client";
 import ErrorPage from "../404";
 import { useIsAuth } from "../../utils/useIsAuth";
+import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
 
 interface Props {}
 
@@ -47,8 +48,6 @@ const Publication: React.FC<Props> = () => {
       </Layout>
     );
   if (error) return <ErrorPage />;
-
-  console.log(data?.postsByPublicationId?.posts);
 
   if (!membersData) return null;
   const members = membersData.members.map((member) => member.userId);
@@ -118,6 +117,9 @@ const Publication: React.FC<Props> = () => {
         <NextLink href={`/create-post?publicationId=${paramId}`}>
           <Button>Create Post</Button>
         </NextLink>
+        {data?.postsByPublicationId?.posts.map((post) => (
+          <MiniPostCard post={post} isColumn={true} key={post.id} />
+        ))}
       </Wrapper>
     </Layout>
   );

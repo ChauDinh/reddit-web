@@ -150,7 +150,8 @@ const CreatePost: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="flex-start">
                   <Button
-                    colorScheme="telegram"
+                    colorScheme="yellow"
+                    bg="yellow.400"
                     isLoading={isSubmitting}
                     type="submit"
                     rightIcon={<BiSend />}
@@ -160,7 +161,7 @@ const CreatePost: React.FC<Props> = () => {
                   </Button>
                   <Button
                     rightIcon={<RiDraftLine />}
-                    colorScheme="telegram"
+                    colorScheme="blackAlpha"
                     variant="outline"
                     ml={5}
                   >

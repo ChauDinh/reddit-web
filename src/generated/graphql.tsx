@@ -879,11 +879,7 @@ export type PostsByPublicationIdQuery = (
     { __typename?: 'PaginatedPosts' }
     & { posts: Array<(
       { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'title' | 'createdAt' | 'updatedAt' | 'text'>
-      & { creator: (
-        { __typename?: 'User' }
-        & Pick<User, 'username'>
-      ) }
+      & PostSnippetFragment
     )> }
   )> }
 );
@@ -1854,18 +1850,11 @@ export const PostsByPublicationIdDocument = gql`
     query PostsByPublicationId($limit: Int!, $cursor: String, $publicationId: Int!) {
   postsByPublicationId(limit: $limit, cursor: $cursor, publicationId: $publicationId) {
     posts {
-      id
-      title
-      creator {
-        username
-      }
-      createdAt
-      updatedAt
-      text
+      ...PostSnippet
     }
   }
 }
-    `;
+    ${PostSnippetFragmentDoc}`;
 
 /**
  * __usePostsByPublicationIdQuery__

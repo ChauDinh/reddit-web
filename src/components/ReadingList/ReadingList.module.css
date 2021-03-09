@@ -10,6 +10,7 @@
 
 .container:hover {
   box-shadow: 0 3px 10px rgba(153, 180, 206, 0.3);
+  border: none !important;
 }
 
 .author {

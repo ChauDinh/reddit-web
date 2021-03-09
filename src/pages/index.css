@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,300;1,400;1,500&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -19,7 +20,7 @@ body {
 }
 
 .header__title > div {
-  color: #ff595a;
+  text-align: center;
 }
 
 .create-post__btn {
@@ -27,8 +28,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800 !important;
   font-size: 18px !important;
+  font-weight: 600;
   padding-right: 0;
 }
 

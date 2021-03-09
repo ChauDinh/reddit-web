@@ -1,7 +1,16 @@
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
-import { Box, Button, Text, useDisclosure, Fade } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  useDisclosure,
+  Fade,
+  Icon,
+  Flex,
+} from "@chakra-ui/react";
+import { BiCheck, BiError } from "react-icons/bi";
 
 import { Layout } from "../components/Layout";
 import { Wrapper } from "../components/Wrapper/Wrapper";
@@ -56,7 +65,12 @@ const CreatePublication: React.FC<Props> = () => {
                 Create new publication
               </Text>
               <Box mt={4}>
-                <InputField name="title" placeholder="Title" label="Title" />
+                <InputField
+                  width="100%"
+                  name="title"
+                  placeholder="Title"
+                  label="Title"
+                />
               </Box>
               <Box mt={6} fontSize="16px" fontWeight="600">
                 <Field
@@ -76,33 +90,42 @@ const CreatePublication: React.FC<Props> = () => {
                 </Text>
                 <Fade in={true}>
                   {values.isPrivate ? (
-                    <Box
+                    <Flex
                       p="10px"
                       color="white"
                       mt="4"
                       bg="yellow.400"
                       rounded="md"
                       shadow="md"
+                      justifyContent="center"
+                      alignItems="center"
                     >
-                      This publication is private. Only members can see it
-                    </Box>
+                      <Icon as={BiError} mr={2} />
+                      This publication is private.
+                    </Flex>
                   ) : (
-                    <Box
+                    <Flex
                       p="10px"
-                      color="teal.500"
+                      colorScheme="blackAlpha"
+                      border="1px"
+                      borderColor="blackAlpha.900"
+                      color="blackAlpha.900"
                       mt="4"
-                      border="1px solid teal"
                       rounded="md"
                       shadow="xs"
                       fontSize="15px"
+                      justifyContent="center"
+                      alignItems="center"
                     >
-                      This publication is public. Everybody can see it
-                    </Box>
+                      <Icon as={BiCheck} mr={2} />
+                      This publication is public.
+                    </Flex>
                   )}
                 </Fade>
               </Box>
               <Button
-                colorScheme="telegram"
+                colorScheme="blackAlpha"
+                bg="blackAlpha.900"
                 isLoading={isSubmitting}
                 type="submit"
                 mt={10}

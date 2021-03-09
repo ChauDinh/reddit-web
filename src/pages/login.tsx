@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Text, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -45,9 +45,7 @@ const Login: React.FC<Props> = () => {
         >
           {({ isSubmitting }) => (
             <Form style={styles.container}>
-              <Text fontSize="23px" fontWeight={700}>
-                Sign In
-              </Text>
+              <Heading size="xl">Sign In</Heading>
               <Box mt={4}>
                 {" "}
                 <InputField
@@ -72,7 +70,8 @@ const Login: React.FC<Props> = () => {
                 justifyContent="space-between"
               >
                 <Button
-                  colorScheme="telegram"
+                  colorScheme="yellow"
+                  bg="yellow.400"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -85,7 +84,13 @@ const Login: React.FC<Props> = () => {
               <hr style={{ margin: "20px 0" }} />
               <Flex direction="column">
                 <NextLink href="/register">
-                  <Button colorScheme="telegram" variant="outline" flexGrow={1}>
+                  <Button
+                    colorScheme="blackAlpha"
+                    borderColor="blackAlpha.900"
+                    color="blackAlpha.900"
+                    variant="outline"
+                    flexGrow={1}
+                  >
                     Create new account
                   </Button>
                 </NextLink>
