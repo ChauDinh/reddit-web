@@ -60,7 +60,7 @@ const Index = () => {
                     }}
                   />
                 </Heading>
-                <NextLink href="">
+                <NextLink href="/login">
                   <Button
                     alignItems="center"
                     colorScheme="blackAlpha"

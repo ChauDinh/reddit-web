@@ -88,6 +88,7 @@ export const NavBar: React.FC<Props> = () => {
           <Button
             colorScheme="blackAlpha"
             borderColor="blackAlpha.900"
+            color="blackAlpha.900"
             variant="outline"
             fontSize="sm"
             fontWeight={800}
