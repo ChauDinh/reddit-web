@@ -21,6 +21,7 @@
 
 .content {
   font-size: 16px;
+  text-transform: capitalize;
   text-overflow: ellipsis !important;
   overflow: hidden;
   display: -webkit-box;

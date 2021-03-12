@@ -23,6 +23,21 @@ body {
   text-align: center;
 }
 
+.homePage__headerBackgroundImage {
+  background-image: url("https://res.cloudinary.com/dnlthcx1a/image/upload/v1615395183/rush-198_hubgax.png");
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.homePage__backgroundImage {
+  padding: 150px 0;
+  background-image: url("https://res.cloudinary.com/dnlthcx1a/image/upload/v1615382150/taxi-844_beaciy.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
 .create-post__btn {
   max-width: 200px;
   display: flex;
@@ -79,7 +94,10 @@ input[type="checkbox"] {
     padding-bottom: 0px;
   }
   .header__title {
-    text-align: right;
+    text-align: center;
     margin-bottom: 16px !important;
+  }
+  .homePage__backgroundImage {
+    display: none !important;
   }
 }

@@ -31,6 +31,7 @@ import {
   BiSearch,
   BiUserCircle,
   BiCodeBlock,
+  BiFile,
 } from "react-icons/bi";
 import {
   RiMoonClearFill,
@@ -54,7 +55,7 @@ export const NavBar: React.FC<Props> = () => {
 
   // color mode
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("white", "gray.800");
+  const bg = useColorModeValue("#fece2f", "#fece2f");
   const color = useColorModeValue("black", "white");
 
   // Drawer
@@ -163,6 +164,10 @@ export const NavBar: React.FC<Props> = () => {
                     <NextLink href="/" as={`/`}>
                       HOME
                     </NextLink>
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={BiFile} />
+                    <NextLink href="/blog">BLOG</NextLink>
                   </ListItem>
                   <ListItem>
                     <ListIcon as={BiUserCircle} />

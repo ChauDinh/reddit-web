@@ -23,6 +23,7 @@
 .postTitle {
   width: 100%;
   height: 100%;
+  text-transform: capitalize;
   text-overflow: ellipsis !important;
   overflow: hidden !important;
   display: -webkit-box;

@@ -35,8 +35,6 @@ export const ReadingList: React.FC<Props> = () => {
           className={ReadingListStyles.container}
           key={post.id}
           direction="column"
-          borderBottom="1px"
-          borderColor="lightgray"
         >
           <Flex alignItems="center">
             <Avatar

@@ -13,6 +13,7 @@ import { useGetPostsFromUrl } from "../../utils/useGetPostsFromUrl";
 import { useGetFollowingFromUrl } from "../../utils/useGetFollowingFromUrl";
 import { useGetFollowerFromUrl } from "../../utils/useGetFollowerFromUrl";
 import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
+import { FollowButton } from "../../components/FollowButton/FollowButton";
 
 interface Props {}
 
@@ -75,12 +76,23 @@ const User: React.FC<Props> = () => {
               className={userProfileStyles.userNameAndBtn}
               alignItems="center"
             >
-              <Button colorScheme="gray" mr={4} size="sm">
-                Direct message
+              <Button
+                colorScheme="blackAlpha"
+                borderColor="blackAlpha.900"
+                border="1px"
+                variant="outline"
+                color="blackAlpha.900"
+                mr={4}
+                size="md"
+              >
+                Message
               </Button>
-              <Button colorScheme="gray" size="sm">
-                Following
-              </Button>
+              <FollowButton
+                creator={{
+                  username: data.getUserById.username,
+                  id: data.getUserById.id,
+                }}
+              />
             </Flex>
             <Flex className={userProfileStyles.userData}>
               <Text className={userProfileStyles.postsData}>

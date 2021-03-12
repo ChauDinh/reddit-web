@@ -1,154 +1,208 @@
-import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import TypeWriter from "typewriter-effect";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import React from "react";
 import NextLink from "next/link";
-import { Layout } from "../components/Layout";
-import { usePostsQuery } from "../generated/graphql";
-import ErrorPage from "./404";
+import { useRouter } from "next/router";
+
 import { createWithApollo } from "../utils/withApollo";
+import { Layout } from "../components/Layout";
 import { Wrapper } from "../components/Wrapper/Wrapper";
-import { Sidebar } from "../components/Sidebar/Sidebar";
-import { ReadingList } from "../components/ReadingList/ReadingList";
-import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
-import { BigPostCard } from "../components/BigPostCard/BigPostCard";
+import { Pricing } from "../components/Pricing/Pricing";
+import { BiChevronRight } from "react-icons/bi";
+import { useMeQuery } from "../generated/graphql";
+import { isServer } from "../utils/isServer";
+import ErrorPage from "./404";
 
-const Index = () => {
-  const { data, error, loading, fetchMore, variables } = usePostsQuery({
-    variables: {
-      limit: 9,
-      cursor: null as null | string,
-    },
-    notifyOnNetworkStatusChange: true,
-  });
+interface Props {}
 
-  if (!loading && !data) {
-    console.error("Error: ", error?.message);
-    return <ErrorPage />;
-  }
+const Index: React.FC<Props> = () => {
+  const { data, loading, error } = useMeQuery({ skip: isServer() });
 
-  return (
-    <Layout variant="regular" direction="column">
-      <Box style={{ flexGrow: 1 }}>
+  if (loading) return null;
+  if (error) return <ErrorPage />;
+  if (data?.me) {
+    const router = useRouter();
+    router.push("/blog");
+    return null;
+  } else {
+    return (
+      <Layout variant="regular" direction="column">
         <Wrapper variants="regular">
           <Flex
-            className="header__content"
-            alignItems="flex-start"
-            justifyContent="space-between"
+            direction="column"
+            alignItems="center"
+            justifyContent="flex-start"
             w="100%"
+            pt="30px"
           >
-            <Flex
-              flexGrow={1}
-              w="100%"
-              alignItems="center"
-              justifyContent="space-between"
+            <Heading
+              as="h2"
+              size="2xl"
+              fontWeight="800"
+              textAlign="center"
+              mb={6}
             >
-              <Flex flexDirection="column" w="100%" alignItems="center">
-                <Heading className="header__title" mb={6} size="xl">
-                  What's new technologies for
-                  <TypeWriter
-                    onInit={(typewriter) => {
-                      typewriter.pauseFor(1000).deleteAll().start();
-                    }}
-                    options={{
-                      strings: [
-                        "Developers",
-                        "DevOps",
-                        "Designers",
-                        "and YOU!",
-                      ],
-                      autoStart: true,
-                      loop: true,
-                    }}
-                  />
-                </Heading>
-                <NextLink href="/login">
-                  <Button
-                    alignItems="center"
-                    colorScheme="blackAlpha"
-                    variant="outline"
-                    borderColor="blackAlpha.900"
-                    color="blackAlpha.900"
-                    w="100%"
-                    size="md"
-                    mb={2}
-                    className="create-post__btn"
-                  >
-                    Join Us
-                  </Button>
-                </NextLink>
-                <NextLink href="/create-post">
-                  <Button
-                    alignItems="center"
-                    colorScheme="yellow"
-                    bg="yellow.400"
-                    color="black"
-                    variant="solid"
-                    size="md"
-                    w="100%"
-                    className="create-post__btn"
-                  >
-                    Create Post
-                  </Button>
-                </NextLink>
+              Get smatter about what
+              <br /> matters to you
+            </Heading>
+            <Heading
+              as="h5"
+              colorScheme="gray"
+              color="gray.600"
+              size="md"
+              fontWeight="800"
+              textAlign="center"
+              mb={6}
+            >
+              We'll help you find great things to read.
+            </Heading>
+            <NextLink href="/blog">
+              <Button colorScheme="yellow" bg="yellow.400">
+                Get Started
+              </Button>
+            </NextLink>
+          </Flex>
+        </Wrapper>
+        <Flex
+          mt="20px"
+          w="100%"
+          justifyContent="center"
+          className="homePage__headerBackgroundImage"
+        >
+          <Image
+            w="500px"
+            mb="40px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615381423/taxi-no-comments_opqyfr.png"
+          />
+        </Flex>
+        <Flex
+          justifyContent="center"
+          w="100%"
+          mb="80px"
+          mt="40px"
+          className="homePage__backgroundImage"
+        >
+          <Image
+            w="800px"
+            borderRadius="3px"
+            boxShadow="0px 3px 5px rgba(0, 0, 0, 0.2)"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615381837/Screen_Shot_2021-03-10_at_20.10.22_iimvnd.png"
+          />
+        </Flex>
+        <Wrapper variants="regular">
+          <Flex direction="column" alignItems="center" w="100%" mb="40px">
+            <Heading as="h2" size="2xl" mb="20px" textAlign="center">
+              Find the plan that's right for you
+            </Heading>
+            <Heading
+              as="h5"
+              size="md"
+              mb="10px"
+              colorScheme="gray"
+              color="gray.600"
+              fontWeight="800"
+              textAlign="center"
+            >
+              with Reasonable pricing
+            </Heading>
+            <Text
+              colorScheme="gray"
+              color="gray.500"
+              fontSize="16px"
+              fontWeight="600"
+            >
+              Only US$3 / month
+            </Text>
+            <Text
+              fontSize="16px"
+              colorScheme="gray"
+              color="gray.500"
+              fontWeight="600"
+              mb="20px"
+            >
+              Billed monthly. Cancel anytime
+            </Text>
+            <Button
+              colorScheme="blackAlpha"
+              bg="blackAlpha.900"
+              color="white"
+              size="md"
+              mb="20px"
+            >
+              Get Premium
+            </Button>
+            <Pricing />
+          </Flex>
+        </Wrapper>
+        <Wrapper variants="regular">
+          <Flex w="100%" justifyContent="center" alignItems="center">
+            <Box
+              boxShadow="0px 3px 60px rgba(200, 200, 200, 0.5)"
+              padding="10px 16px"
+              borderRadius="3px"
+            >
+              <Text textAlign="justify">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                exercitationem quae hic dicta fugiat itaque cupiditate aliquam,
+                laboriosam sapiente amet harum, dolore quisquam debitis facere,
+                corrupti tempore.
+              </Text>
+              <Flex
+                w="100%"
+                justifyContent="space-between"
+                mt="10px"
+                fontWeight="600"
+              >
+                <Text>John Doe</Text>
+                <Text>
+                  Read more <Icon as={BiChevronRight} />
+                </Text>
               </Flex>
-            </Flex>
+              <Text fontSize="sm" colorScheme="gray" color="gray.600">
+                Software engineering{" "}
+              </Text>
+            </Box>
             <Image
-              className="header__img"
-              w="400px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615273378/taxi-social-distancing_oqjty9.png"
+              w="500px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615454437/taxi-599_akjzgx.png"
             />
           </Flex>
         </Wrapper>
-        {loading && !data ? (
-          <Text>Loading...</Text>
-        ) : (
-          <Wrapper variants="regular">
-            <Flex w="100%" justifyContent="space-between">
-              <Flex flexGrow={1} direction="column">
-                <Heading className="recent-articles__title" mb="20px" size="md">
-                  MOST RECENT
-                </Heading>
-                <BigPostCard />
-                {data?.posts.posts.map((post) =>
-                  !post ? null : <MiniPostCard key={post.id} post={post} />
-                )}
-                {data && data.posts.hasMore ? (
-                  <Flex
-                    alignItems="center"
-                    justifyContent="center"
-                    mt={8}
-                    pb={8}
-                  >
-                    <Button
-                      colorScheme="blackAlpha"
-                      bg="blackAlpha.900"
-                      color="white"
-                      size="sm"
-                      onClick={() => {
-                        fetchMore({
-                          variables: {
-                            limit: variables?.limit,
-                            cursor:
-                              data.posts.posts[data.posts.posts.length - 1]
-                                .createdAt,
-                          },
-                        });
-                      }}
-                      isLoading={loading}
-                    >
-                      Load More
-                    </Button>
-                  </Flex>
-                ) : null}
-              </Flex>
-              <Sidebar isSticky={false}>
-                <ReadingList></ReadingList>
-              </Sidebar>
-            </Flex>
-          </Wrapper>
-        )}
-      </Box>
-    </Layout>
-  );
+        <Wrapper variants="regular">
+          <Flex
+            direction="column"
+            w="100%"
+            alignItems="center"
+            mb="20px"
+            textAlign="center"
+          >
+            <Heading as="h2" size="xl">
+              Expand your reading.
+            </Heading>
+            <Heading as="h2" size="xl">
+              Expand your mind.
+            </Heading>
+            <Button
+              mt="20px"
+              mb="80px"
+              colorScheme="yellow"
+              bg="yellow.400"
+              size="md"
+            >
+              <NextLink href="/blog">Get Started</NextLink>
+            </Button>
+          </Flex>
+        </Wrapper>
+      </Layout>
+    );
+  }
 };
 
 export default createWithApollo({ ssr: true })(Index);

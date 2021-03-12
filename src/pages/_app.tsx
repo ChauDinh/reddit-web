@@ -14,9 +14,9 @@ function MyApp({ Component, pageProps }: any) {
       <Head>
         <link
           rel="shortcut icon"
-          href="https://res.cloudinary.com/dnlthcx1a/image/upload/v1614050755/Group_236_2x_eaksr9.png"
+          href="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615402007/Stockholm_icons_-_Design_-_Layers_2x_rkkvre.png"
         />
-        <title>Implement - Online blog platform</title>
+        <title>BLOG - Online blog platform</title>
       </Head>
       <Component {...pageProps} />
     </ChakraProvider>

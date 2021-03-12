@@ -14,10 +14,6 @@
   font-size: 18px;
 }
 
-.postCreator__followBtn {
-  margin-left: 20px;
-}
-
 @media only screen and (max-width: 768px) {
   .postCreator__container {
     justify-content: flex-start;

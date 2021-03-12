@@ -28,8 +28,6 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
       direction={isColumn ? "column-reverse" : "row"}
       className={MiniPostCardStyles.container}
       maxH={isColumn ? "500px" : "160px"}
-      borderBottom={isColumn ? "none" : "1px"}
-      borderColor="lightgray"
       borderRadius="none"
       position="relative"
     >
@@ -117,6 +115,8 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
         bg="blackAlpha.900"
         color="white"
         padding="0 10px"
+        paddingTop={data.postCategoriesByPostId.length === 0 ? "" : "3px"}
+        paddingBottom={data.postCategoriesByPostId.length === 0 ? "" : "3px"}
         borderRadius="3px"
         fontSize="10px"
         fontWeight="600"

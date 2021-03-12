@@ -12,7 +12,6 @@ import { Form, Formik, Field, FieldProps } from "formik";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { BiSend } from "react-icons/bi";
-import { RiDraftLine } from "react-icons/ri";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
 import {
@@ -111,17 +110,19 @@ const CreatePost: React.FC<Props> = () => {
                   </FormControl>
                 </Box>
                 <Box mt={6}>
-                  <FormControl as="fieldset">
-                    <FormLabel fontWeight={600}>Category</FormLabel>
-                    <FormHelperText mb={4}>
+                  <FormControl as="fieldset" textAlign="center">
+                    <FormLabel fontWeight={600}>Category (optional)</FormLabel>
+                    <FormHelperText mb={6}>
                       You can choose multiple categories. Attached categories to
                       your post would help people discover it easier.
                     </FormHelperText>
                     {data?.categories?.map((category) => (
                       <label
+                        color="gray"
                         key={category.id}
                         style={{
                           marginRight: "20px",
+                          marginBottom: "10px",
                           cursor: "pointer",
                           fontSize: "16px",
                           fontWeight: "normal",
@@ -129,6 +130,9 @@ const CreatePost: React.FC<Props> = () => {
                           display: "inline-flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          background: "#EDF2F7",
+                          padding: "3px 10px",
+                          borderRadius: "3px",
                         }}
                       >
                         <Field
@@ -143,7 +147,6 @@ const CreatePost: React.FC<Props> = () => {
                 </Box>
                 <Box mt={6}>
                   <FormControl>
-                    <FormLabel fontWeight={600}>Content</FormLabel>
                     <Field name="text" as={MyRichTextEditor} />
                   </FormControl>
                 </Box>
@@ -160,12 +163,12 @@ const CreatePost: React.FC<Props> = () => {
                     Create
                   </Button>
                   <Button
-                    rightIcon={<RiDraftLine />}
                     colorScheme="blackAlpha"
+                    color="blackAlpha.900"
                     variant="outline"
                     ml={5}
                   >
-                    Save Draft
+                    Cancel
                   </Button>
                 </Flex>
               </Form>

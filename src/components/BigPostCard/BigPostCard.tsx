@@ -21,7 +21,7 @@ export const BigPostCard: React.FC<Props> = () => {
           colorScheme="blackAlpha"
           bg="blackAlpha.900"
           color="white"
-          padding="0 10px"
+          padding="3px 10px"
           borderRadius="3px"
           fontSize="10px"
           fontWeight="600"
