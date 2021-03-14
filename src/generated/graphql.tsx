@@ -895,7 +895,7 @@ export type PublicationByIdQuery = (
     { __typename?: 'CreatePublicationResponse' }
     & { publication?: Maybe<(
       { __typename?: 'Publication' }
-      & Pick<Publication, 'title' | 'isPrivate'>
+      & Pick<Publication, 'id' | 'title' | 'isPrivate'>
     )>, errors?: Maybe<Array<(
       { __typename?: 'CreatePublicationFieldError' }
       & Pick<CreatePublicationFieldError, 'field' | 'message'>
@@ -1887,6 +1887,7 @@ export const PublicationByIdDocument = gql`
     query PublicationById($publicationId: Float!) {
   publicationById(publicationId: $publicationId) {
     publication {
+      id
       title
       isPrivate
     }

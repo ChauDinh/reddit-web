@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Layout } from "../../components/Layout";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
@@ -16,7 +16,7 @@ import { useGetIntegerId } from "../../utils/useGetIntegerId";
 import { useApolloClient } from "@apollo/client";
 import ErrorPage from "../404";
 import { useIsAuth } from "../../utils/useIsAuth";
-import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
+import { PublicationPost } from "./PublicationPost";
 
 interface Props {}
 
@@ -64,7 +64,7 @@ const Publication: React.FC<Props> = () => {
 
   if (publicationByIdError) return <ErrorPage />;
 
-  // render publication page for guess (login user and guess)
+  // render private publication page for not member (login user and guess)
   if (publicationByIdData.publicationById.errors !== null) {
     // if user is guess
     if (meData?.me === null) {
@@ -99,27 +99,58 @@ const Publication: React.FC<Props> = () => {
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
-        <Button
-          isLoading={meLoading}
-          colorScheme={members.includes(meData!.me!.id) ? "green" : "gray"}
-          onClick={async () => {
-            await createMember({
-              variables: {
-                publicationId: paramId,
-              },
-            });
-            await apolloClient.resetStore();
-          }}
-        >
-          {members.includes(meData!.me!.id) ? "Joined" : "Join"}
-        </Button>
-        <Box>This is publication page</Box>
-        <NextLink href={`/create-post?publicationId=${paramId}`}>
-          <Button>Create Post</Button>
-        </NextLink>
-        {data?.postsByPublicationId?.posts.map((post) => (
-          <MiniPostCard post={post} isColumn={true} key={post.id} />
-        ))}
+        <Flex w="100%">
+          <Flex direction="column" w="160px" mt="20px">
+            <Image
+              w="160px"
+              borderRadius="3px"
+              src={`https://picsum.photos/id/${
+                publicationByIdData.publicationById.publication!.id
+              }/200`}
+              mb="10px"
+            />
+            <Text fontSize="20px" fontWeight="600" textTransform="capitalize">
+              {publicationByIdData!.publicationById.publication!.title}
+            </Text>
+            <Text
+              fontSize="16px"
+              textAlign="justify"
+              mt="10px"
+              color="gray.600"
+            >
+              <Text fontWeight="600">Description: </Text>Lorem ipsum dolor sit
+              amet consectetur adipisicing elit. Animi, at.
+            </Text>
+            <Button
+              mt="20px"
+              isLoading={meLoading}
+              colorScheme={members.includes(meData!.me!.id) ? "green" : "gray"}
+              onClick={async () => {
+                await createMember({
+                  variables: {
+                    publicationId: paramId,
+                  },
+                });
+                await apolloClient.resetStore();
+              }}
+            >
+              {members.includes(meData!.me!.id) ? "Subscribed" : "Subscribe"}
+            </Button>
+            <NextLink href={`/create-post?publicationId=${paramId}`}>
+              <Button mt="10px">Create Post</Button>
+            </NextLink>
+          </Flex>
+          <Box flexGrow={1} mt="20px" ml="70px">
+            {/* {data?.postsByPublicationId?.posts.map((post) => (
+            <MiniPostCard post={post} isColumn={true} key={post.id} />
+          ))} */}
+            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+              {data?.postsByPublicationId?.posts.map((post) => (
+                <PublicationPost post={post} />
+              ))}
+            </Grid>
+          </Box>
+        </Flex>
       </Wrapper>
     </Layout>
   );

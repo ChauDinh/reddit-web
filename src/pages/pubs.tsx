@@ -8,6 +8,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 import NextLink from "next/link";
 
 import { Layout } from "../components/Layout";
@@ -17,6 +18,13 @@ import { createWithApollo } from "../utils/withApollo";
 import ErrorPage from "./404";
 
 interface Props {}
+createBreakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+});
 
 const Pubs: React.FC<Props> = () => {
   const { data, loading, error } = usePublicationsQuery();
@@ -36,6 +44,7 @@ const Pubs: React.FC<Props> = () => {
             bg="yellow.200"
             borderRadius="10px"
             padding="10px"
+            display={{ base: "none", md: "flex", lg: "flex" }}
           >
             <Box padding="80px 50px">
               <Heading as="h2" size="xl" lineHeight="40px" mb="20px">
@@ -52,25 +61,36 @@ const Pubs: React.FC<Props> = () => {
               </Text>
             </Box>
             <Image
+              display={{ base: "none", md: "inline-block", lg: "inline-block" }}
               w="260px"
               src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615546674/open-doodles-reading_qmszta.png"
             />
           </Flex>
         </Wrapper>
         <Wrapper variants="regular">
-          <Heading as="h3" size="md">
+          <Heading
+            fontSize={{ base: "36px", md: "28px", lg: "28px" }}
+            fontWeight={{ base: "800", md: "700", lg: "700" }}
+          >
             Trending publications
           </Heading>
         </Wrapper>
         <Wrapper variants="regular">
           <Box w="100%">
-            <Grid templateColumns="repeat(3, 1fr)" gap="40px">
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(2, 1fr)",
+                lg: "repeat(3, 1fr)",
+              }}
+              gap="40px"
+            >
               {data?.publications.map((pub, idx) => (
                 <Flex
                   direction="column"
                   key={idx}
                   borderRadius="3px"
-                  border="1px solid rgba(0, 0, 0, 0.2)"
+                  bg="white"
                 >
                   <Box position="relative">
                     <Image
@@ -99,7 +119,7 @@ const Pubs: React.FC<Props> = () => {
                           {pub.title}
                         </Text>
                         <Image
-                          fallbackSrc={`https://picsum.photos/id/${idx}/200`}
+                          fallbackSrc={`https://picsum.photos/id/${pub.id}/200`}
                           borderRadius="0 0 5px 5px"
                         />
                       </Box>
@@ -132,37 +152,50 @@ const Pubs: React.FC<Props> = () => {
                       {pub.isPrivate ? "private" : "public"}
                     </Text>
                   </Text>
-                  <Button
-                    w="100%"
-                    colorScheme="whiteAlpha"
-                    bg="whiteAlpha.900"
-                    color="gray.400"
-                    borderTop="1px"
-                    borderColor="gray.300"
-                    borderRadius="0"
-                    mt={2}
+                  <NextLink
+                    href="/publication/[id]"
+                    as={`/publication/${pub.id}`}
                   >
-                    Subscribe now
-                  </Button>
+                    <Button
+                      w="100%"
+                      borderBottom="1px"
+                      borderTop="1px"
+                      borderColor="gray.300"
+                      borderRadius="0"
+                      mt={2}
+                    >
+                      Checkout
+                    </Button>
+                  </NextLink>
                 </Flex>
               ))}
             </Grid>
           </Box>
         </Wrapper>
         <Wrapper variants="regular">
-          <Heading as="h3" size="md">
+          <Heading
+            fontSize={{ base: "36px", md: "28px", lg: "28px" }}
+            fontWeight={{ base: "800", md: "700", lg: "700" }}
+          >
             New
           </Heading>
         </Wrapper>
         <Wrapper variants="regular">
-          <Grid templateColumns="repeat(3, 1fr)" gap="40px">
+          <Grid
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              md: "repeat(2, 1fr)",
+              lg: "repeat(3, 1fr)",
+            }}
+            gap="40px"
+          >
             {data?.publications
               .map((pub, idx) => (
                 <Flex
                   key={idx}
                   direction="column"
                   borderRadius="3px"
-                  border="1px solid rgba(0, 0, 0, 0.2)"
+                  bg="white"
                 >
                   <Box position="relative">
                     <Image
@@ -191,7 +224,7 @@ const Pubs: React.FC<Props> = () => {
                           {pub.title}
                         </Text>
                         <Image
-                          fallbackSrc={`https://picsum.photos/id/${idx}/200`}
+                          fallbackSrc={`https://picsum.photos/id/${pub.id}/200`}
                           borderRadius="0 0 5px 5px"
                         />
                       </Box>
@@ -224,18 +257,21 @@ const Pubs: React.FC<Props> = () => {
                       {pub.isPrivate ? "private" : "public"}
                     </Text>
                   </Text>
-                  <Button
-                    w="100%"
-                    colorScheme="whiteAlpha"
-                    bg="whiteAlpha.900"
-                    color="gray.400"
-                    borderTop="1px"
-                    borderColor="gray.300"
-                    borderRadius="0"
-                    mt={2}
+                  <NextLink
+                    href="/publication/[id]"
+                    as={`/publication/${pub.id}`}
                   >
-                    Subscribe now
-                  </Button>
+                    <Button
+                      w="100%"
+                      borderBottom="1px"
+                      borderTop="1px"
+                      borderColor="gray.300"
+                      borderRadius="0"
+                      mt={2}
+                    >
+                      Checkout
+                    </Button>
+                  </NextLink>
                 </Flex>
               ))
               .reverse()}
