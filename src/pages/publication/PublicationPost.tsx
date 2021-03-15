@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import {
@@ -20,6 +20,10 @@ export const PublicationPost: React.FC<Props> = ({ post }) => {
       w="100%"
       h="100%"
       border="1px solid rgba(200, 200, 200, 0.6)"
+      _hover={{
+        boxShadow: "0 6px 10px rgba(153, 180, 206, 0.3);",
+        border: "none",
+      }}
     >
       <Image
         src={

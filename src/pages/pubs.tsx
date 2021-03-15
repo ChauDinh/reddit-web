@@ -94,7 +94,7 @@ const Pubs: React.FC<Props> = () => {
                 >
                   <Box position="relative">
                     <Image
-                      bg="yellow.200"
+                      bg="white"
                       fallbackSrc="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615550914/rush-197_pk0hwi.png"
                     />
                     <NextLink
@@ -107,12 +107,12 @@ const Pubs: React.FC<Props> = () => {
                         left="50%"
                         transform="translate(-50%, -50%)"
                         colorScheme="yellow"
-                        bg="yellow.100"
+                        bg="yellow.400"
                         borderRadius="5px"
                         fontWeight="600"
                         fontSize="18px"
                         textTransform="capitalize"
-                        color="blue.600"
+                        color="blackAlpha.900"
                         cursor="pointer"
                       >
                         <Text textAlign="center" mt={2} mb={2}>
@@ -158,10 +158,9 @@ const Pubs: React.FC<Props> = () => {
                   >
                     <Button
                       w="100%"
-                      borderBottom="1px"
-                      borderTop="1px"
+                      border="1px"
                       borderColor="gray.300"
-                      borderRadius="0"
+                      borderRadius="px"
                       mt={2}
                     >
                       Checkout
@@ -199,7 +198,7 @@ const Pubs: React.FC<Props> = () => {
                 >
                   <Box position="relative">
                     <Image
-                      bg="yellow.200"
+                      bg="white"
                       fallbackSrc="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615550914/rush-197_pk0hwi.png"
                     />
                     <NextLink
@@ -212,12 +211,12 @@ const Pubs: React.FC<Props> = () => {
                         left="50%"
                         transform="translate(-50%, -50%)"
                         colorScheme="yellow"
-                        bg="yellow.100"
+                        bg="yellow.400"
                         borderRadius="5px"
                         fontWeight="600"
                         fontSize="18px"
                         textTransform="capitalize"
-                        color="blue.600"
+                        color="blackAlpha.900"
                         cursor="pointer"
                       >
                         <Text textAlign="center" mt={2} mb={2}>
@@ -263,10 +262,9 @@ const Pubs: React.FC<Props> = () => {
                   >
                     <Button
                       w="100%"
-                      borderBottom="1px"
-                      borderTop="1px"
+                      border="1px"
                       borderColor="gray.300"
-                      borderRadius="0"
+                      borderRadius="3px"
                       mt={2}
                     >
                       Checkout

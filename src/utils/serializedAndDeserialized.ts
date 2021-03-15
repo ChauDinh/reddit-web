@@ -11,7 +11,7 @@ export const serialized = (node: Node) => {
         Prism.languages.javascript,
         "javascript"
       );
-      return `<pre style="font-family: monospace; overflow-x: scroll; max-width: 600px; scrollbar-width: none;">${highlightedCode}</pre>`;
+      return `<pre style="font-family: monospace; overflow-x: scroll; max-width: 600px; scrollbar-width: none; font-size: 13px; font-weight: 600">${highlightedCode}</pre>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
       return `<strong style="font-weight: 800; display: inline-block;"><em style="text-decoration:underline">${node.text}</em></strong>`;

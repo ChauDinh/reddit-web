@@ -103,6 +103,7 @@ const Publication: React.FC<Props> = () => {
           <Flex direction="column" w="160px" mt="20px">
             <Image
               w="160px"
+              minW="160px"
               borderRadius="3px"
               src={`https://picsum.photos/id/${
                 publicationByIdData.publicationById.publication!.id
@@ -112,14 +113,9 @@ const Publication: React.FC<Props> = () => {
             <Text fontSize="20px" fontWeight="600" textTransform="capitalize">
               {publicationByIdData!.publicationById.publication!.title}
             </Text>
-            <Text
-              fontSize="16px"
-              textAlign="justify"
-              mt="10px"
-              color="gray.600"
-            >
+            <Text fontSize="16px" mt="10px" color="gray.600">
               <Text fontWeight="600">Description: </Text>Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Animi, at.
+              amet consectetur adipisicing elit. Distinctio, dolorum.
             </Text>
             <Button
               mt="20px"
@@ -144,7 +140,7 @@ const Publication: React.FC<Props> = () => {
             {/* {data?.postsByPublicationId?.posts.map((post) => (
             <MiniPostCard post={post} isColumn={true} key={post.id} />
           ))} */}
-            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+            <Grid templateColumns="repeat(3, 1fr)" gap={6}>
               {data?.postsByPublicationId?.posts.map((post) => (
                 <PublicationPost post={post} />
               ))}
