@@ -14,6 +14,7 @@ import { useGetFollowingFromUrl } from "../../utils/useGetFollowingFromUrl";
 import { useGetFollowerFromUrl } from "../../utils/useGetFollowerFromUrl";
 import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
 import { FollowButton } from "../../components/FollowButton/FollowButton";
+import { BgAndColor } from "../../utils/bgAndColor";
 
 interface Props {}
 
@@ -29,6 +30,7 @@ const User: React.FC<Props> = () => {
     data: followerData,
     loading: followerLoading,
   } = useGetFollowerFromUrl();
+  const { color } = BgAndColor();
 
   if (loading) {
     return (
@@ -77,11 +79,11 @@ const User: React.FC<Props> = () => {
               alignItems="center"
             >
               <Button
-                colorScheme="blackAlpha"
-                borderColor="blackAlpha.900"
+                colorScheme="gray"
+                borderColor={color}
                 border="1px"
                 variant="outline"
-                color="blackAlpha.900"
+                color={color}
                 mr={4}
                 size="md"
               >

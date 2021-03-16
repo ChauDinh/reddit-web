@@ -19,7 +19,6 @@ import {
   ListIcon,
   DrawerOverlay,
   useColorMode,
-  useColorModeValue,
   Switch,
   Image,
   InputRightElement,
@@ -44,6 +43,7 @@ import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import navBarStyles from "./NavBar.module.css";
+import { BgAndColor } from "../../utils/bgAndColor";
 
 interface Props {}
 
@@ -55,8 +55,7 @@ export const NavBar: React.FC<Props> = () => {
 
   // color mode
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("#fece2f", "#fece2f");
-  const color = useColorModeValue("black", "white");
+  const { bg, color } = BgAndColor();
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,8 +73,9 @@ export const NavBar: React.FC<Props> = () => {
       <Flex className={navBarStyles.navbar__loginRegisterBtns}>
         <NextLink href="/login">
           <Button
-            colorScheme="blackAlpha"
-            bg="blackAlpha.900"
+            color={bg}
+            bg={color}
+            colorScheme="gray"
             alignItems={"center"}
             mr={2}
             fontSize="sm"
@@ -87,9 +87,8 @@ export const NavBar: React.FC<Props> = () => {
         </NextLink>
         <NextLink href="/register">
           <Button
-            colorScheme="blackAlpha"
-            borderColor="blackAlpha.900"
-            color="blackAlpha.900"
+            borderColor={color}
+            color={color}
             variant="outline"
             fontSize="sm"
             fontWeight={800}

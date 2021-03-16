@@ -23,6 +23,7 @@ import { useIsAuth } from "../utils/useIsAuth";
 import { MyRichTextEditor } from "../components/MyRichTextEditor/MyRichTextEditor";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
+import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 
@@ -41,6 +42,7 @@ const CreatePost: React.FC<Props> = () => {
   const [createPostCategory] = useCreatePostCategoryMutation();
   const { data, error, loading } = useCategoriesQuery();
   const publicationId = router.query;
+  const { color } = BgAndColor();
 
   if (loading) return <Text>loading...</Text>;
   if (error) return null;
@@ -118,7 +120,6 @@ const CreatePost: React.FC<Props> = () => {
                     </FormHelperText>
                     {data?.categories?.map((category) => (
                       <label
-                        color="gray"
                         key={category.id}
                         style={{
                           marginRight: "20px",
@@ -128,11 +129,12 @@ const CreatePost: React.FC<Props> = () => {
                           fontWeight: "normal",
                           textTransform: "capitalize",
                           display: "inline-flex",
+                          color: "white",
+                          background: "black",
                           alignItems: "center",
                           justifyContent: "center",
-                          background: "#EDF2F7",
                           padding: "3px 10px",
-                          borderRadius: "3px",
+                          borderRadius: "50px",
                         }}
                       >
                         <Field
@@ -153,8 +155,7 @@ const CreatePost: React.FC<Props> = () => {
 
                 <Flex mt={4} alignItems="center" justifyContent="flex-start">
                   <Button
-                    colorScheme="yellow"
-                    bg="yellow.400"
+                    color={color}
                     isLoading={isSubmitting}
                     type="submit"
                     rightIcon={<BiSend />}
@@ -162,12 +163,7 @@ const CreatePost: React.FC<Props> = () => {
                   >
                     Create
                   </Button>
-                  <Button
-                    colorScheme="blackAlpha"
-                    color="blackAlpha.900"
-                    variant="outline"
-                    ml={5}
-                  >
+                  <Button color="blackAlpha.900" variant="outline" ml={5}>
                     Cancel
                   </Button>
                 </Flex>

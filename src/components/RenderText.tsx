@@ -5,10 +5,10 @@ interface Props {
   str: string;
 }
 
-export const RenderText: React.FC<Props> = (props) => {
+export const RenderText: React.FC<Props> = props => {
   console.log(
     "render-text: ",
-    props.str.split("\n").filter((el) => el.includes("<pre>"))
+    props.str.split("\n").filter(el => el.includes("<pre>"))
   );
   return (
     <Box

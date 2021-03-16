@@ -19,17 +19,19 @@ import { BiChevronRight } from "react-icons/bi";
 import { useMeQuery } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
 import ErrorPage from "./404";
+import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 
 const Index: React.FC<Props> = () => {
   const { data, loading, error } = useMeQuery({ skip: isServer() });
+  const { bg, color } = BgAndColor();
 
   if (loading) return null;
   if (error) return <ErrorPage />;
   if (data?.me) {
     const router = useRouter();
-    router.push("/blog");
+    router.push("/navigation");
     return null;
   } else {
     return (
@@ -63,8 +65,8 @@ const Index: React.FC<Props> = () => {
             >
               We'll help you find great things to read.
             </Heading>
-            <NextLink href="/blog">
-              <Button colorScheme="yellow" bg="yellow.400">
+            <NextLink href="/navigation">
+              <Button color={bg} bg={color} colorScheme="gray">
                 Get Started
               </Button>
             </NextLink>
@@ -125,16 +127,16 @@ const Index: React.FC<Props> = () => {
               colorScheme="gray"
               color="gray.500"
               fontWeight="600"
-              mb="20px"
+              mb="40px"
             >
               Billed monthly. Cancel anytime
             </Text>
             <Button
-              colorScheme="blackAlpha"
-              bg="blackAlpha.900"
-              color="white"
+              color={bg}
+              bg={color}
               size="md"
-              mb="20px"
+              mb="40px"
+              colorScheme="gray"
             >
               Get Premium
             </Button>
@@ -192,11 +194,12 @@ const Index: React.FC<Props> = () => {
             <Button
               mt="20px"
               mb="80px"
-              colorScheme="yellow"
-              bg="yellow.400"
+              color={bg}
+              bg={color}
               size="md"
+              colorScheme="gray"
             >
-              <NextLink href="/blog">Get Started</NextLink>
+              <NextLink href="/navigation">Get Started</NextLink>
             </Button>
           </Flex>
         </Wrapper>

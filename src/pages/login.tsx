@@ -10,12 +10,14 @@ import { toErrorMap } from "../utils/toErrorMap";
 import { Layout } from "../components/Layout";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
+import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
   const [login] = useLoginMutation();
   const router = useRouter();
+  const { bg, color } = BgAndColor();
   return (
     <Layout variant="small" direction="column">
       <Wrapper variants="small">
@@ -39,7 +41,7 @@ const Login: React.FC<Props> = () => {
               setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data?.login?.user) {
               // navigate to login page
-              router.push(`${router.query.next || "/blog"}`);
+              router.push(`${router.query.next || "/navigation"}`);
             }
           }}
         >
@@ -70,8 +72,9 @@ const Login: React.FC<Props> = () => {
                 justifyContent="space-between"
               >
                 <Button
-                  colorScheme="yellow"
-                  bg="yellow.400"
+                  bg={color}
+                  color={bg}
+                  colorScheme="gray"
                   isLoading={isSubmitting}
                   type="submit"
                 >
@@ -85,9 +88,8 @@ const Login: React.FC<Props> = () => {
               <Flex direction="column">
                 <NextLink href="/register">
                   <Button
-                    colorScheme="blackAlpha"
-                    borderColor="blackAlpha.900"
-                    color="blackAlpha.900"
+                    borderColor={color}
+                    color={color}
                     variant="outline"
                     flexGrow={1}
                   >

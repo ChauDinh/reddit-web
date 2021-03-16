@@ -18,6 +18,7 @@ import { Sidebar } from "../components/Sidebar/Sidebar";
 import { ReadingList } from "../components/ReadingList/ReadingList";
 import { MiniPostCard } from "../components/MiniPostCard/MiniPostCard";
 import { BigPostCard } from "../components/BigPostCard/BigPostCard";
+import { BgAndColor } from "../utils/bgAndColor";
 
 const Blog = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -27,6 +28,8 @@ const Blog = () => {
     },
     notifyOnNetworkStatusChange: true,
   });
+
+  const { bg, color } = BgAndColor();
 
   if (!loading && !data) {
     console.error("Error: ", error?.message);
@@ -74,8 +77,8 @@ const Blog = () => {
                       alignItems="center"
                       colorScheme="blackAlpha"
                       variant="outline"
-                      borderColor="blackAlpha.900"
-                      color="blackAlpha.900"
+                      border="1px solid"
+                      color={color}
                       w="100%"
                       size="md"
                       mb={2}
@@ -87,9 +90,9 @@ const Blog = () => {
                   <NextLink href="/create-post">
                     <Button
                       alignItems="center"
-                      colorScheme="yellow"
-                      bg="yellow.400"
-                      color="black"
+                      // bg="blackAlpha.900"
+                      color={bg}
+                      bg={color}
                       variant="solid"
                       size="md"
                       w="100%"

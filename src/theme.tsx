@@ -1,4 +1,8 @@
-import { theme as chakraTheme, extendTheme } from "@chakra-ui/react";
+import {
+  theme as chakraTheme,
+  extendTheme,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 const fonts = {
   heading: "Lato, SF Pro Display, -apple-system, sans-serif",
@@ -18,42 +22,6 @@ const configs = {
   colors: {
     ...chakraTheme.colors,
     black: "#16161D",
-    orange: {
-      50: "#ffe9dd",
-      100: "#ffc5af",
-      200: "#ffa17e",
-      300: "#ff7c4c",
-      400: "#ff581a",
-      500: "#ff4500",
-      600: "#b42f00",
-      700: "#812100",
-      800: "#4f1200",
-      900: "#210300",
-    },
-    grey: {
-      50: "#f8f0f2",
-      100: "#d9d9d9",
-      200: "#d9d9d9",
-      300: "#d9d9d9",
-      400: "#d9d9d9",
-      500: "#d9d9d9",
-      600: "#8c8c8c",
-      700: "#737373",
-      800: "#595959",
-      900: "#404040",
-    },
-    purple: {
-      50: "#e2ebff",
-      100: "#b3c3ff",
-      200: "#829cfc",
-      300: "#5274f9",
-      400: "#224df6",
-      500: "#0933dd",
-      600: "#0328ad",
-      700: "#001c7d",
-      800: "#00114e",
-      900: "#000620",
-    },
   },
   fontWeight,
   fonts,

@@ -18,6 +18,7 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
       postId: postId,
     },
   });
+
   return data ? (
     loading ? (
       <Text>Loading comment...</Text>

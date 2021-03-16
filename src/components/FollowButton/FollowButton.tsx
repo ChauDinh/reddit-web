@@ -31,9 +31,7 @@ export const FollowButton: React.FC<Props> = ({ creator }) => {
       isLoading={loading}
       isDisabled={data?.me?.username ? false : true}
       colorScheme={
-        subscribedData?.subscribed?.includes(creator.id)
-          ? "yellow"
-          : "blackAlpha"
+        subscribedData?.subscribed?.includes(creator.id) ? "green" : "gray"
       }
       fontSize="65%"
       ml="20px"

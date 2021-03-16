@@ -40,6 +40,7 @@ import { RiFireFill, RiExternalLinkLine } from "react-icons/ri";
 
 import { PostCreator } from "../../components/PostCreator/PostCreator";
 import { useGetCategories } from "../../utils/useGetCategories";
+import { BgAndColor } from "../../utils/bgAndColor";
 
 interface Props {}
 
@@ -52,6 +53,8 @@ const Post: React.FC<Props> = () => {
     data: postCategoriesData,
     loading: postCategoriesLoading,
   } = useGetCategories(data?.post ? data.post.id : -1);
+
+  const { color } = BgAndColor();
 
   if (loading) {
     return (
@@ -233,10 +236,8 @@ const Post: React.FC<Props> = () => {
                       />
                     </Flex>
                     <Button
-                      colorScheme="blackAlpha"
                       variant="outline"
-                      color="blackAlpha.900"
-                      borderColor="blackAlpha.900"
+                      color={color}
                       type="submit"
                       isLoading={isSubmitting}
                       ml={2}

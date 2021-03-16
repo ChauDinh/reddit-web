@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { BiCheckCircle } from "react-icons/bi";
+import { BgAndColor } from "../../utils/bgAndColor";
 
 import { Features } from "./Features";
 import PricingStyles from "./PricingStyles.module.css";
@@ -18,6 +19,7 @@ import PricingStyles from "./PricingStyles.module.css";
 interface Props {}
 
 export const Pricing: React.FC<Props> = () => {
+  const { bg, color } = BgAndColor();
   return (
     <Flex
       justifyContent="space-between"
@@ -37,13 +39,13 @@ export const Pricing: React.FC<Props> = () => {
         <Text colorScheme="gray" color="gray.600" fontSize="18px">
           For starters
         </Text>
-        <Text colorScheme="gray" color="gray.800" fontSize="36px">
+        <Text colorScheme="gray" color={color} fontSize="36px">
           $0
         </Text>
         <Text colorScheme="gray" color="gray.600" fontSize="16px">
           per user per month
         </Text>
-        <Button mt="20px" colorScheme="yellow" bg="yellow.400">
+        <Button mt="20px" color={bg} bg={color} colorScheme="gray">
           Get Started
         </Button>
         <Features>
@@ -72,13 +74,13 @@ export const Pricing: React.FC<Props> = () => {
         <Text colorScheme="gray" color="gray.600" fontSize="18px">
           For pros
         </Text>
-        <Text colorScheme="gray" color="gray.800" fontSize="36px">
+        <Text colorScheme="gray" color={color} fontSize="36px">
           $3
         </Text>
         <Text colorScheme="gray" color="gray.600" fontSize="16px">
           per user per month
         </Text>
-        <Button mt="20px" colorScheme="yellow" bg="yellow.400">
+        <Button mt="20px" color={bg} bg={color} colorScheme="gray">
           Try for 14 days free
         </Button>
         <Features>
@@ -119,13 +121,13 @@ export const Pricing: React.FC<Props> = () => {
         <Text colorScheme="gray" color="gray.600" fontSize="18px">
           For teams
         </Text>
-        <Text colorScheme="gray" color="gray.800" fontSize="36px">
+        <Text colorScheme="gray" color={color} fontSize="36px">
           $5
         </Text>
         <Text colorScheme="gray" color="gray.600" fontSize="16px">
           per user per month
         </Text>
-        <Button mt="20px" colorScheme="yellow" bg="yellow.400">
+        <Button mt="20px" color={bg} bg={color} colorScheme="gray">
           Upgrade now
         </Button>
         <Features>

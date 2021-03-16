@@ -16,6 +16,7 @@ import { Wrapper } from "../components/Wrapper/Wrapper";
 import { usePublicationsQuery } from "../generated/graphql";
 import { createWithApollo } from "../utils/withApollo";
 import ErrorPage from "./404";
+import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 createBreakpoints({
@@ -28,6 +29,7 @@ createBreakpoints({
 
 const Pubs: React.FC<Props> = () => {
   const { data, loading, error } = usePublicationsQuery();
+  const { bg, color } = BgAndColor();
 
   if (error) return <ErrorPage />;
 
@@ -40,20 +42,20 @@ const Pubs: React.FC<Props> = () => {
           <Flex
             justifyContent="space-between"
             w="100%"
-            colorScheme="yellow"
-            bg="yellow.200"
+            bg={color}
             borderRadius="10px"
             padding="10px"
             display={{ base: "none", md: "flex", lg: "flex" }}
+            boxShadow="0px 3px 6px rgba(200, 200, 200, 0.4)"
           >
             <Box padding="80px 50px">
-              <Heading as="h2" size="xl" lineHeight="40px" mb="20px">
+              <Heading color={bg} as="h2" size="xl" lineHeight="40px" mb="20px">
                 Discover more posts on <br /> Publications
               </Heading>
               <Text
                 fontSize="18px"
-                colorScheme="blackAlpha"
-                color="blackAlpha.600"
+                colorScheme="gray"
+                color="gray.600"
                 fontWeight="600"
               >
                 Wanna boost your knowledge and creative energy? <br /> Find
@@ -86,15 +88,11 @@ const Pubs: React.FC<Props> = () => {
               gap="40px"
             >
               {data?.publications.map((pub, idx) => (
-                <Flex
-                  direction="column"
-                  key={idx}
-                  borderRadius="3px"
-                  bg="white"
-                >
+                <Flex direction="column" key={idx} borderRadius="3px" bg={bg}>
                   <Box position="relative">
                     <Image
-                      bg="white"
+                      borderRadius="5px"
+                      bg="gray.200"
                       fallbackSrc="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615550914/rush-197_pk0hwi.png"
                     />
                     <NextLink
@@ -107,12 +105,12 @@ const Pubs: React.FC<Props> = () => {
                         left="50%"
                         transform="translate(-50%, -50%)"
                         colorScheme="yellow"
-                        bg="yellow.400"
+                        bg={color}
                         borderRadius="5px"
                         fontWeight="600"
                         fontSize="18px"
                         textTransform="capitalize"
-                        color="blackAlpha.900"
+                        color={bg}
                         cursor="pointer"
                       >
                         <Text textAlign="center" mt={2} mb={2}>
@@ -144,6 +142,7 @@ const Pubs: React.FC<Props> = () => {
                       float="right"
                       textTransform="lowercase"
                       bg={pub.isPrivate ? "gray.300" : "green.300"}
+                      color={bg}
                       borderRadius="10px"
                       padding="0px 7px"
                       fontSize="14px"
@@ -156,13 +155,7 @@ const Pubs: React.FC<Props> = () => {
                     href="/publication/[id]"
                     as={`/publication/${pub.id}`}
                   >
-                    <Button
-                      w="100%"
-                      border="1px"
-                      borderColor="gray.300"
-                      borderRadius="px"
-                      mt={2}
-                    >
+                    <Button w="100%" borderRadius="3px" mt={2}>
                       Checkout
                     </Button>
                   </NextLink>
@@ -190,15 +183,11 @@ const Pubs: React.FC<Props> = () => {
           >
             {data?.publications
               .map((pub, idx) => (
-                <Flex
-                  key={idx}
-                  direction="column"
-                  borderRadius="3px"
-                  bg="white"
-                >
+                <Flex key={idx} direction="column" borderRadius="3px" bg={bg}>
                   <Box position="relative">
                     <Image
-                      bg="white"
+                      borderRadius="5px"
+                      bg="gray.200"
                       fallbackSrc="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615550914/rush-197_pk0hwi.png"
                     />
                     <NextLink
@@ -210,13 +199,12 @@ const Pubs: React.FC<Props> = () => {
                         top="50%"
                         left="50%"
                         transform="translate(-50%, -50%)"
-                        colorScheme="yellow"
-                        bg="yellow.400"
+                        bg={color}
                         borderRadius="5px"
                         fontWeight="600"
                         fontSize="18px"
                         textTransform="capitalize"
-                        color="blackAlpha.900"
+                        color={bg}
                         cursor="pointer"
                       >
                         <Text textAlign="center" mt={2} mb={2}>
@@ -248,6 +236,7 @@ const Pubs: React.FC<Props> = () => {
                       float="right"
                       textTransform="lowercase"
                       bg={pub.isPrivate ? "gray.300" : "green.300"}
+                      color={bg}
                       borderRadius="10px"
                       padding="0px 7px"
                       fontSize="14px"

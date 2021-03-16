@@ -10,12 +10,14 @@ import { toErrorMap } from "../utils/toErrorMap";
 import { Layout } from "../components/Layout";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
+import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 
 const Register: React.FC<Props> = () => {
   const [register] = useRegisterMutation();
   const router = useRouter();
+  const { bg, color } = BgAndColor();
   return (
     <Layout variant="small" direction="column">
       <Wrapper variants="small">
@@ -77,8 +79,9 @@ const Register: React.FC<Props> = () => {
                 alignItems="center"
               >
                 <Button
-                  colorScheme="yellow"
-                  bg="yellow.400"
+                  bg={color}
+                  color={bg}
+                  colorScheme="gray"
                   isLoading={isSubmitting}
                   type="submit"
                 >
