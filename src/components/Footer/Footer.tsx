@@ -40,8 +40,8 @@ export const Footer: React.FC<Props> = () => {
           >
             <Flex direction="column" alignItems="center" size="xl">
               <Image
-                w="36px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+                w="50px"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
               />
               BLOG.Inc
             </Flex>

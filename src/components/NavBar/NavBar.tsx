@@ -107,9 +107,9 @@ export const NavBar: React.FC<Props> = () => {
           onClick={onOpen}
           className={navBarStyles.navbar__userBtn}
           leftIcon={<RiArrowDropDownLine />}
-          colorScheme="blackAlpha"
-          bg="blackAlpha.900"
-          color="white"
+          colorScheme="white"
+          bg="white"
+          color="blackAlpha.900"
           fontWeight={600}
         >
           <Flex justifyContent="space-between" alignItems="center">
@@ -146,11 +146,10 @@ export const NavBar: React.FC<Props> = () => {
               fontSize="medium"
             >
               <Image
-                w="30px"
+                w="40px"
                 mr={2}
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
               />
-              BLOG
             </Flex>
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -230,7 +229,6 @@ export const NavBar: React.FC<Props> = () => {
     <Flex
       zIndex={2}
       top={0}
-      position="sticky"
       fontWeight={700}
       className={navBarStyles.navbar__container}
       bg={bg}
@@ -245,9 +243,9 @@ export const NavBar: React.FC<Props> = () => {
           <NextLink href="/">
             <Flex cursor="pointer" fontSize="large" alignItems="center">
               <Image
-                w="36px"
+                w="48px"
                 mr={2}
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615108567/Stockholm_icons_-_Design_-_Layers_2x_bgdh8j.png"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
               />
               <Text fontWeight="800">BLOG</Text>
             </Flex>
@@ -255,14 +253,13 @@ export const NavBar: React.FC<Props> = () => {
         </Box>
         <InputGroup className={navBarStyles.navbar__searchInputGroup}>
           <Input
-            // maxW=""
             flexGrow={1}
             fontSize="md"
             type="text"
             placeholder="Search for titles, authors, topics..."
-            background="white"
+            background="whiteAlpha.700"
             borderColor="blackAlpha.900"
-            color="black"
+            color="blackAlpha.800"
             mr={2}
           />
           <InputRightElement mr={2}>
