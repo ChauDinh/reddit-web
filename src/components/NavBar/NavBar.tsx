@@ -137,19 +137,15 @@ export const NavBar: React.FC<Props> = () => {
           <DrawerOverlay />
           <DrawerContent className={navBarStyles.navbar__drawerContainer}>
             <DrawerCloseButton />
-            <Flex
-              alignItems="center"
-              ml="24px"
-              mt="10px"
-              mb="10px"
-              fontWeight="800"
-              fontSize="medium"
-            >
+            <Flex alignItems="center" ml="24px" mt="10px" mb="10px">
               <Image
-                w="40px"
+                w="36px"
                 mr={2}
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
+                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616222866/Group_6_2x_ukk0nq.png"
               />
+              <Text fontWeight="600" fontSize="18px">
+                Readit
+              </Text>
             </Flex>
             <Box className={navBarStyles.navbar__drawerSection}>
               <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
@@ -243,11 +239,17 @@ export const NavBar: React.FC<Props> = () => {
           <NextLink href="/">
             <Flex cursor="pointer" fontSize="large" alignItems="center">
               <Image
-                w="48px"
-                mr={2}
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
+                w="36px"
+                mr={4}
+                src={
+                  colorMode === "light"
+                    ? "https://res.cloudinary.com/dnlthcx1a/image/upload/v1616222866/Group_6_2x_ukk0nq.png"
+                    : "https://res.cloudinary.com/dnlthcx1a/image/upload/v1616223149/Group_6_2x_j03v2s.png"
+                }
               />
-              <Text fontWeight="800">BLOG</Text>
+              <Text fontSize="20px" fontWeight="600">
+                Readit
+              </Text>
             </Flex>
           </NextLink>
         </Box>

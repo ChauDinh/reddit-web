@@ -1,3 +1,15 @@
+.plans {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.plans > img {
+  width: 100px !important;
+  height: 100px !important;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     flex-direction: column !important;

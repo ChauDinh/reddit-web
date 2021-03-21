@@ -5,11 +5,16 @@ import {
   Heading,
   Icon,
   Image,
+  List,
+  ListIcon,
+  ListItem,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { BiCheckCircle } from "react-icons/bi";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 import { createWithApollo } from "../utils/withApollo";
 import { Layout } from "../components/Layout";
@@ -22,6 +27,14 @@ import ErrorPage from "./404";
 import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
+
+createBreakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+});
 
 const Index: React.FC<Props> = () => {
   const { data, loading, error } = useMeQuery({ skip: isServer() });
@@ -45,19 +58,22 @@ const Index: React.FC<Props> = () => {
             pt="30px"
           >
             <Heading
-              as="h2"
-              size="2xl"
-              fontWeight="800"
+              fontSize={{ base: "30px", sm: "40px", md: "60px", lg: "80px" }}
+              fontWeight="600"
               textAlign="center"
               mb={6}
+              lineHeight={{ base: "45px", md: "90px", lg: "90px" }}
             >
-              Get smatter about what
-              <br /> matters to you
+              <span>Write</span> to be understood,
+              <br />
+              <span>Speak</span> to be heart,
+              <br />
+              <span>Read</span> to grow.
             </Heading>
             <Heading
               as="h5"
               colorScheme="gray"
-              color="gray.600"
+              color={color}
               size="md"
               fontWeight="800"
               textAlign="center"
@@ -74,34 +90,107 @@ const Index: React.FC<Props> = () => {
         </Wrapper>
         <Flex
           mt="20px"
+          mb="40px"
           w="100%"
           justifyContent="center"
           className="homePage__headerBackgroundImage"
         >
           <Image
-            w="500px"
-            mb="40px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615381423/taxi-no-comments_opqyfr.png"
-          />
-        </Flex>
-        <Flex
-          justifyContent="center"
-          w="100%"
-          mb="80px"
-          mt="40px"
-          className="homePage__backgroundImage"
-        >
-          <Image
             w="800px"
-            borderRadius="3px"
-            boxShadow="0px 3px 5px rgba(0, 0, 0, 0.2)"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615381837/Screen_Shot_2021-03-10_at_20.10.22_iimvnd.png"
+            mb="40px"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615933451/pablo-815_bso4ux.png"
           />
         </Flex>
+
         <Wrapper variants="regular">
-          <Flex direction="column" alignItems="center" w="100%" mb="40px">
-            <Heading as="h2" size="2xl" mb="20px" textAlign="center">
-              Find the plan that's right for you
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            w="100%"
+            mt="40px"
+            position="relative"
+            direction={{ base: "column", md: "column", lg: "row" }}
+          >
+            <Image
+              position="absolute"
+              right={{ base: "30%", md: "0", lg: "-110px" }}
+              top="-120px"
+              height={{ base: "140px", md: "200px", lg: "200px" }}
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616313203/scribbles-scribbles-73_2x_iyabmg.png"
+            />
+            <Image
+              w="450px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616247102/Group_3_2x_coyohk.png"
+            />
+            <Flex direction="column" flexGrow={1} alignItems="center">
+              <Heading as="h2" size="2xl" mb={4} mt="20px" textAlign="center">
+                The power of{" "}
+                <span
+                  style={{
+                    fontFamily: "'Patrick Hand', cursive",
+                    color: "#ff8181",
+                  }}
+                >
+                  text editor
+                </span>
+                .
+              </Heading>
+              <Text color="gray.500" mb={4}>
+                Our platform supports WYSIWYG text editor
+              </Text>
+              <List spacing={3}>
+                <ListItem>
+                  <ListIcon as={BiCheckCircle} color="green.600" />
+                  Enhance writer productivity & retention
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={BiCheckCircle} color="green.600" />
+                  Build your brand reputation and trust
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={BiCheckCircle} color="green.600" />
+                  Improve your writing skills
+                </ListItem>
+              </List>
+            </Flex>
+          </Flex>
+        </Wrapper>
+        <Wrapper variants="regular">
+          <Flex
+            direction="column"
+            alignItems="center"
+            w="100%"
+            mb="40px"
+            mt="40px"
+            position="relative"
+          >
+            <Image
+              top={{ base: "-100px", md: "-100px", lg: "-150px" }}
+              left={{ base: "30%", md: "40%", lg: "-50px" }}
+              height={{ base: "120px", md: "120px", lg: "200px" }}
+              position="absolute"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616313201/scribbles-scribbles-88_2x_u1m30r.png"
+            />
+            <Heading as="h2" size="2xl" mt="10px" mb="16px" textAlign="center">
+              Find the{" "}
+              <span
+                style={{
+                  fontFamily: "'Patrick Hand', cursive",
+                  color: "#7fd6c2",
+                }}
+              >
+                plan
+              </span>{" "}
+              that's{" "}
+              <span
+                style={{
+                  fontFamily: "'Patrick Hand', cursive",
+                  color: "#ffc016",
+                }}
+              >
+                right
+              </span>{" "}
+              for you
             </Heading>
             <Heading
               as="h5"
@@ -144,11 +233,25 @@ const Index: React.FC<Props> = () => {
           </Flex>
         </Wrapper>
         <Wrapper variants="regular">
-          <Flex w="100%" justifyContent="center" alignItems="center">
+          <Flex
+            w="100%"
+            justifyContent="center"
+            alignItems="flex-start"
+            className="homePage__customerReview"
+            position="relative"
+          >
+            <Image
+              height={{ base: "150px", md: "150px", lg: "200px" }}
+              top={{ base: "-130px", md: "-110px", lg: "-130px" }}
+              right={{ base: "0px", md: "40%", lg: "-50px" }}
+              position="absolute"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616313203/scribbles-scribbles-73_2x_iyabmg.png"
+            />
             <Box
-              boxShadow="0px 3px 60px rgba(200, 200, 200, 0.5)"
+              boxShadow="0px 3px 10px rgba(220, 220, 220, 0.1)"
               padding="10px 16px"
               borderRadius="3px"
+              mt="20px"
             >
               <Text textAlign="justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
@@ -172,8 +275,8 @@ const Index: React.FC<Props> = () => {
               </Text>
             </Box>
             <Image
-              w="500px"
-              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615454437/taxi-599_akjzgx.png"
+              w="480px"
+              src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616246522/Group_1_2x_jua0zp.png"
             />
           </Flex>
         </Wrapper>

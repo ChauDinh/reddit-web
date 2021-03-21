@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 import { Layout } from "../components/Layout";
 import { Wrapper } from "../components/Wrapper/Wrapper";
@@ -8,25 +9,39 @@ import { createWithApollo } from "../utils/withApollo";
 
 interface Props {}
 
+createBreakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+});
+
 const Navigation: React.FC<Props> = () => {
   return (
     <Layout direction="column" variant="regular">
-      <Wrapper variants="regular">
-        <Heading
-          mt="20px"
-          w="100%"
-          fontFamily="'Viaoda Libre', cursive"
-          fontSize="80px"
-          fontWeight={500}
-          textAlign="center"
+      <Heading
+        mt="20px"
+        w="100%"
+        fontSize={{ base: "30px", md: "40px", lg: "80px" }}
+        fontWeight={700}
+        textAlign="center"
+      >
+        Reading in{" "}
+        <span
+          style={{
+            fontFamily: "'Patrick Hand', cursive",
+            color: "#c000ff",
+          }}
         >
-          Reading in happiness.
-        </Heading>
-      </Wrapper>
+          happiness
+        </span>
+        .
+      </Heading>
       <Wrapper variants="regular">
         <Box
-          padding={4}
-          px={0}
+          // padding={4}
+          // px={0}
           w="100%"
           mx="auto"
           sx={{
@@ -62,13 +77,7 @@ const Navigation: React.FC<Props> = () => {
                 <Text mb={2} fontWeight={800}>
                   ABOUT
                 </Text>
-                <Heading
-                  as="h2"
-                  size="lg"
-                  mb={2}
-                  fontWeight={600}
-                  fontFamily="'Viaoda Libre', cursive"
-                >
+                <Heading as="h2" size="lg" mb={2} fontWeight={600}>
                   100% technical blog
                 </Heading>
                 <Text fontSize="15px">Specialization drives success</Text>
@@ -103,13 +112,7 @@ const Navigation: React.FC<Props> = () => {
                 <Text mb={2} fontWeight={800}>
                   PUBLICATIONS
                 </Text>
-                <Heading
-                  as="h2"
-                  size="lg"
-                  mb={2}
-                  fontWeight={600}
-                  fontFamily="'Viaoda Libre', cursive"
-                >
+                <Heading as="h2" size="lg" mb={2} fontWeight={600}>
                   Our reason
                 </Heading>
                 <Text fontSize="15px">
@@ -147,13 +150,7 @@ const Navigation: React.FC<Props> = () => {
                 <Text mb={2} fontWeight={800}>
                   BLOG
                 </Text>
-                <Heading
-                  as="h2"
-                  size="lg"
-                  mb={2}
-                  fontWeight={600}
-                  fontFamily="'Viaoda Libre', cursive"
-                >
+                <Heading as="h2" size="lg" mb={2} fontWeight={600}>
                   Making people happy
                 </Heading>
                 <Text fontSize="15px">
@@ -196,13 +193,7 @@ const Navigation: React.FC<Props> = () => {
                 <Text mb={2} fontWeight={800}>
                   TEAM
                 </Text>
-                <Heading
-                  as="h2"
-                  size="lg"
-                  mb={2}
-                  fontWeight={600}
-                  fontFamily="'Viaoda Libre', cursive"
-                >
+                <Heading as="h2" size="lg" mb={2} fontWeight={600}>
                   Global at heart
                 </Heading>
                 <Text fontSize="15px">

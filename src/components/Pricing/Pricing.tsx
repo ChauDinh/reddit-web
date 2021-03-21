@@ -29,9 +29,7 @@ export const Pricing: React.FC<Props> = () => {
       <Box textAlign="center" className={PricingStyles.plans}>
         <Image
           mb="10px"
-          w="250px"
-          h="200px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615397627/taxi-delivery-1_b6sotl.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934221/pablo-278_kvxwlz.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Free
@@ -65,8 +63,8 @@ export const Pricing: React.FC<Props> = () => {
         <Image
           mb="10px"
           w="250px"
-          h="200px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615397626/taxi-bank_ptodjb.png"
+          h="210px"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934218/pablo-886_gytouu.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Premium
@@ -112,8 +110,8 @@ export const Pricing: React.FC<Props> = () => {
         <Image
           mb="10px"
           w="250px"
-          h="200px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615397625/taxi-805_v6qi7j.png"
+          h="210px"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934217/pablo-social-distancing-friendship-on-the-phone-stay-home-concept-1_b4zkii.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Business

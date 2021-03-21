@@ -1,7 +1,7 @@
 import {
   Box,
   Flex,
-  Image,
+  Text,
   Input,
   InputGroup,
   InputLeftElement,
@@ -39,11 +39,7 @@ export const Footer: React.FC<Props> = () => {
             flexDirection="column"
           >
             <Flex direction="column" alignItems="center" size="xl">
-              <Image
-                w="50px"
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615915577/Group_7_2x_yx7mil.png"
-              />
-              BLOG.Inc
+              <Text fontWeight="600">Readit.Inc</Text>
             </Flex>
             <Box className={footerStyles.social__icons}>
               <RiFacebookCircleFill className={footerStyles.social__icon} />
