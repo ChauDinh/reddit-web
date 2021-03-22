@@ -29,7 +29,13 @@ interface Props {}
 
 const CustomCheckbox: FC<FieldProps> = ({ field, form, ...props }) => {
   return (
-    <Checkbox mr="5px" mt="2px" {...field} {...props}>
+    <Checkbox
+      mr="5px"
+      mt="2px"
+      style={{ borderRadius: "50px" }}
+      {...field}
+      {...props}
+    >
       {field?.value}
     </Checkbox>
   );
@@ -129,8 +135,7 @@ const CreatePost: React.FC<Props> = () => {
                           fontWeight: "normal",
                           textTransform: "capitalize",
                           display: "inline-flex",
-                          color: "white",
-                          background: "black",
+                          color: "gray",
                           alignItems: "center",
                           justifyContent: "center",
                           padding: "3px 10px",
@@ -163,7 +168,7 @@ const CreatePost: React.FC<Props> = () => {
                   >
                     Create
                   </Button>
-                  <Button color="blackAlpha.900" variant="outline" ml={5}>
+                  <Button color={color} variant="outline" ml={5}>
                     Cancel
                   </Button>
                 </Flex>

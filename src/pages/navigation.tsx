@@ -23,7 +23,7 @@ const Navigation: React.FC<Props> = () => {
       <Heading
         mt="20px"
         w="100%"
-        fontSize={{ base: "30px", md: "40px", lg: "80px" }}
+        fontSize={{ base: "30px", md: "40px", lg: "60px" }}
         fontWeight={700}
         textAlign="center"
       >
@@ -34,7 +34,7 @@ const Navigation: React.FC<Props> = () => {
             color: "#c000ff",
           }}
         >
-          happiness
+          Happiness
         </span>
         .
       </Heading>
@@ -54,11 +54,11 @@ const Navigation: React.FC<Props> = () => {
             <Flex
               d="inline-flex"
               justifyContent="space-between"
-              bg="blue.700"
+              bg="white"
               borderRadius="10px"
               padding="10px"
               w="100%"
-              color="white"
+              border="1px solid rgba(190, 185, 200, 0.5)"
               mb={4}
               style={{
                 backgroundImage:
@@ -95,11 +95,11 @@ const Navigation: React.FC<Props> = () => {
               justifyContent="space-between"
               w="100%"
               mb={4}
-              bg="orange.200"
-              color="orange.800"
+              bg="white"
               padding="10px"
               paddingTop="120px"
               borderRadius="10px"
+              border="1px solid rgba(190, 185, 200, 0.5)"
               _hover={{
                 transform: "scale(1.1)",
               }}
@@ -128,12 +128,13 @@ const Navigation: React.FC<Props> = () => {
           </NextLink>
           <NextLink href="/blog">
             <Flex
-              bg="gray.200"
+              bg="white"
               d="inline-flex"
               padding="10px"
               w="100%"
               paddingTop="150px"
               borderRadius="10px"
+              border="1px solid rgba(190, 185, 200, 0.5)"
               mb={4}
               color="gray.800"
               justifyContent="space-between"
@@ -174,8 +175,8 @@ const Navigation: React.FC<Props> = () => {
               padding="10px"
               paddingTop="50px"
               borderRadius="10px"
-              bg="yellow.200"
-              color="yellow.800"
+              border="1px solid rgba(190, 185, 200, 0.5)"
+              bg="white"
               style={{
                 backgroundImage:
                   "url('https://res.cloudinary.com/dnlthcx1a/image/upload/v1615550914/rush-197_pk0hwi.png')",

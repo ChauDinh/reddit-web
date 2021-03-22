@@ -254,23 +254,32 @@ const Leaf = ({ attributes, children, leaf }: any) => {
         className={css`
           font-family: monospace;
           background: hsla(0, 0%, 100%, 0.5);
-          ${leaf.comment &&
-          css`
-            color: slategray;
-          `}
-          ${(leaf.operator || leaf.url) &&
-          css`
-            color: #9a6e3a;
-          `}
-        ${leaf.keyword &&
+          ${
+            leaf.comment &&
+            css`
+              color: slategray;
+            `
+          }
+          ${
+            (leaf.operator || leaf.url) &&
+            css`
+              color: #9a6e3a;
+            `
+          }
+        ${
+          leaf.keyword &&
           css`
             color: #07a;
-          `}
-        ${(leaf.variable || leaf.regex) &&
+          `
+        }
+        ${
+          (leaf.variable || leaf.regex) &&
           css`
             color: #e90;
-          `}
-        ${(leaf.number ||
+          `
+        }
+        ${
+          (leaf.number ||
             leaf.boolean ||
             leaf.tag ||
             leaf.constant ||
@@ -279,19 +288,26 @@ const Leaf = ({ attributes, children, leaf }: any) => {
             leaf.selector) &&
           css`
             color: #905;
-          `}
-        ${leaf.punctuation &&
+          `
+        }
+        ${
+          leaf.punctuation &&
           css`
             color: #999;
-          `}
-        ${(leaf.string || leaf.char) &&
+          `
+        }
+        ${
+          (leaf.string || leaf.char) &&
           css`
             color: #690;
-          `}
-        ${(leaf.function || leaf.class) &&
+          `
+        }
+        ${
+          (leaf.function || leaf.class) &&
           css`
             color: #dd4a68;
-          `}
+          `
+        }
         `}
       >
         {children}
@@ -423,8 +439,9 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
           style={{
             width: "100%",
             borderRadius: "3px 3px 0 0",
-            padding: "10px 0",
-            paddingTop: "0",
+            border: "1px solid #e2e8f0",
+            borderBottom: "none",
+            padding: "10px 16px",
             position: "relative",
             alignItems: "center",
             justifyContent: "space-between",
@@ -459,7 +476,6 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             </Select>
           </div>
         </Flex>
-        <hr />
         <Editable
           id={field.name}
           style={{
@@ -468,7 +484,7 @@ export const MyRichTextEditor: React.FC<Props> = (props: any) => {
             height: "500px",
             backgroundColor: "#fff",
             color: "black",
-            borderRadius: "3px",
+            borderRadius: "0 0 3px 3px",
             border: "1px solid #e2e8f0",
             borderTop: "none",
             padding: "15px 15px",

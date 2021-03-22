@@ -51,6 +51,10 @@ input[type="checkbox"] {
   background-color: red;
 }
 
+.chakra-checkbox__control {
+  border-radius: 50px !important;
+}
+
 @media only screen and (max-width: 768px) {
   .header__content {
     padding-top: 20px;
