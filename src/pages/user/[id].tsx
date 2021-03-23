@@ -12,9 +12,9 @@ import userProfileStyles from "./UserProfile.module.css";
 import { useGetPostsFromUrl } from "../../utils/useGetPostsFromUrl";
 import { useGetFollowingFromUrl } from "../../utils/useGetFollowingFromUrl";
 import { useGetFollowerFromUrl } from "../../utils/useGetFollowerFromUrl";
-import { MiniPostCard } from "../../components/MiniPostCard/MiniPostCard";
 import { FollowButton } from "../../components/FollowButton/FollowButton";
 import { BgAndColor } from "../../utils/bgAndColor";
+import { PostCard } from "../../components/PostCard/PostCard";
 
 interface Props {}
 
@@ -115,7 +115,7 @@ const User: React.FC<Props> = () => {
             </Flex>
           </Flex>
           {postsData.postsByCreatorId.posts.map((post) => (
-            <MiniPostCard key={post.id} post={post} isColumn={true} />
+            <PostCard post={post} />
           ))}
         </Box>
       </Wrapper>

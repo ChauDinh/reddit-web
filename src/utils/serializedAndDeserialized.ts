@@ -75,7 +75,7 @@ export const serializedSnippet = (nodes: Node[]) => {
     })
     .join("\n");
   return {
-    text: result.length < 46 ? result : result.slice(0, 46) + "...",
+    text: result.length < 46 ? result : result.slice(0, 100) + "...",
     imgUrl,
   };
 };

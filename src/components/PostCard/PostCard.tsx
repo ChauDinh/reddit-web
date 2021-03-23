@@ -1,56 +1,120 @@
+import { Flex, Image, Text, Heading } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
-import {
-  Avatar,
-  Box,
-  Flex,
-  Heading,
-  Text,
-  Image,
-  Link,
-} from "@chakra-ui/react";
+
 import {
   PostSnippetFragment,
   SinglePostSnippetFragment,
 } from "../../generated/graphql";
 import { serializedSnippet } from "../../utils/serializedAndDeserialized";
-import PostCardStyles from "./PostCard.module.css";
-import { avatarUrlGenerator } from "../../utils/createAvatar";
+import { avatarUrlGenerator, backgroundUrl } from "../../utils/createAvatar";
+import { useGetCategories } from "../../utils/useGetCategories";
+import ErrorPage from "../../pages/404";
 
 interface Props {
   post: PostSnippetFragment | SinglePostSnippetFragment;
 }
 
 export const PostCard: React.FC<Props> = ({ post }) => {
+  const { data, loading, error } = useGetCategories(post.id);
+
+  if (loading) return null;
+  if (error) return <ErrorPage />;
+  if (!data?.postCategoriesByPostId) return <ErrorPage />;
+
   return (
-    <Box className={PostCardStyles.post__container}>
-      <Text className={PostCardStyles.post__tech}>General</Text>
-      <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+    <NextLink href="/post/[id]" as={`/post/${post.id}`}>
+      <Flex
+        direction="column"
+        _hover={{
+          boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
+        }}
+        cursor="pointer"
+        borderRadius="12px"
+        border="1px solid rgba(200, 200, 200, 0.4)"
+      >
         <Image
-          className={PostCardStyles.post__img}
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1604317187/undraw_video_influencer_9oyy_kod7oy.png"
+          src={
+            serializedSnippet(JSON.parse(post.text)).imgUrl ||
+            backgroundUrl[post.id % 7]
+          }
+          bg="gray.200"
+          borderRadius="12px 12px 0 0"
+          w="100%"
+          h={{ base: "56,25%", md: "256px", lg: "256px" }}
+          objectFit="cover"
+          mb="10px"
         />
-      </NextLink>
-      <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-        <Flex className={PostCardStyles.postTitle__container}>
-          <Heading className={PostCardStyles.post__title}>{post.title}</Heading>
-          <Box className={PostCardStyles.fullyPost__title}>{post.title}</Box>
+        <Text
+          fontSize="14px"
+          color="gray.500"
+          textTransform="uppercase"
+          display="inline-block"
+          mb="5px"
+          padding="0 15px"
+        >
+          {data!.postCategoriesByPostId[0]?.categories.title || "no category"}
+        </Text>
+        <Heading
+          as="h3"
+          size="md"
+          mb="10px"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "100%",
+            maxWidth: "100%",
+          }}
+          flexGrow={1}
+          padding="0 15px"
+        >
+          {post.title}
+        </Heading>
+        <Text
+          fontWeight="400"
+          fontSize="14px"
+          mb="20px"
+          color="gray.500"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "100%",
+            maxWidth: "100%",
+          }}
+          padding="0 15px"
+        >
+          {serializedSnippet(JSON.parse(post.text)).text}
+        </Text>
+        <Flex alignItems="center" padding="15px" paddingTop="0px">
+          <Image
+            src={avatarUrlGenerator(post.creatorId)}
+            width="50px"
+            height="50px"
+            borderRadius="10px"
+            objectFit="cover"
+            flexShrink={0}
+            mr="10px"
+          />
+          <Flex direction="column">
+            <Text fontWeight={600} fontSize="14px" mb="5px">
+              By: {post.creator.username}
+            </Text>
+            <Text fontSize="12px" color="gray.500" fontWeight="300">
+              {
+                new Date(parseInt(post.createdAt))
+                  .toLocaleString()
+                  .split(",")[0]
+              }
+            </Text>
+          </Flex>
         </Flex>
-      </NextLink>
-      <NextLink href="/post/[id]" as={`/post/${post.id}`}>
-        <Text className={PostCardStyles.post__text}>
-          {serializedSnippet(JSON.parse(post.text))}
-        </Text>
-      </NextLink>
-      <Flex className={PostCardStyles.post__author}>
-        <Avatar size="sm" src={avatarUrlGenerator(post.creator.id)} />
-        <Text as={Link} ml={2}>
-          {post.creator.username}
-        </Text>
-        <Text ml={1}>
-          {new Date(parseInt(post.updatedAt)).toLocaleString().split(",")[0]}
-        </Text>
       </Flex>
-    </Box>
+    </NextLink>
   );
 };

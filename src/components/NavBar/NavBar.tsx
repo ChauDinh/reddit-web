@@ -154,17 +154,17 @@ export const NavBar: React.FC<Props> = () => {
               <DrawerBody className={navBarStyles.navbar__drawerBody}>
                 <List spacing={5}>
                   <ListItem>
-                    <ListIcon as={BiHome} />
+                    <ListIcon as={BiHome} mb="3px" />
                     <NextLink href="/" as={`/`}>
                       HOME
                     </NextLink>
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={BiFile} />
+                    <ListIcon as={BiFile} mb="3px" />
                     <NextLink href="/blog">BLOG</NextLink>
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={BiUserCircle} />
+                    <ListIcon as={BiUserCircle} mb="3px" />
                     <NextLink href="/user/[id]" as={`/user/${data.me.id}`}>
                       MY ACCOUNT
                     </NextLink>
@@ -180,9 +180,9 @@ export const NavBar: React.FC<Props> = () => {
                 <List spacing={5}>
                   <ListItem>
                     {colorMode === "light" ? (
-                      <ListIcon as={RiSunLine} />
+                      <ListIcon as={RiSunLine} mb="3px" />
                     ) : (
-                      <ListIcon as={RiMoonClearFill} />
+                      <ListIcon as={RiMoonClearFill} mb="3px" />
                     )}
                     {colorMode}
                     <Switch
@@ -193,13 +193,13 @@ export const NavBar: React.FC<Props> = () => {
                     />
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={BiCodeBlock} />
+                    <ListIcon as={BiCodeBlock} mb="3px" />
                     SOURCE CODE
                   </ListItem>
                 </List>
               </DrawerBody>
             </Box>
-            <Divider mb={0} />
+            <Divider mb={0} mt="20px" />
             <DrawerHeader className={navBarStyles.navbar__drawerHeader}>
               <Button
                 variant="link"

@@ -1,0 +1,11 @@
+fragment PublicationSnippet on Publication {
+  id
+  title
+  creatorId
+  creator {
+    username
+  }
+  createdAt
+  updatedAt
+  isPrivate
+}

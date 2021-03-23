@@ -32,6 +32,7 @@ export type Query = {
   categoriesByCreatorId?: Maybe<Array<Category>>;
   sentMessages?: Maybe<Array<DirectMessage>>;
   receivedMessages?: Maybe<Array<DirectMessage>>;
+  postCategories?: Maybe<Array<PostCategory>>;
   postCategoriesByPostId?: Maybe<Array<PostCategory>>;
   publications: Array<Publication>;
   publicationById: CreatePublicationResponse;
@@ -481,6 +482,15 @@ export type PostSnippetFragment = (
   ) }
 );
 
+export type PublicationSnippetFragment = (
+  { __typename?: 'Publication' }
+  & Pick<Publication, 'id' | 'title' | 'creatorId' | 'createdAt' | 'updatedAt' | 'isPrivate'>
+  & { creator: (
+    { __typename?: 'User' }
+    & Pick<User, 'username'>
+  ) }
+);
+
 export type RegularCreatePostFieldErrorFragment = (
   { __typename?: 'CreatePostFieldError' }
   & Pick<CreatePostFieldError, 'field' | 'message'>
@@ -910,11 +920,7 @@ export type PublicationsQuery = (
   { __typename?: 'Query' }
   & { publications: Array<(
     { __typename?: 'Publication' }
-    & Pick<Publication, 'id' | 'title' | 'createdAt' | 'updatedAt' | 'isPrivate'>
-    & { creator: (
-      { __typename?: 'User' }
-      & Pick<User, 'username'>
-    ) }
+    & PublicationSnippetFragment
   )> }
 );
 
@@ -938,6 +944,19 @@ export type SubscriberQuery = (
   & Pick<Query, 'subscriber'>
 );
 
+export const PublicationSnippetFragmentDoc = gql`
+    fragment PublicationSnippet on Publication {
+  id
+  title
+  creatorId
+  creator {
+    username
+  }
+  createdAt
+  updatedAt
+  isPrivate
+}
+    `;
 export const RegularCreatePostFieldErrorFragmentDoc = gql`
     fragment RegularCreatePostFieldError on CreatePostFieldError {
   field
@@ -1927,17 +1946,10 @@ export type PublicationByIdQueryResult = Apollo.QueryResult<PublicationByIdQuery
 export const PublicationsDocument = gql`
     query Publications {
   publications {
-    id
-    title
-    creator {
-      username
-    }
-    createdAt
-    updatedAt
-    isPrivate
+    ...PublicationSnippet
   }
 }
-    `;
+    ${PublicationSnippetFragmentDoc}`;
 
 /**
  * __usePublicationsQuery__

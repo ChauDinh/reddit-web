@@ -41,7 +41,7 @@ const Login: React.FC<Props> = () => {
               setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data?.login?.user) {
               // navigate to login page
-              router.push(`${router.query.next || "/navigation"}`);
+              router.push(`${router.query.next || "/blog"}`);
             }
           }}
         >

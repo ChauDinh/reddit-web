@@ -44,7 +44,7 @@ const Index: React.FC<Props> = () => {
   if (error) return <ErrorPage />;
   if (data?.me) {
     const router = useRouter();
-    router.push("/navigation");
+    router.push("/blog");
     return null;
   } else {
     return (
@@ -81,7 +81,7 @@ const Index: React.FC<Props> = () => {
             >
               We'll help you find great things to read.
             </Heading>
-            <NextLink href="/navigation">
+            <NextLink href="/blog">
               <Button color={bg} bg={color} colorScheme="gray">
                 Get Started
               </Button>
@@ -302,7 +302,7 @@ const Index: React.FC<Props> = () => {
               size="md"
               colorScheme="gray"
             >
-              <NextLink href="/navigation">Get Started</NextLink>
+              <NextLink href="/blog">Get Started</NextLink>
             </Button>
           </Flex>
         </Wrapper>

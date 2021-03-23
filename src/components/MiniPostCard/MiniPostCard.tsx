@@ -25,7 +25,7 @@ export const MiniPostCard: React.FC<Props> = ({ post, isColumn }) => {
 
   return (
     <Flex
-      direction={isColumn ? "column-reverse" : "row"}
+      direction="column"
       className={MiniPostCardStyles.container}
       maxH={isColumn ? "500px" : "160px"}
       borderRadius="none"
