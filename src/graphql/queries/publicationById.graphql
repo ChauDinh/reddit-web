@@ -1,9 +1,7 @@
 query PublicationById($publicationId: Float!) {
   publicationById(publicationId: $publicationId) {
     publication {
-      id
-      title
-      isPrivate
+      ...PublicationSnippet
     }
     errors {
       field

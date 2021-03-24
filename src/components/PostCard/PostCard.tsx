@@ -94,8 +94,8 @@ export const PostCard: React.FC<Props> = ({ post }) => {
         <Flex alignItems="center" padding="15px" paddingTop="0px">
           <Image
             src={avatarUrlGenerator(post.creatorId)}
-            width="50px"
-            height="50px"
+            width="40px"
+            height="40px"
             borderRadius="10px"
             objectFit="cover"
             flexShrink={0}

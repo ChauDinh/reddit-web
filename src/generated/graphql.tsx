@@ -905,7 +905,7 @@ export type PublicationByIdQuery = (
     { __typename?: 'CreatePublicationResponse' }
     & { publication?: Maybe<(
       { __typename?: 'Publication' }
-      & Pick<Publication, 'id' | 'title' | 'isPrivate'>
+      & PublicationSnippetFragment
     )>, errors?: Maybe<Array<(
       { __typename?: 'CreatePublicationFieldError' }
       & Pick<CreatePublicationFieldError, 'field' | 'message'>
@@ -1906,9 +1906,7 @@ export const PublicationByIdDocument = gql`
     query PublicationById($publicationId: Float!) {
   publicationById(publicationId: $publicationId) {
     publication {
-      id
-      title
-      isPrivate
+      ...PublicationSnippet
     }
     errors {
       field
@@ -1916,7 +1914,7 @@ export const PublicationByIdDocument = gql`
     }
   }
 }
-    `;
+    ${PublicationSnippetFragmentDoc}`;
 
 /**
  * __usePublicationByIdQuery__

@@ -1,5 +1,7 @@
 import React from "react";
 import { Avatar, Text, Flex, Button, Box } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
+
 import { createWithApollo } from "../../utils/withApollo";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { Layout } from "../../components/Layout";
@@ -17,6 +19,14 @@ import { BgAndColor } from "../../utils/bgAndColor";
 import { PostCard } from "../../components/PostCard/PostCard";
 
 interface Props {}
+
+createBreakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+});
 
 const User: React.FC<Props> = () => {
   const { data, loading } = useGetUserFromUrl();
@@ -64,7 +74,16 @@ const User: React.FC<Props> = () => {
     <Layout variant="regular" direction="column">
       <Wrapper variants="regular">
         <Box className={userProfileStyles.header}>
-          <Flex className={userProfileStyles.usernameAndAvatar}>
+          <Flex
+            className={userProfileStyles.usernameAndAvatar}
+            alignItems="center"
+            justifyContent={{
+              base: "center",
+              md: "flex-start",
+              lg: "flex-start",
+            }}
+            direction={{ base: "column", md: "row", lg: "row" }}
+          >
             <Avatar
               className={userProfileStyles.avatar}
               src={`${userAvatarUrl}`}
@@ -77,6 +96,11 @@ const User: React.FC<Props> = () => {
             <Flex
               className={userProfileStyles.userNameAndBtn}
               alignItems="center"
+              justifyContent={{
+                base: "center",
+                md: "flex-start",
+                lg: "flex-start",
+              }}
             >
               <Button
                 colorScheme="gray"
@@ -84,7 +108,6 @@ const User: React.FC<Props> = () => {
                 border="1px"
                 variant="outline"
                 color={color}
-                mr={4}
                 size="md"
               >
                 Message
@@ -96,7 +119,12 @@ const User: React.FC<Props> = () => {
                 }}
               />
             </Flex>
-            <Flex className={userProfileStyles.userData}>
+            <Flex
+              className={userProfileStyles.userData}
+              color="gray.600"
+              fontWeight="500"
+              fontSize="14px"
+            >
               <Text className={userProfileStyles.postsData}>
                 <span> {postsData.postsByCreatorId.posts.length}</span>
                 {postsData.postsByCreatorId.posts.length > 1

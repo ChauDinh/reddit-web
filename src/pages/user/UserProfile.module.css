@@ -10,10 +10,15 @@
   height: 80px !important;
   width: 80px !important;
   margin: 0;
+  border-radius: 12px !important;
+}
+
+.avatar > img {
+  border-radius: 12px !important;
 }
 
 .username {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   margin-right: 20px;
   margin-left: 20px;
@@ -76,7 +81,6 @@
     align-items: center;
   }
   .userNameAndBtn {
-    justify-content: flex-start !important;
     width: 100%;
   }
   .username {
@@ -86,6 +90,7 @@
   .userData {
     width: 100%;
     justify-content: space-between;
+    margin-top: 15px;
   }
   .postsData,
   .followersData,
