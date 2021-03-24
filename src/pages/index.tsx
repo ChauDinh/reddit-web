@@ -58,24 +58,23 @@ const Index: React.FC<Props> = () => {
             pt="30px"
           >
             <Heading
-              fontSize={{ base: "30px", sm: "40px", md: "60px", lg: "80px" }}
-              fontWeight="600"
+              as="h2"
+              size="2xl"
+              fontSize={{ base: "50px", sm: "50px", md: "70px", lg: "90px" }}
+              fontWeight="800"
               textAlign="center"
               mb={6}
               lineHeight={{ base: "45px", md: "90px", lg: "90px" }}
+              fontFamily="'Patrick Hand', cursive"
             >
-              <span>Write</span> to be understood,
-              <br />
-              <span>Speak</span> to be heart,
-              <br />
-              <span>Read</span> to grow.
+              Get smarter about what matters to you
             </Heading>
             <Heading
               as="h5"
               colorScheme="gray"
-              color={color}
+              color="gray.600"
               size="md"
-              fontWeight="800"
+              fontWeight="600"
               textAlign="center"
               mb={6}
             >
@@ -98,7 +97,7 @@ const Index: React.FC<Props> = () => {
           <Image
             w="800px"
             mb="40px"
-            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615933451/pablo-815_bso4ux.png"
+            src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616598213/pixeltrue-meditation-1_u4wik7.png"
           />
         </Flex>
 

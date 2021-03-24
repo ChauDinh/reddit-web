@@ -28,8 +28,10 @@ export const Pricing: React.FC<Props> = () => {
     >
       <Box textAlign="center" className={PricingStyles.plans}>
         <Image
+          w="250px"
+          h="200px"
           mb="10px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934221/pablo-278_kvxwlz.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616599188/pixeltrue-icons-discount-1_wpglya.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Free
@@ -63,8 +65,8 @@ export const Pricing: React.FC<Props> = () => {
         <Image
           mb="10px"
           w="250px"
-          h="210px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934218/pablo-886_gytouu.png"
+          h="200px"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616599180/pixeltrue-icons-receipt_tlyedq.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Premium
@@ -110,8 +112,8 @@ export const Pricing: React.FC<Props> = () => {
         <Image
           mb="10px"
           w="250px"
-          h="210px"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1615934217/pablo-social-distancing-friendship-on-the-phone-stay-home-concept-1_b4zkii.png"
+          h="20px"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616599182/pixeltrue-icons-grow-your-money_wure2a.png"
         />
         <Heading as="h2" size="xl" mb="10px" fontWeight="800">
           Business

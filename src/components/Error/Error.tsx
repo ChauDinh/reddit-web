@@ -23,7 +23,7 @@ export const Error: React.FC<Props> = () => {
       >
         <Image
           size="100%"
-          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1608352687/undraw_marilyn_v73y_ecoisd.png"
+          src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616595643/pixeltrue-error-1_q4ih3n.png"
         />
         <Button
           leftIcon={<BiArrowBack />}
