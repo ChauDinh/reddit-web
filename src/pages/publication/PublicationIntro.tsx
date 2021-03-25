@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/client";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import React from "react";
 import { useCreateMemberMutation } from "../../generated/graphql";
@@ -21,8 +21,19 @@ export const PublicationIntro: React.FC<Props> = ({ publicationId }) => {
   const apolloClient = useApolloClient();
 
   return (
-    <Flex direction="column" w="100%" mt="30px">
-      <Text>
+    <Flex
+      direction="column"
+      w="100%"
+      h="calc(100vh - 265px)"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Image
+        w="256px"
+        src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616664361/crayon-2088_vvv0fe.png"
+        mb="20px"
+      />
+      <Text fontSize="28px" fontWeight="300" mb="10px" textAlign="center">
         This is a private publication. Please subscribe to see the content
       </Text>
       <Button
