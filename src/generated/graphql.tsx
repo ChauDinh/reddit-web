@@ -894,6 +894,24 @@ export type PostsByPublicationIdQuery = (
   )> }
 );
 
+export type PostsInFollowingPublicationsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PostsInFollowingPublicationsQuery = (
+  { __typename?: 'Query' }
+  & { postsInFollowingPublications?: Maybe<(
+    { __typename?: 'PaginatedPosts' }
+    & Pick<PaginatedPosts, 'hasMore'>
+    & { posts: Array<(
+      { __typename?: 'Post' }
+      & PostSnippetFragment
+    )> }
+  )> }
+);
+
 export type PublicationByIdQueryVariables = Exact<{
   publicationId: Scalars['Float'];
 }>;
@@ -1902,6 +1920,43 @@ export function usePostsByPublicationIdLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type PostsByPublicationIdQueryHookResult = ReturnType<typeof usePostsByPublicationIdQuery>;
 export type PostsByPublicationIdLazyQueryHookResult = ReturnType<typeof usePostsByPublicationIdLazyQuery>;
 export type PostsByPublicationIdQueryResult = Apollo.QueryResult<PostsByPublicationIdQuery, PostsByPublicationIdQueryVariables>;
+export const PostsInFollowingPublicationsDocument = gql`
+    query PostsInFollowingPublications($limit: Int!, $cursor: String) {
+  postsInFollowingPublications(limit: $limit, cursor: $cursor) {
+    hasMore
+    posts {
+      ...PostSnippet
+    }
+  }
+}
+    ${PostSnippetFragmentDoc}`;
+
+/**
+ * __usePostsInFollowingPublicationsQuery__
+ *
+ * To run a query within a React component, call `usePostsInFollowingPublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsInFollowingPublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsInFollowingPublicationsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      cursor: // value for 'cursor'
+ *   },
+ * });
+ */
+export function usePostsInFollowingPublicationsQuery(baseOptions?: Apollo.QueryHookOptions<PostsInFollowingPublicationsQuery, PostsInFollowingPublicationsQueryVariables>) {
+        return Apollo.useQuery<PostsInFollowingPublicationsQuery, PostsInFollowingPublicationsQueryVariables>(PostsInFollowingPublicationsDocument, baseOptions);
+      }
+export function usePostsInFollowingPublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsInFollowingPublicationsQuery, PostsInFollowingPublicationsQueryVariables>) {
+          return Apollo.useLazyQuery<PostsInFollowingPublicationsQuery, PostsInFollowingPublicationsQueryVariables>(PostsInFollowingPublicationsDocument, baseOptions);
+        }
+export type PostsInFollowingPublicationsQueryHookResult = ReturnType<typeof usePostsInFollowingPublicationsQuery>;
+export type PostsInFollowingPublicationsLazyQueryHookResult = ReturnType<typeof usePostsInFollowingPublicationsLazyQuery>;
+export type PostsInFollowingPublicationsQueryResult = Apollo.QueryResult<PostsInFollowingPublicationsQuery, PostsInFollowingPublicationsQueryVariables>;
 export const PublicationByIdDocument = gql`
     query PublicationById($publicationId: Float!) {
   publicationById(publicationId: $publicationId) {

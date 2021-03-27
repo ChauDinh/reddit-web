@@ -1,0 +1,8 @@
+query PostsInFollowingPublications($limit: Int!, $cursor: String) {
+  postsInFollowingPublications(limit: $limit, cursor: $cursor) {
+    hasMore
+    posts {
+      ...PostSnippet
+    }
+  }
+}

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Text,
-  Fade,
-  Grid,
-  Heading,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Fade, Grid, Icon } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import NextLink from "next/link";
 import { BiPlusCircle } from "react-icons/bi";
@@ -19,8 +9,9 @@ import ErrorPage from "./404";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 import { PostCard } from "../components/PostCard/PostCard";
-import { avatarUrlGenerator } from "../utils/createAvatar";
 import { BgAndColor } from "../utils/bgAndColor";
+import { FeaturedPost } from "../components/FeaturedPost/FeaturedPost";
+import { FollowingPosts } from "../components/FollowingPosts/FollowingPosts";
 
 createBreakpoints({
   sm: "30em",
@@ -33,7 +24,7 @@ createBreakpoints({
 const Blog = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
     variables: {
-      limit: 9,
+      limit: 6,
       cursor: null as null | string,
     },
     notifyOnNetworkStatusChange: true,
@@ -45,6 +36,8 @@ const Blog = () => {
     console.error("Error: ", error?.message);
     return <ErrorPage />;
   }
+
+  console.log("[display new post length]: ", data?.posts.posts.length);
 
   return (
     <Fade in={true}>
@@ -58,145 +51,89 @@ const Blog = () => {
             </NextLink>
           </Wrapper>
           <Wrapper variants="regular">
-            <Grid
-              padding="15px"
-              border="1px solid rgba(200, 200, 200, 0.4)"
-              borderRadius="12px"
-              w="100%"
-              templateColumns={{
-                base: "repeat(1, 1fr)",
-                md: "1.5fr 1fr",
-                lg: "1.5fr 1fr",
-              }}
-              gridGap={{ base: "0 20px", md: "0 20px", lg: "0 60px" }}
-            >
-              <Image
-                bg="gray.200"
-                borderRadius="12px"
-                w="100%"
-                h="296px"
-                objectFit="cover"
-                mb={{ base: "10px", md: "0px", lg: "0px" }}
-                src="https://res.cloudinary.com/dnlthcx1a/image/upload/v1616422016/crayon-waiting-3_xlr4rh.png"
-              />
-
-              <Flex direction="column">
-                <Text
-                  fontSize="14px"
-                  color="gray.500"
-                  textTransform="uppercase"
-                  display="inline-block"
-                  mb="5px"
-                >
-                  JavaScript
-                </Text>
-                <Heading
-                  as="h2"
-                  size="lg"
-                  fontWeight={800}
-                  mb="10px"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: 4,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    width: "100%",
-                    maxWidth: "100%",
-                  }}
-                  flexGrow={1}
-                >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Veritatis sit delectus voluptate explicabo perspiciatis? Nam
-                  animi quae sed esse atque iste et suscipit dicta nesciunt
-                  neque eos laborum commodi qui est ullam deleniti aliquid
-                  tenetur aspernatur, amet eveniet, id velit mollitia iure.
-                  Impedit, nostrum ullam quod dolores consectetur voluptate
-                  rerum.
-                </Heading>
-                <Text
-                  fontWeight="400"
-                  fontSize="14px"
-                  mb="20px"
-                  color="gray.500"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    width: "100%",
-                    maxWidth: "100%",
-                  }}
-                >
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Doloremque earum, tempora maxime iure reiciendis fuga sint.
-                  Quibusdam ut labore vitae eveniet autem sed, distinctio cumque
-                  quam? Explicabo necessitatibus ut ipsum.
-                </Text>
-                <Flex alignItems="center">
-                  <Image
-                    src={avatarUrlGenerator(1)}
-                    width="50px"
-                    height="50px"
-                    borderRadius="10px"
-                    objectFit="cover"
-                    flexShrink={0}
-                    mr="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontWeight={600} fontSize="14px" mb="5px">
-                      By: Ben Awad
-                    </Text>
-                    <Text fontSize="12px" color="gray.500" fontWeight="300">
-                      3/1/2021
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </Grid>
+            <Flex direction="column" w="100%" maxW="1000px">
+              <Text fontSize="18px" fontWeight={800} mb="20px">
+                Following publications
+              </Text>
+              <FollowingPosts />
+            </Flex>
+          </Wrapper>
+          <Wrapper variants="regular">
+            <Flex direction="column" w="100%" maxW="1000px">
+              <Text fontSize="18px" fontWeight="800" mb="20px">
+                Featured
+              </Text>
+              <FeaturedPost />
+            </Flex>
           </Wrapper>
           {loading && !data ? (
             <Text>Loading...</Text>
           ) : (
-            <Wrapper variants="regular">
-              <Grid
+            <Flex direction="column">
+              <Flex
+                maxW="1000px"
                 w="100%"
-                templateColumns={{
-                  base: "repeat(1, 1fr)",
-                  md: "repeat(2, 1fr)",
-                  lg: "repeat(3, 1fr)",
-                }}
-                gap={{ base: "20px", md: "20px", lg: "30px" }}
+                alignItems="center"
+                margin="0 auto"
+                mt="20px"
+                p={{ base: "0 15px", md: "0 15px", lg: "0" }}
               >
-                {data!.posts.posts.map((post) => (
-                  <PostCard key={post.id} post={post} />
-                ))}
-              </Grid>
-              {data && data.posts.hasMore ? (
-                <Flex alignItems="center" justifyContent="center" mt={8} pb={8}>
-                  <Button
-                    colorScheme="blackAlpha"
-                    bg="blackAlpha.900"
-                    color="white"
-                    size="sm"
-                    onClick={() => {
-                      fetchMore({
-                        variables: {
-                          limit: variables?.limit,
-                          cursor:
-                            data.posts.posts[data.posts.posts.length - 1]
-                              .createdAt,
-                        },
-                      });
+                <Text fontSize="18px" fontWeight="800" mr="15px">
+                  New posts
+                </Text>
+                <Button size="sm">Create post</Button>
+              </Flex>
+              <Wrapper variants="regular">
+                <Flex direction="column" w="100%">
+                  <Grid
+                    w="100%"
+                    templateColumns={{
+                      base: "repeat(1, 1fr)",
+                      md: "repeat(2, 1fr)",
+                      lg: "repeat(3, 1fr)",
                     }}
-                    isLoading={loading}
+                    gap={{ base: "20px", md: "20px", lg: "30px" }}
                   >
-                    Load more
-                  </Button>
+                    {data!.posts.posts.map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
+                  </Grid>
+                  {data && data.posts.hasMore ? (
+                    <Flex
+                      alignItems="center"
+                      justifyContent="center"
+                      mt={8}
+                      pb={8}
+                    >
+                      <Button
+                        colorScheme="blackAlpha"
+                        bg="blackAlpha.900"
+                        color="white"
+                        size="sm"
+                        onClick={() => {
+                          console.log(
+                            "[NEW POSTS CURSOR]: ",
+                            data.posts.posts[data.posts.posts.length - 1].title
+                          );
+                          fetchMore({
+                            variables: {
+                              limit: variables?.limit,
+                              cursor:
+                                data.posts.posts[data.posts.posts.length - 1]
+                                  .createdAt,
+                            },
+                          });
+                          console.log("new post is coming...");
+                        }}
+                        isLoading={loading}
+                      >
+                        Load more
+                      </Button>
+                    </Flex>
+                  ) : null}
                 </Flex>
-              ) : null}
-            </Wrapper>
+              </Wrapper>
+            </Flex>
           )}
         </Box>
       </Layout>
