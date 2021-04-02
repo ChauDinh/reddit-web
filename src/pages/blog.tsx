@@ -52,9 +52,19 @@ const Blog = () => {
           </Wrapper>
           <Wrapper variants="regular">
             <Flex direction="column" w="100%" maxW="1000px">
-              <Text fontSize="18px" fontWeight={800} mb="20px">
-                Following publications
-              </Text>
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text fontSize="18px" fontWeight={800} mb="20px">
+                  Following publications
+                </Text>
+                <Text
+                  // fontSize="14px"
+                  fontWeight={800}
+                  mb="20px"
+                  color="blue.500"
+                >
+                  <NextLink href="/pubs">Read more</NextLink>
+                </Text>
+              </Flex>
               <FollowingPosts />
             </Flex>
           </Wrapper>

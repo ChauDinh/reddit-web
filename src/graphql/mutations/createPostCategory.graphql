@@ -1,6 +1,15 @@
-mutation CreatePostCategory($postId: Float!, $categoryId: Float!) {
-  createPostCategory(postId: $postId, categoryId: $categoryId) {
-    postId
-    categoryId
-  }
+mutation CreatePostCategory(
+  $postId: Float!
+  $categoryId: Float!
+  $postTitle: String!
+  $categoryTitle: String!
+  $creator: String!
+) {
+  createPostCategory(
+    postId: $postId
+    categoryId: $categoryId
+    postTitle: $postTitle
+    categoryTitle: $categoryTitle
+    creator: $creator
+  )
 }

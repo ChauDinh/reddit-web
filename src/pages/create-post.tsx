@@ -91,6 +91,10 @@ const CreatePost: React.FC<Props> = () => {
                         variables: {
                           postId: response.data!.createPost.post!.id,
                           categoryId: selectedCategory.id,
+                          postTitle: response.data!.createPost.post!.title,
+                          categoryTitle: selectedCategory.title,
+                          creator: response.data?.createPost.post?.creator
+                            .username as string,
                         },
                       })
                   );

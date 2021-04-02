@@ -61,17 +61,6 @@ export const FollowingPosts: React.FC<Props> = () => {
             color="white"
             size="sm"
             onClick={() => {
-              console.log(
-                "[CURSOR]: ",
-                new Date(
-                  parseInt(
-                    data.postsInFollowingPublications!.posts[
-                      data.postsInFollowingPublications!.posts.length - 1
-                    ].createdAt
-                  )
-                )
-              );
-              console.log("start fetching...");
               fetchMore({
                 variables: {
                   limit: variables?.limit,
@@ -80,7 +69,6 @@ export const FollowingPosts: React.FC<Props> = () => {
                   ].createdAt,
                 },
               });
-              console.log("fetching completed...");
             }}
             isLoading={loading}
           >

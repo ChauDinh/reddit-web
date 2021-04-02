@@ -158,6 +158,8 @@ export type PostCategory = {
   postId: Scalars['Float'];
   category: Category;
   post: Post;
+  postTitle: Scalars['String'];
+  categoryTitle: Scalars['String'];
   categories: Category;
 };
 
@@ -274,7 +276,7 @@ export type Mutation = {
   deleteCategory: Scalars['Boolean'];
   createMessage: DirectMessage;
   deleteMessage: Scalars['Boolean'];
-  createPostCategory: PostCategory;
+  createPostCategory: Scalars['Boolean'];
   createStory: Story;
   deleteStory: Scalars['Boolean'];
   createPublication: CreatePublicationResponse;
@@ -366,6 +368,9 @@ export type MutationDeleteMessageArgs = {
 
 
 export type MutationCreatePostCategoryArgs = {
+  creator: Scalars['String'];
+  categoryTitle: Scalars['String'];
+  postTitle: Scalars['String'];
   categoryId: Scalars['Float'];
   postId: Scalars['Float'];
 };
@@ -607,15 +612,15 @@ export type CreatePostMutation = (
 export type CreatePostCategoryMutationVariables = Exact<{
   postId: Scalars['Float'];
   categoryId: Scalars['Float'];
+  postTitle: Scalars['String'];
+  categoryTitle: Scalars['String'];
+  creator: Scalars['String'];
 }>;
 
 
 export type CreatePostCategoryMutation = (
   { __typename?: 'Mutation' }
-  & { createPostCategory: (
-    { __typename?: 'PostCategory' }
-    & Pick<PostCategory, 'postId' | 'categoryId'>
-  ) }
+  & Pick<Mutation, 'createPostCategory'>
 );
 
 export type CreatePublicationMutationVariables = Exact<{
@@ -1223,11 +1228,8 @@ export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutati
 export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
 export const CreatePostCategoryDocument = gql`
-    mutation CreatePostCategory($postId: Float!, $categoryId: Float!) {
-  createPostCategory(postId: $postId, categoryId: $categoryId) {
-    postId
-    categoryId
-  }
+    mutation CreatePostCategory($postId: Float!, $categoryId: Float!, $postTitle: String!, $categoryTitle: String!, $creator: String!) {
+  createPostCategory(postId: $postId, categoryId: $categoryId, postTitle: $postTitle, categoryTitle: $categoryTitle, creator: $creator)
 }
     `;
 export type CreatePostCategoryMutationFn = Apollo.MutationFunction<CreatePostCategoryMutation, CreatePostCategoryMutationVariables>;
@@ -1247,6 +1249,9 @@ export type CreatePostCategoryMutationFn = Apollo.MutationFunction<CreatePostCat
  *   variables: {
  *      postId: // value for 'postId'
  *      categoryId: // value for 'categoryId'
+ *      postTitle: // value for 'postTitle'
+ *      categoryTitle: // value for 'categoryTitle'
+ *      creator: // value for 'creator'
  *   },
  * });
  */
