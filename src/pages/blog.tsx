@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { BiPlusCircle } from "react-icons/bi";
 
 import { Layout } from "../components/Layout";
-import { usePostsQuery } from "../generated/graphql";
+import { useMeQuery, usePostsQuery } from "../generated/graphql";
 import ErrorPage from "./404";
 import { createWithApollo } from "../utils/withApollo";
 import { Wrapper } from "../components/Wrapper/Wrapper";
@@ -12,6 +12,7 @@ import { PostCard } from "../components/PostCard/PostCard";
 import { BgAndColor } from "../utils/bgAndColor";
 import { FeaturedPost } from "../components/FeaturedPost/FeaturedPost";
 import { FollowingPosts } from "../components/FollowingPosts/FollowingPosts";
+import { isServer } from "../utils/isServer";
 
 createBreakpoints({
   sm: "30em",
@@ -29,6 +30,9 @@ const Blog = () => {
     },
     notifyOnNetworkStatusChange: true,
   });
+  const { data: meData, loading: meLoading, error: meError } = useMeQuery({
+    skip: isServer(),
+  });
 
   const { bg, color } = BgAndColor();
 
@@ -37,7 +41,9 @@ const Blog = () => {
     return <ErrorPage />;
   }
 
-  console.log("[display new post length]: ", data?.posts.posts.length);
+  if (meLoading) return null;
+  if (meError) return null;
+  if (!meData) return null;
 
   return (
     <Fade in={true}>
@@ -50,6 +56,7 @@ const Blog = () => {
               </Button>
             </NextLink>
           </Wrapper>
+
           <Wrapper variants="regular">
             <Flex direction="column" w="100%" maxW="1000px">
               <Flex alignItems="center" justifyContent="space-between">

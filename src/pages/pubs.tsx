@@ -23,12 +23,11 @@ createBreakpoints({
 
 const Pubs: React.FC<Props> = () => {
   const { data, loading, error } = usePublicationsQuery();
+  const { bg, color } = BgAndColor();
 
   if (error) return <ErrorPage />;
 
   if (loading) return <Text>loading...</Text>;
-
-  const { bg, color } = BgAndColor();
 
   return (
     <Layout variant="regular" direction="column">
@@ -44,7 +43,7 @@ const Pubs: React.FC<Props> = () => {
         </Text>
         <NextLink href="/create-publication">
           <Button
-            borderRadius="50px"
+            borderRadius="3px"
             size="sm"
             color={bg}
             bg={color}

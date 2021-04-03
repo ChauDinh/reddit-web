@@ -38,6 +38,7 @@ import {
   RiArrowDropDownLine,
 } from "react-icons/ri";
 import { useApolloClient } from "@apollo/client";
+import { useRouter } from "next/router";
 
 import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
@@ -51,6 +52,8 @@ export const NavBar: React.FC<Props> = () => {
   const { data, loading } = useMeQuery({ skip: isServer() }); // if the typeof window is server, we don't send the query
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
   const apolloClient = useApolloClient();
+  const router = useRouter();
+
   let renderUser = null; // the html rendered in user link component
 
   // color mode
@@ -204,7 +207,11 @@ export const NavBar: React.FC<Props> = () => {
               <Button
                 variant="link"
                 onClick={async () => {
-                  await logout();
+                  await logout({
+                    update: async (cache) => {
+                      await cache.reset();
+                    },
+                  }).then(() => router.push("/"));
                   await apolloClient.resetStore();
                 }}
                 isLoading={logoutFetching}

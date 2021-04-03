@@ -5,7 +5,11 @@
 import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import React from "react";
-import { usePostsInFollowingPublicationsQuery } from "../../generated/graphql";
+import {
+  useMeQuery,
+  usePostsInFollowingPublicationsQuery,
+} from "../../generated/graphql";
+import { isServer } from "../../utils/isServer";
 import { PostCard } from "../PostCard/PostCard";
 import { Wrapper } from "../Wrapper/Wrapper";
 
@@ -31,10 +35,19 @@ export const FollowingPosts: React.FC<Props> = () => {
       limit: 3,
       cursor: null as null | string,
     },
-    notifyOnNetworkStatusChange: true,
   });
 
-  if (!data || error || !data.postsInFollowingPublications)
+  const { data: meData, loading: meLoading, error: meError } = useMeQuery({
+    skip: isServer(),
+  });
+
+  if (!meData || !meLoading || meError) return null;
+
+  if (!meData.me) return null;
+
+  if (error) return null;
+
+  if (!data || !data.postsInFollowingPublications)
     return <Text>There is no data</Text>;
 
   if (loading) return <Wrapper variants="regular">loading...</Wrapper>;
