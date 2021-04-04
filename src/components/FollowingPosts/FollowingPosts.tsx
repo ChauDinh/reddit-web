@@ -41,9 +41,11 @@ export const FollowingPosts: React.FC<Props> = () => {
     skip: isServer(),
   });
 
-  if (!meData || !meLoading || meError) return null;
+  if (!meData || meError) return null;
 
-  if (!meData.me) return null;
+  if (meLoading) return <Wrapper variants="regular">loading...</Wrapper>;
+
+  // if (!meData.me) return null;
 
   if (error) return null;
 
@@ -51,6 +53,8 @@ export const FollowingPosts: React.FC<Props> = () => {
     return <Text>There is no data</Text>;
 
   if (loading) return <Wrapper variants="regular">loading...</Wrapper>;
+
+  console.log("[PUBLICATION DATA]: ", data.postsInFollowingPublications.posts);
 
   return (
     <Flex direction="column" w="100%">

@@ -207,11 +207,7 @@ export const NavBar: React.FC<Props> = () => {
               <Button
                 variant="link"
                 onClick={async () => {
-                  await logout({
-                    update: async (cache) => {
-                      await cache.reset();
-                    },
-                  }).then(() => router.push("/"));
+                  await logout().then(() => router.push("/"));
                   await apolloClient.resetStore();
                 }}
                 isLoading={logoutFetching}
