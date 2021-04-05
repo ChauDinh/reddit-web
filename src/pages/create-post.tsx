@@ -122,7 +122,7 @@ const CreatePost: React.FC<Props> = () => {
                   </FormControl>
                 </Box>
                 <Box mt={6}>
-                  <FormControl as="fieldset" textAlign="center">
+                  <FormControl as="fieldset" textAlign="left">
                     <FormLabel fontWeight={600}>Category (optional)</FormLabel>
                     <FormHelperText mb={6}>
                       You can choose multiple categories. Attached categories to
@@ -143,6 +143,7 @@ const CreatePost: React.FC<Props> = () => {
                           alignItems: "center",
                           justifyContent: "center",
                           padding: "3px 10px",
+                          paddingLeft: "0",
                           borderRadius: "50px",
                         }}
                       >

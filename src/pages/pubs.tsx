@@ -10,7 +10,6 @@ import { usePublicationsQuery } from "../generated/graphql";
 import { createWithApollo } from "../utils/withApollo";
 import ErrorPage from "./404";
 import { PublicationCard } from "../components/PublicationCard/PublicationCard";
-import { BgAndColor } from "../utils/bgAndColor";
 
 interface Props {}
 createBreakpoints({
@@ -23,7 +22,6 @@ createBreakpoints({
 
 const Pubs: React.FC<Props> = () => {
   const { data, loading, error } = usePublicationsQuery();
-  const { bg, color } = BgAndColor();
 
   if (error) return <ErrorPage />;
 
@@ -42,13 +40,7 @@ const Pubs: React.FC<Props> = () => {
           Discover publications
         </Text>
         <NextLink href="/create-publication">
-          <Button
-            borderRadius="3px"
-            size="sm"
-            color={bg}
-            bg={color}
-            colorScheme="black"
-          >
+          <Button size="sm">
             <Icon as={BiPlusCircle} mr="5px" /> Create new
           </Button>
         </NextLink>

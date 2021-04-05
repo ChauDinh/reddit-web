@@ -59,13 +59,12 @@ const Index: React.FC<Props> = () => {
           >
             <Heading
               as="h2"
-              size="2xl"
-              fontSize={{ base: "50px", sm: "50px", md: "70px", lg: "90px" }}
+              size="lg"
+              fontSize={{ base: "30px", sm: "40px", md: "60px", lg: "70px" }}
               fontWeight="800"
               textAlign="center"
               mb={6}
               lineHeight={{ base: "45px", md: "90px", lg: "90px" }}
-              fontFamily="'Patrick Hand', cursive"
             >
               Get smarter about what matters to you
             </Heading>
