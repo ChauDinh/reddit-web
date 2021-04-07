@@ -11,7 +11,7 @@ export const serialized = (node: Node) => {
         Prism.languages.javascript,
         "javascript"
       );
-      return `<pre style="font-family: monospace; overflow-x: scroll; max-width: 600px; scrollbar-width: none; font-size: 13px; font-weight: 600">${highlightedCode}</pre>`;
+      return `<pre style="white-space:pre-wrap; background-color: #f6fbfd; color: #443d82; font-family: monospace; overflow-x: scroll; max-width: 600px; scrollbar-width: none; font-size: 18px; font-weight: 600; padding: 0 10px; line-height: 30px">${highlightedCode}</pre>`;
     }
     if (node.bold === true && node.italic === true && node.underline === true) {
       return `<strong style="font-weight: 800; display: inline-block;"><em style="text-decoration:underline">${node.text}</em></strong>`;
@@ -26,13 +26,13 @@ export const serialized = (node: Node) => {
       return `<em style="text-decoration:underline; display: inline-block;">${node.text}</em>`;
     }
     if (node.bold === true) {
-      return `<strong style="font-weight: 800;">${node.text}</strong>`;
+      return `<strong style="font-weight: 800; font-size: 18px">${node.text}</strong>`;
     }
     if (node.italic === true) {
       return `<em>${node.text}</em>`;
     }
     if (node.underline === true) {
-      return `<p style="display: inline-block; text-decoration:underline">${node.text}</p>`;
+      return `<p style="display: inline-block !important; text-decoration:underline">${node.text}</p>`;
     }
     return escapeHTML(node.text);
   }
@@ -41,19 +41,17 @@ export const serialized = (node: Node) => {
 
   switch (node.type) {
     case "image": {
-      console.log(node.url);
       return `<img style="width: 100%; margin-bottom: 20px; margin-top: 20px" src=${node.url} /> <div style="clear: both"></div>`;
     }
     case "link":
       return `<a style="text-decoration:underline; color:blue; word-break: break-word;" target="__blank" href=${node.url}>${children}</a>`;
     case "paragraph":
-      return `<p style="margin-top: 10px; margin-bottom: 10px; text-align: justify; ">${children}</p>`;
+      return `<p style="text-align: justify; line-height: 30px">${children}</p>`;
     case "heading":
       return `<h1 style="font-size:22px; font-weight:800; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
       return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
     case "list-item": {
-      console.log("List Item", children);
       return `<li style="margin-bottom:20px">${children}</li>`;
     }
     case "bulleted-list":

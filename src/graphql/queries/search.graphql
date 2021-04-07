@@ -1,0 +1,15 @@
+query Search($tokens: String!) {
+  search(tokens: $tokens) {
+    postId
+    categoryId
+    post {
+      title
+      creator {
+        username
+      }
+    }
+    category {
+      title
+    }
+  }
+}

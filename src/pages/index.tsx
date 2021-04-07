@@ -36,6 +36,11 @@ createBreakpoints({
   "2xl": "96em",
 });
 
+/**
+ * Renders an entire landing page
+ *
+ * @returns {Promise<string>}
+ */
 const Index: React.FC<Props> = () => {
   const { data, loading, error } = useMeQuery({ skip: isServer() });
   const { bg, color } = BgAndColor();

@@ -34,6 +34,7 @@ export type Query = {
   receivedMessages?: Maybe<Array<DirectMessage>>;
   postCategories?: Maybe<Array<PostCategory>>;
   postCategoriesByPostId?: Maybe<Array<PostCategory>>;
+  search?: Maybe<Array<PostCategory>>;
   publications: Array<Publication>;
   publicationById: CreatePublicationResponse;
   members: Array<Member>;
@@ -100,6 +101,11 @@ export type QueryCategoriesByCreatorIdArgs = {
 
 export type QueryPostCategoriesByPostIdArgs = {
   postId: Scalars['Float'];
+};
+
+
+export type QuerySearchArgs = {
+  tokens: Scalars['String'];
 };
 
 
@@ -945,6 +951,30 @@ export type PublicationsQuery = (
     { __typename?: 'Publication' }
     & PublicationSnippetFragment
   )> }
+);
+
+export type SearchQueryVariables = Exact<{
+  tokens: Scalars['String'];
+}>;
+
+
+export type SearchQuery = (
+  { __typename?: 'Query' }
+  & { search?: Maybe<Array<(
+    { __typename?: 'PostCategory' }
+    & Pick<PostCategory, 'postId' | 'categoryId'>
+    & { post: (
+      { __typename?: 'Post' }
+      & Pick<Post, 'title'>
+      & { creator: (
+        { __typename?: 'User' }
+        & Pick<User, 'username'>
+      ) }
+    ), category: (
+      { __typename?: 'Category' }
+      & Pick<Category, 'title'>
+    ) }
+  )>> }
 );
 
 export type SubscribedQueryVariables = Exact<{
@@ -2033,6 +2063,49 @@ export function usePublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type PublicationsQueryHookResult = ReturnType<typeof usePublicationsQuery>;
 export type PublicationsLazyQueryHookResult = ReturnType<typeof usePublicationsLazyQuery>;
 export type PublicationsQueryResult = Apollo.QueryResult<PublicationsQuery, PublicationsQueryVariables>;
+export const SearchDocument = gql`
+    query Search($tokens: String!) {
+  search(tokens: $tokens) {
+    postId
+    categoryId
+    post {
+      title
+      creator {
+        username
+      }
+    }
+    category {
+      title
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchQuery__
+ *
+ * To run a query within a React component, call `useSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchQuery({
+ *   variables: {
+ *      tokens: // value for 'tokens'
+ *   },
+ * });
+ */
+export function useSearchQuery(baseOptions?: Apollo.QueryHookOptions<SearchQuery, SearchQueryVariables>) {
+        return Apollo.useQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
+      }
+export function useSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchQuery, SearchQueryVariables>) {
+          return Apollo.useLazyQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
+        }
+export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
+export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
+export type SearchQueryResult = Apollo.QueryResult<SearchQuery, SearchQueryVariables>;
 export const SubscribedDocument = gql`
     query Subscribed($subscriberId: Int!) {
   subscribed(subscriberId: $subscriberId)
