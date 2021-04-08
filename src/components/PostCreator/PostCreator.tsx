@@ -26,6 +26,7 @@ export const PostCreator: React.FC<Props> = ({ creator, createdAt }) => {
           size="md"
           name={creator.username}
           src={avatarUrlGenerator(creator.id)}
+          borderRadius="6px"
         />
       </Box>
       <Flex direction="column" className={PostCreatorStyles.postCreator__name}>

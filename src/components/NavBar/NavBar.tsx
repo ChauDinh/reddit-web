@@ -45,6 +45,7 @@ import { isServer } from "../../utils/isServer";
 import { avatarUrlGenerator } from "../../utils/createAvatar";
 import navBarStyles from "./NavBar.module.css";
 import { BgAndColor } from "../../utils/bgAndColor";
+import { Form, Formik } from "formik";
 
 interface Props {}
 
@@ -62,6 +63,7 @@ export const NavBar: React.FC<Props> = () => {
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   /**
    * There are 3 states:
    * data is loading
@@ -256,21 +258,39 @@ export const NavBar: React.FC<Props> = () => {
             </Flex>
           </NextLink>
         </Box>
-        <InputGroup className={navBarStyles.navbar__searchInputGroup}>
-          <Input
-            flexGrow={1}
-            fontSize="md"
-            type="text"
-            placeholder="Search for titles, authors, topics..."
-            background="whiteAlpha.700"
-            borderColor="blackAlpha.900"
-            color="blackAlpha.800"
-            mr={2}
-          />
-          <InputRightElement mr={2}>
-            <BiSearch color="blackAlpha" />
-          </InputRightElement>
-        </InputGroup>
+        <Formik
+          initialValues={{ search: "" }}
+          onSubmit={(values) => {
+            router.push(`/search?search=${values.search}`);
+          }}
+        >
+          {({ setFieldValue }) => (
+            <Form
+              style={{
+                width: "100%",
+                marginRight: "20px",
+              }}
+            >
+              <InputGroup className={navBarStyles.navbar__searchInputGroup}>
+                <Input
+                  flexGrow={1}
+                  fontSize="md"
+                  type="text"
+                  name="search"
+                  onChange={(e) => setFieldValue("search", e.target.value)}
+                  placeholder="Search for titles, authors, topics..."
+                  colorScheme="white"
+                  background="whiteAlpha.200"
+                  color="blackAlpha.800"
+                  mr={2}
+                />
+                <InputRightElement mr={2}>
+                  <BiSearch color="blackAlpha" />
+                </InputRightElement>
+              </InputGroup>
+            </Form>
+          )}
+        </Formik>
         <Flex>{renderUser}</Flex>
       </Flex>
     </Flex>

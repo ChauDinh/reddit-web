@@ -3,10 +3,7 @@ query Search($tokens: String!) {
     postId
     categoryId
     post {
-      title
-      creator {
-        username
-      }
+      ...PostSnippet
     }
     category {
       title

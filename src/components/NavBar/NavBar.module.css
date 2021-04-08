@@ -21,6 +21,8 @@
   margin-right: 20px;
   display: flex;
   justify-content: flex-end;
+  flex-grow: 1;
+  float: left;
 }
 
 .navbar__searchInputGroup > input {
@@ -68,6 +70,10 @@
 
 .navbar__username:hover {
   animation: floatText 3s infinite alternate ease-in-out;
+}
+
+.navbar__userAvatarImg > img {
+  border-radius: 6px;
 }
 
 @keyframes floatText {

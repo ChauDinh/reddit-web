@@ -965,11 +965,7 @@ export type SearchQuery = (
     & Pick<PostCategory, 'postId' | 'categoryId'>
     & { post: (
       { __typename?: 'Post' }
-      & Pick<Post, 'title'>
-      & { creator: (
-        { __typename?: 'User' }
-        & Pick<User, 'username'>
-      ) }
+      & PostSnippetFragment
     ), category: (
       { __typename?: 'Category' }
       & Pick<Category, 'title'>
@@ -2069,17 +2065,14 @@ export const SearchDocument = gql`
     postId
     categoryId
     post {
-      title
-      creator {
-        username
-      }
+      ...PostSnippet
     }
     category {
       title
     }
   }
 }
-    `;
+    ${PostSnippetFragmentDoc}`;
 
 /**
  * __useSearchQuery__
