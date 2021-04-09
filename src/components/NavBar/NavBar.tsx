@@ -241,6 +241,7 @@ export const NavBar: React.FC<Props> = () => {
         justifyContent="space-between"
       >
         <Box mr={2}>
+          {" "}
           <NextLink href="/">
             <Flex cursor="pointer" fontSize="large" alignItems="center">
               <Image
@@ -267,7 +268,7 @@ export const NavBar: React.FC<Props> = () => {
           {({ setFieldValue }) => (
             <Form
               style={{
-                width: "100%",
+                flexGrow: 1,
                 marginRight: "20px",
               }}
             >

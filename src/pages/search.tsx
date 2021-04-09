@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Flex, Heading, Icon, Text } from "@chakra-ui/react";
-import { BiArrowBack } from "react-icons/bi";
+import { Flex, Heading } from "@chakra-ui/react";
 
 import { SearchPost } from "../components/SearchPost/SearchPost";
 import { createWithApollo } from "../utils/withApollo";
@@ -32,18 +31,7 @@ const Search: React.FC<Props> = () => {
   return (
     <Layout direction="column" variant="regular">
       <Wrapper variants="regular">
-        <Flex direction="column" mt="30px">
-          <Flex
-            onClick={() => router.back()}
-            alignItems="center"
-            cursor="pointer"
-            mb="20px"
-            color="blue.400"
-            maxW="100px"
-          >
-            <Icon as={BiArrowBack} mr={2} />
-            <Text fontSize="16px">Go back</Text>
-          </Flex>
+        <Flex direction="column" mt="20px">
           <Heading size="xl" mb="20px">
             # {search}
           </Heading>

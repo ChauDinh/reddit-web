@@ -73,10 +73,7 @@ export const FollowingPosts: React.FC<Props> = () => {
       {data && data.postsInFollowingPublications.hasMore ? (
         <Flex alignItems="center" justifyContent="center" mt={8}>
           <Button
-            colorScheme="blackAlpha"
-            bg="blackAlpha.900"
-            color="white"
-            size="sm"
+            size="md"
             onClick={() => {
               fetchMore({
                 variables: {

@@ -120,10 +120,10 @@ const Blog = () => {
                       pb={8}
                     >
                       <Button
-                        colorScheme="blackAlpha"
-                        bg="blackAlpha.900"
-                        color="white"
-                        size="sm"
+                        // colorScheme="blackAlpha"
+                        // bg="blackAlpha.900"
+                        // color="white"
+                        size="md"
                         onClick={() => {
                           console.log(
                             "[NEW POSTS CURSOR]: ",

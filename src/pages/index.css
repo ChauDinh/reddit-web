@@ -27,7 +27,7 @@ body {
 
 .homePage__headerBackgroundImage {
   background-image: url("https://res.cloudinary.com/dnlthcx1a/image/upload/v1615899066/flamenco-187_ozwvgq.png");
-  background-position: right;
+  background-position: left;
   background-repeat: repeat-x;
   background-size: contain;
 }

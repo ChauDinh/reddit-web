@@ -31,7 +31,7 @@ export const PostCard: React.FC<Props> = ({ post }) => {
         }}
         cursor="pointer"
         borderRadius="12px"
-        border="1px solid rgba(200, 200, 200, 0.4)"
+        shadow="md"
       >
         <Image
           src={
