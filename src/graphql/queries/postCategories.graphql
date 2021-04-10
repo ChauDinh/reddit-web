@@ -1,0 +1,17 @@
+query PostCategories {
+  postCategories {
+    postId
+    categoryId
+    post {
+      title
+      creator {
+        username
+      }
+      viewed
+      points
+    }
+    category {
+      title
+    }
+  }
+}
