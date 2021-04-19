@@ -54,8 +54,6 @@ export const FollowingPosts: React.FC<Props> = () => {
 
   if (loading) return <Wrapper variants="regular">loading...</Wrapper>;
 
-  console.log("[PUBLICATION DATA]: ", data.postsInFollowingPublications.posts);
-
   return (
     <Flex direction="column" w="100%">
       <Grid

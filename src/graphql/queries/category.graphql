@@ -1,0 +1,5 @@
+query Category($id: Float!) {
+  category(id: $id) {
+    title
+  }
+}

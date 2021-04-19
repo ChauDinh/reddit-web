@@ -64,7 +64,11 @@ const initApolloClient = (apolloClient, initialState, ctx) => {
 
   // Reuse client on the client-side
   if (!globalApolloClient) {
-    globalApolloClient = createApolloClient(apolloClient(ctx), initialState, ctx);
+    globalApolloClient = createApolloClient(
+      apolloClient(ctx),
+      initialState,
+      ctx
+    );
   }
 
   return globalApolloClient;
@@ -131,7 +135,9 @@ export const createApollo = (ac) => {
             try {
               // Import `@apollo/react-ssr` dynamically.
               // We don't want to have this in our client bundle.
-              const { getDataFromTree } = await import("@apollo/client/react/ssr");
+              const { getDataFromTree } = await import(
+                "@apollo/client/react/ssr"
+              );
 
               // Since AppComponents and PageComponents have different context types
               // we need to modify their props a little.

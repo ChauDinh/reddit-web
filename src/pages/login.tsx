@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Box, Button, Flex, Link, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -81,7 +81,7 @@ const Login: React.FC<Props> = () => {
                   Login
                 </Button>
                 <NextLink href="/forgot-password">
-                  <Link>Forgot password?</Link>
+                  <a>Forgot password?</a>
                 </NextLink>
               </Flex>
               <hr style={{ margin: "20px 0" }} />

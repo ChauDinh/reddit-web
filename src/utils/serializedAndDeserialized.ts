@@ -46,13 +46,13 @@ export const serialized = (node: Node) => {
     case "link":
       return `<a style="text-decoration:underline; color:blue; word-break: break-word;" target="__blank" href=${node.url}>${children}</a>`;
     case "paragraph":
-      return `<p style="text-align: justify; line-height: 30px; margin-bottom: 16px">${children}</p>`;
+      return `<p style="text-align: justify; line-height: 30px; margin-bottom: 16px; font-family: 'Merriweather', serif;">${children}</p>`;
     case "heading":
       return `<h1 style="font-size:22px; font-weight:800; margin-top:40px; margin-bottom:20px">${children}</h1>`;
     case "numbered-list":
-      return `<ol style="margin-left:2em; margin-bottom:20px">${children}</ol>`;
+      return `<ol style="margin-left:2em; margin-bottom:20px; font-family: 'Merriweather', serif">${children}</ol>`;
     case "list-item": {
-      return `<li style="margin-bottom:20px">${children}</li>`;
+      return `<li style="margin-bottom:20px; font-family: 'Merriweather', serif">${children}</li>`;
     }
     case "bulleted-list":
       return `<ul style="margin-left:2em; margin-bottom:20px">${children}</ul>`;

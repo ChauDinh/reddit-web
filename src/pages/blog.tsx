@@ -13,6 +13,7 @@ import { BgAndColor } from "../utils/bgAndColor";
 import { FeaturedPost } from "../components/FeaturedPost/FeaturedPost";
 import { FollowingPosts } from "../components/FollowingPosts/FollowingPosts";
 import { isServer } from "../utils/isServer";
+// import { RecommendedPosts } from "../components/RecommendedPosts/RecommendedPosts";
 
 createBreakpoints({
   sm: "30em",
@@ -120,9 +121,6 @@ const Blog = () => {
                       pb={8}
                     >
                       <Button
-                        // colorScheme="blackAlpha"
-                        // bg="blackAlpha.900"
-                        // color="white"
                         size="md"
                         onClick={() => {
                           console.log(

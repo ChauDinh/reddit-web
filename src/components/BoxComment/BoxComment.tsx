@@ -47,7 +47,9 @@ export const BoxComment: React.FC<Props> = ({ postId }) => {
                       ).split(",")[0]}
                 </Text>
               </Flex>
-              <Text flexGrow={1}>{comment.text}</Text>
+              <Text className={BoxCommentStyles.text} flexGrow={1}>
+                {comment.text}
+              </Text>
             </Flex>
           </Flex>
         ))}

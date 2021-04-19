@@ -30,16 +30,19 @@ export type Query = {
   comments?: Maybe<CommentResults>;
   categories?: Maybe<Array<Category>>;
   categoriesByCreatorId?: Maybe<Array<Category>>;
+  category?: Maybe<Category>;
   sentMessages?: Maybe<Array<DirectMessage>>;
   receivedMessages?: Maybe<Array<DirectMessage>>;
   postCategories?: Maybe<Array<PostCategory>>;
   postCategoriesByPostId?: Maybe<Array<PostCategory>>;
+  postCategoriesByCategoryId?: Maybe<Array<PostCategory>>;
   search?: Maybe<Array<PostCategory>>;
   publications: Array<Publication>;
   publicationById: CreatePublicationResponse;
   members: Array<Member>;
   meProfile?: Maybe<UserProfile>;
   profileById?: Maybe<UserProfile>;
+  notificationByPostId: Array<PostNotification>;
 };
 
 
@@ -99,8 +102,18 @@ export type QueryCategoriesByCreatorIdArgs = {
 };
 
 
+export type QueryCategoryArgs = {
+  id: Scalars['Float'];
+};
+
+
 export type QueryPostCategoriesByPostIdArgs = {
   postId: Scalars['Float'];
+};
+
+
+export type QueryPostCategoriesByCategoryIdArgs = {
+  categoryId: Scalars['Float'];
 };
 
 
@@ -121,6 +134,11 @@ export type QueryMembersArgs = {
 
 export type QueryProfileByIdArgs = {
   userId: Scalars['Float'];
+};
+
+
+export type QueryNotificationByPostIdArgs = {
+  postId: Scalars['Float'];
 };
 
 export type PaginatedPosts = {
@@ -264,6 +282,19 @@ export type UserProfile = {
   user: User;
 };
 
+export type PostNotification = {
+  __typename?: 'PostNotification';
+  id: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  message: Scalars['String'];
+  isRead: Scalars['Boolean'];
+  postId: Scalars['Float'];
+  userId: Scalars['Float'];
+  post: Post;
+  user: User;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createPost: CreatePostResponse;
@@ -290,6 +321,7 @@ export type Mutation = {
   createUserCategory: Scalars['Boolean'];
   updateProfile: Scalars['Boolean'];
   uploadAvatar: Scalars['Boolean'];
+  createNotification: PostNotification;
 };
 
 
@@ -416,6 +448,12 @@ export type MutationUpdateProfileArgs = {
 
 export type MutationUploadAvatarArgs = {
   picture: Scalars['Upload'];
+};
+
+
+export type MutationCreateNotificationArgs = {
+  postId: Scalars['Float'];
+  message: Scalars['String'];
 };
 
 export type CreatePostResponse = {
@@ -761,6 +799,19 @@ export type CategoriesQuery = (
   )>> }
 );
 
+export type CategoryQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type CategoryQuery = (
+  { __typename?: 'Query' }
+  & { category?: Maybe<(
+    { __typename?: 'Category' }
+    & Pick<Category, 'title'>
+  )> }
+);
+
 export type CommentQueryVariables = Exact<{
   postId: Scalars['Float'];
 }>;
@@ -853,6 +904,22 @@ export type PostCategoriesQuery = (
     ), category: (
       { __typename?: 'Category' }
       & Pick<Category, 'title'>
+    ) }
+  )>> }
+);
+
+export type PostCategoriesByCategoryIdQueryVariables = Exact<{
+  categoryId: Scalars['Float'];
+}>;
+
+
+export type PostCategoriesByCategoryIdQuery = (
+  { __typename?: 'Query' }
+  & { postCategoriesByCategoryId?: Maybe<Array<(
+    { __typename?: 'PostCategory' }
+    & { post: (
+      { __typename?: 'Post' }
+      & PostSnippetFragment
     ) }
   )>> }
 );
@@ -1644,6 +1711,39 @@ export function useCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
 export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
 export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const CategoryDocument = gql`
+    query Category($id: Float!) {
+  category(id: $id) {
+    title
+  }
+}
+    `;
+
+/**
+ * __useCategoryQuery__
+ *
+ * To run a query within a React component, call `useCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCategoryQuery(baseOptions?: Apollo.QueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+        return Apollo.useQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, baseOptions);
+      }
+export function useCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+          return Apollo.useLazyQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, baseOptions);
+        }
+export type CategoryQueryHookResult = ReturnType<typeof useCategoryQuery>;
+export type CategoryLazyQueryHookResult = ReturnType<typeof useCategoryLazyQuery>;
+export type CategoryQueryResult = Apollo.QueryResult<CategoryQuery, CategoryQueryVariables>;
 export const CommentDocument = gql`
     query Comment($postId: Float!) {
   comments(postId: $postId) {
@@ -1870,6 +1970,41 @@ export function usePostCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type PostCategoriesQueryHookResult = ReturnType<typeof usePostCategoriesQuery>;
 export type PostCategoriesLazyQueryHookResult = ReturnType<typeof usePostCategoriesLazyQuery>;
 export type PostCategoriesQueryResult = Apollo.QueryResult<PostCategoriesQuery, PostCategoriesQueryVariables>;
+export const PostCategoriesByCategoryIdDocument = gql`
+    query PostCategoriesByCategoryId($categoryId: Float!) {
+  postCategoriesByCategoryId(categoryId: $categoryId) {
+    post {
+      ...PostSnippet
+    }
+  }
+}
+    ${PostSnippetFragmentDoc}`;
+
+/**
+ * __usePostCategoriesByCategoryIdQuery__
+ *
+ * To run a query within a React component, call `usePostCategoriesByCategoryIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostCategoriesByCategoryIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostCategoriesByCategoryIdQuery({
+ *   variables: {
+ *      categoryId: // value for 'categoryId'
+ *   },
+ * });
+ */
+export function usePostCategoriesByCategoryIdQuery(baseOptions?: Apollo.QueryHookOptions<PostCategoriesByCategoryIdQuery, PostCategoriesByCategoryIdQueryVariables>) {
+        return Apollo.useQuery<PostCategoriesByCategoryIdQuery, PostCategoriesByCategoryIdQueryVariables>(PostCategoriesByCategoryIdDocument, baseOptions);
+      }
+export function usePostCategoriesByCategoryIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostCategoriesByCategoryIdQuery, PostCategoriesByCategoryIdQueryVariables>) {
+          return Apollo.useLazyQuery<PostCategoriesByCategoryIdQuery, PostCategoriesByCategoryIdQueryVariables>(PostCategoriesByCategoryIdDocument, baseOptions);
+        }
+export type PostCategoriesByCategoryIdQueryHookResult = ReturnType<typeof usePostCategoriesByCategoryIdQuery>;
+export type PostCategoriesByCategoryIdLazyQueryHookResult = ReturnType<typeof usePostCategoriesByCategoryIdLazyQuery>;
+export type PostCategoriesByCategoryIdQueryResult = Apollo.QueryResult<PostCategoriesByCategoryIdQuery, PostCategoriesByCategoryIdQueryVariables>;
 export const PostCategoriesByPostIdDocument = gql`
     query PostCategoriesByPostId($postId: Float!) {
   postCategoriesByPostId(postId: $postId) {

@@ -116,7 +116,7 @@ const Post: React.FC<Props> = () => {
                 color="white"
                 bg="blackAlpha.900"
                 mr={1}
-                mb={1}
+                mb={4}
                 key={category.categories.id}
                 cursor="pointer"
               >

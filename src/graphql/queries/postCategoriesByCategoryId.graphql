@@ -1,0 +1,7 @@
+query PostCategoriesByCategoryId($categoryId: Float!) {
+  postCategoriesByCategoryId(categoryId: $categoryId) {
+    post {
+      ...PostSnippet
+    }
+  }
+}
