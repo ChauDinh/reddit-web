@@ -64,10 +64,8 @@ const Blog = () => {
                 <Text fontSize="18px" fontWeight={800} mb="20px">
                   Following publications
                 </Text>
-                <Text fontWeight={800} mb="20px">
-                  <NextLink href="/pubs">
-                    <Button size="sm">Read more</Button>
-                  </NextLink>
+                <Text fontSize="sm" color="blue.400" fontWeight={600} mb="20px">
+                  <NextLink href="/pubs">Read more</NextLink>
                 </Text>
               </Flex>
               <FollowingPosts />

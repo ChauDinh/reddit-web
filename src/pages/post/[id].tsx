@@ -8,6 +8,7 @@ import {
   TagLabel,
   Tag,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import React from "react";
 import { Node } from "slate";
 import { useApolloClient } from "@apollo/client";
@@ -120,7 +121,14 @@ const Post: React.FC<Props> = () => {
                 key={category.categories.id}
                 cursor="pointer"
               >
-                <TagLabel># {category.categories.title}</TagLabel>
+                <a>
+                  <NextLink
+                    href="/category/[id]"
+                    as={`/category/${category.categories.id}`}
+                  >
+                    <TagLabel># {category.categories.title}</TagLabel>
+                  </NextLink>
+                </a>
               </Tag>
             ))}
           </Box>
